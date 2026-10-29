@@ -72,7 +72,7 @@ body.meaning .ar-block .ayah{cursor:pointer}
 .surah-head{margin:6px 0 10px;padding:16px 12px 13px;border-radius:8px;text-align:center;
   background:linear-gradient(180deg,#0e6a55,#0b5c4d);border:1px solid var(--gold);
   box-shadow:inset 0 0 0 3px rgba(231,207,122,.25)}
-.surah-head .sh-ar{display:block;font-family:'Amiri Quran',serif;font-size:calc(var(--arfs,27px)*1.18);font-weight:700;color:#f3d98b;line-height:2.0;margin-bottom:6px}
+.surah-head .sh-ar{display:block;font-family:'Amiri Quran',serif;font-size:calc(var(--arfs,27px)*1.32);font-weight:700;text-shadow:0 0 2px rgba(243,217,139,.55);color:#f3d98b;line-height:2.0;margin-bottom:6px}
 .surah-head .sh-meta{display:block;font-size:12px;color:#cfe9db;margin-top:1px}
 .bismillah{direction:rtl;text-align:center;font-family:'Amiri Quran',serif;
   font-size:calc(var(--arfs,27px)*.96);line-height:1.9;color:#0b5c4d;margin:2px 0 8px}
@@ -224,6 +224,7 @@ function fitScroll(el, page){
     el.style.setProperty("--arlh", String(lh));
   };
   if (fitCache[page]){ const c = fitCache[page]; apply(c[0], c[1]); el.style.overflowY = "hidden"; return c[0]; }
+  if (el.clientHeight < 50){ apply(19.5, 2.35); return 19.5; }   // hidden element: do not measure, do not cache
   const target = el.clientHeight - 10;
   const lastSz = FIT_SIZES[FIT_SIZES.length - 1];
   /* measure the CONTENT wrapper, never the scroll box: with the text vertically
@@ -314,12 +315,12 @@ async function flipTo(target, dir){
   if (nk >= 0 && nk <= 30 && !packs[nk]) loadPack(nk).catch(()=>{});
   if (!W || !H){ setBase(tAyahs, target); flipping = false; return; }
   const rest = $("curlRest"), flap = $("curlFlap"), flapIn = $("curlFlapIn"), shadow = $("curlShadow");
+  $("sheet").style.display = "block";   // must be visible before its layers are measured
   rest.innerHTML = `<div class="page-scroll"><div class="page-inner">${pageHTML(cAyahs, fromPage)}</div></div>`;
   const rEl = rest.querySelector(".page-scroll"); if (rEl) fitScroll(rEl, fromPage);
   flapIn.innerHTML = `<div class="page-scroll"><div class="page-inner">${pageHTML(tAyahs, target)}</div></div>`;
   const fEl = flapIn.querySelector(".page-scroll"); if (fEl) fitScroll(fEl, target);
   setBase(tAyahs, target);
-  $("sheet").style.display = "block";
   shadow.style.height = Math.round(H * 1.7) + "px";
   flipSound();
   /* fold geometry: corner C is dragged to D as progress s goes 0→1;
@@ -369,6 +370,7 @@ async function flipTo(target, dir){
     if (t < 1) requestAnimationFrame(frame);
     else { $("sheet").style.display = "none"; flipping = false; }
   }
+  drawCurl(0);
   requestAnimationFrame(frame);
 }
 /* ---------- page-flip sound (Sunny's own pick: Freesound book-page recording, page-flip.mp3) ---------- */
