@@ -1,8 +1,8 @@
 // Waqt service worker — offline support for the Waqt prayer-times site.
 // Strategy: pages (HTML) are network-first so updates arrive promptly;
 // static assets are cache-first. Bump CACHE_VERSION to force a refresh.
-var CACHE_VERSION = 'waqt-v1';
-var PRECACHE = ['./', './index.html', './logo.png', './manifest.json'];
+var CACHE_VERSION = 'waqt-v2';
+var PRECACHE = ['./', './index.html', './logo.png', './icon-192.png', './manifest.json'];
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
