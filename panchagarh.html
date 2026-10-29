@@ -63,6 +63,19 @@ footer h4{font-size:14px;color:#0b5c4d;margin:15px 0 6px}
 .dir a.cur{background:#0b5c4d;color:#fff;border-color:#0b5c4d;font-weight:700}
 .disc{color:#6b7280;font-size:12px;margin-top:18px;text-align:center}
 @media (max-width:400px){.p .pt{font-size:16.5px}.p .pn{font-size:11.5px}.banner h1{font-size:24px}}
+
+.rcard{padding:14px 12px 16px}
+.rhead{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:none;border:0;padding:2px;cursor:pointer;font-family:inherit;text-align:left}
+.rhead .rt{font-size:17px;font-weight:700;color:#a5821d}
+.rchev{color:#0b5c4d;font-size:15px;line-height:1;transition:transform .25s ease}
+.rcard.open .rchev{transform:rotate(180deg)}
+#rWrap{margin-top:12px}
+.rtab{table-layout:fixed;font-size:13px}
+.rtab th{font-size:12.5px;padding:8px 2px}
+.rtab td{padding:9px 2px}
+.rtab .tm{font-size:15px}
+.rtab .tm span{font-size:9px}
+.rtab tr.rdiv td{background:#fbf6e3;color:#0b5c4d;font-weight:700;font-size:12.5px;text-align:left;padding:6px 9px}
 </style>
 </head>
 <body>
@@ -85,6 +98,16 @@ footer h4{font-size:14px;color:#0b5c4d;margin:15px 0 6px}
   <section class="card">
     <div class="mhead"><button id="mPrev" type="button" aria-label="Previous month">&#8249;</button><h2 id="mTitle"></h2><button id="mNext" type="button" aria-label="Next month">&#8250;</button></div>
     <table><thead><tr id="mHeadRow"></tr></thead><tbody id="mBody"></tbody></table>
+  </section>
+
+  <section class="card rcard" id="rCard">
+    <button class="rhead" id="rToggle" type="button" aria-expanded="false" aria-controls="rWrap">
+      <span class="rt" data-bn="রমজান ১৪৪৮ — সেহরি ও ইফতার" data-en="Ramadan 1448 — Sehri &amp; Iftar">রমজান ১৪৪৮ — সেহরি ও ইফতার</span>
+      <span class="rchev" aria-hidden="true">&#9662;</span>
+    </button>
+    <div id="rWrap" hidden>
+      <table class="rtab"><colgroup><col style="width:16%"><col style="width:16%"><col style="width:34%"><col style="width:34%"></colgroup><thead><tr><th data-bn="রমজান" data-en="Ramadan">রমজান</th><th data-bn="তারিখ" data-en="Date">তারিখ</th><th data-bn="সেহরি" data-en="Sehri">সেহরি</th><th data-bn="ইফতার" data-en="Iftar">ইফতার</th></tr></thead><tbody id="rBody"></tbody></table>
+    </div>
   </section>
   <a class="mainbtn" href="index.html" data-bn="Waqt — মূল সাইটে যান" data-en="Waqt — go to the main site">Waqt — মূল সাইটে যান</a>
   <footer>
@@ -222,6 +245,33 @@ document.getElementById("mPrev").onclick = function () { shiftMonth(-1); };
 document.getElementById("mNext").onclick = function () { shiftMonth(1); };
 renderStatic(); renderDay(); renderMonth();
 setInterval(tick, 1000);
+
+function renderRamadan() {
+  var L = S[lang], rows = "", cur = "", tds = dstr(new Date());
+  for (var i = 0; i < DATA.length; i++) {
+    var e = DATA[i];
+    if (hijriIdx(e.h) !== 8) continue;
+    var ym = e.d.slice(0, 7);
+    if (ym !== cur) {
+      cur = ym;
+      rows += "<tr class='rdiv'><td colspan='4'>" + L.months[+e.d.slice(5, 7) - 1] + " " + dg(e.d.slice(0, 4)) + "</td></tr>";
+    }
+    var sf = fmt(e.f), mf = fmt(e.m);
+    rows += "<tr" + (e.d === tds ? " class='today'" : "") + "><td><b>" + dg(hijriDay(e.h)) + "</b></td><td><b>" + dg(+e.d.slice(8)) + "</b></td>" +
+      "<td><div class='tm'>" + dg(sf.t) + "<span>" + sf.ap + "</span></div></td>" +
+      "<td><div class='tm'>" + dg(mf.t) + "<span>" + mf.ap + "</span></div></td></tr>";
+  }
+  document.getElementById("rBody").innerHTML = rows;
+}
+renderRamadan();
+var _setLangV2 = setLang;
+setLang = function (l) { _setLangV2(l); renderRamadan(); };
+document.getElementById("rToggle").onclick = function () {
+  var w = document.getElementById("rWrap"), open = w.hidden;
+  w.hidden = !open;
+  this.setAttribute("aria-expanded", open ? "true" : "false");
+  document.getElementById("rCard").className = "card rcard" + (open ? " open" : "");
+};
 </script>
 </body>
 </html>
