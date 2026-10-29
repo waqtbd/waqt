@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Waqt (Wakto / ওয়াক্ত) sitemap.
+     District pages are rendered client-side in index.html, so only the main
+     page is listed here. Update the URL below if the final address changes
+     from the planned waqtbd.com. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://waqtbd.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
