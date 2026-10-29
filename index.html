@@ -589,6 +589,7 @@
       .mq-status{font-size:15.5px; color:var(--ink-soft); line-height:1.65; padding:12px 2px 2px; min-height:24px}
       .mq-status b{color:var(--ink)}
       .mq-netretry{margin:10px auto 2px; display:flex; width:fit-content}
+      .mq-gmaps{margin:10px auto 2px; display:flex; width:fit-content; text-decoration:none}
       .mq-locbox{text-align:center; padding:18px 6px 8px}
       .mq-locbox .mq-loc-title{font-size:18px; font-weight:700; color:var(--ink); margin-bottom:6px}
       .mq-locbox p{margin:0 auto 14px; max-width:420px; color:var(--ink-soft); font-size:15.5px; line-height:1.65}
@@ -1126,6 +1127,7 @@
         <div class="mq-map hidden" id="mqMap"></div>
         <div class="mq-status" id="mqStatus" role="status"></div>
         <button type="button" class="btn mq-netretry hidden" id="mqNetRetry"><span data-i18n="mosqueRetry">আবার চেষ্টা করুন</span></button>
+        <a class="btn mq-gmaps hidden" id="mqGmaps" href="#" target="_blank" rel="noopener"><span data-i18n="mosqueGmaps">Google Maps-এ মসজিদ খুঁজুন</span></a>
         <div class="mq-locbox hidden" id="mqLocBox">
           <div class="mq-loc-title" data-i18n="mosqueLocTitle">লোকেশন চালু করুন</div>
           <p data-i18n="mosqueLocBody">কাছের মসজিদ দেখাতে আপনার লোকেশন দরকার। ফোনের লোকেশন (GPS) চালু করে নিচের বোতামে চাপ দিন।</p>
@@ -1956,7 +1958,7 @@
         mosqueLocBtn:'লোকেশন চালু করে খুঁজুন', mosqueSearching:'আশেপাশের মসজিদ খোঁজা হচ্ছে…',
         mosqueFound:'{n}টি মসজিদ পাওয়া গেছে', mosqueNone:'আশেপাশে কোনো মসজিদ পাওয়া যায়নি।',
         mosqueNetFail:'মসজিদের তথ্য আনা যায়নি — ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।',
-        mosqueRetry:'আবার চেষ্টা করুন',
+        mosqueRetry:'আবার চেষ্টা করুন', mosqueGmaps:'Google Maps-এ মসজিদ খুঁজুন',
         mosqueDenied:'লোকেশন পাওয়া যায়নি — এই সাইটের জন্য লোকেশন অনুমতি বন্ধ আছে। ব্রাউজারের সাইট সেটিংস (Site settings → Location) থেকে অনুমতি দিন, অথবা ফোনের লোকেশন (GPS) চালু করে আবার চেষ্টা করুন।',
         installStarted:'ইনস্টল শুরু হয়েছে — হোম স্ক্রিনে Waqt অ্যাপটি দেখুন।',
         mosqueDir:'পথ দেখুন', mosqueYou:'আপনি এখানে', mosqueUnnamed:'মসজিদ',
@@ -2019,7 +2021,7 @@
         mosqueLocBtn:'Find with location', mosqueSearching:'Searching for mosques nearby…',
         mosqueFound:'{n} mosques found', mosqueNone:'No mosques found nearby.',
         mosqueNetFail:'Could not load mosque data — check your internet connection and try again.',
-        mosqueRetry:'Try again',
+        mosqueRetry:'Try again', mosqueGmaps:'Find mosques in Google Maps',
         mosqueDenied:'Location is unavailable — permission for this site is blocked. Allow location in your browser site settings (Site settings → Location), or turn on phone location (GPS), then try again.',
         installStarted:'Install started — look for the Waqt app on your home screen.',
         mosqueDir:'Directions', mosqueYou:'You are here', mosqueUnnamed:'Mosque',
@@ -3159,9 +3161,15 @@
       return 2 * R * Math.asin(Math.sqrt(a));
     }
     function mqShowNetRetry(show) { $('mqNetRetry').classList.toggle('hidden', !show); }
+    function mqShowGmaps(show, lat, lon) {
+      const a = $('mqGmaps');
+      if (show && lat != null) a.href = 'https://www.google.com/maps/search/mosque/@' + lat + ',' + lon + ',15z';
+      a.classList.toggle('hidden', !show);
+    }
     function findNearbyMosques() {
       mqShowLocBox(false);
       mqShowNetRetry(false);
+      mqShowGmaps(false);
       $('mqList').innerHTML = '';
       $('mqMap').classList.add('hidden');
       if (!('geolocation' in navigator)) { mqSetStatus(''); mqShowLocBox(true); return; }
@@ -3195,75 +3203,108 @@
         setTimeout(() => fail(null), 32000);
       } catch (e) { fail(null); }
     }
-    /* Public Overpass instances, tried in order: the main server is
-       frequently busy (429 / 504 / timeouts), so one failure moves on
-       to the next mirror instead of abandoning the search. */
+    /* Public Overpass instances. Some of them are effectively dead —
+       they accept the connection and then never answer — and the main
+       server is often busy. Asking them ONE BY ONE (the old behaviour)
+       stacked a 26s + 16s + 16s + 16s wait before the search gave up,
+       which is exactly the "searching… forever, then try again" loop
+       reported on phones. So all instances are now asked AT THE SAME
+       TIME and the first good answer wins; the losers are aborted.
+       The whole search is bounded by a single 16s cap per radius. */
     const OVERPASS_ENDPOINTS = [
       'https://overpass-api.de/api/interpreter',
       'https://overpass.kumi.systems/api/interpreter',
       'https://overpass.private.coffee/api/interpreter',
-      'https://overpass.nchc.org.tw/api/interpreter'
+      'https://overpass.nchc.org.tw/api/interpreter',
+      'https://overpass.openstreetmap.fr/api/interpreter',
+      'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
     ];
-    async function overpassOnce(url, q, ms) {
-      const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), ms);
-      try {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: 'data=' + encodeURIComponent(q),
-          signal: ctrl.signal
+    function overpassRace(q, ms) {
+      return new Promise((resolve, reject) => {
+        let done = false, pending = OVERPASS_ENDPOINTS.length, lastErr = null;
+        const ctrls = [];
+        const finishAll = (except) => {
+          ctrls.forEach((c) => { if (c !== except) { try { c.abort(); } catch (e) {} } });
+        };
+        OVERPASS_ENDPOINTS.forEach((url) => {
+          const ctrl = new AbortController(); ctrls.push(ctrl);
+          const timer = setTimeout(() => { try { ctrl.abort(); } catch (e) {} }, ms);
+          fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'data=' + encodeURIComponent(q),
+            signal: ctrl.signal
+          }).then((res) => {
+            if (!res.ok) throw new Error('overpass ' + res.status);
+            return res.json();
+          }).then((data) => {
+            clearTimeout(timer);
+            if (done) return;
+            /* Overpass can answer HTTP 200 yet carry a fatal remark
+               (e.g. a server-side timeout) with no usable elements —
+               treat that as a failure so another mirror can still win. */
+            if (data && data.remark && /timed out|error/i.test(data.remark) && !(data.elements || []).length) {
+              throw new Error('overpass remark');
+            }
+            done = true;
+            finishAll(ctrl);
+            resolve(data);
+          }).catch((err) => {
+            clearTimeout(timer);
+            if (done) return;
+            lastErr = err;
+            pending -= 1;
+            if (pending === 0) { done = true; reject(lastErr || new Error('overpass failed')); }
+          });
         });
-        if (!res.ok) throw new Error('overpass ' + res.status);
-        return await res.json();
-      } finally { clearTimeout(timer); }
+      });
     }
     async function fetchMosques(lat, lon, radius) {
-      const q = '[out:json][timeout:25];(' +
+      const q = '[out:json][timeout:15];(' +
         'node["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + ');' +
         'way["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + ');' +
         'node["building"="mosque"](around:' + radius + ',' + lat + ',' + lon + ');' +
         'way["building"="mosque"](around:' + radius + ',' + lat + ',' + lon + ');' +
-        ');out center tags 80;';
-      let lastErr = null;
-      for (let i = 0; i < OVERPASS_ENDPOINTS.length; i++) {
-        try {
-          const data = await overpassOnce(OVERPASS_ENDPOINTS[i], q, i === 0 ? 26000 : 16000);
-          const seen = {}, out = [];
-          (data.elements || []).forEach((el) => {
-            const la = el.lat != null ? el.lat : (el.center && el.center.lat);
-            const lo = el.lon != null ? el.lon : (el.center && el.center.lon);
-            if (la == null || lo == null) return;
-            const key = la.toFixed(5) + ',' + lo.toFixed(5);
-            if (seen[key]) return; seen[key] = true;
-            const tags = el.tags || {};
-            out.push({
-              name: tags.name || tags['name:bn'] || tags['name:en'] || L().mosqueUnnamed,
-              lat: la, lon: lo, dist: haversineM(lat, lon, la, lo)
-            });
-          });
-          out.sort((a, b) => a.dist - b.dist);
-          return out;
-        } catch (e) { lastErr = e; }
-      }
-      throw lastErr || new Error('overpass failed');
+        ');out center tags 40;';
+      const data = await overpassRace(q, 16000);
+      const seen = {}, out = [];
+      (data.elements || []).forEach((el) => {
+        const la = el.lat != null ? el.lat : (el.center && el.center.lat);
+        const lo = el.lon != null ? el.lon : (el.center && el.center.lon);
+        if (la == null || lo == null) return;
+        const key = la.toFixed(5) + ',' + lo.toFixed(5);
+        if (seen[key]) return; seen[key] = true;
+        const tags = el.tags || {};
+        out.push({
+          name: tags.name || tags['name:bn'] || tags['name:en'] || L().mosqueUnnamed,
+          lat: la, lon: lo, dist: haversineM(lat, lon, la, lo)
+        });
+      });
+      out.sort((a, b) => a.dist - b.dist);
+      return out;
     }
     async function loadMosqueMap(lat, lon) {
       mqShowNetRetry(false);
+      mqShowGmaps(false);
       mqSetStatus(L().mosqueSearching);
       let places = [];
       try {
-        places = await fetchMosques(lat, lon, 3000);
+        /* One 5 km search covers the common case in a single round;
+           only a sparse result earns one wider second round. */
+        places = await fetchMosques(lat, lon, 5000);
         if (places.length < 3) {
-          const wider = await fetchMosques(lat, lon, 8000);
+          const wider = await fetchMosques(lat, lon, 12000);
           if (wider.length > places.length) places = wider;
         }
       } catch (e) {
         /* A data failure is not a location problem: the GPS fix is
-           already in hand, so keep it, show the network message and
-           offer a direct retry — never the "turn on location" panel. */
+           already in hand, so keep it, show the network message with a
+           direct retry — plus a Google Maps search link for the same
+           spot, which works even while every OSM mirror is down, so
+           the visitor is never left with a dead end. */
         mqSetStatus(L().mosqueNetFail);
         mqShowNetRetry(true);
+        mqShowGmaps(true, lat, lon);
         return;
       }
       places = places.slice(0, 15);
