@@ -7,7 +7,11 @@
     <meta name="description" content="Waqt (Wakto) — ওয়াক্ত: বাংলাদেশের ৬৪ জেলার আজকের নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, তসবিহ ও হাদিস। Prayer times for all 64 districts of Bangladesh." />
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
-    <title>Waqt (Wakto) — আজকের নামাজের সময় | Prayer Times Bangladesh</title>
+    <title>Waqt (ওয়াক্ত) — আজকের নামাজের সময় | Prayer Times Bangladesh</title>
+    <meta property="og:title" content="Waqt (ওয়াক্ত) — আজকের নামাজের সময় | Prayer Times Bangladesh" />
+    <meta name="twitter:title" content="Waqt (ওয়াক্ত) — আজকের নামাজের সময় | Prayer Times Bangladesh" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b5c4d">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -316,6 +320,54 @@
       .r-sub{font-size:15.5px; opacity:.92; line-height:1.6}
       .ramadan-card .duo-card{border:1px solid rgba(255,255,255,.22)}
 
+      /* ---------- special days ---------- */
+      .sp-hero{
+        border-radius:var(--radius); padding:22px 20px; color:#f4efe0; position:relative; overflow:hidden; margin-bottom:16px;
+        background:
+          radial-gradient(700px 300px at 85% -10%, rgba(212,175,90,.25), transparent 60%),
+          linear-gradient(160deg,#0d6a4b 0%, var(--emerald-deep) 55%, var(--emerald-night) 100%);
+        box-shadow:var(--shadow); text-align:center;
+      }
+      .sp-hero-label{font-size:13.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); font-weight:600}
+      .sp-hero-name{font-size:clamp(24px,6vw,32px); font-weight:700; margin:8px 0 4px; line-height:1.3}
+      .sp-hero-date{font-size:15.5px; opacity:.92; line-height:1.6}
+      .sp-hero-count{font-size:clamp(30px,8vw,42px); font-weight:700; color:var(--gold-soft); margin-top:10px; line-height:1.2}
+      .sp-list{display:grid; gap:10px}
+      .sp-row{
+        display:flex; align-items:center; gap:12px; background:var(--surface); border:1px solid var(--line);
+        border-radius:16px; padding:14px 16px; box-shadow:var(--shadow);
+      }
+      .sp-row.past{opacity:.55; box-shadow:none}
+      .sp-row.soon{border-color:var(--gold); background:linear-gradient(160deg, var(--surface), var(--gold-soft))}
+      @media (prefers-color-scheme: dark){ .sp-row.soon{background:var(--surface-2)} }
+      .sp-main{flex:1; min-width:0}
+      .sp-name{font-size:17.5px; font-weight:700; line-height:1.35}
+      .sp-badge{font-size:12px; font-weight:700; background:var(--gold); color:#231a04; border-radius:999px; padding:2px 9px; vertical-align:2px; white-space:nowrap}
+      .sp-alt{font-size:13.5px; color:var(--ink-soft); margin-top:1px}
+      .sp-dates{font-size:14.5px; color:var(--ink-soft); margin-top:4px; line-height:1.55}
+      .sp-chip{
+        flex:none; max-width:38%; text-align:center; background:var(--gold-soft); color:var(--gold-ink);
+        border:1px solid var(--gold); border-radius:12px; padding:9px 10px; font-weight:700; font-size:14.5px; line-height:1.35; min-height:44px;
+        display:flex; align-items:center; justify-content:center;
+      }
+      .sp-row.past .sp-chip{background:var(--surface-2); border-color:var(--line); color:var(--ink-soft)}
+      .sp-note{font-size:13.5px; color:var(--ink-soft); margin:14px 2px 0; line-height:1.65}
+      .sp-home-card{
+        display:flex; align-items:center; gap:12px; width:100%; text-align:left; border:1px solid rgba(255,255,255,.22);
+        border-radius:var(--radius); padding:18px; color:#f4efe0; min-height:44px; box-shadow:var(--shadow);
+        background:
+          radial-gradient(700px 300px at 85% -10%, rgba(212,175,90,.25), transparent 60%),
+          linear-gradient(160deg,#0d6a4b 0%, var(--emerald-deep) 55%, var(--emerald-night) 100%);
+        transition:transform .15s ease;
+      }
+      .sp-home-card:active{transform:scale(.98)}
+      .sp-home-text{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px}
+      .sp-home-label{font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-soft); font-weight:600}
+      .sp-home-name{font-size:20px; font-weight:700; line-height:1.3}
+      .sp-home-sub{font-size:14.5px; opacity:.92; line-height:1.5}
+      .sp-home-arr{font-size:26px; color:var(--gold-soft); flex:none}
+      .menu-status{font-size:14px; color:var(--ink-soft); line-height:1.6; padding:8px 4px 10px; border-bottom:1px dashed var(--line)}
+
       /* ---------- monthly table ---------- */
       .table-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
       .table-top{
@@ -439,6 +491,31 @@
       .hadith-text{font-size:16.5px; line-height:1.75; font-weight:500; margin:0 0 10px}
       .hadith-ref{font-size:14.5px; font-weight:700; color:var(--gold-ink)}
       .hadith-note{font-size:13px; color:var(--ink-soft); margin-top:10px; line-height:1.6}
+      /* ---------- islamic library ---------- */
+      .lib-tabs{display:flex; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:5px; box-shadow:var(--shadow); margin-bottom:16px}
+      .lib-tab{flex:1; border:0; background:transparent; padding:11px 8px; border-radius:999px; font-size:16.5px; font-weight:700; color:var(--ink-soft); transition:all .2s ease}
+      .lib-tab.on{background:var(--emerald); color:#fff; box-shadow:0 6px 16px rgba(7,47,33,.22)}
+      @media (prefers-color-scheme: dark){ .lib-tab.on{background:var(--emerald); color:#fff} }
+      .lib-tab:active{transform:scale(.97)}
+      .lib-pane{display:none}
+      .lib-pane.on{display:block; animation:viewIn .3s ease both}
+      .lib-subhead{font-size:17px; font-weight:700; margin:20px 2px 4px; color:var(--emerald-deep)}
+      @media (prefers-color-scheme: dark){ .lib-subhead{color:var(--gold)} }
+      .lib-subnote{font-size:14px; color:var(--ink-soft); margin:0 2px 12px; line-height:1.6}
+      .topic-chips{display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 16px}
+      .topic-chip{border:1.5px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; padding:8px 14px; font-size:14.5px; font-weight:600; box-shadow:0 2px 8px rgba(7,47,33,.05)}
+      .topic-chip.on{background:var(--gold-soft); border-color:var(--gold); color:var(--gold-ink); font-weight:700}
+      .topic-chip:active{transform:scale(.96)}
+      .lib-list{display:grid; gap:12px}
+      .lib-card{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:var(--shadow)}
+      .lib-card-top{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:10px}
+      .lib-topic-badge{font-size:12.5px; font-weight:700; letter-spacing:.02em; background:var(--gold-soft); color:var(--gold-ink); border:1px solid var(--gold); padding:4px 10px; border-radius:999px}
+      .lib-title{font-size:16px; font-weight:700; color:var(--ink)}
+      .lib-ar{font-family:"Amiri",serif; font-size:22px; line-height:2; text-align:right; color:var(--emerald-deep); margin:6px 0 10px; direction:rtl}
+      @media (prefers-color-scheme: dark){ .lib-ar{color:var(--gold)} }
+      .lib-text{font-size:16px; line-height:1.75; font-weight:500; margin:0 0 10px}
+      .lib-ref{font-size:14px; font-weight:700; color:var(--gold-ink); display:flex; gap:6px; flex-wrap:wrap}
+      .lib-count{font-size:13.5px; color:var(--ink-soft); margin:0 2px 10px}
       .setting-row{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0}
       .setting-row + .setting-row{border-top:1px dashed var(--line)}
       .setting-row label{font-size:15.5px; font-weight:500}
@@ -455,6 +532,7 @@
         font-size:16px; font-weight:500; color:var(--ink); text-align:left; border-bottom:1px dashed var(--line);
       }
       .menu-link:last-child{border-bottom:0}
+      a.menu-link{text-decoration:none}
       .menu-link .arr{margin-left:auto; color:var(--ink-soft)}
 
       /* ---------- states / toast ---------- */
@@ -617,6 +695,18 @@
           </div>
         </div>
       </section>
+
+      <!-- ================= NEXT SPECIAL DAY ================= -->
+      <section class="block rise d5" id="nextSpecialSec" aria-label="Next special day">
+        <button type="button" class="sp-home-card" id="nextSpecialCard">
+          <span class="sp-home-text">
+            <span class="sp-home-label">✦ <span data-i18n="nextSpecial">আসন্ন বিশেষ দিন</span></span>
+            <span class="sp-home-name" id="nextSpecialName">—</span>
+            <span class="sp-home-sub" id="nextSpecialSub">—</span>
+          </span>
+          <span class="sp-home-arr" aria-hidden="true">›</span>
+        </button>
+      </section>
     </div>
     </div><!-- /view-home -->
 
@@ -774,31 +864,91 @@
     </div>
     </div><!-- /view-ramadan -->
 
-    <!-- ================= VIEW: HADITH ================= -->
+    <!-- ================= VIEW: HADITH / ISLAMIC LIBRARY ================= -->
     <div class="view" id="view-hadith">
     <div class="wrap">
-      <section class="block" aria-label="Hadith">
+      <section class="block" aria-label="Islamic library">
         <div class="sec-head">
-          <h2 data-i18n="hadithTitle">হাদিস</h2>
+          <h2 data-i18n="libraryTitle">ইসলামিক লাইব্রেরি</h2>
           <div class="rule"></div>
-          <span class="sec-note" data-i18n="hadithToday">আজকের হাদিস</span>
+          <span class="sec-note" data-i18n="librarySub">বিষয় অনুযায়ী</span>
         </div>
-        <div class="hadith-card">
-          <p class="hadith-ar" id="hadithAr" dir="rtl" lang="ar">—</p>
-          <p class="hadith-text" id="hadithText">—</p>
-          <div class="hadith-ref"><span data-i18n="hadithSource">সূত্র:</span> <span id="hadithRef">—</span></div>
+
+        <div class="lib-tabs" role="tablist" aria-label="Library">
+          <button type="button" class="lib-tab on" data-libtab="hadith" role="tab" data-i18n="tabHadith">হাদিস</button>
+          <button type="button" class="lib-tab" data-libtab="dua" role="tab" data-i18n="tabDua">দোয়া</button>
+          <button type="button" class="lib-tab" data-libtab="surah" role="tab" data-i18n="tabSurah">সূরা</button>
         </div>
-        <div style="display:flex; gap:10px; margin-top:12px">
-          <button type="button" class="btn gold" id="hadithNext" data-i18n="hadithNext">পরের হাদিস →</button>
+
+        <!-- HADITH PANE -->
+        <div class="lib-pane on" id="lib-pane-hadith">
+          <div class="sec-head" style="margin-top:4px">
+            <h2 style="font-size:17px" data-i18n="hadithToday">আজকের হাদিস</h2>
+            <div class="rule"></div>
+          </div>
+          <div class="hadith-card">
+            <p class="hadith-ar" id="hadithAr" dir="rtl" lang="ar">—</p>
+            <p class="hadith-text" id="hadithText">—</p>
+            <div class="hadith-ref"><span data-i18n="hadithSource">সূত্র:</span> <span id="hadithRef">—</span></div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button type="button" class="btn ghost" id="hadithPrev" data-i18n="hadithPrev" style="flex:1; justify-content:center">← আগের হাদিস</button>
+            <button type="button" class="btn gold" id="hadithNext" data-i18n="hadithNext" style="flex:1; justify-content:center">পরের হাদিস →</button>
+          </div>
+          <h3 class="lib-subhead" data-i18n="hadithByTopic">বিষয় অনুযায়ী হাদিস</h3>
+          <p class="lib-subnote" data-i18n="hadithByTopicNote">বিষয় বেছে নিলে সেই বিষয়ের সহীহ হাদিসগুলো দেখা যাবে।</p>
+          <div class="topic-chips" id="hadithChips"></div>
+          <p class="lib-count" id="hadithCount"></p>
+          <div class="lib-list" id="hadithList"></div>
         </div>
+
+        <!-- DUA PANE -->
+        <div class="lib-pane" id="lib-pane-dua">
+          <h3 class="lib-subhead" style="margin-top:4px" data-i18n="duaByTopic">বিষয় অনুযায়ী দোয়া</h3>
+          <p class="lib-subnote" data-i18n="duaByTopicNote">কুরআন ও সহীহ হাদিসের সুপরিচিত দোয়া — আরবি, অর্থ ও সূত্রসহ।</p>
+          <div class="topic-chips" id="duaChips"></div>
+          <p class="lib-count" id="duaCount"></p>
+          <div class="lib-list" id="duaList"></div>
+        </div>
+
+        <!-- SURAH PANE -->
+        <div class="lib-pane" id="lib-pane-surah">
+          <h3 class="lib-subhead" style="margin-top:4px" data-i18n="surahByTopic">বিষয় অনুযায়ী সূরা ও আয়াত</h3>
+          <p class="lib-subnote" data-i18n="surahByTopicNote">ছোট সূরা ও আয়াত — আরবি, বাংলা অর্থ ও সূরার নম্বরসহ।</p>
+          <div class="topic-chips" id="surahChips"></div>
+          <p class="lib-count" id="surahCount"></p>
+          <div class="lib-list" id="surahList"></div>
+        </div>
+
         <p class="hadith-note" data-i18n="hadithNote">অনুবাদ আনুমানিক — মূল আরবি পাঠ ও যাচাইয়ের জন্য উল্লিখিত সূত্র (sunnah.com) দেখুন।</p>
       </section>
     </div>
     </div><!-- /view-hadith -->
+
+    <!-- ================= VIEW: SPECIAL DAYS ================= -->
+    <div class="view" id="view-special">
+    <div class="wrap">
+      <section class="block" aria-label="Special Islamic days">
+        <div class="sec-head">
+          <h2 data-i18n="specialTitle">বিশেষ ইসলামিক দিন</h2>
+          <div class="rule"></div>
+          <span class="sec-note" id="specialYear">—</span>
+        </div>
+        <div class="sp-hero hidden" id="specialHero">
+          <div class="sp-hero-label" data-i18n="nextSpecial">আসন্ন বিশেষ দিন</div>
+          <div class="sp-hero-name" id="specialHeroName">—</div>
+          <div class="sp-hero-date" id="specialHeroDate">—</div>
+          <div class="sp-hero-count" id="specialHeroCount">—</div>
+        </div>
+        <div class="sp-list" id="specialList"></div>
+        <p class="sp-note" data-i18n="specialNote">তারিখ চাঁদ দেখার উপর নির্ভরশীল — একদিন এদিক-ওদিক হতে পারে।</p>
+      </section>
+    </div>
+    </div><!-- /view-special -->
     </main>
 
-    <!-- ================= FOOTER ================= -->
-    <footer class="footer-sec">
+    <!-- ================= FOOTER: time disclaimer — time-related views only ================= -->
+    <footer class="footer-sec" id="timeDisclaimer">
       <div class="disc">
         <span data-i18n="discText">সময় হিসাব অনুযায়ী দেওয়া হয়েছে। স্থানীয় মসজিদ ও ইসলামিক ফাউন্ডেশন বাংলাদেশের সময়সূচিই চূড়ান্ত — দু-এক মিনিট এদিক-ওদিক হতে পারে।</span>
       </div>
@@ -878,6 +1028,13 @@
         <button type="button" class="menu-link" data-goto="tasbih"><span>📿</span> <span data-i18n="goTasbih">তসবিহ কাউন্টার</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="ramadan"><span>🌙</span> <span data-i18n="goRamadan">রমজান</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="hadith"><span>📖</span> <span data-i18n="goHadith">হাদিস</span> <span class="arr">›</span></button>
+        <button type="button" class="menu-link" data-goto="special"><span>⭐</span> <span data-i18n="goSpecial">বিশেষ দিন</span> <span class="arr">›</span></button>
+        <button type="button" class="menu-link" id="mosqueBtn"><span>📍</span> <span data-i18n="goMosque">কাছের মসজিদ</span> <span class="arr">›</span></button>
+        <div class="menu-status hidden" id="mosqueStatus" role="status"></div>
+        <button type="button" class="menu-link" id="installBtn"><span>📲</span> <span data-i18n="goInstall">অ্যাপ ইনস্টল করুন</span> <span class="arr">›</span></button>
+        <div class="menu-status hidden" id="installHint" data-i18n="installHint">ব্রাউজারের মেনু (⋮) খুলে "Add to Home screen" চাপুন — Waqt আপনার হোম স্ক্রিনে যোগ হয়ে যাবে।</div>
+        <a class="menu-link" href="directory.html"><span>🗺️</span> <span data-i18n="goDirectory">সব জেলা ও উপজেলা</span> <span class="arr">›</span></a>
+        <a class="menu-link" href="proshno-uttor.html"><span>❓</span> <span data-i18n="goQA">প্রশ্ন ও উত্তর</span> <span class="arr">›</span></a>
       </div>
 
       <div class="drawer-sec">
@@ -1020,6 +1177,147 @@
        en:"The best among you (Muslims) are those who learn the Qur'an and teach it.",
        refBn:'সহীহ আল-বুখারী ৫০২৭', refEn:'Sahih al-Bukhari 5027'}
     ];
+    /* ================================================================
+       Islamic Library — topic-wise Hadith, Dua & Surah.
+       Only well-known authentic items. Arabic from Quran / sunnah.com
+       wording; Bangla & English are faithful translations.
+       ================================================================ */
+    const LIBRARY = {
+      hadith: {
+        topics: [
+          {id:'salah', bn:'নামাজ', en:'Prayer'},
+          {id:'sabr', bn:'ধৈর্য', en:'Patience'},
+          {id:'rizq-h', bn:'রিজিক', en:'Provision'},
+          {id:'parents-h', bn:'মা-বাবা', en:'Parents'},
+          {id:'sadaqah', bn:'সদকা ও দান', en:'Charity'},
+          {id:'tawbah', bn:'ক্ষমা ও তওবা', en:'Forgiveness & Repentance'},
+          {id:'akhlaq', bn:'ভালো আখলাক', en:'Good Character'}
+        ],
+        items: [
+          {topic:'salah', ar:'الصَّلَوَاتُ الْخَمْسُ، وَالْجُمُعَةُ إِلَى الْجُمُعَةِ، كَفَّارَةٌ لِمَا بَيْنَهُنَّ', bn:'পাঁচ ওয়াক্ত নামাজ এবং এক জুমা থেকে পরের জুমা — এগুলোর মধ্যবর্তী (ছোট) গুনাহের কাফফারা।', en:'The five daily prayers, and Jumuah to the next Jumuah, are an expiation for what is between them.', refBn:'সহীহ মুসলিম ২৩৩', refEn:'Sahih Muslim 233'},
+          {topic:'salah', ar:'إِنَّ أَوَّلَ مَا يُحَاسَبُ بِهِ الْعَبْدُ يَوْمَ الْقِيَامَةِ مِنْ عَمَلِهِ صَلَاتُهُ', bn:'কিয়ামতের দিন বান্দার আমলের মধ্যে সবার আগে নামাজের হিসাব নেওয়া হবে।', en:'The first thing a servant will be called to account for on the Day of Resurrection from his deeds is the prayer.', refBn:'সুনানে আত-তিরমিজি ৪১৩; আবু দাউদ ৮৬৪', refEn:'Jami at-Tirmidhi 413; Abu Dawud 864'},
+          {topic:'sabr', ar:'مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلَا وَصَبٍ وَلَا هَمٍّ وَلَا حُزْنٍ وَلَا أَذًى وَلَا غَمٍّ حَتَّى الشَّوْكَةِ يُشَاكُهَا إِلَّا كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ', bn:'মুসলিমের উপর যে কষ্ট, রোগ, দুশ্চিন্তা, দুঃখ, কষ্টদায়ক বিষয় বা পেরেশানি আসে — এমনকি একটি কাঁটা বিঁধলেও — আল্লাহ তার বিনিময়ে তার গুনাহ মাফ করে দেন।', en:'No fatigue, disease, sorrow, sadness, hurt or distress befalls a Muslim — even a thorn prick — except that Allah expiates some of his sins by it.', refBn:'সহীহ বুখারী ৫৬৪১; সহীহ মুসলিম ২৫৭৩', refEn:'Sahih al-Bukhari 5641; Sahih Muslim 2573'},
+          {topic:'sabr', ar:'عَجَبًا لِأَمْرِ الْمُؤْمِنِ، إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ، إِنْ أَصَابَتْهُ سَرَّاءُ شَكَرَ فَكَانَ خَيْرًا لَهُ، وَإِنْ أَصَابَتْهُ ضَرَّاءُ صَبَرَ فَكَانَ خَيْرًا لَهُ', bn:'মুমিনের ব্যাপারটি আশ্চর্যজনক! তার সব অবস্থাই কল্যাণকর: সুখ এলে সে শুকরিয়া আদায় করে — তা তার জন্য কল্যাণ; কষ্ট এলে সে ধৈর্য ধরে — তাও তার জন্য কল্যাণ।', en:'How wonderful is the affair of the believer! All his affairs are good: if prosperity comes he is grateful and that is good for him, and if adversity strikes he is patient and that is good for him.', refBn:'সহীহ মুসলিম ২৯৯৯', refEn:'Sahih Muslim 2999'},
+          {topic:'rizq-h', ar:'لَوْ أَنَّكُمْ تَوَكَّلْتُمْ عَلَى اللَّهِ حَقَّ تَوَكُّلِهِ لَرَزَقَكُمْ كَمَا يَرْزُقُ الطَّيْرَ، تَغْدُو خِمَاصًا وَتَرُوحُ بِطَانًا', bn:'তোমরা যদি আল্লাহর উপর যথাযথ ভরসা করতে, তিনি তোমাদের রিজিক দিতেন যেমন পাখিকে দেন — সে সকালে খালি পেটে বের হয়, সন্ধ্যায় ভরা পেটে ফেরে।', en:'If you relied upon Allah as He should be relied upon, He would provide for you as He provides for the birds: they go out hungry in the morning and return full in the evening.', refBn:'সুনানে আত-তিরমিজি ২৩৪৪; ইবনে মাজাহ ৪১৬৪', refEn:'Jami at-Tirmidhi 2344; Ibn Majah 4164'},
+          {topic:'rizq-h', ar:'مَنْ أَحَبَّ أَنْ يُبْسَطَ لَهُ فِي رِزْقِهِ وَيُنْسَأَ لَهُ فِي أَثَرِهِ فَلْيَصِلْ رَحِمَهُ', bn:'যে চায় তার রিজিক বাড়ুক ও আয়ু দীর্ঘ হোক, সে যেন আত্মীয়তার সম্পর্ক বজায় রাখে।', en:'Whoever would like his provision to be increased and his life extended, let him keep good ties with his kin.', refBn:'সহীহ বুখারী ২০৬৭; সহীহ মুসলিম ২৫৫৭', refEn:'Sahih al-Bukhari 2067; Sahih Muslim 2557'},
+          {topic:'parents-h', ar:'جَاءَ رَجُلٌ إِلَى رَسُولِ اللَّهِ ﷺ فَقَالَ: مَنْ أَحَقُّ النَّاسِ بِحُسْنِ صَحَابَتِي؟ قَالَ: أُمُّكَ، قَالَ: ثُمَّ مَنْ؟ قَالَ: ثُمَّ أُمُّكَ، قَالَ: ثُمَّ مَنْ؟ قَالَ: ثُمَّ أُمُّكَ، قَالَ: ثُمَّ مَنْ؟ قَالَ: ثُمَّ أَبُوكَ', bn:'এক ব্যক্তি এসে জিজ্ঞেস করল, আমার ভালো আচরণের সবচেয়ে বেশি হকদার কে? নবী ﷺ বললেন: তোমার মা। আবার জিজ্ঞেস করায় বললেন: তোমার মা, তারপর তোমার মা, তারপর তোমার বাবা।', en:'A man asked: Who is most deserving of my good companionship? The Prophet ﷺ said: Your mother. Then who? Your mother. Then who? Your mother. Then who? Then your father.', refBn:'সহীহ বুখারী ৫৯৭১; সহীহ মুসলিম ২৫৪৮', refEn:'Sahih al-Bukhari 5971; Sahih Muslim 2548'},
+          {topic:'parents-h', ar:'رِضَا الرَّبِّ فِي رِضَا الْوَالِدِ، وَسَخَطُ الرَّبِّ فِي سَخَطِ الْوَالِدِ', bn:'পিতার সন্তুষ্টিতেই আল্লাহর সন্তুষ্টি, আর পিতার অসন্তুষ্টিতেই আল্লাহর অসন্তুষ্টি।', en:"The Lord's pleasure is in the parent's pleasure, and the Lord's displeasure is in the parent's displeasure.", refBn:'সুনানে আত-তিরমিজি ১৮৯৯', refEn:'Jami at-Tirmidhi 1899'},
+          {topic:'sadaqah', ar:'مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ', bn:'সদকা (দান) সম্পদ কমায় না।', en:'Charity does not decrease wealth.', refBn:'সহীহ মুসলিম ২৫৮৮', refEn:'Sahih Muslim 2588'},
+          {topic:'sadaqah', ar:'اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ، فَمَنْ لَمْ يَجِدْ فَبِكَلِمَةٍ طَيِّبَةٍ', bn:'জাহান্নামের আগুন থেকে বাঁচো — একটি খেজুরের অর্ধেক দান করে হলেও; যে তা-ও পায় না, সে যেন ভালো কথা বলে।', en:'Protect yourselves from the Fire, even with half a date given in charity; and whoever cannot find that, then with a good word.', refBn:'সহীহ বুখারী ১৪১৭; সহীহ মুসলিম ১০১৬', refEn:'Sahih al-Bukhari 1417; Sahih Muslim 1016'},
+          {topic:'tawbah', ar:'كُلُّ بَنِي آدَمَ خَطَّاءٌ، وَخَيْرُ الْخَطَّائِينَ التَّوَّابُونَ', bn:'আদম সন্তানের সবাই গুনাহ করে, আর গুনাহকারীদের মধ্যে সর্বোত্তম তারা, যারা তওবা করে।', en:'Every son of Adam commits sins, and the best of those who commit sins are those who repent.', refBn:'সুনানে আত-তিরমিজি ২৪৯৯; ইবনে মাজাহ ৪২৫১', refEn:'Jami at-Tirmidhi 2499; Ibn Majah 4251'},
+          {topic:'tawbah', ar:'إِنَّ اللَّهَ يَبْسُطُ يَدَهُ بِاللَّيْلِ لِيَتُوبَ مُسِيءُ النَّهَارِ، وَيَبْسُطُ يَدَهُ بِالنَّهَارِ لِيَتُوبَ مُسِيءُ اللَّيْلِ', bn:'আল্লাহ রাতে তাঁর হাত প্রসারিত করেন, যাতে দিনে গুনাহকারী তওবা করে; আর দিনে হাত প্রসারিত করেন, যাতে রাতে গুনাহকারী তওবা করে।', en:'Allah stretches out His Hand at night for the one who sinned by day to repent, and stretches out His Hand by day for the one who sinned by night to repent.', refBn:'সহীহ মুসলিম ২৭৫৯', refEn:'Sahih Muslim 2759'},
+          {topic:'akhlaq', ar:'أَكْمَلُ الْمُؤْمِنِينَ إِيمَانًا أَحْسَنُهُمْ خُلُقًا', bn:'ঈমানের দিক থেকে পূর্ণাঙ্গ মুমিন সে-ই, যার আখলাক (চরিত্র) সবচেয়ে ভালো।', en:'The most complete of the believers in faith are those with the best character.', refBn:'সুনানে আবু দাউদ ৪৬৮২; তিরমিজি ১১৬২', refEn:'Sunan Abu Dawud 4682; Tirmidhi 1162'},
+          {topic:'akhlaq', ar:'إِنَّمَا بُعِثْتُ لِأُتَمِّمَ صَالِحَ الْأَخْلَاقِ', bn:'আমাকে পাঠানো হয়েছে উত্তম চরিত্রকে পূর্ণতা দেওয়ার জন্য।', en:'I was only sent to perfect good character.', refBn:'মুসনাদে আহমাদ ৮৯৫২; আদাবুল মুফরাদ ২৭৩', refEn:'Musnad Ahmad 8952; Al-Adab Al-Mufrad 273'}
+        ]
+      },
+      dua: {
+        topics: [
+          {id:'morning-sleep', bn:'সকাল ও ঘুম', en:'Morning & Sleep'},
+          {id:'distress', bn:'বিপদ ও দুশ্চিন্তা', en:'Hardship & Anxiety'},
+          {id:'rizq-d', bn:'রিজিক', en:'Provision'},
+          {id:'shifa', bn:'অসুস্থতা ও শিফা', en:'Illness & Healing'},
+          {id:'forgiveness', bn:'ক্ষমা চাওয়া', en:'Seeking Forgiveness'},
+          {id:'parents-d', bn:'মা-বাবার জন্য', en:'For Parents'}
+        ],
+        items: [
+          {topic:'morning-sleep', titleBn:'ঘুমানোর দোয়া', titleEn:'Before sleeping', ar:'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', bn:'হে আল্লাহ, তোমার নামেই আমি মৃত্যুবরণ করি (ঘুমাই) ও জীবিত হই (জাগি)।', en:'In Your name, O Allah, I die and I live.', refBn:'সহীহ বুখারী ৬৩২৪', refEn:'Sahih al-Bukhari 6324'},
+          {topic:'morning-sleep', titleBn:'ঘুম থেকে জাগার দোয়া', titleEn:'On waking up', ar:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ', bn:'সকল প্রশংসা আল্লাহর, যিনি আমাদের মৃত্যুর (ঘুমের) পর জীবিত করলেন, আর তাঁর দিকেই পুনরুত্থান।', en:'All praise is for Allah who gave us life after He caused us to die, and to Him is the resurrection.', refBn:'সহীহ বুখারী ৬৩১২', refEn:'Sahih al-Bukhari 6312'},
+          {topic:'morning-sleep', titleBn:'সকালের দোয়া', titleEn:'Morning dua', ar:'اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ', bn:'হে আল্লাহ, তোমার (অনুগ্রহে) আমরা সকালে উপনীত হয়েছি, তোমার দ্বারাই সন্ধ্যায় উপনীত হই, তোমার দ্বারাই বাঁচি ও মরি, আর তোমার দিকেই পুনরুত্থান।', en:'O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection.', refBn:'সুনানে আত-তিরমিজি ৩৩৯১; আবু দাউদ ৫০৬৮', refEn:'Jami at-Tirmidhi 3391; Abu Dawud 5068'},
+          {topic:'distress', titleBn:'ইউনুস (আ.)-এর দোয়া', titleEn:'Dua of Yunus (AS)', ar:'لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ', bn:'তুমি ছাড়া কোনো উপাস্য নেই; তুমি পবিত্র, নিশ্চয়ই আমি জালিমদের অন্তর্ভুক্ত ছিলাম।', en:'There is no god but You; glory be to You. Indeed, I have been of the wrongdoers.', refBn:'সূরা আম্বিয়া (২১): ৮৭', refEn:'Quran — Surah Al-Anbiya (21): 87'},
+          {topic:'distress', titleBn:'বিপদে ভরসার দোয়া', titleEn:'Trust in hardship', ar:'حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ', bn:'আল্লাহই আমাদের জন্য যথেষ্ট, আর তিনি কতই না উত্তম কর্মবিধায়ক।', en:'Allah is sufficient for us, and He is the best Disposer of affairs.', refBn:'সূরা আলে ইমরান (৩): ১৭৩', refEn:'Quran — Surah Aal-e-Imran (3): 173'},
+          {topic:'distress', titleBn:'দুশ্চিন্তা থেকে আশ্রয়ের দোয়া', titleEn:'Protection from anxiety', ar:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ', bn:'হে আল্লাহ, আমি তোমার কাছে আশ্রয় চাই দুশ্চিন্তা ও দুঃখ থেকে, অক্ষমতা ও অলসতা থেকে, কৃপণতা ও ভীরুতা থেকে, ঋণের বোঝা ও মানুষের দাপট থেকে।', en:'O Allah, I seek refuge in You from anxiety and grief, from inability and laziness, from miserliness and cowardice, from the burden of debt and from being overpowered by men.', refBn:'সহীহ বুখারী ৬৩৬৯', refEn:'Sahih al-Bukhari 6369'},
+          {topic:'rizq-d', titleBn:'হালাল রিজিকের দোয়া', titleEn:'For halal provision', ar:'اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ', bn:'হে আল্লাহ, তোমার হালাল দিয়ে হারাম থেকে আমাকে যথেষ্ট করো, আর তোমার অনুগ্রহে তুমি ছাড়া অন্য সবার থেকে আমাকে মুখাপেক্ষীহীন করো।', en:'O Allah, suffice me with what You have made lawful instead of what You have made unlawful, and make me independent of all others besides You by Your bounty.', refBn:'সুনানে আত-তিরমিজি ৩৫৬৩', refEn:'Jami at-Tirmidhi 3563'},
+          {topic:'rizq-d', titleBn:'মূসা (আ.)-এর দোয়া', titleEn:'Dua of Musa (AS)', ar:'رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ', bn:'হে আমার রব, তুমি আমার প্রতি যে কল্যাণই পাঠাবে, আমি তার মুখাপেক্ষী।', en:'My Lord, indeed I am in need of whatever good You send down to me.', refBn:'সূরা কাসাস (২৮): ২৪', refEn:'Quran — Surah Al-Qasas (28): 24'},
+          {topic:'shifa', titleBn:'শিফার দোয়া', titleEn:'Dua for healing', ar:'اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَاسَ، اشْفِهِ وَأَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا', bn:'হে আল্লাহ, মানুষের রব, কষ্ট দূর করে দাও, শিফা দাও — তুমিই শিফাদাতা; তোমার শিফা ছাড়া কোনো শিফা নেই — এমন শিফা দাও যা কোনো রোগ অবশিষ্ট রাখে না।', en:'O Allah, Lord of mankind, remove the harm and heal — You are the Healer; there is no healing except Your healing, a healing that leaves no illness behind.', refBn:'সহীহ বুখারী ৫৬৭৫; সহীহ মুসলিম ২১৯১', refEn:'Sahih al-Bukhari 5675; Sahih Muslim 2191'},
+          {topic:'shifa', titleBn:'রোগীর জন্য দোয়া (৭ বার)', titleEn:'For the sick (×7)', ar:'أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ', bn:'আমি মহান আল্লাহ, মহান আরশের রবের কাছে প্রার্থনা করি, তিনি যেন তোমাকে শিফা দেন।', en:'I ask Allah the Magnificent, Lord of the Magnificent Throne, to heal you.', refBn:'সুনানে আবু দাউদ ৩১০৬; তিরমিজি ২০৮৩', refEn:'Sunan Abu Dawud 3106; Tirmidhi 2083'},
+          {topic:'forgiveness', titleBn:'সাইয়্যিদুল ইস্তিগফার', titleEn:'Sayyidul Istighfar', ar:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ', bn:'হে আল্লাহ, তুমিই আমার রব, তুমি ছাড়া কোনো উপাস্য নেই। তুমি আমাকে সৃষ্টি করেছ, আমি তোমার বান্দা। আমি সাধ্যমতো তোমার অঙ্গীকারের উপর আছি। আমি আমার কৃতকর্মের অনিষ্ট থেকে তোমার কাছে আশ্রয় চাই। আমার উপর তোমার নিয়ামত স্বীকার করছি এবং আমার গুনাহও স্বীকার করছি — আমাকে ক্ষমা করো, কারণ তুমি ছাড়া কেউ গুনাহ ক্ষমা করে না।', en:'O Allah, You are my Lord, there is no god but You. You created me and I am Your servant, and I keep Your covenant and promise as much as I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favour upon me and I acknowledge my sin — so forgive me, for none forgives sins except You.', refBn:'সহীহ বুখারী ৬৩০৬', refEn:'Sahih al-Bukhari 6306'},
+          {topic:'forgiveness', titleBn:'ক্ষমার সংক্ষিপ্ত দোয়া', titleEn:'Short dua for forgiveness', ar:'رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ', bn:'হে আমার রব, আমাকে ক্ষমা করো ও আমার তওবা কবুল করো; নিশ্চয়ই তুমি তওবা কবুলকারী, পরম দয়ালু।', en:'My Lord, forgive me and accept my repentance; indeed You are the Most Forgiving, the Most Merciful.', refBn:'সুনানে আবু দাউদ ১৫১৬', refEn:'Sunan Abu Dawud 1516'},
+          {topic:'parents-d', titleBn:'মা-বাবার জন্য দয়া চাওয়া', titleEn:'Mercy for parents', ar:'رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا', bn:'হে আমার রব, তাদের প্রতি দয়া করো, যেমন তারা শৈশবে আমাকে লালন-পালন করেছেন।', en:'My Lord, have mercy upon them as they raised me when I was small.', refBn:'সূরা ইসরা (১৭): ২৪', refEn:'Quran — Surah Al-Isra (17): 24'},
+          {topic:'parents-d', titleBn:'মা-বাবার ক্ষমার দোয়া', titleEn:'Forgiveness for parents', ar:'رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ', bn:'হে আমাদের রব, যেদিন হিসাব কায়েম হবে, সেদিন আমাকে, আমার মা-বাবাকে ও মুমিনদের ক্ষমা করো।', en:'Our Lord, forgive me and my parents and the believers on the Day the reckoning is established.', refBn:'সূরা ইবরাহীম (১৪): ৪১', refEn:'Quran — Surah Ibrahim (14): 41'}
+        ]
+      },
+      surah: {
+        topics: [
+          {id:'protection', bn:'সুরক্ষা', en:'Protection'},
+          {id:'anxiety', bn:'দুশ্চিন্তা দূর করা', en:'Relief from Anxiety'},
+          {id:'rizq-s', bn:'রিজিক', en:'Provision'}
+        ],
+        items: [
+          {topic:'protection', titleBn:'আয়াতুল কুরসি', titleEn:'Ayatul Kursi', ar:'اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ', bn:'আল্লাহ — তিনি ছাড়া কোনো উপাস্য নেই, তিনি চিরজীবী, সবকিছুর ধারক। তাঁকে তন্দ্রা বা ঘুম স্পর্শ করে না। আসমান ও জমিনে যা আছে সব তাঁরই। (আয়াতের প্রথমাংশ)', en:'Allah — there is no god but He, the Ever-Living, the Sustainer of all. Neither drowsiness nor sleep overtakes Him. To Him belongs whatever is in the heavens and the earth. (first part of the verse)', refBn:'সূরা বাকারা (২): ২৫৫', refEn:'Quran — Surah Al-Baqarah (2): 255'},
+          {topic:'protection', titleBn:'সূরা ইখলাস', titleEn:'Surah Al-Ikhlas', ar:'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ', bn:'বলো: তিনি আল্লাহ, এক ও অদ্বিতীয়। আল্লাহ অমুখাপেক্ষী (সবাই তাঁর মুখাপেক্ষী)। তিনি কাউকে জন্ম দেননি, তাঁকেও জন্ম দেওয়া হয়নি। আর তাঁর সমতুল্য কেউ নেই।', en:'Say: He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, nor is there to Him any equivalent.', refBn:'সূরা ইখলাস (১১২) — সম্পূর্ণ', refEn:'Quran — Surah Al-Ikhlas (112) — complete'},
+          {topic:'protection', titleBn:'সূরা ফালাক', titleEn:'Surah Al-Falaq', ar:'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِنْ شَرِّ مَا خَلَقَ ۝ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ', bn:'বলো: আমি আশ্রয় চাই ভোরের রবের কাছে — তিনি যা সৃষ্টি করেছেন তার অনিষ্ট থেকে, ঘোর অন্ধকারের অনিষ্ট থেকে যখন তা ঘনীভূত হয়, গিঁটে ফুঁ-দানকারিণীদের অনিষ্ট থেকে, আর হিংসুকের অনিষ্ট থেকে যখন সে হিংসা করে।', en:'Say: I seek refuge in the Lord of daybreak from the evil of what He has created, from the evil of darkness when it settles, from the evil of the blowers in knots, and from the evil of an envier when he envies.', refBn:'সূরা ফালাক (১১৩) — সম্পূর্ণ', refEn:'Quran — Surah Al-Falaq (113) — complete'},
+          {topic:'protection', titleBn:'সূরা নাস', titleEn:'Surah An-Nas', ar:'قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ', bn:'বলো: আমি আশ্রয় চাই মানুষের রব, মানুষের মালিক, মানুষের উপাস্যের কাছে — আত্মগোপনকারী কুমন্ত্রণাদাতার অনিষ্ট থেকে, যে মানুষের বুকে কুমন্ত্রণা দেয় — জিন ও মানুষের মধ্য থেকে।', en:'Say: I seek refuge in the Lord of mankind, the King of mankind, the God of mankind, from the evil of the retreating whisperer — who whispers into the breasts of mankind — from among jinn and mankind.', refBn:'সূরা নাস (১১৪) — সম্পূর্ণ', refEn:'Quran — Surah An-Nas (114) — complete'},
+          {topic:'anxiety', titleBn:'কষ্টের সাথেই স্বস্তি', titleEn:'With hardship comes ease', ar:'فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا', bn:'নিশ্চয়ই কষ্টের সাথেই স্বস্তি আছে। অবশ্যই কষ্টের সাথেই স্বস্তি আছে।', en:'Indeed, with hardship comes ease. Indeed, with hardship comes ease.', refBn:'সূরা ইনশিরাহ (৯৪): ৫–৬', refEn:'Quran — Surah Ash-Sharh (94): 5–6'},
+          {topic:'anxiety', titleBn:'হৃদয়ের প্রশান্তি', titleEn:'Tranquility of the heart', ar:'الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُمْ بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ', bn:'যারা ঈমান এনেছে, আল্লাহর স্মরণে তাদের হৃদয় প্রশান্ত হয়। জেনে রাখো, আল্লাহর স্মরণেই হৃদয় প্রশান্ত হয়।', en:'Those who believe and whose hearts find rest in the remembrance of Allah. Verily, in the remembrance of Allah do hearts find rest.', refBn:'সূরা রা‘দ (১৩): ২৮', refEn:"Quran — Surah Ar-Ra'd (13): 28"},
+          {topic:'anxiety', titleBn:'সাধ্যের বাইরে বোঝা নয়', titleEn:'No burden beyond capacity', ar:'لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا', bn:'আল্লাহ কারো উপর তার সাধ্যের বাইরে বোঝা চাপান না।', en:'Allah does not burden a soul beyond its capacity.', refBn:'সূরা বাকারা (২): ২৮৬', refEn:'Quran — Surah Al-Baqarah (2): 286'},
+          {topic:'rizq-s', titleBn:'তাকওয়া ও রিজিক', titleEn:'Taqwa and provision', ar:'وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا ۝ وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ', bn:'যে আল্লাহকে ভয় করে (তাকওয়া অবলম্বন করে), আল্লাহ তার জন্য উত্তরণের পথ করে দেন এবং তাকে এমন জায়গা থেকে রিজিক দেন যা সে কল্পনাও করেনি।', en:'Whoever fears Allah — He will make for him a way out, and provide for him from where he does not expect.', refBn:'সূরা তালাক (৬৫): ২–৩', refEn:'Quran — Surah At-Talaq (65): 2–3'},
+          {topic:'rizq-s', titleBn:'সব প্রাণীর রিজিক আল্লাহর কাছে', titleEn:'Every creature’s provision', ar:'وَمَا مِنْ دَابَّةٍ فِي الْأَرْضِ إِلَّا عَلَى اللَّهِ رِزْقُهَا', bn:'পৃথিবীতে বিচরণকারী এমন কোনো প্রাণী নেই, যার রিজিকের দায়িত্ব আল্লাহর উপর নেই।', en:'There is no creature on earth but that upon Allah is its provision.', refBn:'সূরা হূদ (১১): ৬', refEn:'Quran — Surah Hud (11): 6'}
+        ]
+      }
+    };
+
+    /* ---------------- islamic library rendering ---------------- */
+    function libTopicLabel(kind, topicId) {
+      const sec = LIBRARY[kind]; if (!sec) return '';
+      const tp = sec.topics.find((x) => x.id === topicId);
+      if (!tp) return '';
+      return state.lang === 'bn' ? tp.bn : tp.en;
+    }
+    function renderLibraryPane(kind) {
+      const sec = LIBRARY[kind]; if (!sec) return;
+      const chipsEl = $(kind + 'Chips'), listEl = $(kind + 'List'), countEl = $(kind + 'Count');
+      if (!chipsEl || !listEl) return;
+      const cur = state.libraryTopic[kind] || 'all';
+      // chips
+      chipsEl.innerHTML = '';
+      const allBtn = document.createElement('button');
+      allBtn.type = 'button'; allBtn.className = 'topic-chip' + (cur === 'all' ? ' on' : '');
+      allBtn.textContent = L().topicAll;
+      allBtn.addEventListener('click', () => { state.libraryTopic[kind] = 'all'; renderLibraryPane(kind); });
+      chipsEl.appendChild(allBtn);
+      sec.topics.forEach((tp) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'topic-chip' + (cur === tp.id ? ' on' : '');
+        b.textContent = state.lang === 'bn' ? tp.bn : tp.en;
+        b.addEventListener('click', () => { state.libraryTopic[kind] = tp.id; renderLibraryPane(kind); });
+        chipsEl.appendChild(b);
+      });
+      // items
+      const items = sec.items.filter((it) => cur === 'all' || it.topic === cur);
+      if (countEl) countEl.textContent = num(items.length) + (state.lang === 'bn' ? 'টি' : ' items');
+      listEl.innerHTML = '';
+      items.forEach((it) => {
+        const card = document.createElement('article'); card.className = 'lib-card';
+        const top = document.createElement('div'); top.className = 'lib-card-top';
+        const badge = document.createElement('span'); badge.className = 'lib-topic-badge'; badge.textContent = libTopicLabel(kind, it.topic);
+        top.appendChild(badge);
+        if (it.titleBn || it.titleEn) {
+          const ttl = document.createElement('span'); ttl.className = 'lib-title'; ttl.textContent = state.lang === 'bn' ? (it.titleBn || '') : (it.titleEn || '');
+          top.appendChild(ttl);
+        }
+        card.appendChild(top);
+        const ar = document.createElement('p'); ar.className = 'lib-ar'; ar.setAttribute('dir', 'rtl'); ar.setAttribute('lang', 'ar'); ar.textContent = it.ar; card.appendChild(ar);
+        const tx = document.createElement('p'); tx.className = 'lib-text'; tx.textContent = state.lang === 'bn' ? it.bn : it.en; card.appendChild(tx);
+        const rf = document.createElement('div'); rf.className = 'lib-ref';
+        const lab = document.createElement('span'); lab.textContent = L().hadithSource;
+        const val = document.createElement('span'); val.textContent = state.lang === 'bn' ? it.refBn : it.refEn;
+        rf.appendChild(lab); rf.appendChild(val); card.appendChild(rf);
+        listEl.appendChild(card);
+      });
+    }
+    function renderLibrary() {
+      // tabs
+      document.querySelectorAll('[data-libtab]').forEach((b) => {
+        b.classList.toggle('on', b.getAttribute('data-libtab') === state.libraryTab);
+      });
+      ['hadith','dua','surah'].forEach((k) => {
+        const pane = $('lib-pane-' + k);
+        if (pane) pane.classList.toggle('on', state.libraryTab === k);
+      });
+      renderLibraryPane('hadith'); renderLibraryPane('dua'); renderLibraryPane('surah');
+    }
+
+
 
     const I18N = {
       bn: {
@@ -1036,7 +1334,8 @@
         tasbihTitle:'তসবিহ', tasbihNote:'গোল বোতামে চাপ দিন', roundDone:'এই রাউন্ড শেষ:', totalCount:'মোট গণনা:',
         target:'লক্ষ্য:', reset:'রিসেট', ofTarget:'লক্ষ্য', tap:'চাপ দিন',
         discText:'সময় হিসাব অনুযায়ী দেওয়া হয়েছে। স্থানীয় মসজিদ ও ইসলামিক ফাউন্ডেশন বাংলাদেশের সময়সূচিই চূড়ান্ত — দু-এক মিনিট এদিক-ওদিক হতে পারে।',
-        menuTitle:'মেনু', hadithTitle:'হাদিস', hadithToday:'আজকের হাদিস', hadithNext:'পরের হাদিস →',
+        menuTitle:'মেনু', hadithTitle:'হাদিস', hadithToday:'আজকের হাদিস', hadithNext:'পরের হাদিস →', hadithPrev:'← আগের হাদিস',
+        libraryTitle:'ইসলামিক লাইব্রেরি', librarySub:'বিষয় অনুযায়ী', tabHadith:'হাদিস', tabDua:'দোয়া', tabSurah:'সূরা', topicAll:'সব', hadithByTopic:'বিষয় অনুযায়ী হাদিস', hadithByTopicNote:'বিষয় বেছে নিলে সেই বিষয়ের সহীহ হাদিসগুলো দেখা যাবে।', duaByTopic:'বিষয় অনুযায়ী দোয়া', duaByTopicNote:'কুরআন ও সহীহ হাদিসের সুপরিচিত দোয়া — আরবি, অর্থ ও সূত্রসহ।', surahByTopic:'বিষয় অনুযায়ী সূরা ও আয়াত', surahByTopicNote:'ছোট সূরা ও আয়াত — আরবি, বাংলা অর্থ ও সূরার নম্বরসহ।', libCountSuffix:'টি',
         hadithSource:'সূত্র:', hadithNote:'অনুবাদ আনুমানিক — মূল আরবি পাঠ ও যাচাইয়ের জন্য উল্লিখিত সূত্র (sunnah.com) দেখুন।',
         settings:'সেটিংস', methodLabel:'হিসাবের পদ্ধতি', methodHint:'বাংলাদেশে সাধারণত করাচি পদ্ধতি চলে',
         madhabLabel:'আসরের হিসাব (মাজহাব)', madhabHint:'বাংলাদেশে হানাফি-ই প্রচলিত',
@@ -1050,6 +1349,12 @@
         ramadanExpected:'সম্ভাব্য শুরু:', ramadanFar:'পরের রমজানের তারিখ শীঘ্রই জানা যাবে',
         ramadanTableBtn:'রমজানের ক্যালেন্ডার', thisMonth:'এই মাস',
         goRamadan:'রমজান', goHadith:'হাদিস',
+        goDirectory:'সব জেলা ও উপজেলা', goQA:'প্রশ্ন ও উত্তর',
+        goSpecial:'বিশেষ দিন', specialTitle:'বিশেষ ইসলামিক দিন', nextSpecial:'আসন্ন বিশেষ দিন',
+        specialNote:'তারিখ চাঁদ দেখার উপর নির্ভরশীল — একদিন এদিক-ওদিক হতে পারে।',
+        probable:'সম্ভাব্য', passed:'পেরিয়ে গেছে', todayWord:'আজ', daysLeft:'দিন বাকি', inDays:'আর {n} দিন',
+        goMosque:'কাছের মসজিদ', goInstall:'অ্যাপ ইনস্টল করুন',
+        installHint:'ব্রাউজারের মেনু (⋮) খুলে "Add to Home screen" চাপুন — Waqt আপনার হোম স্ক্রিনে যোগ হয়ে যাবে।',
         compassCalib:'কম্পাসের কাঁটা কাঁপছে? ফোনটি ৮-এর আকৃতিতে কয়েকবার ঘোরান — কম্পাস ঠিক হয়ে যাবে।',
         nextBadge:'পরের', tomorrow:'আগামীকাল', started:'শুরু হয়েছে', leftSuffix:'বাকি',
         methodNames:{1:'করাচি পদ্ধতি',3:'Muslim World League',4:'মক্কা (Umm al-Qura)',2:'ISNA',5:'মিশর পদ্ধতি'},
@@ -1079,8 +1384,9 @@
         monthTitle:'Calendar',
         tasbihTitle:'Tasbih counter', tasbihNote:'Tap the round button', roundDone:'Rounds completed:', totalCount:'Total count:',
         target:'Target:', reset:'Reset', ofTarget:'of', tap:'Tap',
-        discText:'Times are calculated and may differ by a minute or two. Your local mosque and Islamic Foundation Bangladesh timetable remain the final authority.',
-        menuTitle:'Menu', hadithTitle:'Hadith', hadithToday:"Today's Hadith", hadithNext:'Next Hadith →',
+        discText:'Times are calculated. The schedules of your local mosque and the Islamic Foundation Bangladesh are final — times may differ by a minute or two.',
+        menuTitle:'Menu', hadithTitle:'Hadith', hadithToday:"Today's Hadith", hadithNext:'Next Hadith →', hadithPrev:'← Previous Hadith',
+        libraryTitle:'Islamic Library', librarySub:'By topic', tabHadith:'Hadith', tabDua:'Dua', tabSurah:'Surah', topicAll:'All', hadithByTopic:'Hadith by Topic', hadithByTopicNote:'Choose a topic to see authentic hadith on that subject.', duaByTopic:'Dua by Topic', duaByTopicNote:'Well-known duas from the Quran and authentic Hadith — with Arabic, meaning and source.', surahByTopic:'Surah & Verses by Topic', surahByTopicNote:'Short surahs and verses — with Arabic, meaning and surah number.', libCountSuffix:' items',
         hadithSource:'Source:', hadithNote:'Translations are approximate — see the cited source (sunnah.com) for the original Arabic text.',
         settings:'Settings', methodLabel:'Calculation method', methodHint:'The Karachi method is customary in Bangladesh',
         madhabLabel:'Asr calculation (madhab)', madhabHint:'Hanafi is customary in Bangladesh',
@@ -1094,6 +1400,12 @@
         ramadanExpected:'Expected start:', ramadanFar:'The next Ramadan date will be known soon',
         ramadanTableBtn:'Ramadan calendar', thisMonth:'This month',
         goRamadan:'Ramadan', goHadith:'Hadith',
+        goDirectory:'All Districts & Upazilas', goQA:'Questions & Answers',
+        goSpecial:'Special Days', specialTitle:'Special Islamic Days', nextSpecial:'Next special day',
+        specialNote:'Dates depend on moon sighting — they may shift by a day.',
+        probable:'Probable', passed:'Passed', todayWord:'Today', daysLeft:'days left', inDays:'In {n} days',
+        goMosque:'Nearby Mosques', goInstall:'Install App',
+        installHint:'Open your browser menu (⋮) and tap "Add to Home screen" — Waqt will be added to your home screen.',
         compassCalib:'Needle shaking? Move the phone in a figure-8 a few times to calibrate the compass.',
         nextBadge:'NEXT', tomorrow:'tomorrow', started:'has begun', leftSuffix:'left',
         methodNames:{1:'Karachi method',3:'Muslim World League',4:'Makkah (Umm al-Qura)',2:'ISNA',5:'Egypt method'},
@@ -1211,7 +1523,10 @@
       lpHeading: null,       // low-pass filtered heading
       smoothHeading: null,   // displayed heading (unwrapped, glides to target)
       targetHeading: null,   // unwrapped target for smoothHeading
-      page: 'home',          // active view: home | month | qibla | tasbih | ramadan | hadith
+      page: 'home',          // active view: home | month | qibla | tasbih | ramadan | hadith | special
+      lastLoc: null,         // last geolocation fix {lat, lon}, for the nearby-mosque search
+      libraryTab: 'hadith',
+      libraryTopic: { hadith: 'all', dua: 'all', surah: 'all' },
       ramadanYM: null        // [year, month] of the current/next Ramadan month
     };
 
@@ -1269,7 +1584,8 @@
       $('langEn').classList.toggle('on', state.lang === 'en');
       $('langBn2').classList.toggle('on', state.lang === 'bn');
       $('langEn2').classList.toggle('on', state.lang === 'en');
-      renderPlaceLabel(); renderChips(); renderDhikrTabs(); renderHadith(); renderTasbih();
+      renderPlaceLabel(); renderChips(); renderDhikrTabs(); renderHadith(); renderTasbih(); if (typeof renderLibrary === 'function') renderLibrary();
+      if (typeof renderSpecialDays === 'function') renderSpecialDays();
       if (state.today) { renderToday(); renderMonthHead(); }
       renderQibla(); renderMonthTitle();
     }
@@ -1856,6 +2172,7 @@
       toast(L().locGetting);
       navigator.geolocation.getCurrentPosition((pos) => {
         const lat = pos.coords.latitude, lon = pos.coords.longitude;
+        state.lastLoc = { lat: lat, lon: lon };
         /* nearest district label, for familiarity */
         let best = null, bestD = 1e9;
         for (const d of DISTRICTS) {
@@ -1929,16 +2246,21 @@
     }
 
     /* ---------------- pages (bottom navigation) ---------------- */
-    const PAGES = ['home', 'month', 'qibla', 'tasbih', 'ramadan', 'hadith'];
+    const PAGES = ['home', 'month', 'qibla', 'tasbih', 'ramadan', 'hadith', 'special'];
     function showPage(name) {
       if (PAGES.indexOf(name) < 0) name = 'home';
       state.page = name;
       for (const p of PAGES) $('view-' + p).classList.toggle('active', p === name);
+      /* Time disclaimer belongs ONLY on time-related views (Home, Calendar, Ramadan) —
+         never on Qibla, Tasbih or Hadith/Library. */
+      var disc = $('timeDisclaimer');
+      if (disc) disc.classList.toggle('hidden', ['home', 'month', 'ramadan'].indexOf(name) < 0);
       document.querySelectorAll('.bottomnav button').forEach((b) => {
         b.classList.toggle('on', b.getAttribute('data-page') === name);
       });
       window.scrollTo(0, 0);
       if (name === 'ramadan') renderRamadan();
+      if (name === 'special') renderSpecialDays();
       if (name === 'qibla') applyCompass();
     }
 
@@ -1983,6 +2305,9 @@
       });
 
       $('locBtn').addEventListener('click', useMyLocation);
+      $('nextSpecialCard').addEventListener('click', () => showPage('special'));
+      $('mosqueBtn').addEventListener('click', openNearbyMosques);
+      $('installBtn').addEventListener('click', installApp);
       $('retryBtn').addEventListener('click', loadAll);
       $('compassBtn').addEventListener('click', startCompass);
 
@@ -2000,7 +2325,9 @@
       });
       $('tasbihReset').addEventListener('click', () => { tasbih.count = 0; tasbih.rounds = 0; tasbih.total = 0; renderTasbih(); });
 
+      $('hadithPrev').addEventListener('click', () => { hadithIdx = (hadithIdx - 1 + HADITHS.length) % HADITHS.length; renderHadith(); });
       $('hadithNext').addEventListener('click', () => { hadithIdx = (hadithIdx + 1) % HADITHS.length; renderHadith(); });
+      document.querySelectorAll('[data-libtab]').forEach((b) => { b.addEventListener('click', () => { state.libraryTab = b.getAttribute('data-libtab'); renderLibrary(); window.scrollTo({top:0, behavior:'smooth'}); }); });
 
       $('methodSel').addEventListener('change', (e) => {
         state.method = +e.target.value; state.monthCache = {};
@@ -2039,6 +2366,167 @@
       $('schoolHanafi').classList.toggle('on', s === 1);
       $('schoolShafi').classList.toggle('on', s === 0);
       loadAll();
+    }
+
+    /* ---------------- special islamic days ----------------
+       The 9 special days of the Hijri year. Gregorian dates are found by
+       scanning the app's own embedded Hijri calendar (EMBED.hijri) — no
+       network calls. For each day we prefer its occurrence in the current
+       Hijri year; if that date falls outside the embedded window (already
+       past before the data starts), the next occurrence is shown instead,
+       with its own Hijri year in the row. */
+    const SPECIAL_DAYS = [
+      { m: 1,  d: 10, bn: 'আশুরা', en: 'Ashura' },
+      { m: 3,  d: 12, bn: 'ঈদে মিলাদুন্নবী (সা.)', en: 'Eid-e-Miladunnabi (SAW)' },
+      { m: 7,  d: 27, bn: 'শবে মেরাজ', en: 'Shab-e-Meraj' },
+      { m: 8,  d: 15, bn: 'শবে বরাত', en: 'Shab-e-Barat' },
+      { m: 9,  d: 1,  bn: 'রমজান শুরু', en: 'Ramadan begins' },
+      { m: 9,  d: 27, bn: 'শবে কদর', en: 'Laylatul Qadr (Shab-e-Qadr)', probable: true },
+      { m: 10, d: 1,  bn: 'ঈদুল ফিতর', en: 'Eid-ul-Fitr' },
+      { m: 12, d: 9,  bn: 'আরাফার দিন', en: 'Day of Arafah' },
+      { m: 12, d: 10, bn: 'ঈদুল আজহা', en: 'Eid-ul-Adha' }
+    ];
+    function gregFromIndex(i) { return new Date(EMBED.start[0], EMBED.start[1] - 1, EMBED.start[2] + i); }
+    function dayDiff(a, b) {
+      return Math.round((Date.UTC(a.getFullYear(), a.getMonth(), a.getDate()) -
+        Date.UTC(b.getFullYear(), b.getMonth(), b.getDate())) / 86400000);
+    }
+    function specialData() {
+      const now = new Date();
+      const di = embedDayIndex(now);
+      let curYear = null;
+      if (state.today && state.today.date && state.today.date.hijri) curYear = +state.today.date.hijri.year;
+      else if (di >= 0) curYear = +embedHijri(di).year;
+      if (curYear == null) return { year: null, list: [], next: null };
+      const list = [];
+      for (const sd of SPECIAL_DAYS) {
+        let inYear = null, upcoming = null;
+        for (let i = 0; i < EMBED.days; i++) {
+          const hj = embedHijri(i);
+          if (hj.month.number !== sd.m || +hj.day !== sd.d) continue;
+          const g = gregFromIndex(i);
+          const rec = { sd: sd, g: g, hy: +hj.year, days: dayDiff(g, now) };
+          if (+hj.year === curYear && !inYear) inYear = rec;
+          if (rec.days >= 0 && !upcoming) upcoming = rec;
+          if (inYear && upcoming) break;
+        }
+        const pick = inYear || upcoming;
+        if (pick) list.push(pick);
+      }
+      list.sort((a, b) => a.g - b.g);
+      let next = null;
+      for (const r of list) if (r.days >= 0 && (!next || r.days < next.days)) next = r;
+      return { year: curYear, list: list, next: next };
+    }
+    function specialName(sd) { return state.lang === 'bn' ? sd.bn : sd.en; }
+    function specialNameAlt(sd) { return state.lang === 'bn' ? sd.en : sd.bn; }
+    function hijriText(r) {
+      return num(r.sd.d) + ' ' + HIJRI_MONTHS[state.lang][r.sd.m - 1] + ' ' + num(r.hy) + ' ' + L().hijriWord;
+    }
+    function gregText(g) {
+      return WEEKDAYS[state.lang][WD_EN[g.getDay()]] + ', ' + num(g.getDate()) + ' ' +
+        L().monthNames[g.getMonth()] + ' ' + num(g.getFullYear());
+    }
+    function daysText(days) {
+      if (days < 0) return L().passed;
+      if (days === 0) return L().todayWord;
+      if (days === 1) return L().tomorrow;
+      return L().inDays.replace('{n}', num(days));
+    }
+    function renderSpecialDays() {
+      const data = specialData();
+      $('specialYear').textContent = data.year ? num(data.year) + ' ' + L().hijriWord : '—';
+      const hero = $('specialHero');
+      if (data.next) {
+        hero.classList.remove('hidden');
+        $('specialHeroName').textContent = specialName(data.next.sd);
+        $('specialHeroDate').textContent = hijriText(data.next) + ' · ' + gregText(data.next.g);
+        $('specialHeroCount').textContent = data.next.days === 0 ? L().todayWord
+          : data.next.days === 1 ? L().tomorrow
+          : num(data.next.days) + ' ' + L().daysLeft;
+      } else {
+        hero.classList.add('hidden');
+      }
+      const wrap = $('specialList'); wrap.innerHTML = '';
+      for (const r of data.list) {
+        const row = document.createElement('div');
+        row.className = 'sp-row' + (r.days < 0 ? ' past' : '') + (data.next && r === data.next ? ' soon' : '');
+        const main = document.createElement('div'); main.className = 'sp-main';
+        const nm = document.createElement('div'); nm.className = 'sp-name';
+        nm.textContent = specialName(r.sd);
+        if (r.sd.probable) {
+          const b = document.createElement('span'); b.className = 'sp-badge';
+          b.textContent = L().probable; b.style.marginLeft = '8px'; nm.appendChild(b);
+        }
+        const alt = document.createElement('div'); alt.className = 'sp-alt'; alt.textContent = specialNameAlt(r.sd);
+        const dt = document.createElement('div'); dt.className = 'sp-dates';
+        dt.textContent = hijriText(r) + ' · ' + gregText(r.g);
+        main.appendChild(nm); main.appendChild(alt); main.appendChild(dt);
+        const chip = document.createElement('div'); chip.className = 'sp-chip'; chip.textContent = daysText(r.days);
+        row.appendChild(main); row.appendChild(chip);
+        wrap.appendChild(row);
+      }
+      /* compact "next special day" card on Home */
+      const sec = $('nextSpecialSec');
+      if (data.next) {
+        sec.classList.remove('hidden');
+        $('nextSpecialName').textContent = specialName(data.next.sd) +
+          (data.next.sd.probable ? ' (' + L().probable + ')' : '');
+        $('nextSpecialSub').textContent = gregText(data.next.g) + ' · ' + daysText(data.next.days);
+      } else {
+        sec.classList.add('hidden');
+      }
+    }
+
+    /* ---------------- nearby mosques ----------------
+       One tap: reuse the last known location when we have one, otherwise
+       ask for geolocation, then open Google Maps with a mosque search.
+       If location is unavailable or denied, the same search opens
+       without coordinates (Maps then uses its own location). */
+    function openNearbyMosques() {
+      const open = (lat, lon) => {
+        const q = (lat != null && lon != null) ? 'mosque near ' + lat + ',' + lon : 'mosque';
+        window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q), '_blank');
+      };
+      if (state.lastLoc) { open(state.lastLoc.lat, state.lastLoc.lon); return; }
+      if (!('geolocation' in navigator)) { open(null, null); return; }
+      const st = $('mosqueStatus');
+      st.textContent = L().locGetting; st.classList.remove('hidden');
+      let settled = false;
+      const done = () => { st.classList.add('hidden'); st.textContent = ''; };
+      const fallback = () => { if (!settled) { settled = true; done(); open(null, null); } };
+      try {
+        navigator.geolocation.getCurrentPosition((pos) => {
+          if (settled) return; settled = true; done();
+          state.lastLoc = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+          open(state.lastLoc.lat, state.lastLoc.lon);
+        }, fallback, { timeout: 9000, maximumAge: 300000 });
+        setTimeout(fallback, 11000);
+      } catch (e) { fallback(); }
+    }
+
+    /* ---------------- PWA: install prompt + service worker ----------------
+       The service worker is registered ONLY on the live github.io host,
+       so sandboxed previews and local copies never try to load sw.js. */
+    let deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+    });
+    function installApp() {
+      const hint = $('installHint');
+      if (deferredInstallPrompt) {
+        hint.classList.add('hidden');
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then(() => { deferredInstallPrompt = null; }).catch(() => {});
+      } else {
+        hint.classList.remove('hidden');
+      }
+    }
+    if ('serviceWorker' in navigator && /(^|\.)github\.io$/i.test(location.hostname)) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
     }
 
     /* ---------------- init ---------------- */
