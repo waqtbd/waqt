@@ -41,7 +41,11 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
   border-radius:5px;pointer-events:none;z-index:3}
 .page::after{content:"";position:absolute;inset:11px;border:.75px solid rgba(201,162,39,.35);
   border-radius:4px;pointer-events:none;z-index:3}
-.page-scroll{position:absolute;inset:0;overflow-y:auto;padding:22px 20px 24px;scrollbar-width:thin}
+.page-scroll{position:absolute;inset:14px;overflow-y:auto;padding:20px 16px 22px;scrollbar-width:thin;
+  border-radius:7px;display:flex;flex-direction:column;
+  background:linear-gradient(172deg,#fffef9 0%,#fdf6e1 52%,#f8ecc9 100%);
+  box-shadow:inset 0 0 34px rgba(201,162,39,.13),inset 0 1px 0 rgba(255,255,255,.75)}
+.page-inner{margin:auto 0}
 .sheet{z-index:6;pointer-events:none;display:none}
 .curl-rest{position:absolute;inset:0;border-radius:8px;overflow:hidden;
   background:linear-gradient(160deg,var(--paper),var(--paper2));border:1px solid #d9c68d;
@@ -60,8 +64,7 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 #loading{position:absolute;inset:0;z-index:8;display:none;align-items:center;justify-content:center;
   color:var(--emerald);font-weight:600;font-size:16px;background:rgba(255,253,244,.85);border-radius:8px}
 .ar-block{direction:rtl;text-align:justify;font-family:'Amiri Quran',serif;
-  font-size:var(--arfs,27px);line-height:var(--arlh,2.08);color:#1c2a24;margin:0 4px;border-radius:6px;
-  background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.5) 0,rgba(255,255,255,.5) calc(var(--linepx,56px)*.9),rgba(160,118,18,.14) var(--linepx,56px),rgba(160,118,18,.14) calc(var(--linepx,56px) + 1px),rgba(212,175,55,.2) calc(var(--linepx,56px)*1.12),rgba(212,175,55,.2) calc(var(--linepx,56px)*1.9),rgba(255,255,255,.5) calc(var(--linepx,56px)*2))}
+  font-size:var(--arfs,27px);line-height:var(--arlh,2.08);color:#1c2a24}
 .ar-block .ayah{border-radius:6px;padding:0 1px}
 .ar-block .ayah.playing{background:rgba(201,162,39,.28);box-shadow:0 0 0 2px rgba(201,162,39,.25)}
 body.meaning .ar-block .ayah{cursor:pointer}
@@ -214,10 +217,9 @@ function surahMeta(n){ return INDEX.surahs[n - 1]; }
 const FIT_SIZES = [24, 22.5, 21, 19.5, 18, 16.5, 15, 13.5, 12.5];
 function fitScroll(el, page){
   const apply = sz => {
-    const lh = sz >= 21 ? 2.08 : 1.92;
+    const lh = sz >= 21 ? 2.08 : 2.02;
     el.style.setProperty("--arfs", sz + "px");
     el.style.setProperty("--arlh", String(lh));
-    el.style.setProperty("--linepx", (sz * lh).toFixed(1) + "px");
   };
   if (fitCache[page]){ apply(fitCache[page]); el.style.overflowY = "hidden"; return fitCache[page]; }
   let chosen = FIT_SIZES[FIT_SIZES.length - 1];
@@ -254,7 +256,7 @@ function pageHTML(ayahs, pageNo){
 function setBase(ayahs, page){
   curAyahs = ayahs;
   const sc = $("pageScroll");
-  sc.innerHTML = pageHTML(ayahs, page);
+  sc.innerHTML = `<div class="page-inner">${pageHTML(ayahs, page)}</div>`;
   sc.scrollTop = 0;
   fitScroll(sc, page);
   $("pgNum").textContent = bnD(page);
@@ -290,9 +292,9 @@ async function flipTo(target, dir){
   if (nk >= 0 && nk <= 30 && !packs[nk]) loadPack(nk).catch(()=>{});
   if (!W || !H){ setBase(tAyahs, target); flipping = false; return; }
   const rest = $("curlRest"), flap = $("curlFlap"), flapIn = $("curlFlapIn"), shadow = $("curlShadow");
-  rest.innerHTML = `<div class="page-scroll">${pageHTML(cAyahs, fromPage)}</div>`;
+  rest.innerHTML = `<div class="page-scroll"><div class="page-inner">${pageHTML(cAyahs, fromPage)}</div></div>`;
   const rEl = rest.querySelector(".page-scroll"); if (rEl) fitScroll(rEl, fromPage);
-  flapIn.innerHTML = `<div class="page-scroll">${pageHTML(tAyahs, target)}</div>`;
+  flapIn.innerHTML = `<div class="page-scroll"><div class="page-inner">${pageHTML(tAyahs, target)}</div></div>`;
   const fEl = flapIn.querySelector(".page-scroll"); if (fEl) fitScroll(fEl, target);
   setBase(tAyahs, target);
   $("sheet").style.display = "block";
@@ -359,12 +361,12 @@ function flipSound(){
 const nextPage = () => flipTo(cur + 1, 1);
 const prevPage = () => flipTo(cur - 1, -1);
 
-/* touch swipe (mushaf direction: swipe right = next page) + edge taps + ayah taps */
+/* touch + taps follow the side touched: right side = next page, left side = previous page */
 let tx = 0, ty = 0;
 $("book").addEventListener("touchstart", e => { const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; }, {passive:true});
 $("book").addEventListener("touchend", e => {
   const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
-  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4){ dx > 0 ? nextPage() : prevPage(); }
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4){ dx > 0 ? prevPage() : nextPage(); }
 }, {passive:true});
 $("book").addEventListener("click", e => {
   if (window.getSelection && String(window.getSelection())) return;
@@ -373,7 +375,7 @@ $("book").addEventListener("click", e => {
     const ay = e.target.closest ? e.target.closest(".ayah") : null;
     if (ay && x > 0.10 && x < 0.90){ showMeaning(Number(ay.dataset.s), Number(ay.dataset.a)); return; }
   }
-  if (x < 0.16) nextPage(); else if (x > 0.84) prevPage();
+  if (x < 0.16) prevPage(); else if (x > 0.84) nextPage();
 });
 document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") prevPage();
