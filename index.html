@@ -69,7 +69,8 @@
         backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
         border-bottom:1px solid var(--line);
       }
-      .brand{display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; text-align:center}
+      .brand{display:flex; flex-direction:row; align-items:center; gap:10px; min-width:0; text-align:left}
+      .brand-text{display:flex; flex-direction:column; justify-content:center; min-width:0}
       .brand-mark{
         width:42px; height:42px; flex:none; border-radius:12px;
         background:linear-gradient(145deg,var(--emerald) 0%,var(--emerald-deep) 100%);
@@ -332,7 +333,7 @@
       table.month{border-collapse:collapse; width:100%; min-width:640px; font-variant-numeric:tabular-nums}
       table.month th,table.month td{padding:11px 10px; text-align:center; font-size:15px; border-bottom:1px solid var(--line); white-space:nowrap}
       table.month th{background:var(--emerald-deep); color:#fff; font-weight:600; position:sticky; top:0; z-index:2; font-size:14.5px}
-      table.month td:first-child,table.month th:first-child{text-align:left; font-weight:600}
+      table.month td:first-child,table.month th:first-child{text-align:center; font-weight:600}
       table.month tbody tr:nth-child(even) td{background:var(--surface-2)}
       table.month tbody tr:hover td{background:color-mix(in srgb, var(--gold-soft) 45%, var(--surface))}
       table.month tr.today td{background:var(--gold-soft); font-weight:700}
@@ -350,7 +351,7 @@
         table.month{min-width:0; width:100%; table-layout:fixed}
         table.month th,table.month td{padding:9px 1px; font-size:12.5px; white-space:normal; line-height:1.3; vertical-align:middle}
         table.month th{font-size:11px; line-height:1.35; padding:10px 1px}
-        table.month td:first-child{font-size:16px; font-weight:700; color:var(--emerald-deep)}
+        table.month td:first-child{font-size:16px; font-weight:700; color:var(--emerald-deep); text-align:center}
         table.month td .ma{display:block; margin-left:0; font-size:9px; font-weight:700; letter-spacing:.06em; color:var(--ink-soft)}
         table.month td .mh{display:block; margin-left:0; font-size:9.5px; font-weight:500; color:var(--ink-soft)}
         table.month tr.today td .ma,table.month tr.today td .mh{color:inherit; opacity:.7}
@@ -504,8 +505,8 @@
         <div class="brand-mark" id="svgLogoFallback" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 24a15.5 15.5 0 1 0 31 0 15.5 15.5 0 1 0-31 0Zm6 0a14.5 14.5 0 1 0 29 0 14.5 14.5 0 1 0-29 0Z" fill="#eed184"/><polygon points="35,17.8 36.46,21.99 40.9,22.08 37.36,24.77 38.64,29.01 35,26.48 31.36,29.01 32.64,24.77 29.1,22.08 33.54,21.99" fill="#ffedb0"/></svg>
         </div>
-        <img src="logo.png" alt="Waqt logo" width="72" height="72" style="border-radius:50%;display:block;margin:0 auto" onload="var f=document.getElementById('svgLogoFallback'); if(f) f.style.display='none';" onerror="this.style.display='none'">
-        <div>
+        <img src="logo.png" alt="Waqt logo" width="72" height="72" style="border-radius:50%;display:block;flex:none" onload="var f=document.getElementById('svgLogoFallback'); if(f) f.style.display='none';" onerror="this.style.display='none'">
+        <div class="brand-text">
           <div class="brand-name">WAQT</div>
           <div class="brand-sub">ওয়াক্ত</div>
         </div>
