@@ -35,7 +35,7 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 #book{position:relative;height:calc(100dvh - 252px);min-height:340px;perspective:1900px;overflow:hidden;border-radius:8px}
 .page,.sheet{position:absolute;inset:0;border-radius:8px}
 .page{background:linear-gradient(160deg,var(--paper) 0%,var(--paper2) 100%);
-  border:1px solid #d9c68d;box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 0 60px rgba(201,162,39,.08);
+  border:1px solid #d9c68d;box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 0 60px rgba(160,118,18,.15);
   overflow:hidden}
 .page::before{content:"";position:absolute;inset:7px;border:1.5px solid rgba(201,162,39,.55);
   border-radius:5px;pointer-events:none;z-index:3}
@@ -45,7 +45,7 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 .sheet{z-index:6;pointer-events:none;display:none}
 .curl-rest{position:absolute;inset:0;border-radius:8px;overflow:hidden;
   background:linear-gradient(160deg,var(--paper),var(--paper2));border:1px solid #d9c68d;
-  box-shadow:inset 0 0 60px rgba(201,162,39,.08)}
+  box-shadow:inset 0 0 60px rgba(160,118,18,.15)}
 .curl-rest::before{content:"";position:absolute;inset:7px;border:1.5px solid rgba(201,162,39,.55);border-radius:5px;pointer-events:none;z-index:3}
 .curl-rest::after{content:"";position:absolute;inset:11px;border:.75px solid rgba(201,162,39,.35);border-radius:4px;pointer-events:none;z-index:3}
 .curl-shadow{position:absolute;left:0;top:0;width:76px;pointer-events:none;opacity:0;
@@ -60,16 +60,16 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 #loading{position:absolute;inset:0;z-index:8;display:none;align-items:center;justify-content:center;
   color:var(--emerald);font-weight:600;font-size:16px;background:rgba(255,253,244,.85);border-radius:8px}
 .ar-block{direction:rtl;text-align:justify;font-family:'Amiri Quran',serif;
-  font-size:var(--arfs,27px);line-height:var(--arlh,2.08);color:#1c2a24;
+  font-size:var(--arfs,27px);line-height:var(--arlh,2.08);color:#1c2a24;margin:0 4px;border-radius:6px;
   background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.55) 0,rgba(255,255,255,.55) var(--linepx,56px),rgba(212,175,55,.18) var(--linepx,56px),rgba(212,175,55,.18) calc(var(--linepx,56px)*2))}
 .ar-block .ayah{border-radius:6px;padding:0 1px}
 .ar-block .ayah.playing{background:rgba(201,162,39,.28);box-shadow:0 0 0 2px rgba(201,162,39,.25)}
 body.meaning .ar-block .ayah{cursor:pointer}
 .marker{color:#a87f14;font-size:.68em;white-space:nowrap;padding:0 2px}
-.surah-head{margin:6px 0 10px;padding:9px 12px;border-radius:8px;text-align:center;
+.surah-head{margin:6px 0 10px;padding:14px 12px 12px;border-radius:8px;text-align:center;
   background:linear-gradient(180deg,#0e6a55,#0b5c4d);border:1px solid var(--gold);
   box-shadow:inset 0 0 0 3px rgba(231,207,122,.25)}
-.surah-head .sh-ar{display:block;font-family:'Amiri Quran',serif;font-size:calc(var(--arfs,27px)*.93);color:#f3d98b;line-height:1.5}
+.surah-head .sh-ar{display:block;font-family:'Amiri Quran',serif;font-size:calc(var(--arfs,27px)*.93);color:#f3d98b;line-height:2.0;margin-bottom:7px}
 .surah-head .sh-meta{display:block;font-size:12.5px;color:#dff5ea;margin-top:1px}
 .bismillah{direction:rtl;text-align:center;font-family:'Amiri Quran',serif;
   font-size:calc(var(--arfs,27px)*.96);line-height:1.9;color:#0b5c4d;margin:2px 0 8px}
@@ -211,7 +211,7 @@ async function pageAyahs(page){
 function surahMeta(n){ return INDEX.surahs[n - 1]; }
 
 /* ---------- auto-fit: largest font size that fits the page without scrolling ---------- */
-const FIT_SIZES = [27, 25, 23, 21, 19.5, 18, 16.5, 15, 13.5, 12.5];
+const FIT_SIZES = [24, 22.5, 21, 19.5, 18, 16.5, 15, 13.5, 12.5];
 function fitScroll(el, page){
   const apply = sz => {
     const lh = sz >= 21 ? 2.08 : 1.92;
@@ -224,10 +224,10 @@ function fitScroll(el, page){
   for (const sz of FIT_SIZES){
     apply(sz);
     chosen = sz;
-    if (el.scrollHeight <= el.clientHeight + 2) break;
+    if (el.scrollHeight <= el.clientHeight - 8) break;
   }
   fitCache[page] = chosen;
-  el.style.overflowY = (el.scrollHeight <= el.clientHeight + 2) ? "hidden" : "auto";
+  el.style.overflowY = (el.scrollHeight <= el.clientHeight - 8) ? "hidden" : "auto";
   return chosen;
 }
 
@@ -510,6 +510,10 @@ window.addEventListener("resize", () => {
     cur = (saved >= 1 && saved <= TOTAL) ? saved : 1;
     syncMeaningUI();
     await render(cur);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => {
+      for (const k in fitCache) delete fitCache[k];
+      if (!flipping) render(cur);
+    });
     const nk = packOf(cur + 1); if (nk <= 30) loadPack(nk).catch(()=>{});
   } catch(e) {
     $("pageScroll").innerHTML = `<p style="padding:24px;text-align:center">দুঃখিত, কুরআনের তথ্য আনা যায়নি। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।</p>`;
