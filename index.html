@@ -810,7 +810,7 @@
           <div class="search-row">
             <div class="search-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
-              <input type="search" id="searchInput" autocomplete="off" data-i18n-ph="searchPh" placeholder="জেলার নাম লিখুন — বগুড়া / Bogura" aria-label="Search district" />
+              <input type="search" id="searchInput" autocomplete="off" data-i18n-ph="searchPh" placeholder="জেলার নাম লিখুন — ঢাকা / Dhaka" aria-label="Search district" />
               <div class="results" id="searchResults" role="listbox"></div>
             </div>
             <button type="button" class="loc-btn" id="locBtn">
@@ -818,7 +818,7 @@
               <span data-i18n="myLocation">আমার অবস্থান</span>
             </button>
           </div>
-          <div class="chips" id="chipRow" aria-label="Popular districts"></div>
+          <div class="chips" id="chipRow" aria-label="Divisions"></div>
         </div>
       </section>
 
@@ -1311,7 +1311,29 @@
       ['rangamati','রাঙ্গামাটি','Rangamati',22.6509924,92.144705,''],
       ['bandarban','বান্দরবান','Bandarban',21.7769664,92.194832,'']
     ];
-    const POPULAR = ['bogura','dhaka','chattogram','rajshahi','khulna','sylhet','rangpur','barishal'];
+    /* The 8 divisions, in chip order, with each division's districts.
+       Tapping a division chip runs the search for that division so its
+       districts are listed for selection. */
+    const DIVISIONS = [
+      { key:'dhaka', bn:'ঢাকা', en:'Dhaka' },
+      { key:'chattogram', bn:'চট্টগ্রাম', en:'Chattogram' },
+      { key:'rajshahi', bn:'রাজশাহী', en:'Rajshahi' },
+      { key:'khulna', bn:'খুলনা', en:'Khulna' },
+      { key:'barishal', bn:'বরিশাল', en:'Barishal' },
+      { key:'sylhet', bn:'সিলেট', en:'Sylhet' },
+      { key:'rangpur', bn:'রংপুর', en:'Rangpur' },
+      { key:'mymensingh', bn:'ময়মনসিংহ', en:'Mymensingh' }
+    ];
+    const DIV_DISTRICTS = {
+      dhaka:['dhaka','faridpur','gazipur','gopalganj','kishoreganj','madaripur','manikganj','munshiganj','narayanganj','narsingdi','rajbari','shariatpur','tangail'],
+      chattogram:['bandarban','brahmanbaria','chandpur','chattogram','coxsbazar','cumilla','feni','khagrachhari','lakshmipur','noakhali','rangamati'],
+      rajshahi:['bogura','chapai','joypurhat','naogaon','natore','pabna','rajshahi','sirajganj'],
+      khulna:['bagerhat','chuadanga','jashore','jhenaidah','khulna','kushtia','magura','meherpur','narail','satkhira'],
+      barishal:['barguna','barishal','bhola','jhalokati','patuakhali','pirojpur'],
+      sylhet:['habiganj','moulvibazar','sunamganj','sylhet'],
+      rangpur:['dinajpur','gaibandha','kurigram','lalmonirhat','nilphamari','panchagarh','rangpur','thakurgaon'],
+      mymensingh:['jamalpur','mymensingh','netrokona','sherpur']
+    };
 
     const PRAYERS = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
     const PRAYER_NAMES = {
@@ -2010,7 +2032,7 @@
     const I18N = {
       bn: {
         brandSub:'ওয়াক্ত · Wakto', nextPrayer:'পরের নামাজ', remaining:'বাকি সময়',
-        searchPh:'জেলার নাম লিখুন — বগুড়া / Bogura', myLocation:'আমার অবস্থান',
+        searchPh:'জেলার নাম লিখুন — ঢাকা / Dhaka', myLocation:'আমার অবস্থান',
         todayTimes:'আজকের নামাজের সময়', loading:'সময় আনা হচ্ছে…',
         loadFailTitle:'সময় আনা যায়নি', loadFailBody:'ইন্টারনেট সংযোগ দরকার — সংযোগ দেখে আবার চেষ্টা করুন।', retry:'আবার চেষ্টা করুন',
         sehriIftar:'সেহরি ও ইফতার', sehriIftarNote:'আজকের সময়', sehriEnds:'সেহরির শেষ সময়', sehriSub:'ফজরের ওয়াক্ত শুরু',
@@ -2075,7 +2097,7 @@
       },
       en: {
         brandSub:'Wakto · ওয়াক্ত', nextPrayer:'Next prayer', remaining:'Time remaining',
-        searchPh:'Search district — Bogura / বগুড়া', myLocation:'My location',
+        searchPh:'Search district — Dhaka / ঢাকা', myLocation:'My location',
         todayTimes:"Today's prayer times", loading:'Loading times…',
         loadFailTitle:'Could not load times', loadFailBody:'An internet connection is needed — check it and try again.', retry:'Try again',
         sehriIftar:'Sehri & Iftar', sehriIftarNote:"Today's times", sehriEnds:'Sehri ends', sehriSub:'Fajr begins',
@@ -2809,6 +2831,12 @@
     function searchDistricts(q) {
       q = (q || '').trim().toLowerCase();
       if (!q) return [];
+      /* an exact division name (either language) lists that division's districts */
+      for (const div of DIVISIONS) {
+        if (q === div.bn || q === div.en.toLowerCase() || q === div.key) {
+          return DISTRICTS.filter((d) => DIV_DISTRICTS[div.key].indexOf(d[0]) !== -1);
+        }
+      }
       const hits = [];
       for (const d of DISTRICTS) {
         const en = d[2].toLowerCase();
@@ -2840,12 +2868,16 @@
     }
     function renderChips() {
       const row = $('chipRow'); row.innerHTML = '';
-      for (const key of POPULAR) {
-        const d = DISTRICTS.find((x) => x[0] === key); if (!d) continue;
+      for (const div of DIVISIONS) {
         const c = document.createElement('button');
-        c.type = 'button'; c.className = 'chip' + (state.place && state.place.key === key ? ' on' : '');
-        c.textContent = state.lang === 'bn' ? d[1] : d[2];
-        c.addEventListener('click', () => setPlace(districtPlace(d), { scrollTop: true }));
+        c.type = 'button'; c.className = 'chip' + (state.place && state.place.key && DIV_DISTRICTS[div.key].indexOf(state.place.key) !== -1 ? ' on' : '');
+        c.textContent = state.lang === 'bn' ? div.bn : div.en;
+        c.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const input = $('searchInput');
+          input.value = state.lang === 'bn' ? div.bn : div.en;
+          showResults(searchDistricts(input.value));
+        });
         row.appendChild(c);
       }
     }
