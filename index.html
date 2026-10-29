@@ -382,6 +382,23 @@
       .sp-home-name{font-size:20px; font-weight:700; line-height:1.3}
       .sp-home-sub{font-size:14.5px; opacity:.92; line-height:1.5}
       .sp-home-arr{font-size:26px; color:var(--gold-soft); flex:none}
+      .quran-card{
+        display:flex; align-items:center; gap:14px; width:100%; text-decoration:none; text-align:left;
+        border:1px solid rgba(212,175,90,.55); border-radius:var(--radius); padding:18px; color:#f4efe0; min-height:44px;
+        box-shadow:var(--shadow), inset 0 0 0 1px rgba(212,175,90,.22);
+        background:
+          radial-gradient(700px 300px at 85% -10%, rgba(212,175,90,.32), transparent 60%),
+          linear-gradient(160deg,#0d6a4b 0%, var(--emerald-deep) 55%, var(--emerald-night) 100%);
+        transition:transform .15s ease;
+      }
+      .quran-card:active{transform:scale(.98)}
+      .quran-medal{
+        flex:none; width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+        background:radial-gradient(circle at 32% 28%, rgba(212,175,90,.42), rgba(212,175,90,.08) 72%);
+        border:1.5px solid var(--gold); color:var(--gold-soft);
+        box-shadow:inset 0 0 0 3px rgba(6,40,28,.55), 0 2px 8px rgba(0,0,0,.25);
+      }
+      .quran-medal svg{width:30px; height:30px}
       .menu-status{font-size:14px; color:var(--ink-soft); line-height:1.6; padding:8px 4px 10px; border-bottom:1px dashed var(--line)}
 
       /* ---------- monthly table ---------- */
@@ -771,6 +788,21 @@
         </div>
       </section>
 
+      <!-- ================= QURAN ================= -->
+      <section class="block rise d5" aria-label="Quran">
+        <a class="quran-card" href="quran.html">
+          <span class="quran-medal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.2 4.9 7.6 4.2 4 4.2v13.1c3.6 0 6.2.7 8 2.3 1.8-1.6 4.4-2.3 8-2.3V4.2c-3.6 0-6.2.7-8 2.3z"/><path d="M12 6.5v13.1"/><path d="M7.2 8.6c1 .1 2 .3 2.8.7M7.2 12c1 .1 2 .3 2.8.7M16.8 8.6c-1 .1-2 .3-2.8.7M16.8 12c-1 .1-2 .3-2.8.7"/></svg>
+          </span>
+          <span class="sp-home-text">
+            <span class="sp-home-label">✦ <span data-i18n="quranKicker">আল-কুরআনুল কারীম</span></span>
+            <span class="sp-home-name" data-i18n="quranTitle">পবিত্র কুরআন</span>
+            <span class="sp-home-sub" data-i18n="quranSub">আরবি · বাংলা অর্থ · তিলাওয়াত</span>
+          </span>
+          <span class="sp-home-arr" aria-hidden="true">›</span>
+        </a>
+      </section>
+
       <!-- ================= NEXT SPECIAL DAY ================= -->
       <section class="block rise d5" id="nextSpecialSec" aria-label="Next special day">
         <button type="button" class="sp-home-card" id="nextSpecialCard">
@@ -1102,6 +1134,7 @@
         <button type="button" class="menu-link" data-goto="tasbih"><span>📿</span> <span data-i18n="goTasbih">তসবিহ কাউন্টার</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="ramadan"><span>🌙</span> <span data-i18n="goRamadan">রমজান</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="hadith"><span>📖</span> <span data-i18n="goHadith">হাদিস</span> <span class="arr">›</span></button>
+        <a class="menu-link" href="quran.html"><span>📗</span> <span data-i18n="goQuran">কুরআন</span> <span class="arr">›</span></a>
         <button type="button" class="menu-link" data-goto="special"><span>⭐</span> <span data-i18n="goSpecial">বিশেষ দিন</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" id="mosqueBtn"><span>📍</span> <span data-i18n="goMosque">কাছের মসজিদ</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" id="installBtn"><span>📲</span> <span data-i18n="goInstall">অ্যাপ ইনস্টল করুন</span> <span class="arr">›</span></button>
@@ -1946,7 +1979,8 @@
         ramadanSubOn:'আজকের সেহরি ও ইফতারের সময় নিচে দেওয়া হলো।', ramadanInDays:'রমজান শুরু হতে বাকি {n} দিন',
         ramadanExpected:'সম্ভাব্য শুরু:', ramadanFar:'পরের রমজানের তারিখ শীঘ্রই জানা যাবে',
         ramadanTableBtn:'রমজানের ক্যালেন্ডার', thisMonth:'এই মাস',
-        goRamadan:'রমজান', goHadith:'হাদিস',
+        goRamadan:'রমজান', goHadith:'হাদিস', goQuran:'কুরআন',
+        quranKicker:'আল-কুরআনুল কারীম', quranTitle:'পবিত্র কুরআন', quranSub:'আরবি · বাংলা অর্থ · তিলাওয়াত',
         goDirectory:'সব জেলা ও উপজেলা', goQA:'প্রশ্ন ও উত্তর',
         goSpecial:'বিশেষ দিন', specialTitle:'বিশেষ ইসলামিক দিন', nextSpecial:'আসন্ন বিশেষ দিন',
         specialNote:'তারিখ চাঁদ দেখার উপর নির্ভরশীল — একদিন এদিক-ওদিক হতে পারে।',
@@ -2010,7 +2044,8 @@
         ramadanSubOn:"Today's Sehri and Iftar times are below.", ramadanInDays:'Ramadan begins in {n} days',
         ramadanExpected:'Expected start:', ramadanFar:'The next Ramadan date will be known soon',
         ramadanTableBtn:'Ramadan calendar', thisMonth:'This month',
-        goRamadan:'Ramadan', goHadith:'Hadith',
+        goRamadan:'Ramadan', goHadith:'Hadith', goQuran:'Quran',
+        quranKicker:'Al-Quran Al-Kareem', quranTitle:'The Holy Quran', quranSub:'Arabic · Bangla meaning · Recitation',
         goDirectory:'All Districts & Upazilas', goQA:'Questions & Answers',
         goSpecial:'Special Days', specialTitle:'Special Islamic Days', nextSpecial:'Next special day',
         specialNote:'Dates depend on moon sighting — they may shift by a day.',
