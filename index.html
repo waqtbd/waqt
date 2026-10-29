@@ -73,7 +73,7 @@
         background:linear-gradient(145deg,var(--emerald) 0%,var(--emerald-deep) 100%);
         display:grid; place-items:center; box-shadow:var(--shadow);
       }
-      .brand-mark svg{width:26px; height:26px}
+      .brand-mark svg{width:32px; height:32px}
       .brand-name{font-family:"Marcellus",serif; font-size:26px; letter-spacing:.06em; line-height:1; color:var(--emerald-deep)}
       @media (prefers-color-scheme: dark){ .brand-name{color:var(--gold)} }
       .brand-sub{font-size:14px; color:var(--gold-ink); font-weight:600; line-height:1.3; margin-top:2px; letter-spacing:.01em}
@@ -105,6 +105,10 @@
       .hero-place{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
       .hero-place h1{font-size:clamp(30px,6vw,46px); margin:0; font-weight:700; letter-spacing:.01em}
       .hero-place .pin{color:var(--gold); font-size:.8em}
+      .place-detail{
+        align-self:center; background:rgba(212,175,90,.18); border:1px solid rgba(233,217,174,.55);
+        color:#ffe9ad; padding:6px 13px; border-radius:999px; font-size:15.5px; font-weight:700; letter-spacing:.01em;
+      }
       .hero-dates{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
       .hero-date-chip{
         background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22);
@@ -330,10 +334,26 @@
       table.month tr.today td:first-child{box-shadow:inset 4px 0 0 var(--gold); color:var(--emerald-deep); font-weight:800}
       @media (prefers-color-scheme: dark){ table.month tr.today td:first-child{color:var(--gold-ink)} }
       table.month tr:last-child td{border-bottom:0}
+      table.month td .ma{margin-left:4px}
+      table.month td .mh{margin-left:4px}
+      /* phone: the whole month fits the screen — no sideways scrolling.
+         Columns share the width evenly, times stack time-over-AM/PM and
+         the Hijri month drops to a small second line, so every day stays
+         fully readable in a clean, calm grid. */
       @media (max-width:640px){
-        table.month{min-width:572px}
-        table.month th,table.month td{padding:8px 6px; font-size:13px}
-        table.month th{font-size:12.5px}
+        .table-scroll{overflow-x:hidden}
+        table.month{min-width:0; width:100%; table-layout:fixed}
+        table.month th,table.month td{padding:9px 1px; font-size:12.5px; white-space:normal; line-height:1.3; vertical-align:middle}
+        table.month th{font-size:11px; line-height:1.35; padding:10px 1px}
+        table.month td:first-child{font-size:16px; font-weight:700; color:var(--emerald-deep)}
+        table.month td .ma{display:block; margin-left:0; font-size:9px; font-weight:700; letter-spacing:.06em; color:var(--ink-soft)}
+        table.month td .mh{display:block; margin-left:0; font-size:9.5px; font-weight:500; color:var(--ink-soft)}
+        table.month tr.today td .ma,table.month tr.today td .mh{color:inherit; opacity:.7}
+        table.month tr.today td:first-child{color:var(--emerald-deep)}
+      }
+      @media (max-width:640px) and (prefers-color-scheme: dark){
+        table.month td:first-child{color:var(--gold)}
+        table.month tr.today td:first-child{color:var(--gold-ink)}
       }
       .table-actions{display:flex; gap:10px; padding:14px 16px; border-top:1px solid var(--line); flex-wrap:wrap; align-items:center}
       .table-actions .sp{flex:1}
@@ -424,15 +444,6 @@
       .seg{display:flex; border:1.5px solid var(--line); border-radius:10px; overflow:hidden}
       .seg button{border:0; background:var(--surface-2); padding:9px 13px; font-size:14.5px; font-weight:600; color:var(--ink-soft)}
       .seg button.on{background:var(--emerald); color:#fff}
-      .switch{position:relative; width:52px; height:30px; flex:none}
-      .switch input{opacity:0; width:100%; height:100%; position:absolute; margin:0; cursor:pointer}
-      .switch .track{position:absolute; inset:0; background:var(--line); border-radius:99px; transition:background .2s}
-      .switch .track::after{
-        content:""; position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%;
-        background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.25); transition:left .2s;
-      }
-      .switch input:checked + .track{background:var(--emerald)}
-      .switch input:checked + .track::after{left:25px}
       .menu-link{
         display:flex; width:100%; align-items:center; gap:10px; padding:13px 4px; border:0; background:transparent;
         font-size:16px; font-weight:500; color:var(--ink); text-align:left; border-bottom:1px dashed var(--line);
@@ -486,7 +497,7 @@
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2.5c.6 2.3-.4 3.9-1.9 5C8.4 9.2 7.7 11 8 13.1c.4 3 2.6 5 5.4 5.1-2.3 1.5-5.4 1.3-7.7-.4C3.4 15.9 2.6 12.7 3.6 9.8 4.7 6.6 7.7 4 12 2.5Z" fill="#e9d9ae"/><path d="M17.6 4.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8Z" fill="#e9d9ae"/></svg>
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 24a15.5 15.5 0 1 0 31 0 15.5 15.5 0 1 0-31 0Zm6 0a14.5 14.5 0 1 0 29 0 14.5 14.5 0 1 0-29 0Z" fill="#eed184"/><polygon points="35,17.8 36.46,21.99 40.9,22.08 37.36,24.77 38.64,29.01 35,26.48 31.36,29.01 32.64,24.77 29.1,22.08 33.54,21.99" fill="#ffedb0"/></svg>
         </div>
         <div>
           <div class="brand-name">WAQT</div>
@@ -520,6 +531,7 @@
       <div class="hero-inner">
         <div class="hero-place rise">
           <h1><span class="pin">◈</span> <span id="placeName">বগুড়া</span></h1>
+          <span class="place-detail hidden" id="placeDetail"></span>
         </div>
         <div class="hero-dates rise d1">
           <span class="hero-date-chip" id="gregDate">—</span>
@@ -652,9 +664,9 @@
     <div class="view" id="view-month">
     <div class="wrap">
       <!-- ================= MONTHLY ================= -->
-      <section class="block" aria-label="Monthly timetable">
+      <section class="block" aria-label="Calendar">
         <div class="sec-head">
-          <h2 data-i18n="monthTitle">মাসিক সময়সূচি</h2>
+          <h2 data-i18n="monthTitle">ক্যালেন্ডার</h2>
           <div class="rule"></div>
           <span class="sec-note" id="ramadanNote"></span>
         </div>
@@ -675,11 +687,6 @@
           <div class="table-actions no-print">
             <button type="button" class="btn ghost" id="thisMonthBtn">
               <span data-i18n="thisMonth">এই মাস</span>
-            </button>
-            <div class="sp"></div>
-            <button type="button" class="btn ghost" id="printBtn">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4V9h16v9h-2M6 14h12v7H6z"/></svg>
-              <span data-i18n="print">প্রিন্ট / PDF</span>
             </button>
           </div>
         </div>
@@ -794,11 +801,11 @@
     <nav class="bottomnav" aria-label="Pages">
       <button type="button" data-page="home" class="on">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.2 12 4l8 7.2"/><path d="M6.2 9.6V20h11.6V9.6"/><path d="M10 20v-5.2h4V20"/></svg>
-        <span data-i18n="navHome">বাড়ি</span>
+        <span data-i18n="navHome">হোম</span>
       </button>
       <button type="button" data-page="month">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10.2h16M8.5 3.4v4M15.5 3.4v4"/></svg>
-        <span data-i18n="navMonth">মাসিক</span>
+        <span data-i18n="navMonth">ক্যালেন্ডার</span>
       </button>
       <button type="button" data-page="qibla">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M15.4 8.6l-2 4.8-4.8 2 2-4.8z"/></svg>
@@ -848,11 +855,6 @@
           </div>
         </div>
         <div class="setting-row">
-          <label for="notifToggle"><span data-i18n="notifLabel">নামাজের সময় নোটিফিকেশন</span>
-            <span class="hint" data-i18n="notifHint">ওয়াক্ত হলেই জানিয়ে দেবে — পেজ খোলা থাকতে হবে</span></label>
-          <span class="switch"><input type="checkbox" id="notifToggle" /><span class="track"></span></span>
-        </div>
-        <div class="setting-row">
           <label><span data-i18n="langLabel">ভাষা / Language</span></label>
           <div class="seg" role="group" aria-label="Language">
             <button type="button" id="langBn2" class="on">বাংলা</button>
@@ -864,7 +866,7 @@
       <div class="drawer-sec">
         <h3>🧭 <span data-i18n="quickGo">যেখানে যেতে চান</span></h3>
         <button type="button" class="menu-link" data-goto="home"><span>🕌</span> <span data-i18n="goTimes">আজকের নামাজের সময়</span> <span class="arr">›</span></button>
-        <button type="button" class="menu-link" data-goto="month"><span>📅</span> <span data-i18n="goMonth">মাসিক সময়সূচি</span> <span class="arr">›</span></button>
+        <button type="button" class="menu-link" data-goto="month"><span>📅</span> <span data-i18n="goMonth">ক্যালেন্ডার</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="qibla"><span>🧭</span> <span data-i18n="goQibla">কিবলার দিক</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="tasbih"><span>📿</span> <span data-i18n="goTasbih">তসবিহ কাউন্টার</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="ramadan"><span>🌙</span> <span data-i18n="goRamadan">রমজান</span> <span class="arr">›</span></button>
@@ -873,7 +875,7 @@
 
       <div class="drawer-sec">
         <h3>ℹ️ <span data-i18n="aboutTitle">Waqt সম্পর্কে</span></h3>
-        <p style="margin:0; color:var(--ink-soft); font-size:15px; line-height:1.7" data-i18n="aboutText">Waqt — বাংলাদেশের ৬৪ জেলার নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, মাসিক সময়সূচি, তসবিহ ও যাচাই করা হাদিস — এক জায়গায়, কোনো লগইন ছাড়াই।</p>
+        <p style="margin:0; color:var(--ink-soft); font-size:15px; line-height:1.7" data-i18n="aboutText">Waqt — বাংলাদেশের ৬৪ জেলার নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, ক্যালেন্ডার, তসবিহ ও যাচাই করা হাদিস — এক জায়গায়, কোনো লগইন ছাড়াই।</p>
       </div>
     </aside>
 
@@ -1023,7 +1025,7 @@
         qiblaTitle:'কিবলার দিক', qiblaHead:'কাবার দিক (উত্তর থেকে ঘড়ির কাঁটার দিকে)',
         qiblaHow:'সোনালি তীরটি কিবলার দিক দেখায়। "লাইভ কম্পাস চালু করুন" চাপলে ফোন ঘোরালেই কম্পাস ঘুরবে — তীরটি উপরের দিকে এলেই সেটাই কিবলা।',
         compassOn:'লাইভ কম্পাস চালু করুন',
-        monthTitle:'মাসিক সময়সূচি', print:'প্রিন্ট / PDF',
+        monthTitle:'ক্যালেন্ডার',
         tasbihTitle:'তসবিহ', tasbihNote:'গোল বোতামে চাপ দিন', roundDone:'এই রাউন্ড শেষ:', totalCount:'মোট গণনা:',
         target:'লক্ষ্য:', reset:'রিসেট', ofTarget:'লক্ষ্য', tap:'চাপ দিন',
         discText:'সময় হিসাব অনুযায়ী দেওয়া হয়েছে। স্থানীয় মসজিদ ও ইসলামিক ফাউন্ডেশন বাংলাদেশের সময়সূচিই চূড়ান্ত — দু-এক মিনিট এদিক-ওদিক হতে পারে।',
@@ -1031,16 +1033,15 @@
         hadithSource:'সূত্র:', hadithNote:'অনুবাদ আনুমানিক — মূল আরবি পাঠ ও যাচাইয়ের জন্য উল্লিখিত সূত্র (sunnah.com) দেখুন।',
         settings:'সেটিংস', methodLabel:'হিসাবের পদ্ধতি', methodHint:'বাংলাদেশে সাধারণত করাচি পদ্ধতি চলে',
         madhabLabel:'আসরের হিসাব (মাজহাব)', madhabHint:'বাংলাদেশে হানাফি-ই প্রচলিত',
-        notifLabel:'নামাজের সময় নোটিফিকেশন', notifHint:'ওয়াক্ত হলেই জানিয়ে দেবে — পেজ খোলা থাকতে হবে',
         langLabel:'ভাষা / Language', quickGo:'যেখানে যেতে চান',
-        goTimes:'আজকের নামাজের সময়', goQibla:'কিবলার দিক', goMonth:'মাসিক সময়সূচি', goTasbih:'তসবিহ কাউন্টার',
+        goTimes:'আজকের নামাজের সময়', goQibla:'কিবলার দিক', goMonth:'ক্যালেন্ডার', goTasbih:'তসবিহ কাউন্টার',
         aboutTitle:'Waqt সম্পর্কে',
-        aboutText:'Waqt — বাংলাদেশের ৬৪ জেলার নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, মাসিক সময়সূচি, তসবিহ ও যাচাই করা হাদিস — এক জায়গায়, কোনো লগইন ছাড়াই।',
-        navHome:'বাড়ি', navMonth:'মাসিক', navQibla:'কিবলা', navTasbih:'তসবিহ', navRamadan:'রমজান', navHadith:'হাদিস',
+        aboutText:'Waqt — বাংলাদেশের ৬৪ জেলার নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, ক্যালেন্ডার, তসবিহ ও যাচাই করা হাদিস — এক জায়গায়, কোনো লগইন ছাড়াই।',
+        navHome:'হোম', navMonth:'ক্যালেন্ডার', navQibla:'কিবলা', navTasbih:'তসবিহ', navRamadan:'রমজান', navHadith:'হাদিস',
         ramadanTitle:'রমজান', ramadanNowShort:'এখন রমজান মাস চলছে', ramadanDayOf:'আজ রমজানের {d} তম দিন',
         ramadanSubOn:'আজকের সেহরি ও ইফতারের সময় নিচে দেওয়া হলো।', ramadanInDays:'রমজান শুরু হতে বাকি {n} দিন',
         ramadanExpected:'সম্ভাব্য শুরু:', ramadanFar:'পরের রমজানের তারিখ শীঘ্রই জানা যাবে',
-        ramadanTableBtn:'রমজানের মাসের সময়সূচি', thisMonth:'এই মাস',
+        ramadanTableBtn:'রমজানের ক্যালেন্ডার', thisMonth:'এই মাস',
         goRamadan:'রমজান', goHadith:'হাদিস',
         compassCalib:'কম্পাসের কাঁটা কাঁপছে? ফোনটি ৮-এর আকৃতিতে কয়েকবার ঘোরান — কম্পাস ঠিক হয়ে যাবে।',
         nextBadge:'পরের', tomorrow:'আগামীকাল', started:'শুরু হয়েছে', leftSuffix:'বাকি',
@@ -1052,8 +1053,8 @@
         compassNoSensor:'লাইভ কম্পাস থেকে সাড়া মিলছে না — ফোনে কম্পাস সেন্সর না থাকলে এমন হয়। উপরের ডিগ্রিটি উত্তর থেকে ঘড়ির কাঁটার দিকে মাপা: সেটাই কিবলা।',
         methodNetNeeded:'অন্য পদ্ধতির জন্য ইন্টারনেট দরকার — ডিফল্ট পদ্ধতির সময় দেখানো হচ্ছে',
         compassDenied:'কম্পাসের অনুমতি পাওয়া যায়নি', locFail:'অবস্থান পাওয়া যায়নি — জেলা search করে বেছে নিন',
-        locGetting:'অবস্থান নেওয়া হচ্ছে…', roundComplete:'রাউন্ড শেষ! মাশাআল্লাহ', notifOn:'নোটিফিকেশন চালু হয়েছে',
-        notifDenied:'নোটিফিকেশন অনুমতি পাওয়া যায়নি', ramadanNow:'রমজান চলছে — এই মাসে রোজা',
+        locGetting:'অবস্থান নেওয়া হচ্ছে…', roundComplete:'রাউন্ড শেষ! মাশাআল্লাহ',
+        ramadanNow:'রমজান চলছে — এই মাসে রোজা',
         hijriWord:'হিজরি', dateWord:'তারিখ',
         thDate:'তারিখ', thHijri:'হিজরি', now:'এখন',
         monthNames:['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর']
@@ -1068,7 +1069,7 @@
         qiblaTitle:'Qibla direction', qiblaHead:'Direction of the Kaaba (clockwise from north)',
         qiblaHow:'The gold arrow points to the Qibla. Tap "Start live compass" and turn your phone — when the arrow points straight up, you are facing the Qibla.',
         compassOn:'Start live compass',
-        monthTitle:'Monthly timetable', print:'Print / PDF',
+        monthTitle:'Calendar',
         tasbihTitle:'Tasbih counter', tasbihNote:'Tap the round button', roundDone:'Rounds completed:', totalCount:'Total count:',
         target:'Target:', reset:'Reset', ofTarget:'of', tap:'Tap',
         discText:'Times are calculated and may differ by a minute or two. Your local mosque and Islamic Foundation Bangladesh timetable remain the final authority.',
@@ -1076,16 +1077,15 @@
         hadithSource:'Source:', hadithNote:'Translations are approximate — see the cited source (sunnah.com) for the original Arabic text.',
         settings:'Settings', methodLabel:'Calculation method', methodHint:'The Karachi method is customary in Bangladesh',
         madhabLabel:'Asr calculation (madhab)', madhabHint:'Hanafi is customary in Bangladesh',
-        notifLabel:'Prayer-time notifications', notifHint:'Alerts when a prayer time arrives — this page must stay open',
         langLabel:'Language / ভাষা', quickGo:'Go to',
-        goTimes:"Today's prayer times", goQibla:'Qibla direction', goMonth:'Monthly timetable', goTasbih:'Tasbih counter',
+        goTimes:"Today's prayer times", goQibla:'Qibla direction', goMonth:'Calendar', goTasbih:'Tasbih counter',
         aboutTitle:'About Waqt',
-        aboutText:'Waqt — prayer times for all 64 districts of Bangladesh, Qibla direction, Hijri date, Sehri–Iftar, a monthly timetable, a tasbih counter and verified hadith — all in one place, no login needed.',
-        navHome:'Home', navMonth:'Monthly', navQibla:'Qibla', navTasbih:'Tasbih', navRamadan:'Ramadan', navHadith:'Hadith',
+        aboutText:'Waqt — prayer times for all 64 districts of Bangladesh, Qibla direction, Hijri date, Sehri–Iftar, a calendar, a tasbih counter and verified hadith — all in one place, no login needed.',
+        navHome:'Home', navMonth:'Calendar', navQibla:'Qibla', navTasbih:'Tasbih', navRamadan:'Ramadan', navHadith:'Hadith',
         ramadanTitle:'Ramadan', ramadanNowShort:'Ramadan is ongoing', ramadanDayOf:'Today is day {d} of Ramadan',
         ramadanSubOn:"Today's Sehri and Iftar times are below.", ramadanInDays:'Ramadan begins in {n} days',
         ramadanExpected:'Expected start:', ramadanFar:'The next Ramadan date will be known soon',
-        ramadanTableBtn:'Ramadan month timetable', thisMonth:'This month',
+        ramadanTableBtn:'Ramadan calendar', thisMonth:'This month',
         goRamadan:'Ramadan', goHadith:'Hadith',
         compassCalib:'Needle shaking? Move the phone in a figure-8 a few times to calibrate the compass.',
         nextBadge:'NEXT', tomorrow:'tomorrow', started:'has begun', leftSuffix:'left',
@@ -1097,8 +1097,8 @@
         compassNoSensor:'No response from the live compass — this phone may not have a compass sensor. Use the degree above, measured clockwise from north: that is the Qibla.',
         methodNetNeeded:'Other methods need an internet connection — showing the default method times',
         compassDenied:'Compass permission was not granted', locFail:'Location not found — search and pick your district instead',
-        locGetting:'Getting your location…', roundComplete:'Round complete! MashaAllah', notifOn:'Notifications are on',
-        notifDenied:'Notification permission was not granted', ramadanNow:'Ramadan is ongoing — fasting this month',
+        locGetting:'Getting your location…', roundComplete:'Round complete! MashaAllah',
+        ramadanNow:'Ramadan is ongoing — fasting this month',
         hijriWord:'Hijri', dateWord:'Date',
         thDate:'Date', thHijri:'Hijri', now:'Now',
         monthNames:['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -1199,8 +1199,6 @@
       tomorrowFajr: null,    // Date of tomorrow's Fajr
       monthCache: {},        // 'YYYY-M' -> Aladhan calendar array
       viewYear: null, viewMonth: null,
-      notif: false,
-      notified: {},          // prayer name -> date string already notified
       compassOn: false,
       heading: null,         // device heading (deg, 0 = north)
       lpHeading: null,       // low-pass filtered heading
@@ -1278,7 +1276,13 @@
       if (!state.place) return '—';
       return state.lang === 'bn' ? state.place.labelBn : state.place.labelEn;
     }
-    function renderPlaceLabel() { $('placeName').textContent = placeLabel(); }
+    function renderPlaceLabel() {
+      $('placeName').textContent = placeLabel();
+      const el = $('placeDetail');
+      const d = state.place && state.place.detail;
+      if (d) { el.textContent = d; el.classList.remove('hidden'); }
+      else { el.textContent = ''; el.classList.add('hidden'); }
+    }
 
     function setPlace(place, opts) {
       state.place = place;
@@ -1409,7 +1413,6 @@
           state.method = 1; state.school = 1;
           $('methodSel').value = '1';
           $('schoolHanafi').classList.add('on'); $('schoolShafi').classList.remove('on');
-          state.notified = {};
           if (showEmbeddedToday(new Date())) {
             toast(L().methodNetNeeded);
             loadMonth(state.viewYear, state.viewMonth);
@@ -1560,7 +1563,7 @@
       }
     }
 
-    /* ---------------- clock + countdown + notifications ---------------- */
+    /* ---------------- clock + countdown ---------------- */
     function tick() {
       const now = new Date();
       let h = now.getHours(); const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12; if (h === 0) h = 12;
@@ -1579,29 +1582,8 @@
             $('dayProgress').style.width = pct + '%';
           }
         }
-        checkNotify(next, now);
       } else {
         $('countdown').textContent = '--:--:--';
-      }
-    }
-    function checkNotify(next, now) {
-      if (!state.notif || !('Notification' in window) || Notification.permission !== 'granted') return;
-      const todayKey = now.toDateString();
-      /* notify when a prayer time is reached (within the last 60 s) */
-      for (const item of prayerDates()) {
-        if (!item.at) continue;
-        const key = item.name + '|' + todayKey;
-        if (state.notified[key]) continue;
-        const delta = now - item.at;
-        if (delta >= 0 && delta < 60000) {
-          state.notified[key] = true;
-          try {
-            new Notification('Waqt — ' + PRAYER_NAMES[state.lang][item.name], {
-              body: PRAYER_NAMES[state.lang][item.name] + ' ' + L().started + ' · ' + placeLabel()
-            });
-          } catch (e) { /* ignore */ }
-          toast(PRAYER_NAMES[state.lang][item.name] + ' ' + L().started);
-        }
       }
     }
     setInterval(tick, 1000);
@@ -1626,8 +1608,8 @@
         const tr = document.createElement('tr');
         if (g.date === todayStr) tr.className = 'today';
         const t = day.timings;
-        const cells = [num(g.day) + ' ' + L().monthNames[g.month.number - 1].slice(0, 3), num(hj.day) + ' ' + HIJRI_MONTHS[state.lang][hj.month.number - 1].slice(0, 4)]
-          .concat(PRAYERS.map((p) => { const f = fmt12(t[p]); return f.text + ' ' + f.ampm; }));
+        const cells = [num(g.day), num(hj.day) + '<span class="mh">' + HIJRI_MONTHS[state.lang][hj.month.number - 1].slice(0, 4) + '</span>']
+          .concat(PRAYERS.map((p) => { const f = fmt12(t[p]); return '<span class="mt">' + f.text + '</span><span class="ma">' + f.ampm + '</span>'; }));
         tr.innerHTML = cells.map((c) => '<td>' + c + '</td>').join('');
         tb.appendChild(tr);
       }
@@ -1819,6 +1801,49 @@
     }
 
     /* ---------------- geolocation ---------------- */
+    /* Build "District · Upazila" (e.g. "Bogura Sadar") from a Nominatim
+       reverse-geocode address. Upazila names in Bangladesh usually begin
+       with the district name, in which case the upazila alone says both.
+       When Nominatim names no upazila but the locality is the district's
+       own headquarters town, that town sits in the "<District> Sadar"
+       upazila (true for most districts; the big metropolitan districts
+       are excluded by the caller, whose cities have no Sadar upazila). */
+    function composeLocDetail(a, opts) {
+      if (!a) return '';
+      opts = opts || {};
+      const clean = (s) => (s || '')
+        .replace(/\s+(District|Zila|Upazila|Upazilla)\s*$/i, '')
+        .replace(/\s+(জেলা|উপজেলা)\s*$/, '')
+        .trim();
+      let district = clean(a.state_district);
+      let upazila = '';
+      if (a.county && (/upazila/i.test(a.county) || a.county.indexOf('উপজেলা') !== -1)) upazila = clean(a.county);
+      else if (!district && a.county) district = clean(a.county);
+      const town = clean(a.town || a.municipality || a.city || '');
+      if (!district) district = town;
+      if (!upazila && town && district && town !== district) upazila = town;
+      if (!upazila && town && district && town === district && opts.allowSadar) {
+        upazila = district + ' ' + (opts.sadarWord || 'Sadar');
+      }
+      if (upazila && district && upazila !== district) {
+        if (upazila.toLowerCase().indexOf(district.toLowerCase()) === 0) return upazila;
+        return district + ' · ' + upazila;
+      }
+      return upazila || district || '';
+    }
+    async function reverseGeocodeDetail(lat, lon, allowSadar) {
+      const lang = state.lang === 'bn' ? 'bn' : 'en';
+      const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' +
+        encodeURIComponent(lat) + '&lon=' + encodeURIComponent(lon) +
+        '&zoom=14&accept-language=' + lang);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const j = await r.json();
+      return composeLocDetail(j && j.address, {
+        allowSadar: allowSadar,
+        sadarWord: state.lang === 'bn' ? 'সদর' : 'Sadar'
+      });
+    }
+
     function useMyLocation() {
       if (!('geolocation' in navigator)) { toast(L().locFail); return; }
       toast(L().locGetting);
@@ -1830,8 +1855,19 @@
           const dd = (d[3] - lat) * (d[3] - lat) + (d[4] - lon) * (d[4] - lon);
           if (dd < bestD) { bestD = dd; best = d; }
         }
-        /* embedded fallback for a custom location = nearest district's times */
-        setPlace({ labelBn: 'আমার অবস্থান', labelEn: 'My location', lat: lat, lon: lon, key: null, embedKey: best ? best[0] : null }, { scrollTop: true });
+        /* embedded fallback for a custom location = nearest district's times;
+           the chip beside "আমার অবস্থান" starts as the nearest district and
+           is refined to district + upazila once reverse geocoding answers */
+        const place = { labelBn: 'আমার অবস্থান', labelEn: 'My location', lat: lat, lon: lon, key: null,
+          embedKey: best ? best[0] : null,
+          detail: best ? (state.lang === 'bn' ? best[1] : best[2]) : '' };
+        setPlace(place, { scrollTop: true });
+        /* metropolitan districts whose headquarters city has no
+           "<District> Sadar" upazila — show the district alone there */
+        const allowSadar = !best || ['dhaka', 'chattogram', 'khulna', 'rajshahi', 'cumilla'].indexOf(best[0]) === -1;
+        reverseGeocodeDetail(lat, lon, allowSadar).then((detail) => {
+          if (detail && state.place === place) { place.detail = detail; renderPlaceLabel(); }
+        }).catch(() => { /* offline / blocked: nearest-district chip stays */ });
       }, () => { toast(L().locFail); }, { timeout: 12000, maximumAge: 300000 });
     }
 
@@ -1951,10 +1987,6 @@
         state.viewMonth++; if (state.viewMonth > 12) { state.viewMonth = 1; state.viewYear++; }
         loadMonth(state.viewYear, state.viewMonth);
       });
-      $('printBtn').addEventListener('click', () => {
-        toast(state.lang === 'bn' ? 'ব্রাউজারের প্রিন্ট অপশন থেকে প্রিন্ট / PDF করুন' : 'Use the browser print dialog to print or save as PDF');
-      });
-
       $('tapZone').addEventListener('click', tapTasbih);
       document.querySelectorAll('.target-sel button').forEach((b) => {
         b.addEventListener('click', () => { tasbih.target = +b.getAttribute('data-target'); tasbih.count = 0; renderTasbih(); });
@@ -1964,21 +1996,11 @@
       $('hadithNext').addEventListener('click', () => { hadithIdx = (hadithIdx + 1) % HADITHS.length; renderHadith(); });
 
       $('methodSel').addEventListener('change', (e) => {
-        state.method = +e.target.value; state.monthCache = {}; state.notified = {};
+        state.method = +e.target.value; state.monthCache = {};
         loadAll();
       });
       $('schoolHanafi').addEventListener('click', () => setSchool(1));
       $('schoolShafi').addEventListener('click', () => setSchool(0));
-
-      $('notifToggle').addEventListener('change', async (e) => {
-        if (e.target.checked) {
-          if (!('Notification' in window)) { toast(L().notifDenied); e.target.checked = false; return; }
-          let perm = Notification.permission;
-          if (perm === 'default') { try { perm = await Notification.requestPermission(); } catch (err) { perm = 'denied'; } }
-          if (perm === 'granted') { state.notif = true; toast(L().notifOn); }
-          else { state.notif = false; e.target.checked = false; toast(L().notifDenied); }
-        } else state.notif = false;
-      });
 
       document.querySelectorAll('[data-goto]').forEach((b) => {
         b.addEventListener('click', () => {
@@ -2006,7 +2028,7 @@
     }
     function setSchool(s) {
       if (state.school === s) return;
-      state.school = s; state.monthCache = {}; state.notified = {};
+      state.school = s; state.monthCache = {};
       $('schoolHanafi').classList.toggle('on', s === 1);
       $('schoolShafi').classList.toggle('on', s === 0);
       loadAll();
