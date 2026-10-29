@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content="Waqt (Wakto) — ওয়াক্ত: বাংলাদেশের ৬৪ জেলার আজকের নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, তসবিহ ও হাদিস। Prayer times for all 64 districts of Bangladesh." />
-    <link rel="icon" href="data:," />
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
     <title>Waqt (Wakto) — আজকের নামাজের সময় | Prayer Times Bangladesh</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Hind+Siliguri:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
     <style>
       :root{
@@ -67,7 +69,7 @@
         backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
         border-bottom:1px solid var(--line);
       }
-      .brand{display:flex; align-items:center; gap:11px; min-width:0}
+      .brand{display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; text-align:center}
       .brand-mark{
         width:42px; height:42px; flex:none; border-radius:12px;
         background:linear-gradient(145deg,var(--emerald) 0%,var(--emerald-deep) 100%);
@@ -221,6 +223,9 @@
       .duo-card .d-label{font-size:14px; letter-spacing:.1em; text-transform:uppercase; opacity:.85; font-weight:600}
       .duo-card .d-time{font-size:34px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.2}
       .duo-card .d-sub{font-size:14.5px; opacity:.9}
+
+      /* prayer-time numerals: Hind Siliguri renders Bengali digits (e.g. ১) more cleanly */
+      .prayer .p-time,.next-time,#countdown,.duo-card .d-time,table.month td:not(:first-child){font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif}
 
       /* ---------- qibla ---------- */
       .qibla-card{
@@ -496,9 +501,10 @@
     <!-- ================= HEADER ================= -->
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark" aria-hidden="true">
+        <div class="brand-mark" id="svgLogoFallback" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 24a15.5 15.5 0 1 0 31 0 15.5 15.5 0 1 0-31 0Zm6 0a14.5 14.5 0 1 0 29 0 14.5 14.5 0 1 0-29 0Z" fill="#eed184"/><polygon points="35,17.8 36.46,21.99 40.9,22.08 37.36,24.77 38.64,29.01 35,26.48 31.36,29.01 32.64,24.77 29.1,22.08 33.54,21.99" fill="#ffedb0"/></svg>
         </div>
+        <img src="logo.png" alt="Waqt logo" width="72" height="72" style="border-radius:50%;display:block;margin:0 auto" onload="var f=document.getElementById('svgLogoFallback'); if(f) f.style.display='none';" onerror="this.style.display='none'">
         <div>
           <div class="brand-name">WAQT</div>
           <div class="brand-sub">ওয়াক্ত</div>
