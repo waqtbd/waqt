@@ -82,10 +82,13 @@ body.meaning .ar-block .ayah{cursor:pointer}
 #controls button:active{transform:scale(.97)}
 #controls #playBtn{background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:#3a2c00;border:none}
 #controls #bnBtn.on{background:#11634f;border-color:var(--gold-soft);color:#fff}
-#meaningCard{position:fixed;left:50%;transform:translate(-50%,140%);bottom:86px;z-index:40;
+#meaningCard{position:fixed;left:50%;bottom:84px;z-index:40;visibility:hidden;pointer-events:none;
+  transform:translate(-50%,calc(100% + 96px));
   width:min(720px,calc(100vw - 20px));background:var(--paper);border:1.5px solid var(--gold);border-radius:16px;
-  box-shadow:0 16px 44px rgba(0,0,0,.5);padding:14px 16px 12px;transition:transform .3s ease}
-#meaningCard.open{transform:translate(-50%,0)}
+  box-shadow:0 16px 44px rgba(0,0,0,.5);padding:14px 16px 12px;
+  transition:transform .3s ease,visibility 0s linear .3s}
+#meaningCard.open{transform:translate(-50%,0);visibility:visible;pointer-events:auto;
+  transition:transform .3s ease,visibility 0s}
 #meaningCard .mc-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 #meaningCard .mc-head b{flex:1;color:var(--emerald);font-size:15px}
 #meaningCard .mc-head .x{font-size:17px;padding:6px 11px;border-radius:9px;background:#f1e8c8;min-height:40px;min-width:40px}
@@ -263,7 +266,7 @@ async function flipTo(target, dir){
   const sheet = $("sheet"), front = $("sheetFront");
   sheet.style.display = "block";
   sheet.classList.remove("anim", "turning");
-  sheet.style.transformOrigin = "right center";
+  sheet.style.transformOrigin = dir > 0 ? "100% 100%" : "0% 100%";   /* each direction lifts diagonally from its own bottom corner */
   const wrap = (ayahs, page) => {
     const fs = fitCache[page] ? ` style="--arfs:${fitCache[page]}px;overflow-y:hidden"` : "";
     return `<div class="page-scroll"${fs}>${pageHTML(ayahs, page)}</div>`;
@@ -273,6 +276,7 @@ async function flipTo(target, dir){
     const fEl = front.querySelector(".page-scroll"); if (fEl) fitScroll(fEl, cur);
     sheet.style.transform = "rotateY(0deg)";
     setBase(tAyahs, target);
+    flipSound();
     requestAnimationFrame(() => requestAnimationFrame(() => {
       sheet.classList.add("anim", "turning"); sheet.style.transform = "rotateY(180deg)";
     }));
@@ -280,6 +284,7 @@ async function flipTo(target, dir){
     front.innerHTML = wrap(tAyahs, target);
     const fEl = front.querySelector(".page-scroll"); if (fEl) fitScroll(fEl, target);
     sheet.style.transform = "rotateY(180deg)";
+    flipSound();
     requestAnimationFrame(() => requestAnimationFrame(() => {
       sheet.classList.add("anim", "turning"); sheet.style.transform = "rotateY(0deg)";
     }));
@@ -291,6 +296,31 @@ async function flipTo(target, dir){
   setTimeout(() => { sheet.style.display = "none"; sheet.classList.remove("anim", "turning"); flipping = false; }, ANIM_MS + 90);
   const nk = packOf(target + (dir > 0 ? 1 : -1));
   if (nk >= 0 && nk <= 30 && !packs[nk]) loadPack(nk).catch(()=>{});
+}
+/* ---------- page-flip sound (soft paper swish, synthesized — no audio file needed) ---------- */
+let AC = null;
+function flipSound(){
+  try{
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    AC = AC || new Ctx();
+    if (AC.state === "suspended") AC.resume();
+    const t = AC.currentTime, dur = 0.38;
+    const buf = AC.createBuffer(1, Math.floor(AC.sampleRate * dur), AC.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    const src = AC.createBufferSource(); src.buffer = buf;
+    const bp = AC.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 0.9;
+    bp.frequency.setValueAtTime(480, t);
+    bp.frequency.exponentialRampToValueAtTime(1500, t + dur * 0.55);
+    bp.frequency.exponentialRampToValueAtTime(650, t + dur);
+    const g = AC.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.11, t + 0.07);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(bp); bp.connect(g); g.connect(AC.destination);
+    src.start(t); src.stop(t + dur);
+  }catch(e){}
 }
 const nextPage = () => flipTo(cur + 1, 1);
 const prevPage = () => flipTo(cur - 1, -1);
