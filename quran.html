@@ -192,7 +192,7 @@ const arD = s => String(s).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
 const $ = id => document.getElementById(id);
 let INDEX = null, BISM = "";
 const packs = {};               // packNo -> {pages:{...}}
-const fitCache = {};            // page -> fitted arabic font size
+const fitCache = {};            // page -> [fitted arabic font size, line-height]
 let cur = 1;                    // current page
 let curAyahs = [];              // ayahs of the current page (for meaning lookup)
 let meaningMode = localStorage.getItem("waqtQuranBn") === "1";
@@ -215,22 +215,40 @@ function surahMeta(n){ return INDEX.surahs[n - 1]; }
 
 /* ---------- auto-fit: largest font size that fits the page without scrolling ---------- */
 const FIT_SIZES = [24, 22.5, 21, 19.5, 18, 16.5, 15, 13.5, 12.5];
+/* Fit = largest font whose lines can SPREAD to fill the page: for each size, the
+   line-height that exactly fills the panel is solved from two measurements and
+   clamped to 2.02..2.8 — so pages are neither cramped nor floating in dead space. */
 function fitScroll(el, page){
-  const apply = sz => {
-    const lh = sz >= 21 ? 2.08 : 2.02;
+  const apply = (sz, lh) => {
     el.style.setProperty("--arfs", sz + "px");
     el.style.setProperty("--arlh", String(lh));
   };
-  if (fitCache[page]){ apply(fitCache[page]); el.style.overflowY = "hidden"; return fitCache[page]; }
-  let chosen = FIT_SIZES[FIT_SIZES.length - 1];
+  if (fitCache[page]){ const c = fitCache[page]; apply(c[0], c[1]); el.style.overflowY = "hidden"; return c[0]; }
+  const target = el.clientHeight - 10;
+  const lastSz = FIT_SIZES[FIT_SIZES.length - 1];
+  let chosen = null;
   for (const sz of FIT_SIZES){
-    apply(sz);
-    chosen = sz;
-    if (el.scrollHeight <= el.clientHeight - 8) break;
+    apply(sz, 2.02);
+    const h1 = el.scrollHeight;
+    if (h1 > target && sz === lastSz){ chosen = [sz, 2.02]; break; }
+    apply(sz, 2.5);
+    const h2 = el.scrollHeight;
+    const slope = (h2 - h1) / 0.48;
+    if (slope < 1){ if (h1 <= target){ chosen = [sz, 2.35]; break; } continue; }
+    const fixed = h1 - slope * 2.02;
+    const lhNeed = (target - fixed) / slope;
+    if (lhNeed < 2.02) continue;
+    let lh = Math.min(lhNeed, 2.8);
+    apply(sz, lh);
+    let guard = 0;
+    while (el.scrollHeight > el.clientHeight - 4 && lh > 2.03 && guard++ < 4){ lh = Math.max(2.02, lh - 0.08); apply(sz, lh); }
+    chosen = [sz, Math.round(lh * 100) / 100];
+    break;
   }
+  if (!chosen) chosen = [lastSz, 2.02];
   fitCache[page] = chosen;
-  el.style.overflowY = (el.scrollHeight <= el.clientHeight - 8) ? "hidden" : "auto";
-  return chosen;
+  el.style.overflowY = (el.scrollHeight <= el.clientHeight - 4) ? "hidden" : "auto";
+  return chosen[0];
 }
 
 /* ---------- rendering ---------- */
