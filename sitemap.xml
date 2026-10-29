@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Waqt (Wakto / ওয়াক্ত) sitemap.
-     District pages are rendered client-side in index.html, so only the main
-     page is listed here. Update the URL below if the final address changes
-     from the planned waqtbd.com. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://waqtbd.com/</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://waqtbd.github.io/waqt/</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/dhaka.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/gazipur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/narayanganj.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/tangail.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/kishoreganj.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/manikganj.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/munshiganj.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/narsingdi.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/faridpur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/gopalganj.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/madaripur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/rajbari.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/shariatpur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/chattogram.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/coxsbazar.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/cumilla.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/brahmanbaria.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/chandpur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/feni.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/khagrachhari.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/lakshmipur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/noakhali.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/rangamati.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/bandarban.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/khulna.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/bagerhat.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/chuadanga.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/jashore.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/jhenaidah.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/kushtia.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/magura.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/meherpur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/narail.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/satkhira.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/rajshahi.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/bogura.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/joypurhat.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/naogaon.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/natore.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/chapai.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/pabna.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/sirajganj.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/rangpur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/dinajpur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/gaibandha.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/kurigram.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/lalmonirhat.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/nilphamari.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/panchagarh.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/thakurgaon.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/barishal.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/bhola.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/barguna.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/jhalokati.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/patuakhali.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/pirojpur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/sylhet.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/habiganj.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/moulvibazar.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/sunamganj.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/mymensingh.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/jamalpur.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/netrokona.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://waqtbd.github.io/waqt/sherpur.html</loc><lastmod>2026-10-29</lastmod></url>
 </urlset>
