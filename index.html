@@ -23,8 +23,6 @@
         window.__waqtInstallPrompt = e;
       });
     </script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <meta name="theme-color" content="#0b5c4d">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -584,8 +582,6 @@
       }
       .mq-head h2{margin:0; font-size:19px; flex:1}
       .mq-body{overflow-y:auto; padding:14px 16px 18px}
-      .mq-map{height:320px; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:var(--surface-2)}
-      @media (max-width:640px){ .mq-map{height:250px} }
       .mq-status{font-size:15.5px; color:var(--ink-soft); line-height:1.65; padding:12px 2px 2px; min-height:24px}
       .mq-status b{color:var(--ink)}
       .mq-netretry{margin:10px auto 2px; display:flex; width:fit-content}
@@ -1124,7 +1120,6 @@
         <button type="button" class="drawer-close" id="mqClose" aria-label="Close">✕</button>
       </div>
       <div class="mq-body">
-        <div class="mq-map hidden" id="mqMap"></div>
         <div class="mq-status" id="mqStatus" role="status"></div>
         <button type="button" class="btn mq-netretry hidden" id="mqNetRetry"><span data-i18n="mosqueRetry">আবার চেষ্টা করুন</span></button>
         <a class="btn mq-gmaps hidden" id="mqGmaps" href="#" target="_blank" rel="noopener"><span data-i18n="mosqueGmaps">Google Maps-এ মসজিদ খুঁজুন</span></a>
@@ -1956,7 +1951,7 @@
         mosqueTitle:'কাছের মসজিদ', mosqueLocTitle:'লোকেশন চালু করুন',
         mosqueLocBody:'কাছের মসজিদ দেখাতে আপনার লোকেশন দরকার। ফোনের লোকেশন (GPS) চালু করে নিচের বোতামে চাপ দিন।',
         mosqueLocBtn:'লোকেশন চালু করে খুঁজুন', mosqueSearching:'আশেপাশের মসজিদ খোঁজা হচ্ছে…',
-        mosqueFound:'{n}টি মসজিদ পাওয়া গেছে', mosqueNone:'আশেপাশে কোনো মসজিদ পাওয়া যায়নি।',
+        mosqueFound:'{n}টি মসজিদ পাওয়া গেছে', mosqueNone:'আশেপাশে ১৫ কিমির মধ্যে আমাদের সংরক্ষিত তথ্যে কোনো মসজিদ পাওয়া যায়নি।',
         mosqueNetFail:'মসজিদের তথ্য আনা যায়নি — ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।',
         mosqueRetry:'আবার চেষ্টা করুন', mosqueGmaps:'Google Maps-এ মসজিদ খুঁজুন',
         mosqueDenied:'লোকেশন পাওয়া যায়নি — এই সাইটের জন্য লোকেশন অনুমতি বন্ধ আছে। ব্রাউজারের সাইট সেটিংস (Site settings → Location) থেকে অনুমতি দিন, অথবা ফোনের লোকেশন (GPS) চালু করে আবার চেষ্টা করুন।',
@@ -2019,7 +2014,7 @@
         mosqueTitle:'Nearby Mosques', mosqueLocTitle:'Turn on location',
         mosqueLocBody:'Your location is needed to show nearby mosques. Turn on location (GPS) on your phone, then tap the button below.',
         mosqueLocBtn:'Find with location', mosqueSearching:'Searching for mosques nearby…',
-        mosqueFound:'{n} mosques found', mosqueNone:'No mosques found nearby.',
+        mosqueFound:'{n} mosques found', mosqueNone:'No mosque found within 15 km in our built-in mosque data.',
         mosqueNetFail:'Could not load mosque data — check your internet connection and try again.',
         mosqueRetry:'Try again', mosqueGmaps:'Find mosques in Google Maps',
         mosqueDenied:'Location is unavailable — permission for this site is blocked. Allow location in your browser site settings (Site settings → Location), or turn on phone location (GPS), then try again.',
@@ -2947,7 +2942,7 @@
       $('mqRetry').addEventListener('click', findNearbyMosques);
       $('mqNetRetry').addEventListener('click', () => {
         mqShowNetRetry(false);
-        if (state.lastLoc) loadMosqueMap(state.lastLoc.lat, state.lastLoc.lon);
+        if (state.lastLoc) loadMosqueList(state.lastLoc.lat, state.lastLoc.lon);
         else findNearbyMosques();
       });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMosqueModal(); });
@@ -3123,13 +3118,20 @@
     }
 
     /* ---------------- nearby mosques ----------------
-       Opens an in-app popup with a real map (Leaflet + OpenStreetMap)
-       centred on the visitor. Location is REQUIRED: without a granted
-       geolocation fix the popup shows a "turn on location" panel and a
-       retry button instead of any map. Mosque positions come from the
-       OpenStreetMap Overpass API (amenity=place_of_worship,
-       religion=muslim, plus building=mosque), sorted nearest first. */
-    let mqMap = null, mqLayer = null, mqMarkers = [];
+       Opens an in-app popup listing the mosques nearest the visitor.
+       Location is REQUIRED: without a granted geolocation fix the
+       popup shows a "turn on location" panel and a retry button.
+       Mosque positions come from a SAME-ORIGIN static dataset baked
+       in at build time (13,967 Bangladesh mosques from OpenStreetMap,
+       split into 0.25° grid-cell files under mosques/: cell key
+       ilat = floor(lat*4), ilon = floor(lon*4); each file is a JSON
+       array of [name, lat, lon], and a 404 simply means that cell
+       holds no mapped mosques). No external API and no map tiles are
+       involved — the public Overpass mirrors and the OSM tile CDN
+       proved unreachable from visitors' networks, which is why the
+       old map popup sat on "searching…" forever. The 3×3 cells
+       around the visitor are fetched in parallel, merged, filtered
+       to 15 km and sorted nearest first. */
     function openMosqueModal() {
       const m = $('mqModal');
       m.hidden = false;
@@ -3171,14 +3173,13 @@
       mqShowNetRetry(false);
       mqShowGmaps(false);
       $('mqList').innerHTML = '';
-      $('mqMap').classList.add('hidden');
       if (!('geolocation' in navigator)) { mqSetStatus(''); mqShowLocBox(true); return; }
       mqSetStatus('<span class="spinner" style="width:22px;height:22px;border-width:3px;display:inline-block;vertical-align:-5px;margin:0 8px 0 0"></span>' + L().locGetting);
       let settled = false;
       const onPos = (pos) => {
         if (settled) return; settled = true;
         state.lastLoc = { lat: pos.coords.latitude, lon: pos.coords.longitude };
-        loadMosqueMap(state.lastLoc.lat, state.lastLoc.lon);
+        loadMosqueList(state.lastLoc.lat, state.lastLoc.lon);
       };
       const fail = (err) => {
         if (settled) return; settled = true;
@@ -3203,141 +3204,83 @@
         setTimeout(() => fail(null), 32000);
       } catch (e) { fail(null); }
     }
-    /* Public Overpass instances. Some of them are effectively dead —
-       they accept the connection and then never answer — and the main
-       server is often busy. Asking them ONE BY ONE (the old behaviour)
-       stacked a 26s + 16s + 16s + 16s wait before the search gave up,
-       which is exactly the "searching… forever, then try again" loop
-       reported on phones. So all instances are now asked AT THE SAME
-       TIME and the first good answer wins; the losers are aborted.
-       The whole search is bounded by a single 16s cap per radius. */
-    const OVERPASS_ENDPOINTS = [
-      'https://overpass-api.de/api/interpreter',
-      'https://overpass.kumi.systems/api/interpreter',
-      'https://overpass.private.coffee/api/interpreter',
-      'https://overpass.nchc.org.tw/api/interpreter',
-      'https://overpass.openstreetmap.fr/api/interpreter',
-      'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
-    ];
-    function overpassRace(q, ms) {
-      return new Promise((resolve, reject) => {
-        let done = false, pending = OVERPASS_ENDPOINTS.length, lastErr = null;
-        const ctrls = [];
-        const finishAll = (except) => {
-          ctrls.forEach((c) => { if (c !== except) { try { c.abort(); } catch (e) {} } });
-        };
-        OVERPASS_ENDPOINTS.forEach((url) => {
-          const ctrl = new AbortController(); ctrls.push(ctrl);
-          const timer = setTimeout(() => { try { ctrl.abort(); } catch (e) {} }, ms);
-          fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'data=' + encodeURIComponent(q),
-            signal: ctrl.signal
-          }).then((res) => {
-            if (!res.ok) throw new Error('overpass ' + res.status);
-            return res.json();
-          }).then((data) => {
-            clearTimeout(timer);
-            if (done) return;
-            /* Overpass can answer HTTP 200 yet carry a fatal remark
-               (e.g. a server-side timeout) with no usable elements —
-               treat that as a failure so another mirror can still win. */
-            if (data && data.remark && /timed out|error/i.test(data.remark) && !(data.elements || []).length) {
-              throw new Error('overpass remark');
-            }
-            done = true;
-            finishAll(ctrl);
-            resolve(data);
-          }).catch((err) => {
-            clearTimeout(timer);
-            if (done) return;
-            lastErr = err;
-            pending -= 1;
-            if (pending === 0) { done = true; reject(lastErr || new Error('overpass failed')); }
-          });
-        });
-      });
+    /* The dataset lives next to index.html as mosques/m<ilat>_<ilon>.json
+       on the live host. Some preview hosts only serve files under
+       assets/, where an identical copy is bundled — so until one path
+       answers with real data, both are tried per cell; after that the
+       winning prefix is remembered for the rest of the session. A 404
+       under every prefix means the cell is empty, never an error. */
+    let mqPrefix = null;
+    async function mqFetchCell(file) {
+      const prefixes = mqPrefix ? [mqPrefix] : ['mosques/', 'assets/mosques/'];
+      let saw404 = false, lastErr = null;
+      for (const p of prefixes) {
+        let res;
+        try { res = await fetch(p + file, { credentials: 'same-origin' }); }
+        catch (e) { lastErr = e; continue; }
+        if (res.status === 404) { saw404 = true; continue; }
+        if (!res.ok) { lastErr = new Error('cell http ' + res.status); continue; }
+        try {
+          const data = await res.json();
+          if (Array.isArray(data)) { if (!mqPrefix) mqPrefix = p; return data; }
+          lastErr = new Error('cell not an array');
+        } catch (e) { lastErr = e; }
+      }
+      /* A known-good prefix failing is a real fetch failure -> the
+         caller shows the retry state. With no prefix known yet, a
+         clean 404 somewhere means "no data in this cell". */
+      if (mqPrefix || !saw404) throw lastErr || new Error('cell fetch failed');
+      return [];
     }
-    async function fetchMosques(lat, lon, radius) {
-      const q = '[out:json][timeout:15];(' +
-        'node["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + ');' +
-        'way["amenity"="place_of_worship"]["religion"="muslim"](around:' + radius + ',' + lat + ',' + lon + ');' +
-        'node["building"="mosque"](around:' + radius + ',' + lat + ',' + lon + ');' +
-        'way["building"="mosque"](around:' + radius + ',' + lat + ',' + lon + ');' +
-        ');out center tags 40;';
-      const data = await overpassRace(q, 16000);
+    async function fetchMosques(lat, lon) {
+      const ci = Math.floor(lat * 4), cj = Math.floor(lon * 4);
+      const jobs = [];
+      for (let di = -1; di <= 1; di++) {
+        for (let dj = -1; dj <= 1; dj++) {
+          jobs.push(mqFetchCell('m' + (ci + di) + '_' + (cj + dj) + '.json'));
+        }
+      }
+      const cells = await Promise.all(jobs);
       const seen = {}, out = [];
-      (data.elements || []).forEach((el) => {
-        const la = el.lat != null ? el.lat : (el.center && el.center.lat);
-        const lo = el.lon != null ? el.lon : (el.center && el.center.lon);
-        if (la == null || lo == null) return;
-        const key = la.toFixed(5) + ',' + lo.toFixed(5);
-        if (seen[key]) return; seen[key] = true;
-        const tags = el.tags || {};
-        out.push({
-          name: tags.name || tags['name:bn'] || tags['name:en'] || L().mosqueUnnamed,
-          lat: la, lon: lo, dist: haversineM(lat, lon, la, lo)
+      cells.forEach((rows) => {
+        (rows || []).forEach((r) => {
+          if (!r || r.length < 3) return;
+          const la = +r[1], lo = +r[2];
+          if (!isFinite(la) || !isFinite(lo)) return;
+          const key = la.toFixed(4) + ',' + lo.toFixed(4);
+          if (seen[key]) return; seen[key] = true;
+          let name = (r[0] || '').replace(/,\s*mosque\s*$/i, '').trim();
+          if (!name) name = L().mosqueUnnamed;
+          out.push({ name: name, lat: la, lon: lo, dist: haversineM(lat, lon, la, lo) });
         });
       });
-      out.sort((a, b) => a.dist - b.dist);
-      return out;
+      return out.filter((p) => p.dist <= 15000).sort((a, b) => a.dist - b.dist);
     }
-    async function loadMosqueMap(lat, lon) {
+    async function loadMosqueList(lat, lon) {
       mqShowNetRetry(false);
       mqShowGmaps(false);
       mqSetStatus(L().mosqueSearching);
       let places = [];
       try {
-        /* One 5 km search covers the common case in a single round;
-           only a sparse result earns one wider second round. */
-        places = await fetchMosques(lat, lon, 5000);
-        if (places.length < 3) {
-          const wider = await fetchMosques(lat, lon, 12000);
-          if (wider.length > places.length) places = wider;
-        }
+        places = await fetchMosques(lat, lon);
       } catch (e) {
-        /* A data failure is not a location problem: the GPS fix is
-           already in hand, so keep it, show the network message with a
-           direct retry — plus a Google Maps search link for the same
-           spot, which works even while every OSM mirror is down, so
-           the visitor is never left with a dead end. */
+        /* The dataset ships with the site itself, so a failure here is
+           exceptional — still, never a dead end: retry plus a Google
+           Maps search link for the same spot. */
         mqSetStatus(L().mosqueNetFail);
         mqShowNetRetry(true);
         mqShowGmaps(true, lat, lon);
         return;
       }
-      places = places.slice(0, 15);
-      /* --- map (falls back to list-only if the Leaflet CDN failed) --- */
-      const mapOk = typeof window.L !== 'undefined';
-      if (mapOk) {
-        $('mqMap').classList.remove('hidden');
-        if (!mqMap) {
-          mqMap = L.map('mqMap', { scrollWheelZoom: true });
-          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
-          }).addTo(mqMap);
-          mqLayer = L.layerGroup().addTo(mqMap);
-        }
-        mqMap.setView([lat, lon], 15);
-        setTimeout(() => { try { mqMap.invalidateSize(); } catch (e) {} }, 120);
-        mqLayer.clearLayers(); mqMarkers = [];
-        L.circleMarker([lat, lon], { radius: 8, color: '#fff', weight: 2.5, fillColor: '#2563eb', fillOpacity: 1 })
-          .addTo(mqLayer).bindPopup('<b>' + L().mosqueYou + '</b>');
-        places.forEach((p) => {
-          const mk = L.marker([p.lat, p.lon]).addTo(mqLayer)
-            .bindPopup('<b>' + p.name.replace(/</g, '&lt;') + '</b><br>' + fmtDist(p.dist));
-          mqMarkers.push(mk);
-        });
-      }
-      /* --- list --- */
+      places = places.slice(0, 12);
       const list = $('mqList'); list.innerHTML = '';
       if (!places.length) {
-        mqSetStatus((mapOk ? '' : L().mosqueNoMap + '<br>') + L().mosqueNone);
+        mqSetStatus(L().mosqueNone);
+        mqShowGmaps(true, lat, lon);
         return;
       }
-      mqSetStatus('<b>' + L().mosqueFound.replace('{n}', num(places.length)) + '</b>' + (mapOk ? '' : '<br>' + L().mosqueNoMap));
-      places.forEach((p, i) => {
+      mqSetStatus('<b>' + L().mosqueFound.replace('{n}', num(places.length)) + '</b>');
+      places.forEach((p) => {
         const row = document.createElement('div'); row.className = 'mq-item';
         const pin = document.createElement('span'); pin.className = 'mq-pin'; pin.textContent = '🕌';
         const main = document.createElement('span'); main.className = 'mq-main';
@@ -3349,9 +3292,7 @@
         dir.target = '_blank'; dir.rel = 'noopener';
         dir.addEventListener('click', (e) => e.stopPropagation());
         row.appendChild(pin); row.appendChild(main); row.appendChild(dir);
-        row.addEventListener('click', () => {
-          if (mqMap && mqMarkers[i]) { mqMap.flyTo([p.lat, p.lon], 16); mqMarkers[i].openPopup(); }
-        });
+        row.addEventListener('click', () => { window.open(dir.href, '_blank', 'noopener'); });
         list.appendChild(row);
       });
     }
