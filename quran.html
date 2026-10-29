@@ -49,9 +49,16 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 .sheet .face::before{content:"";position:absolute;inset:7px;border:1.5px solid rgba(201,162,39,.55);border-radius:5px;pointer-events:none;z-index:3}
 .sheet .face.back{transform:rotateY(180deg);
   background:linear-gradient(70deg,#f6ecd2,#efe3c2)}
-.sheet.anim{transition:transform .95s cubic-bezier(.45,.05,.25,1)}
-.sheet.turning .face.front{animation:shade .95s ease-in-out}
-@keyframes shade{0%{filter:brightness(1)}45%{filter:brightness(.68)}100%{filter:brightness(.94)}}
+.sheet .shade{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;
+  background:linear-gradient(48deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,0) 26%,rgba(255,255,255,.40) 47%,rgba(0,0,0,.20) 63%,rgba(0,0,0,0) 84%);
+  background-size:280% 280%;background-position:100% 100%}
+.sheet.go-next{animation:flipNext 1.15s cubic-bezier(.35,.55,.3,1) forwards}
+.sheet.go-prev{animation:flipPrev 1.15s cubic-bezier(.35,.55,.3,1) forwards}
+.sheet.go-next .shade{animation:shadeSweep 1.15s ease-in-out forwards}
+.sheet.go-prev .shade{animation:shadeSweep 1.15s ease-in-out forwards;transform:scaleX(-1)}
+@keyframes flipNext{0%{transform:rotateY(0deg) rotateZ(0deg)}14%{transform:rotateY(11deg) rotateZ(-1.3deg)}38%{transform:rotateY(54deg) rotateZ(-.6deg)}100%{transform:rotateY(180deg) rotateZ(0deg)}}
+@keyframes flipPrev{0%{transform:rotateY(180deg) rotateZ(0deg)}14%{transform:rotateY(169deg) rotateZ(1.3deg)}38%{transform:rotateY(126deg) rotateZ(.6deg)}100%{transform:rotateY(0deg) rotateZ(0deg)}}
+@keyframes shadeSweep{0%{opacity:0;background-position:100% 100%}16%{opacity:1}72%{opacity:1}100%{opacity:.2;background-position:0% 0%}}
 #loading{position:absolute;inset:0;z-index:8;display:none;align-items:center;justify-content:center;
   color:var(--emerald);font-weight:600;font-size:16px;background:rgba(255,253,244,.85);border-radius:8px}
 .ar-block{direction:rtl;text-align:justify;font-family:'Amiri Quran',serif;
@@ -177,7 +184,7 @@ body.meaning .ar-block .ayah{cursor:pointer}
 
 <script>
 "use strict";
-const TOTAL = 604, PACK = 20, ANIM_MS = 950;
+const TOTAL = 604, PACK = 20, ANIM_MS = 1150;
 const bnD = s => String(s).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
 const arD = s => String(s).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
 const $ = id => document.getElementById(id);
@@ -265,61 +272,41 @@ async function flipTo(target, dir){
   const cAyahs = curAyahs;
   const sheet = $("sheet"), front = $("sheetFront");
   sheet.style.display = "block";
-  sheet.classList.remove("anim", "turning");
+  sheet.classList.remove("go-next", "go-prev");
   sheet.style.transformOrigin = dir > 0 ? "100% 100%" : "0% 100%";   /* each direction lifts diagonally from its own bottom corner */
   const wrap = (ayahs, page) => {
     const fs = fitCache[page] ? ` style="--arfs:${fitCache[page]}px;overflow-y:hidden"` : "";
     return `<div class="page-scroll"${fs}>${pageHTML(ayahs, page)}</div>`;
   };
   if (dir > 0){           // next: current page turns over its right hinge and sweeps away
-    front.innerHTML = wrap(cAyahs, cur);
+    front.innerHTML = wrap(cAyahs, cur) + '<div class="shade"></div>';
     const fEl = front.querySelector(".page-scroll"); if (fEl) fitScroll(fEl, cur);
     sheet.style.transform = "rotateY(0deg)";
     setBase(tAyahs, target);
     flipSound();
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      sheet.classList.add("anim", "turning"); sheet.style.transform = "rotateY(180deg)";
-    }));
+    requestAnimationFrame(() => requestAnimationFrame(() => { sheet.classList.add("go-next"); }));
   } else {               // prev: previous page sweeps in from the right hinge
-    front.innerHTML = wrap(tAyahs, target);
+    front.innerHTML = wrap(tAyahs, target) + '<div class="shade"></div>';
     const fEl = front.querySelector(".page-scroll"); if (fEl) fitScroll(fEl, target);
     sheet.style.transform = "rotateY(180deg)";
     flipSound();
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      sheet.classList.add("anim", "turning"); sheet.style.transform = "rotateY(0deg)";
-    }));
+    requestAnimationFrame(() => requestAnimationFrame(() => { sheet.classList.add("go-prev"); }));
     setTimeout(() => setBase(tAyahs, target), ANIM_MS + 40);
   }
   cur = target;
   $("pgNum").textContent = bnD(target);
   localStorage.setItem("waqtQuranPage", String(target));
-  setTimeout(() => { sheet.style.display = "none"; sheet.classList.remove("anim", "turning"); flipping = false; }, ANIM_MS + 90);
+  setTimeout(() => { sheet.style.display = "none"; sheet.classList.remove("go-next", "go-prev"); flipping = false; }, ANIM_MS + 90);
   const nk = packOf(target + (dir > 0 ? 1 : -1));
   if (nk >= 0 && nk <= 30 && !packs[nk]) loadPack(nk).catch(()=>{});
 }
-/* ---------- page-flip sound (soft paper swish, synthesized — no audio file needed) ---------- */
-let AC = null;
+/* ---------- page-flip sound (real recorded page turn: Mixkit "Page turn single", page-flip.mp3) ---------- */
+let flipAudio = null;
 function flipSound(){
   try{
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if (!Ctx) return;
-    AC = AC || new Ctx();
-    if (AC.state === "suspended") AC.resume();
-    const t = AC.currentTime, dur = 0.38;
-    const buf = AC.createBuffer(1, Math.floor(AC.sampleRate * dur), AC.sampleRate);
-    const d = buf.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-    const src = AC.createBufferSource(); src.buffer = buf;
-    const bp = AC.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 0.9;
-    bp.frequency.setValueAtTime(480, t);
-    bp.frequency.exponentialRampToValueAtTime(1500, t + dur * 0.55);
-    bp.frequency.exponentialRampToValueAtTime(650, t + dur);
-    const g = AC.createGain();
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.11, t + 0.07);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    src.connect(bp); bp.connect(g); g.connect(AC.destination);
-    src.start(t); src.stop(t + dur);
+    if (!flipAudio){ flipAudio = new Audio("page-flip.mp3"); flipAudio.preload = "auto"; }
+    flipAudio.currentTime = 0;
+    const p = flipAudio.play(); if (p && p.catch) p.catch(()=>{});
   }catch(e){}
 }
 const nextPage = () => flipTo(cur + 1, 1);
