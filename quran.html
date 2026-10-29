@@ -68,7 +68,7 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 .ar-block .ayah{border-radius:6px;padding:0 1px}
 .ar-block .ayah.playing{background:rgba(201,162,39,.28);box-shadow:0 0 0 2px rgba(201,162,39,.25)}
 body.meaning .ar-block .ayah{cursor:pointer}
-.marker{color:#a87f14;font-size:.68em;white-space:nowrap;padding:0 2px}
+.marker{color:#f0d98c;background:#0b5c4d;border:1px solid #c9a227;border-radius:999px;font-size:.62em;font-weight:700;white-space:nowrap;padding:.05em .38em .12em;margin:0 .08em}
 .surah-head{margin:6px 0 10px;padding:16px 12px 13px;border-radius:8px;text-align:center;
   background:linear-gradient(180deg,#0e6a55,#0b5c4d);border:1px solid var(--gold);
   box-shadow:inset 0 0 0 3px rgba(231,207,122,.25)}
@@ -225,7 +225,8 @@ function fitScroll(el, page){
   };
   if (fitCache[page]){ const c = fitCache[page]; apply(c[0], c[1]); el.style.overflowY = "hidden"; return c[0]; }
   if (el.clientHeight < 50){ apply(19.5, 2.35); return 19.5; }   // hidden element: do not measure, do not cache
-  const target = el.clientHeight - 10;
+  const avail = el.clientHeight - 48;   // panel vertical padding (42px) + breathing room
+  const target = avail - 6;
   const lastSz = FIT_SIZES[FIT_SIZES.length - 1];
   /* measure the CONTENT wrapper, never the scroll box: with the text vertically
      centered, the scroll box always reports full height and fools the fit */
@@ -246,13 +247,13 @@ function fitScroll(el, page){
     let lh = Math.min(lhNeed, 2.8);
     apply(sz, lh);
     let guard = 0;
-    while (measure() > el.clientHeight - 4 && lh > 2.03 && guard++ < 4){ lh = Math.max(2.02, lh - 0.08); apply(sz, lh); }
+    while (measure() > avail && lh > 2.03 && guard++ < 4){ lh = Math.max(2.02, lh - 0.08); apply(sz, lh); }
     chosen = [sz, Math.round(lh * 100) / 100];
     break;
   }
   if (!chosen) chosen = [lastSz, 2.02];
   fitCache[page] = chosen;
-  el.style.overflowY = (measure() <= el.clientHeight - 4) ? "hidden" : "auto";
+  el.style.overflowY = (measure() <= avail) ? "hidden" : "auto";
   return chosen[0];
 }
 
