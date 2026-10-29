@@ -121,12 +121,16 @@
       }
       .hero-pattern{position:absolute; inset:0; opacity:.09; pointer-events:none}
       .hero-inner{position:relative; max-width:1060px; margin:0 auto; padding:34px 18px 30px}
-      .hero-place{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+      /* the location chip sits on its OWN line under the place heading —
+         the labelled text ("জেলা: … · উপজেলা: …") is long, and sharing the
+         heading's line made it overlap the heading on phone widths */
+      .hero-place{display:flex; flex-direction:column; align-items:flex-start; gap:9px}
       .hero-place h1{font-size:clamp(30px,6vw,46px); margin:0; font-weight:700; letter-spacing:.01em}
       .hero-place .pin{color:var(--gold); font-size:.8em}
       .place-detail{
-        align-self:center; background:rgba(212,175,90,.18); border:1px solid rgba(233,217,174,.55);
+        max-width:100%; background:rgba(212,175,90,.18); border:1px solid rgba(233,217,174,.55);
         color:#ffe9ad; padding:6px 13px; border-radius:999px; font-size:15.5px; font-weight:700; letter-spacing:.01em;
+        line-height:1.5; overflow-wrap:break-word;
       }
       .hero-dates{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
       .hero-date-chip{
@@ -1965,6 +1969,7 @@
         methodNames:{1:'করাচি পদ্ধতি',3:'Muslim World League',4:'মক্কা (Umm al-Qura)',2:'ISNA',5:'মিশর পদ্ধতি'},
         madhabShort:{1:'Hanafi',0:"Shafi'i"},
         noResult:'এই নামে কোনো জেলা পাওয়া যায়নি', myLocName:'আমার অবস্থান',
+        districtWord:'জেলা', upazilaWord:'উপজেলা',
         qiblaFromTxt:'থেকে কিবলা', compassLive:'লাইভ কম্পাস চালু আছে — ফোনটি সমতল রেখে ধীরে ঘোরান',
         compassNeedsPerm:'কম্পাসের অনুমতি দরকার — আবার চাপুন', compassUnsupported:'এই ডিভাইসে লাইভ কম্পাস নেই — তীরটি উত্তর দিক ধরে কিবলা দেখাচ্ছে',
         compassNoSensor:'লাইভ কম্পাস থেকে সাড়া মিলছে না — ফোনে কম্পাস সেন্সর না থাকলে এমন হয়। উপরের ডিগ্রিটি উত্তর থেকে ঘড়ির কাঁটার দিকে মাপা: সেটাই কিবলা।',
@@ -2028,6 +2033,7 @@
         methodNames:{1:'Karachi method',3:'Muslim World League',4:'Makkah (Umm al-Qura)',2:'ISNA',5:'Egypt method'},
         madhabShort:{1:'Hanafi',0:"Shafi'i"},
         noResult:'No district matches that name', myLocName:'My location',
+        districtWord:'District', upazilaWord:'Upazila',
         qiblaFromTxt:'Qibla from', compassLive:'Live compass on — hold the phone flat and turn slowly',
         compassNeedsPerm:'Compass permission needed — tap again', compassUnsupported:'No live compass on this device — the arrow shows Qibla with north up',
         compassNoSensor:'No response from the live compass — this phone may not have a compass sensor. Use the degree above, measured clockwise from north: that is the Qibla.',
@@ -2216,11 +2222,22 @@
       if (!state.place) return '—';
       return state.lang === 'bn' ? state.place.labelBn : state.place.labelEn;
     }
+    /* The location chip shows LABELLED parts in the ACTIVE language —
+       "জেলা: বগুড়া · উপজেলা: বগুড়া সদর" / "District: Bogura · Upazila:
+       Bogura Sadar". The locate result is stored per language
+       (place.detailParts = {bn:{district,upazila}, en:{…}}), so switching
+       the বাংলা|English toggle re-renders the chip instantly in the new
+       language instead of leaving the old language's text behind. */
     function renderPlaceLabel() {
       $('placeName').textContent = placeLabel();
       const el = $('placeDetail');
-      const d = state.place && state.place.detail;
-      if (d) { el.textContent = d; el.classList.remove('hidden'); }
+      const parts = state.place && state.place.detailParts && state.place.detailParts[state.lang];
+      const bits = [];
+      if (parts) {
+        if (parts.district) bits.push(L().districtWord + ': ' + parts.district);
+        if (parts.upazila) bits.push(L().upazilaWord + ': ' + parts.upazila);
+      }
+      if (bits.length) { el.textContent = bits.join(' · '); el.classList.remove('hidden'); }
       else { el.textContent = ''; el.classList.add('hidden'); }
     }
 
@@ -2741,15 +2758,16 @@
     }
 
     /* ---------------- geolocation ---------------- */
-    /* Build "District · Upazila" (e.g. "Bogura Sadar") from a Nominatim
-       reverse-geocode address. Upazila names in Bangladesh usually begin
-       with the district name, in which case the upazila alone says both.
-       When Nominatim names no upazila but the locality is the district's
-       own headquarters town, that town sits in the "<District> Sadar"
-       upazila (true for most districts; the big metropolitan districts
-       are excluded by the caller, whose cities have no Sadar upazila). */
-    function composeLocDetail(a, opts) {
-      if (!a) return '';
+    /* Split a Nominatim reverse-geocode address into {district, upazila}
+       parts for ONE language. When the only upazila-level name Nominatim
+       gives is the district's own headquarters town (or the district name
+       itself), that place sits in the "<District> Sadar" upazila — e.g.
+       Bogura town is in "বগুড়া সদর / Bogura Sadar", never a bare second
+       "বগুড়া / Bogura". (True for most districts; the big metropolitan
+       districts are excluded by the caller, whose cities have no Sadar
+       upazila.) */
+    function composeLocParts(a, opts) {
+      if (!a) return null;
       opts = opts || {};
       const clean = (s) => (s || '')
         .replace(/\s+(District|Zila|Upazila|Upazilla)\s*$/i, '')
@@ -2762,25 +2780,21 @@
       const town = clean(a.town || a.municipality || a.city || '');
       if (!district) district = town;
       if (!upazila && town && district && town !== district) upazila = town;
-      if (!upazila && town && district && town === district && opts.allowSadar) {
+      if (district && opts.allowSadar && (!upazila || upazila === district)) {
         upazila = district + ' ' + (opts.sadarWord || 'Sadar');
       }
-      if (upazila && district && upazila !== district) {
-        if (upazila.toLowerCase().indexOf(district.toLowerCase()) === 0) return upazila;
-        return district + ' · ' + upazila;
-      }
-      return upazila || district || '';
+      if (!district && !upazila) return null;
+      return { district: district, upazila: upazila };
     }
-    async function reverseGeocodeDetail(lat, lon, allowSadar) {
-      const lang = state.lang === 'bn' ? 'bn' : 'en';
+    async function reverseGeocodeParts(lat, lon, lang, allowSadar) {
       const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' +
         encodeURIComponent(lat) + '&lon=' + encodeURIComponent(lon) +
         '&zoom=14&accept-language=' + lang);
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const j = await r.json();
-      return composeLocDetail(j && j.address, {
+      return composeLocParts(j && j.address, {
         allowSadar: allowSadar,
-        sadarWord: state.lang === 'bn' ? 'সদর' : 'Sadar'
+        sadarWord: lang === 'bn' ? 'সদর' : 'Sadar'
       });
     }
 
@@ -2797,17 +2811,36 @@
           if (dd < bestD) { bestD = dd; best = d; }
         }
         /* embedded fallback for a custom location = nearest district's times;
-           the chip beside "আমার অবস্থান" starts as the nearest district and
-           is refined to district + upazila once reverse geocoding answers */
+           the chip under "আমার অবস্থান" starts as the labelled nearest
+           district (both languages, from the district table) and is refined
+           with the upazila once reverse geocoding answers */
         const place = { labelBn: 'আমার অবস্থান', labelEn: 'My location', lat: lat, lon: lon, key: null,
           embedKey: best ? best[0] : null,
-          detail: best ? (state.lang === 'bn' ? best[1] : best[2]) : '' };
+          detailParts: best ? {
+            bn: { district: best[1], upazila: '' },
+            en: { district: best[2], upazila: '' }
+          } : null };
         setPlace(place, { scrollTop: true });
         /* metropolitan districts whose headquarters city has no
            "<District> Sadar" upazila — show the district alone there */
         const allowSadar = !best || ['dhaka', 'chattogram', 'khulna', 'rajshahi', 'cumilla'].indexOf(best[0]) === -1;
-        reverseGeocodeDetail(lat, lon, allowSadar).then((detail) => {
-          if (detail && state.place === place) { place.detail = detail; renderPlaceLabel(); }
+        /* Fetch BOTH languages and store both, so the chip follows the
+           বাংলা|English toggle instantly instead of staying in whichever
+           language was active when the location was found. */
+        Promise.all([
+          reverseGeocodeParts(lat, lon, 'bn', allowSadar).catch(() => null),
+          reverseGeocodeParts(lat, lon, 'en', allowSadar).catch(() => null)
+        ]).then(([bnParts, enParts]) => {
+          if (state.place !== place) return;
+          const merged = { bn: bnParts, en: enParts };
+          let changed = false;
+          for (const lg of ['bn', 'en']) {
+            const p = merged[lg];
+            if (!p) continue;
+            if (!p.district && place.detailParts) p.district = place.detailParts[lg].district;
+            if (p.district || p.upazila) { if (!place.detailParts) place.detailParts = {}; place.detailParts[lg] = p; changed = true; }
+          }
+          if (changed) renderPlaceLabel();
         }).catch(() => { /* offline / blocked: nearest-district chip stays */ });
       }, () => { toast(L().locFail); }, { timeout: 12000, maximumAge: 300000 });
     }
