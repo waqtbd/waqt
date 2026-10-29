@@ -32,7 +32,7 @@ header .ttl span{font-size:12px;color:var(--gold-soft)}
 header .idxbtn{color:#073f34;background:linear-gradient(180deg,var(--gold-soft),var(--gold));
   font-weight:700;font-size:14px;padding:10px 14px;border-radius:999px;min-height:44px}
 main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
-#book{position:relative;height:calc(100dvh - 232px);min-height:340px;perspective:1900px}
+#book{position:relative;height:calc(100dvh - 252px);min-height:340px;perspective:1900px;overflow:hidden;border-radius:8px}
 .page,.sheet{position:absolute;inset:0;border-radius:8px}
 .page{background:linear-gradient(160deg,var(--paper) 0%,var(--paper2) 100%);
   border:1px solid #d9c68d;box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 0 60px rgba(201,162,39,.08);
@@ -48,32 +48,31 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
   box-shadow:0 18px 40px rgba(0,0,0,.45)}
 .sheet .face::before{content:"";position:absolute;inset:7px;border:1.5px solid rgba(201,162,39,.55);border-radius:5px;pointer-events:none;z-index:3}
 .sheet .face.back{transform:rotateY(180deg);
-  background:linear-gradient(250deg,#f6ecd2,#efe3c2)}
-.sheet.anim{transition:transform .58s cubic-bezier(.35,.65,.3,1)}
+  background:linear-gradient(70deg,#f6ecd2,#efe3c2)}
+.sheet.anim{transition:transform .95s cubic-bezier(.45,.05,.25,1)}
+.sheet.turning .face.front{animation:shade .95s ease-in-out}
+@keyframes shade{0%{filter:brightness(1)}45%{filter:brightness(.68)}100%{filter:brightness(.94)}}
 #loading{position:absolute;inset:0;z-index:8;display:none;align-items:center;justify-content:center;
   color:var(--emerald);font-weight:600;font-size:16px;background:rgba(255,253,244,.85);border-radius:8px}
 .ar-block{direction:rtl;text-align:justify;font-family:'Amiri Quran',serif;
-  font-size:27px;line-height:2.2;color:#1c2a24}
+  font-size:var(--arfs,27px);line-height:2.08;color:#1c2a24}
 .ar-block .ayah{border-radius:6px;padding:0 1px}
 .ar-block .ayah.playing{background:rgba(201,162,39,.28);box-shadow:0 0 0 2px rgba(201,162,39,.25)}
+body.meaning .ar-block .ayah{cursor:pointer}
 .marker{color:#a87f14;font-size:.68em;white-space:nowrap;padding:0 2px}
 .surah-head{margin:6px 0 10px;padding:9px 12px;border-radius:8px;text-align:center;
   background:linear-gradient(180deg,#0e6a55,#0b5c4d);border:1px solid var(--gold);
   box-shadow:inset 0 0 0 3px rgba(231,207,122,.25)}
-.surah-head .sh-ar{display:block;font-family:'Amiri Quran',serif;font-size:25px;color:#f3d98b;line-height:1.5}
+.surah-head .sh-ar{display:block;font-family:'Amiri Quran',serif;font-size:calc(var(--arfs,27px)*.93);color:#f3d98b;line-height:1.5}
 .surah-head .sh-meta{display:block;font-size:12.5px;color:#dff5ea;margin-top:1px}
 .bismillah{direction:rtl;text-align:center;font-family:'Amiri Quran',serif;
-  font-size:26px;line-height:1.9;color:#0b5c4d;margin:2px 0 8px}
+  font-size:calc(var(--arfs,27px)*.96);line-height:1.9;color:#0b5c4d;margin:2px 0 8px}
 .page-foot{margin-top:14px;padding-top:8px;border-top:1px solid rgba(201,162,39,.4);
   display:flex;justify-content:space-between;align-items:center;color:#8a6d1f;font-size:13px;font-weight:600}
 .page-foot .wm{letter-spacing:.14em;font-size:11px;color:#b08d28}
-.tr-block{margin-top:14px;border-top:1px dashed rgba(11,92,77,.35);padding-top:10px}
-.tr{margin-bottom:10px}
-.tr b{color:var(--emerald);font-size:13px}
-.tr .bn{display:block;font-size:15.5px;line-height:1.75;color:#2c3a33}
-.tr .en{display:block;font-size:13px;line-height:1.6;color:var(--muted);margin-top:1px}
 #meta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;color:#eafaf3;font-size:14.5px}
 #meta .pgnum{font-weight:700;color:#fff;cursor:pointer;padding:6px 10px;border-radius:8px;border:1px dashed rgba(231,207,122,.5)}
+#hint{display:none;text-align:center;color:#ffe9a8;font-size:13.5px;margin-top:6px}
 #playStatus{display:none;text-align:center;color:var(--gold-soft);font-size:13.5px;margin-top:6px;min-height:18px}
 #controls{position:sticky;bottom:0;z-index:30;max-width:760px;margin:8px auto 0;
   display:flex;gap:8px;padding:10px;background:linear-gradient(180deg,rgba(7,50,40,.92),rgba(7,50,40,.98));
@@ -83,6 +82,15 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 #controls button:active{transform:scale(.97)}
 #controls #playBtn{background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:#3a2c00;border:none}
 #controls #bnBtn.on{background:#11634f;border-color:var(--gold-soft);color:#fff}
+#meaningCard{position:fixed;left:50%;transform:translate(-50%,140%);bottom:86px;z-index:40;
+  width:min(720px,calc(100vw - 20px));background:var(--paper);border:1.5px solid var(--gold);border-radius:16px;
+  box-shadow:0 16px 44px rgba(0,0,0,.5);padding:14px 16px 12px;transition:transform .3s ease}
+#meaningCard.open{transform:translate(-50%,0)}
+#meaningCard .mc-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+#meaningCard .mc-head b{flex:1;color:var(--emerald);font-size:15px}
+#meaningCard .mc-head .x{font-size:17px;padding:6px 11px;border-radius:9px;background:#f1e8c8;min-height:40px;min-width:40px}
+#meaningCard .mc-bn{display:block;font-size:16.5px;line-height:1.8;color:#2c3a33}
+#meaningCard .mc-en{display:block;font-size:13.5px;line-height:1.65;color:var(--muted);margin-top:3px}
 .overlay{position:fixed;inset:0;z-index:50;background:rgba(4,30,24,.72);display:none;
   align-items:flex-end;justify-content:center}
 .overlay.open{display:flex}
@@ -111,7 +119,7 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 .jump-body .go{margin-left:8px;padding:12px 22px;font-size:16px;font-weight:700;border-radius:12px;
   background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:#3a2c00;min-height:50px}
 .jump-body p{color:var(--muted);font-size:13.5px;margin-top:10px}
-@media (min-width:640px){ .ar-block{font-size:30px} #book{height:calc(100dvh - 240px)} }
+@media (min-width:640px){ #book{height:calc(100dvh - 260px)} }
 </style>
 </head>
 <body>
@@ -127,6 +135,7 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
     <div id="loading">পৃষ্ঠা আনা হচ্ছে…</div>
   </div>
   <div id="meta"><span>পৃষ্ঠা</span><span class="pgnum" id="pgNum">১</span><span>/ ৬০৪</span><span id="juzLbl"></span></div>
+  <div id="hint">অর্থ চালু আছে — যেকোনো আয়াতে tap করলে তার অর্থ দেখাবে</div>
   <div id="playStatus"></div>
 </main>
 <div id="controls">
@@ -134,6 +143,12 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
   <button id="playBtn">▶ তিলাওয়াত</button>
   <button id="bnBtn">অর্থ</button>
   <button id="nextBtn">পরের পাতা ›</button>
+</div>
+
+<div id="meaningCard">
+  <div class="mc-head"><b id="mcTitle"></b><button class="x" id="mcClose">✕</button></div>
+  <span class="mc-bn" id="mcBn"></span>
+  <span class="mc-en" id="mcEn"></span>
 </div>
 
 <div class="overlay" id="indexOverlay">
@@ -159,14 +174,16 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 
 <script>
 "use strict";
-const TOTAL = 604, PACK = 20;
+const TOTAL = 604, PACK = 20, ANIM_MS = 950;
 const bnD = s => String(s).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
 const arD = s => String(s).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
 const $ = id => document.getElementById(id);
 let INDEX = null, BISM = "";
 const packs = {};               // packNo -> {pages:{...}}
+const fitCache = {};            // page -> fitted arabic font size
 let cur = 1;                    // current page
-let showBn = localStorage.getItem("waqtQuranBn") === "1";
+let curAyahs = [];              // ayahs of the current page (for meaning lookup)
+let meaningMode = localStorage.getItem("waqtQuranBn") === "1";
 let flipping = false;
 
 /* ---------- data ---------- */
@@ -184,6 +201,21 @@ async function pageAyahs(page){
 }
 function surahMeta(n){ return INDEX.surahs[n - 1]; }
 
+/* ---------- auto-fit: largest font size that fits the page without scrolling ---------- */
+const FIT_SIZES = [27, 25, 23, 21, 19.5, 18, 16.5, 15];
+function fitScroll(el, page){
+  if (fitCache[page]){ el.style.setProperty("--arfs", fitCache[page] + "px"); el.style.overflowY = "hidden"; return fitCache[page]; }
+  let chosen = FIT_SIZES[FIT_SIZES.length - 1];
+  for (const sz of FIT_SIZES){
+    el.style.setProperty("--arfs", sz + "px");
+    if (el.scrollHeight <= el.clientHeight + 2){ chosen = sz; break; }
+    chosen = sz;
+  }
+  fitCache[page] = chosen;
+  el.style.overflowY = (el.scrollHeight <= el.clientHeight + 2) ? "hidden" : "auto";
+  return chosen;
+}
+
 /* ---------- rendering ---------- */
 function pageHTML(ayahs, pageNo){
   let ar = "", lastSurah = 0;
@@ -199,30 +231,26 @@ function pageHTML(ayahs, pageNo){
     ar += `<span class="ayah" data-s="${a.s}" data-a="${a.a}">${a.ar}<span class="marker">۝${arD(a.a)}</span></span> `;
   }
   let html = `<p class="ar-block">${ar}</p>`;
-  // the surah-head insertion above closes/reopens the paragraph; clean the first empty one
   html = html.replace('<p class="ar-block"></p>', '');
-  if (showBn){
-    let tr = `<div class="tr-block">`;
-    for (const a of ayahs){
-      tr += `<div class="tr"><b>${bnD(a.s)}:${bnD(a.a)}</b>` +
-            `<span class="bn">${a.bn}</span><span class="en">${a.en}</span></div>`;
-    }
-    html += tr + `</div>`;
-  }
   const juz = ayahs.length ? ayahs[0].j : "";
   html += `<div class="page-foot"><span>পারা ${bnD(juz)}</span><span class="wm">WAQT</span><span>পৃষ্ঠা ${bnD(pageNo)}</span></div>`;
   return html;
 }
-async function render(page){
-  const ayahs = await pageAyahs(page);
-  $("pageScroll").innerHTML = pageHTML(ayahs, page);
-  $("pageScroll").scrollTop = 0;
+function setBase(ayahs, page){
+  curAyahs = ayahs;
+  const sc = $("pageScroll");
+  sc.innerHTML = pageHTML(ayahs, page);
+  sc.scrollTop = 0;
+  fitScroll(sc, page);
   $("pgNum").textContent = bnD(page);
   $("juzLbl").textContent = ayahs.length ? "· পারা " + bnD(ayahs[0].j) : "";
   localStorage.setItem("waqtQuranPage", String(page));
 }
+async function render(page){
+  setBase(await pageAyahs(page), page);
+}
 
-/* ---------- page flip ---------- */
+/* ---------- page flip: mushaf hinge on the RIGHT edge, slow and smooth ---------- */
 async function flipTo(target, dir){
   let guard = 0;
   while (flipping && guard++ < 15) await new Promise(r => setTimeout(r, 60));
@@ -231,65 +259,87 @@ async function flipTo(target, dir){
   const need = packOf(target);
   if (!packs[need]){ $("loading").style.display = "flex"; await loadPack(need).catch(()=>{}); $("loading").style.display = "none"; }
   const tAyahs = await pageAyahs(target);
-  const tHTML = `<div class="page-scroll">${pageHTML(tAyahs, target)}</div>`;
-  const cHTML = `<div class="page-scroll">${$("pageScroll").innerHTML}</div>`;
+  const cAyahs = curAyahs;
   const sheet = $("sheet"), front = $("sheetFront");
   sheet.style.display = "block";
-  sheet.classList.remove("anim");
-  if (dir > 0){           // next: current page sheet turns away to the left
-    front.innerHTML = cHTML;
-    sheet.style.transformOrigin = "left center";
+  sheet.classList.remove("anim", "turning");
+  sheet.style.transformOrigin = "right center";
+  const wrap = (ayahs, page) => {
+    const fs = fitCache[page] ? ` style="--arfs:${fitCache[page]}px;overflow-y:hidden"` : "";
+    return `<div class="page-scroll"${fs}>${pageHTML(ayahs, page)}</div>`;
+  };
+  if (dir > 0){           // next: current page turns over its right hinge and sweeps away
+    front.innerHTML = wrap(cAyahs, cur);
+    const fEl = front.querySelector(".page-scroll"); if (fEl) fitScroll(fEl, cur);
     sheet.style.transform = "rotateY(0deg)";
-    $("pageScroll").innerHTML = pageHTML(tAyahs, target);
-    $("pageScroll").scrollTop = 0;
+    setBase(tAyahs, target);
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      sheet.classList.add("anim"); sheet.style.transform = "rotateY(-180deg)";
+      sheet.classList.add("anim", "turning"); sheet.style.transform = "rotateY(180deg)";
     }));
-  } else {               // prev: previous page sheet sweeps in from the left
-    front.innerHTML = tHTML;
-    sheet.style.transformOrigin = "left center";
-    sheet.style.transform = "rotateY(-180deg)";
+  } else {               // prev: previous page sweeps in from the right hinge
+    front.innerHTML = wrap(tAyahs, target);
+    const fEl = front.querySelector(".page-scroll"); if (fEl) fitScroll(fEl, target);
+    sheet.style.transform = "rotateY(180deg)";
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      sheet.classList.add("anim"); sheet.style.transform = "rotateY(0deg)";
+      sheet.classList.add("anim", "turning"); sheet.style.transform = "rotateY(0deg)";
     }));
-    setTimeout(() => { $("pageScroll").innerHTML = pageHTML(tAyahs, target); $("pageScroll").scrollTop = 0; }, 590);
+    setTimeout(() => setBase(tAyahs, target), ANIM_MS + 40);
   }
   cur = target;
   $("pgNum").textContent = bnD(target);
-  $("juzLbl").textContent = tAyahs.length ? "· পারা " + bnD(tAyahs[0].j) : "";
   localStorage.setItem("waqtQuranPage", String(target));
-  setTimeout(() => { sheet.style.display = "none"; sheet.classList.remove("anim"); flipping = false; }, 640);
+  setTimeout(() => { sheet.style.display = "none"; sheet.classList.remove("anim", "turning"); flipping = false; }, ANIM_MS + 90);
   const nk = packOf(target + (dir > 0 ? 1 : -1));
   if (nk >= 0 && nk <= 30 && !packs[nk]) loadPack(nk).catch(()=>{});
 }
 const nextPage = () => flipTo(cur + 1, 1);
 const prevPage = () => flipTo(cur - 1, -1);
 
-/* touch swipe + edge taps */
+/* touch swipe (mushaf direction: swipe right = next page) + edge taps + ayah taps */
 let tx = 0, ty = 0;
 $("book").addEventListener("touchstart", e => { const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; }, {passive:true});
 $("book").addEventListener("touchend", e => {
   const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
-  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4){ dx < 0 ? nextPage() : prevPage(); }
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4){ dx > 0 ? nextPage() : prevPage(); }
 }, {passive:true});
 $("book").addEventListener("click", e => {
   if (window.getSelection && String(window.getSelection())) return;
   const r = $("book").getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
-  if (x < 0.16) prevPage(); else if (x > 0.84) nextPage();
+  if (meaningMode){
+    const ay = e.target.closest ? e.target.closest(".ayah") : null;
+    if (ay && x > 0.10 && x < 0.90){ showMeaning(Number(ay.dataset.s), Number(ay.dataset.a)); return; }
+  }
+  if (x < 0.16) nextPage(); else if (x > 0.84) prevPage();
 });
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowLeft") nextPage();
-  if (e.key === "ArrowRight") prevPage();
+  if (e.key === "ArrowLeft") prevPage();
+  if (e.key === "ArrowRight") nextPage();
 });
 $("nextBtn").addEventListener("click", nextPage);
 $("prevBtn").addEventListener("click", prevPage);
 
-/* ---------- translation toggle ---------- */
-function syncBnBtn(){ $("bnBtn").classList.toggle("on", showBn); $("bnBtn").textContent = showBn ? "অর্থ ✓" : "অর্থ"; }
-$("bnBtn").addEventListener("click", async () => {
-  showBn = !showBn;
-  localStorage.setItem("waqtQuranBn", showBn ? "1" : "0");
-  syncBnBtn(); render(cur);
+/* ---------- meaning mode: tap an ayah, see its meaning in a card ---------- */
+function showMeaning(s, a){
+  const ay = curAyahs.find(x => x.s === s && x.a === a);
+  if (!ay) return;
+  const m = surahMeta(s);
+  $("mcTitle").textContent = `সূরা ${m.en} · আয়াত ${bnD(a)}`;
+  $("mcBn").textContent = ay.bn;
+  $("mcEn").textContent = ay.en;
+  $("meaningCard").classList.add("open");
+}
+$("mcClose").addEventListener("click", () => $("meaningCard").classList.remove("open"));
+function syncMeaningUI(){
+  document.body.classList.toggle("meaning", meaningMode);
+  $("bnBtn").classList.toggle("on", meaningMode);
+  $("bnBtn").textContent = meaningMode ? "অর্থ ✓" : "অর্থ";
+  $("hint").style.display = meaningMode ? "block" : "none";
+  if (!meaningMode) $("meaningCard").classList.remove("open");
+}
+$("bnBtn").addEventListener("click", () => {
+  meaningMode = !meaningMode;
+  localStorage.setItem("waqtQuranBn", meaningMode ? "1" : "0");
+  syncMeaningUI();
 });
 
 /* ---------- audio (EveryAyah, Mishary Alafasy, verse by verse) ---------- */
@@ -305,7 +355,6 @@ function pageOfAyahInLoaded(s, a){
 async function ensureAyahVisible(s, a){
   let p = pageOfAyahInLoaded(s, a);
   if (p === null){
-    // sequential reading: the ayah is on the next not-yet-loaded page(s)
     let probe = cur;
     while (p === null && probe < TOTAL){
       probe++;
@@ -316,7 +365,8 @@ async function ensureAyahVisible(s, a){
   if (p !== null && p !== cur) await flipTo(p, p > cur ? 1 : -1);
   document.querySelectorAll(".ayah.playing").forEach(el => el.classList.remove("playing"));
   const el = document.querySelector(`.ayah[data-s="${s}"][data-a="${a}"]`);
-  if (el){ el.classList.add("playing"); el.scrollIntoView({block:"nearest", behavior:"smooth"}); }
+  if (el){ el.classList.add("playing"); }
+  if (meaningMode && $("meaningCard").classList.contains("open")) showMeaning(s, a);
 }
 async function playAyah(s, a){
   playPos = {s, a};
@@ -362,7 +412,7 @@ function buildIndex(filter){
   }
   $("surahList").innerHTML = html || `<p style="padding:18px;color:#6b7a72">কিছু পাওয়া যায়নি</p>`;
   $("surahList").querySelectorAll(".surah-row").forEach(b =>
-    b.addEventListener("click", () => { $("indexOverlay").classList.remove("open"); flipTo(Number(b.dataset.page), 1); }));
+    b.addEventListener("click", () => { $("indexOverlay").classList.remove("open"); flipTo(Number(b.dataset.page), Number(b.dataset.page) > cur ? 1 : -1); }));
 }
 $("openIndex").addEventListener("click", () => { buildIndex(""); $("indexOverlay").classList.add("open"); });
 $("surahSearch").addEventListener("input", e => buildIndex(e.target.value));
@@ -387,7 +437,7 @@ document.querySelectorAll(".overlay").forEach(ov =>
     BISM = p0.pages["1"][0].ar;   // canonical bismillah, taken from the data itself
     const saved = Number(localStorage.getItem("waqtQuranPage") || 1);
     cur = (saved >= 1 && saved <= TOTAL) ? saved : 1;
-    syncBnBtn();
+    syncMeaningUI();
     await render(cur);
     const nk = packOf(cur + 1); if (nk <= 30) loadPack(nk).catch(()=>{});
   } catch(e) {
