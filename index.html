@@ -76,7 +76,8 @@
       .brand-mark svg{width:26px; height:26px}
       .brand-name{font-family:"Marcellus",serif; font-size:26px; letter-spacing:.06em; line-height:1; color:var(--emerald-deep)}
       @media (prefers-color-scheme: dark){ .brand-name{color:var(--gold)} }
-      .brand-sub{font-size:12.5px; color:var(--ink-soft); line-height:1.25; white-space:nowrap}
+      .brand-sub{font-size:14px; color:var(--gold-ink); font-weight:600; line-height:1.3; margin-top:2px; letter-spacing:.01em}
+      @media (prefers-color-scheme: dark){ .brand-sub{color:var(--gold)} }
       .topbar-spacer{flex:1}
       .lang-toggle{
         display:flex; border:1.5px solid var(--line); border-radius:999px; overflow:hidden; background:var(--surface);
@@ -224,7 +225,7 @@
       }
       @media (max-width:720px){ .qibla-card{grid-template-columns:1fr; justify-items:center; text-align:center} }
       .compass-wrap{position:relative; width:280px; height:280px; max-width:78vw; aspect-ratio:1}
-      .compass-dial{position:absolute; inset:0; transition:transform .35s ease-out; will-change:transform}
+      .compass-dial{position:absolute; inset:0; transition:transform .15s linear; will-change:transform}
       .compass-face{
         position:absolute; inset:0; border-radius:50%;
         background:radial-gradient(circle at 50% 42%, var(--surface-2) 0%, var(--surface) 65%);
@@ -260,24 +261,82 @@
       .btn:active{transform:scale(.97)}
       .btn[disabled]{opacity:.55; pointer-events:none}
       .compass-status{font-size:14px; color:var(--ink-soft); margin-top:10px; min-height:20px}
+      .compass-calib{font-size:13.5px; color:var(--gold-ink); margin-top:6px; line-height:1.55; font-weight:500}
+
+      /* ---------- views (separate pages) ---------- */
+      .view{display:none}
+      .view.active{display:block; animation:viewIn .35s ease both}
+      @keyframes viewIn{from{opacity:0} to{opacity:1}}
+
+      /* ---------- bottom navigation ---------- */
+      .bottomnav{
+        position:fixed; left:0; right:0; bottom:0; z-index:70;
+        display:flex; align-items:stretch;
+        background:color-mix(in srgb, var(--surface) 92%, transparent);
+        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+        border-top:1px solid var(--line);
+        padding-bottom:env(safe-area-inset-bottom);
+        box-shadow:0 -6px 24px rgba(7,47,33,.08);
+      }
+      .bottomnav button{
+        flex:1 1 0; min-width:0; border:0; background:transparent; position:relative;
+        display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+        padding:9px 2px 8px; font-size:12.5px; font-weight:600; color:var(--ink-soft);
+      }
+      .bottomnav button svg{width:23px; height:23px; flex:none}
+      .bottomnav button span{white-space:nowrap; line-height:1.1}
+      .bottomnav button.on{color:var(--emerald-deep)}
+      @media (prefers-color-scheme: dark){ .bottomnav button.on{color:var(--gold)} }
+      .bottomnav button.on::before{
+        content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+        width:28px; height:3.5px; border-radius:0 0 5px 5px; background:var(--gold);
+      }
+      .bottomnav button:active{transform:scale(.94)}
+
+      /* ---------- ramadan ---------- */
+      .ramadan-card{
+        border-radius:var(--radius); padding:24px 20px; color:#f4efe0; position:relative; overflow:hidden;
+        background:
+          radial-gradient(700px 300px at 85% -10%, rgba(212,175,90,.25), transparent 60%),
+          linear-gradient(160deg,#0d6a4b 0%, var(--emerald-deep) 55%, var(--emerald-night) 100%);
+        box-shadow:var(--shadow);
+      }
+      .r-status{font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); font-weight:600}
+      .r-big{font-size:clamp(27px,6.5vw,40px); font-weight:700; margin:8px 0 4px; line-height:1.25}
+      .r-sub{font-size:15.5px; opacity:.92; line-height:1.6}
+      .ramadan-card .duo-card{border:1px solid rgba(255,255,255,.22)}
 
       /* ---------- monthly table ---------- */
       .table-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
-      .table-scroll{overflow-x:auto}
+      .table-top{
+        display:flex; align-items:center; gap:10px; padding:13px 14px;
+        background:var(--surface-2); border-bottom:1px solid var(--line);
+      }
+      .table-top .mname{flex:1; text-align:center; font-weight:700; font-size:18.5px; color:var(--emerald-deep)}
+      @media (prefers-color-scheme: dark){ .table-top .mname{color:var(--gold)} }
+      .table-top button{
+        width:42px; height:42px; flex:none; border-radius:11px; border:1.5px solid var(--line);
+        background:var(--surface); font-size:21px; line-height:1; color:var(--ink); box-shadow:var(--shadow);
+      }
+      .table-top button:active{transform:scale(.94)}
+      .table-scroll{overflow:auto; max-height:min(66vh,640px)}
       table.month{border-collapse:collapse; width:100%; min-width:640px; font-variant-numeric:tabular-nums}
-      table.month th,table.month td{padding:9px 10px; text-align:center; font-size:14.5px; border-bottom:1px solid var(--line); white-space:nowrap}
-      table.month th{background:var(--emerald-deep); color:#fff; font-weight:600; position:sticky; top:0}
+      table.month th,table.month td{padding:11px 10px; text-align:center; font-size:15px; border-bottom:1px solid var(--line); white-space:nowrap}
+      table.month th{background:var(--emerald-deep); color:#fff; font-weight:600; position:sticky; top:0; z-index:2; font-size:14.5px}
       table.month td:first-child,table.month th:first-child{text-align:left; font-weight:600}
+      table.month tbody tr:nth-child(even) td{background:var(--surface-2)}
+      table.month tbody tr:hover td{background:color-mix(in srgb, var(--gold-soft) 45%, var(--surface))}
       table.month tr.today td{background:var(--gold-soft); font-weight:700}
+      table.month tr.today td:first-child{box-shadow:inset 4px 0 0 var(--gold); color:var(--emerald-deep); font-weight:800}
+      @media (prefers-color-scheme: dark){ table.month tr.today td:first-child{color:var(--gold-ink)} }
       table.month tr:last-child td{border-bottom:0}
+      @media (max-width:640px){
+        table.month{min-width:572px}
+        table.month th,table.month td{padding:8px 6px; font-size:13px}
+        table.month th{font-size:12.5px}
+      }
       .table-actions{display:flex; gap:10px; padding:14px 16px; border-top:1px solid var(--line); flex-wrap:wrap; align-items:center}
       .table-actions .sp{flex:1}
-      .month-nav{display:flex; gap:8px; align-items:center}
-      .month-nav button{
-        width:38px; height:38px; border-radius:10px; border:1.5px solid var(--line); background:var(--surface-2);
-        font-size:18px; color:var(--ink);
-      }
-      .month-nav .mname{font-weight:700; font-size:16px; min-width:130px; text-align:center}
 
       /* ---------- tasbih ---------- */
       .tasbih-card{
@@ -314,7 +373,7 @@
       .target-sel button.on{background:var(--gold-soft); border-color:var(--gold); color:var(--gold-ink)}
 
       /* ---------- footer ---------- */
-      footer{max-width:1060px; margin:0 auto; padding:0 16px 40px; color:var(--ink-soft); font-size:14px; line-height:1.7}
+      footer{max-width:1060px; margin:0 auto; padding:0 16px 112px; color:var(--ink-soft); font-size:14px; line-height:1.7}
       footer .disc{
         background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px;
       }
@@ -392,11 +451,13 @@
       }
       @keyframes spin{to{transform:rotate(360deg)}}
       .toast{
-        position:fixed; left:50%; bottom:22px; transform:translate(-50%,90px); z-index:120;
+        position:fixed; left:50%; bottom:calc(86px + env(safe-area-inset-bottom)); transform:translate(-50%,90px); z-index:120;
         background:var(--emerald-deep); color:#fff; padding:13px 20px; border-radius:12px; font-size:15.5px; font-weight:600;
-        box-shadow:var(--shadow-lg); transition:transform .35s cubic-bezier(.32,.72,.24,1); max-width:92vw; text-align:center;
+        box-shadow:var(--shadow-lg); max-width:92vw; text-align:center;
+        opacity:0; visibility:hidden; pointer-events:none;
+        transition:transform .35s cubic-bezier(.32,.72,.24,1), opacity .3s ease, visibility 0s linear .4s;
       }
-      .toast.show{transform:translate(-50%,0)}
+      .toast.show{transform:translate(-50%,0); opacity:1; visibility:visible; transition:transform .35s cubic-bezier(.32,.72,.24,1), opacity .3s ease, visibility 0s}
       .hidden{display:none !important}
 
       /* entrance animation */
@@ -410,7 +471,10 @@
       /* print: monthly timetable only */
       @media print{
         body{background:#fff}
-        .topbar,.hero,.search-sec,.qibla-sec,.tasbih-sec,.sehri-sec,.footer-sec,.no-print{display:none !important}
+        .topbar,.bottomnav,.hero,.search-sec,.qibla-sec,.tasbih-sec,.sehri-sec,.footer-sec,.no-print,.table-top button{display:none !important}
+        .view{display:none !important}
+        #view-month{display:block !important}
+        .table-scroll{max-height:none; overflow:visible}
         .wrap{padding:0}
         .table-card{box-shadow:none; border:0}
         table.month th{background:#073f2e !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
@@ -426,6 +490,7 @@
         </div>
         <div>
           <div class="brand-name">WAQT</div>
+          <div class="brand-sub">ওয়াক্ত</div>
         </div>
       </div>
       <div class="topbar-spacer"></div>
@@ -438,6 +503,9 @@
       </button>
     </header>
 
+    <main id="appMain">
+    <!-- ================= VIEW: HOME ================= -->
+    <div class="view active" id="view-home">
     <!-- ================= HERO ================= -->
     <div class="hero">
       <svg class="hero-pattern" width="100%" height="100%" aria-hidden="true">
@@ -473,7 +541,7 @@
       </div>
     </div>
 
-    <main class="wrap">
+    <div class="wrap">
       <!-- ================= SEARCH ================= -->
       <section class="block search-sec rise d2" style="margin-top:18px">
         <div class="search-card">
@@ -497,7 +565,6 @@
         <div class="sec-head">
           <h2 data-i18n="todayTimes">আজকের নামাজের সময়</h2>
           <div class="rule"></div>
-          <span class="sec-note" id="methodNote">—</span>
         </div>
         <div id="timesState" class="state-box">
           <div class="spinner" aria-hidden="true"></div>
@@ -531,9 +598,14 @@
           </div>
         </div>
       </section>
+    </div>
+    </div><!-- /view-home -->
 
+    <!-- ================= VIEW: QIBLA ================= -->
+    <div class="view" id="view-qibla">
+    <div class="wrap">
       <!-- ================= QIBLA ================= -->
-      <section class="block qibla-sec rise d4" aria-label="Qibla direction">
+      <section class="block qibla-sec" aria-label="Qibla direction">
         <div class="sec-head">
           <h2 data-i18n="qiblaTitle">কিবলার দিক</h2>
           <div class="rule"></div>
@@ -569,10 +641,16 @@
               <span data-i18n="compassOn">লাইভ কম্পাস চালু করুন</span>
             </button>
             <div class="compass-status" id="compassStatus"></div>
+            <div class="compass-calib hidden" id="compassCalib" data-i18n="compassCalib">কম্পাসের কাঁটা কাঁপছে? ফোনটি ৮-এর আকৃতিতে কয়েকবার ঘোরান — কম্পাস ঠিক হয়ে যাবে।</div>
           </div>
         </div>
       </section>
+    </div>
+    </div><!-- /view-qibla -->
 
+    <!-- ================= VIEW: MONTHLY ================= -->
+    <div class="view" id="view-month">
+    <div class="wrap">
       <!-- ================= MONTHLY ================= -->
       <section class="block" aria-label="Monthly timetable">
         <div class="sec-head">
@@ -581,6 +659,11 @@
           <span class="sec-note" id="ramadanNote"></span>
         </div>
         <div class="table-card">
+          <div class="table-top">
+            <button type="button" id="prevMonth" aria-label="Previous month">‹</button>
+            <div class="mname" id="monthName">—</div>
+            <button type="button" id="nextMonth" aria-label="Next month">›</button>
+          </div>
           <div class="table-scroll">
             <table class="month" id="monthTable">
               <thead><tr id="monthHead"></tr></thead>
@@ -590,11 +673,9 @@
             </table>
           </div>
           <div class="table-actions no-print">
-            <div class="month-nav">
-              <button type="button" id="prevMonth" aria-label="Previous month">‹</button>
-              <div class="mname" id="monthName">—</div>
-              <button type="button" id="nextMonth" aria-label="Next month">›</button>
-            </div>
+            <button type="button" class="btn ghost" id="thisMonthBtn">
+              <span data-i18n="thisMonth">এই মাস</span>
+            </button>
             <div class="sp"></div>
             <button type="button" class="btn ghost" id="printBtn">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4V9h16v9h-2M6 14h12v7H6z"/></svg>
@@ -603,9 +684,14 @@
           </div>
         </div>
       </section>
+    </div>
+    </div><!-- /view-month -->
 
+    <!-- ================= VIEW: TASBIH ================= -->
+    <div class="view" id="view-tasbih">
+    <div class="wrap">
       <!-- ================= TASBIH ================= -->
-      <section class="block tasbih-sec rise d5" aria-label="Tasbih counter">
+      <section class="block tasbih-sec" aria-label="Tasbih counter">
         <div class="sec-head">
           <h2 data-i18n="tasbihTitle">তসবিহ</h2>
           <div class="rule"></div>
@@ -638,25 +724,51 @@
           </button>
         </div>
       </section>
-    </main>
+    </div>
+    </div><!-- /view-tasbih -->
 
-    <!-- ================= FOOTER ================= -->
-    <footer class="footer-sec">
-      <div class="disc">
-        <span data-i18n="discText">সময় হিসাব অনুযায়ী দেওয়া হয়েছে। স্থানীয় মসজিদ ও ইসলামিক ফাউন্ডেশন বাংলাদেশের সময়সূচিই চূড়ান্ত — দু-এক মিনিট এদিক-ওদিক হতে পারে।</span>
-      </div>
-    </footer>
+    <!-- ================= VIEW: RAMADAN ================= -->
+    <div class="view" id="view-ramadan">
+    <div class="wrap">
+      <section class="block" aria-label="Ramadan">
+        <div class="sec-head">
+          <h2 data-i18n="ramadanTitle">রমজান</h2>
+          <div class="rule"></div>
+          <span class="sec-note" id="ramadanHijri">—</span>
+        </div>
+        <div class="ramadan-card">
+          <div class="r-status" id="ramadanStatus">—</div>
+          <div class="r-big" id="ramadanBig">—</div>
+          <div class="r-sub" id="ramadanSub"></div>
+          <div class="duo" style="margin-top:18px">
+            <div class="duo-card sehri">
+              <div class="d-label" data-i18n="sehriEnds">সেহরির শেষ সময়</div>
+              <div class="d-time" id="ramadanSehri">—</div>
+              <div class="d-sub" data-i18n="sehriSub">ফজরের ওয়াক্ত শুরু</div>
+            </div>
+            <div class="duo-card iftar">
+              <div class="d-label" data-i18n="iftarTime">ইফতারের সময়</div>
+              <div class="d-time" id="ramadanIftar">—</div>
+              <div class="d-sub" data-i18n="iftarSub">মাগরিবের ওয়াক্ত শুরু</div>
+            </div>
+          </div>
+          <button type="button" class="btn gold" id="ramadanTableBtn" style="margin-top:18px">
+            <span data-i18n="ramadanTableBtn">রমজানের মাসের সময়সূচি</span>
+          </button>
+        </div>
+      </section>
+    </div>
+    </div><!-- /view-ramadan -->
 
-    <!-- ================= DRAWER / 3-DOT MENU ================= -->
-    <div class="scrim" id="scrim"></div>
-    <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
-      <div class="drawer-head">
-        <h2 data-i18n="menuTitle">মেনু</h2>
-        <button type="button" class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
-      </div>
-
-      <div class="drawer-sec">
-        <h3>📖 <span data-i18n="hadithTitle">হাদিস</span> · <span data-i18n="hadithToday" style="font-weight:500; color:var(--ink-soft); font-size:14px">আজকের হাদিস</span></h3>
+    <!-- ================= VIEW: HADITH ================= -->
+    <div class="view" id="view-hadith">
+    <div class="wrap">
+      <section class="block" aria-label="Hadith">
+        <div class="sec-head">
+          <h2 data-i18n="hadithTitle">হাদিস</h2>
+          <div class="rule"></div>
+          <span class="sec-note" data-i18n="hadithToday">আজকের হাদিস</span>
+        </div>
         <div class="hadith-card">
           <p class="hadith-ar" id="hadithAr" dir="rtl" lang="ar">—</p>
           <p class="hadith-text" id="hadithText">—</p>
@@ -666,6 +778,52 @@
           <button type="button" class="btn gold" id="hadithNext" data-i18n="hadithNext">পরের হাদিস →</button>
         </div>
         <p class="hadith-note" data-i18n="hadithNote">অনুবাদ আনুমানিক — মূল আরবি পাঠ ও যাচাইয়ের জন্য উল্লিখিত সূত্র (sunnah.com) দেখুন।</p>
+      </section>
+    </div>
+    </div><!-- /view-hadith -->
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer-sec">
+      <div class="disc">
+        <span data-i18n="discText">সময় হিসাব অনুযায়ী দেওয়া হয়েছে। স্থানীয় মসজিদ ও ইসলামিক ফাউন্ডেশন বাংলাদেশের সময়সূচিই চূড়ান্ত — দু-এক মিনিট এদিক-ওদিক হতে পারে।</span>
+      </div>
+    </footer>
+
+    <!-- ================= BOTTOM NAVIGATION ================= -->
+    <nav class="bottomnav" aria-label="Pages">
+      <button type="button" data-page="home" class="on">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.2 12 4l8 7.2"/><path d="M6.2 9.6V20h11.6V9.6"/><path d="M10 20v-5.2h4V20"/></svg>
+        <span data-i18n="navHome">বাড়ি</span>
+      </button>
+      <button type="button" data-page="month">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10.2h16M8.5 3.4v4M15.5 3.4v4"/></svg>
+        <span data-i18n="navMonth">মাসিক</span>
+      </button>
+      <button type="button" data-page="qibla">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M15.4 8.6l-2 4.8-4.8 2 2-4.8z"/></svg>
+        <span data-i18n="navQibla">কিবলা</span>
+      </button>
+      <button type="button" data-page="tasbih">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9.6" r="6.1"/><circle cx="12" cy="9.6" r="1.3" fill="currentColor" stroke="none"/><path d="M12 15.7v2.6M10.3 21.2 12 18.3l1.7 2.9"/></svg>
+        <span data-i18n="navTasbih">তসবিহ</span>
+      </button>
+      <button type="button" data-page="ramadan">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.8A8.4 8.4 0 1 1 9.2 4a6.8 6.8 0 0 0 10.8 10.8Z"/><path d="M17.8 3.6l.4 1.2 1.2.4-1.2.4-.4 1.2-.4-1.2-1.2-.4 1.2-.4.4-1.2Z" fill="currentColor" stroke="none"/></svg>
+        <span data-i18n="navRamadan">রমজান</span>
+      </button>
+      <button type="button" data-page="hadith">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.2 3.5H19V20H6.8A1.8 1.8 0 0 1 5 18.2V5.3A1.8 1.8 0 0 1 6.2 3.5Z"/><path d="M5 18.2A1.8 1.8 0 0 1 6.8 16.4H19"/></svg>
+        <span data-i18n="navHadith">হাদিস</span>
+      </button>
+    </nav>
+
+    <!-- ================= DRAWER / 3-DOT MENU ================= -->
+    <div class="scrim" id="scrim"></div>
+    <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+      <div class="drawer-head">
+        <h2 data-i18n="menuTitle">মেনু</h2>
+        <button type="button" class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
       </div>
 
       <div class="drawer-sec">
@@ -705,10 +863,12 @@
 
       <div class="drawer-sec">
         <h3>🧭 <span data-i18n="quickGo">যেখানে যেতে চান</span></h3>
-        <button type="button" class="menu-link" data-goto="times"><span>🕌</span> <span data-i18n="goTimes">আজকের নামাজের সময়</span> <span class="arr">›</span></button>
-        <button type="button" class="menu-link" data-goto="qibla"><span>🧭</span> <span data-i18n="goQibla">কিবলার দিক</span> <span class="arr">›</span></button>
+        <button type="button" class="menu-link" data-goto="home"><span>🕌</span> <span data-i18n="goTimes">আজকের নামাজের সময়</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="month"><span>📅</span> <span data-i18n="goMonth">মাসিক সময়সূচি</span> <span class="arr">›</span></button>
+        <button type="button" class="menu-link" data-goto="qibla"><span>🧭</span> <span data-i18n="goQibla">কিবলার দিক</span> <span class="arr">›</span></button>
         <button type="button" class="menu-link" data-goto="tasbih"><span>📿</span> <span data-i18n="goTasbih">তসবিহ কাউন্টার</span> <span class="arr">›</span></button>
+        <button type="button" class="menu-link" data-goto="ramadan"><span>🌙</span> <span data-i18n="goRamadan">রমজান</span> <span class="arr">›</span></button>
+        <button type="button" class="menu-link" data-goto="hadith"><span>📖</span> <span data-i18n="goHadith">হাদিস</span> <span class="arr">›</span></button>
       </div>
 
       <div class="drawer-sec">
@@ -876,6 +1036,13 @@
         goTimes:'আজকের নামাজের সময়', goQibla:'কিবলার দিক', goMonth:'মাসিক সময়সূচি', goTasbih:'তসবিহ কাউন্টার',
         aboutTitle:'Waqt সম্পর্কে',
         aboutText:'Waqt — বাংলাদেশের ৬৪ জেলার নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, মাসিক সময়সূচি, তসবিহ ও যাচাই করা হাদিস — এক জায়গায়, কোনো লগইন ছাড়াই।',
+        navHome:'বাড়ি', navMonth:'মাসিক', navQibla:'কিবলা', navTasbih:'তসবিহ', navRamadan:'রমজান', navHadith:'হাদিস',
+        ramadanTitle:'রমজান', ramadanNowShort:'এখন রমজান মাস চলছে', ramadanDayOf:'আজ রমজানের {d} তম দিন',
+        ramadanSubOn:'আজকের সেহরি ও ইফতারের সময় নিচে দেওয়া হলো।', ramadanInDays:'রমজান শুরু হতে বাকি {n} দিন',
+        ramadanExpected:'সম্ভাব্য শুরু:', ramadanFar:'পরের রমজানের তারিখ শীঘ্রই জানা যাবে',
+        ramadanTableBtn:'রমজানের মাসের সময়সূচি', thisMonth:'এই মাস',
+        goRamadan:'রমজান', goHadith:'হাদিস',
+        compassCalib:'কম্পাসের কাঁটা কাঁপছে? ফোনটি ৮-এর আকৃতিতে কয়েকবার ঘোরান — কম্পাস ঠিক হয়ে যাবে।',
         nextBadge:'পরের', tomorrow:'আগামীকাল', started:'শুরু হয়েছে', leftSuffix:'বাকি',
         methodNames:{1:'করাচি পদ্ধতি',3:'Muslim World League',4:'মক্কা (Umm al-Qura)',2:'ISNA',5:'মিশর পদ্ধতি'},
         madhabShort:{1:'Hanafi',0:"Shafi'i"},
@@ -883,7 +1050,7 @@
         qiblaFromTxt:'থেকে কিবলা', compassLive:'লাইভ কম্পাস চালু আছে — ফোনটি সমতল রেখে ধীরে ঘোরান',
         compassNeedsPerm:'কম্পাসের অনুমতি দরকার — আবার চাপুন', compassUnsupported:'এই ডিভাইসে লাইভ কম্পাস নেই — তীরটি উত্তর দিক ধরে কিবলা দেখাচ্ছে',
         compassNoSensor:'লাইভ কম্পাস থেকে সাড়া মিলছে না — ফোনে কম্পাস সেন্সর না থাকলে এমন হয়। উপরের ডিগ্রিটি উত্তর থেকে ঘড়ির কাঁটার দিকে মাপা: সেটাই কিবলা।',
-        methodNetNeeded:'অন্য পদ্ধতির জন্য ইন্টারনেট দরকার — করাচি পদ্ধতি (Hanafi) সময় দেখানো হচ্ছে',
+        methodNetNeeded:'অন্য পদ্ধতির জন্য ইন্টারনেট দরকার — ডিফল্ট পদ্ধতির সময় দেখানো হচ্ছে',
         compassDenied:'কম্পাসের অনুমতি পাওয়া যায়নি', locFail:'অবস্থান পাওয়া যায়নি — জেলা search করে বেছে নিন',
         locGetting:'অবস্থান নেওয়া হচ্ছে…', roundComplete:'রাউন্ড শেষ! মাশাআল্লাহ', notifOn:'নোটিফিকেশন চালু হয়েছে',
         notifDenied:'নোটিফিকেশন অনুমতি পাওয়া যায়নি', ramadanNow:'রমজান চলছে — এই মাসে রোজা',
@@ -914,6 +1081,13 @@
         goTimes:"Today's prayer times", goQibla:'Qibla direction', goMonth:'Monthly timetable', goTasbih:'Tasbih counter',
         aboutTitle:'About Waqt',
         aboutText:'Waqt — prayer times for all 64 districts of Bangladesh, Qibla direction, Hijri date, Sehri–Iftar, a monthly timetable, a tasbih counter and verified hadith — all in one place, no login needed.',
+        navHome:'Home', navMonth:'Monthly', navQibla:'Qibla', navTasbih:'Tasbih', navRamadan:'Ramadan', navHadith:'Hadith',
+        ramadanTitle:'Ramadan', ramadanNowShort:'Ramadan is ongoing', ramadanDayOf:'Today is day {d} of Ramadan',
+        ramadanSubOn:"Today's Sehri and Iftar times are below.", ramadanInDays:'Ramadan begins in {n} days',
+        ramadanExpected:'Expected start:', ramadanFar:'The next Ramadan date will be known soon',
+        ramadanTableBtn:'Ramadan month timetable', thisMonth:'This month',
+        goRamadan:'Ramadan', goHadith:'Hadith',
+        compassCalib:'Needle shaking? Move the phone in a figure-8 a few times to calibrate the compass.',
         nextBadge:'NEXT', tomorrow:'tomorrow', started:'has begun', leftSuffix:'left',
         methodNames:{1:'Karachi method',3:'Muslim World League',4:'Makkah (Umm al-Qura)',2:'ISNA',5:'Egypt method'},
         madhabShort:{1:'Hanafi',0:"Shafi'i"},
@@ -921,7 +1095,7 @@
         qiblaFromTxt:'Qibla from', compassLive:'Live compass on — hold the phone flat and turn slowly',
         compassNeedsPerm:'Compass permission needed — tap again', compassUnsupported:'No live compass on this device — the arrow shows Qibla with north up',
         compassNoSensor:'No response from the live compass — this phone may not have a compass sensor. Use the degree above, measured clockwise from north: that is the Qibla.',
-        methodNetNeeded:'Other methods need an internet connection — showing Karachi method (Hanafi) times',
+        methodNetNeeded:'Other methods need an internet connection — showing the default method times',
         compassDenied:'Compass permission was not granted', locFail:'Location not found — search and pick your district instead',
         locGetting:'Getting your location…', roundComplete:'Round complete! MashaAllah', notifOn:'Notifications are on',
         notifDenied:'Notification permission was not granted', ramadanNow:'Ramadan is ongoing — fasting this month',
@@ -1028,7 +1202,12 @@
       notif: false,
       notified: {},          // prayer name -> date string already notified
       compassOn: false,
-      heading: null          // device heading (deg, 0 = north)
+      heading: null,         // device heading (deg, 0 = north)
+      lpHeading: null,       // low-pass filtered heading
+      smoothHeading: null,   // displayed heading (unwrapped, glides to target)
+      targetHeading: null,   // unwrapped target for smoothHeading
+      page: 'home',          // active view: home | month | qibla | tasbih | ramadan | hadith
+      ramadanYM: null        // [year, month] of the current/next Ramadan month
     };
 
     function L() { return I18N[state.lang]; }
@@ -1087,7 +1266,7 @@
       $('langEn2').classList.toggle('on', state.lang === 'en');
       renderPlaceLabel(); renderChips(); renderDhikrTabs(); renderHadith(); renderTasbih();
       if (state.today) { renderToday(); renderMonthHead(); }
-      renderQibla(); updateMethodNote(); renderMonthTitle();
+      renderQibla(); renderMonthTitle();
     }
     function setLang(l) { if (state.lang !== l) { state.lang = l; applyLang(); } }
 
@@ -1232,7 +1411,6 @@
           $('schoolHanafi').classList.add('on'); $('schoolShafi').classList.remove('on');
           state.notified = {};
           if (showEmbeddedToday(new Date())) {
-            updateMethodNote();
             toast(L().methodNetNeeded);
             loadMonth(state.viewYear, state.viewMonth);
             return;
@@ -1336,12 +1514,50 @@
       $('sehriTime').textContent = sf.text + ' ' + sf.ampm;
       $('iftarTime').textContent = im.text + ' ' + im.ampm;
 
-      updateMethodNote();
+      renderRamadan();
       tick();
     }
 
-    function updateMethodNote() {
-      $('methodNote').textContent = (L().methodNames[state.method] || '') + ' · ' + L().madhabShort[state.school];
+    /* ---------------- ramadan ---------------- */
+    function renderRamadan() {
+      if (!state.today) return;
+      const h = state.today.date.hijri;
+      $('ramadanHijri').textContent = num(h.day) + ' ' + HIJRI_MONTHS[state.lang][h.month.number - 1] + ' ' + num(h.year) + ' ' + L().hijriWord;
+      const sf = fmt12(state.today.timings.Fajr), im = fmt12(state.today.timings.Maghrib);
+      $('ramadanSehri').textContent = sf.text + ' ' + sf.ampm;
+      $('ramadanIftar').textContent = im.text + ' ' + im.ampm;
+      const now = new Date();
+      if (h.month.number === 9) {
+        state.ramadanYM = [now.getFullYear(), now.getMonth() + 1];
+        $('ramadanStatus').textContent = L().ramadanNowShort;
+        $('ramadanBig').textContent = L().ramadanDayOf.replace('{d}', num(h.day));
+        $('ramadanSub').textContent = L().ramadanSubOn;
+        return;
+      }
+      $('ramadanStatus').textContent = L().ramadanTitle;
+      /* days until 1 Ramadan, counted on the embedded Hijri calendar */
+      let days = -1, startD = null;
+      const di = embedDayIndex(now);
+      if (di >= 0) {
+        for (let i = di; i < EMBED.days; i++) {
+          const hj = embedHijri(i);
+          if (hj.month.number === 9 && +hj.day === 1) {
+            days = i - di;
+            startD = new Date(EMBED.start[0], EMBED.start[1] - 1, EMBED.start[2] + i);
+            break;
+          }
+        }
+      }
+      if (days >= 0 && startD) {
+        state.ramadanYM = [startD.getFullYear(), startD.getMonth() + 1];
+        $('ramadanBig').textContent = L().ramadanInDays.replace('{n}', num(days));
+        $('ramadanSub').textContent = L().ramadanExpected + ' ' + num(startD.getDate()) + ' ' +
+          L().monthNames[startD.getMonth()] + ' ' + num(startD.getFullYear());
+      } else {
+        state.ramadanYM = [now.getFullYear(), now.getMonth() + 1];
+        $('ramadanBig').textContent = L().ramadanFar;
+        $('ramadanSub').textContent = '';
+      }
     }
 
     /* ---------------- clock + countdown + notifications ---------------- */
@@ -1436,29 +1652,98 @@
       state.qibla = b;
       $('qiblaDeg').textContent = num(b.toFixed(1));
       $('qiblaFrom').textContent = placeLabel() + ' · ' + L().qiblaFromTxt;
-      updateCompass();
+      applyCompass();
     }
-    function updateCompass() {
+    /* The dial rotates by −heading while the gold pointer stays fixed at
+       the Qibla bearing on the dial, so the pointer's on-screen angle is
+       always (Qibla − heading) — pointing at the Kaaba, never mirrored. */
+    function applyCompass() {
       const dial = $('compassDial'), ptr = $('qiblaPointer');
       if (state.qibla == null) return;
-      const heading = state.compassOn && state.heading != null ? state.heading : 0;
-      dial.style.transform = 'rotate(' + (-heading) + 'deg)';
+      const rot = (state.compassOn && state.smoothHeading != null) ? state.smoothHeading : 0;
+      dial.style.transform = 'rotate(' + (-rot) + 'deg)';
       ptr.style.transform = 'rotate(' + state.qibla + 'deg)';
       ptr.style.transformOrigin = '0 0';
       ptr.style.left = '50%'; ptr.style.top = '50%';
     }
-    function onOrientation(e) {
-      let hdg = null;
-      if (typeof e.webkitCompassHeading === 'number') hdg = e.webkitCompassHeading;
-      else if (typeof e.alpha === 'number') hdg = 360 - e.alpha;
-      if (hdg == null || isNaN(hdg)) return;
+    function shortestDelta(from, to) {
+      let d = (to - from) % 360;
+      if (d > 180) d -= 360;
+      if (d < -180) d += 360;
+      return d;
+    }
+    /* rAF loop: glide the displayed heading toward its target along the
+       shortest arc, so the needle swings smoothly — even across 359°/0° */
+    function compassLoop() {
+      if (state.targetHeading == null || state.smoothHeading == null) { state._cRaf = null; return; }
+      const d = state.targetHeading - state.smoothHeading;
+      if (Math.abs(d) < 0.05) {
+        state.smoothHeading = state.targetHeading;
+        applyCompass(); state._cRaf = null; return;
+      }
+      state.smoothHeading += d * 0.16;
+      applyCompass();
+      state._cRaf = requestAnimationFrame(compassLoop);
+    }
+    function kickCompassLoop() { if (!state._cRaf) state._cRaf = requestAnimationFrame(compassLoop); }
+    function screenAngleDeg() {
+      if (window.screen && screen.orientation && typeof screen.orientation.angle === 'number') return screen.orientation.angle;
+      if (typeof window.orientation === 'number') return window.orientation;
+      return 0;
+    }
+    function pushHeading(raw) {
+      const now = performance.now();
+      /* stability watch: if recent readings scatter widely, the sensor
+         needs calibrating — show the figure-8 hint */
+      state._samples = (state._samples || []).filter((s) => now - s.t < 1500);
+      state._samples.push({ h: raw, t: now });
+      if (state._samples.length >= 6) {
+        let x = 0, y = 0;
+        for (const s of state._samples) { const r = s.h * Math.PI / 180; x += Math.cos(r); y += Math.sin(r); }
+        const unstable = Math.sqrt(x * x + y * y) / state._samples.length < 0.9;
+        if (unstable !== state._calibShown) {
+          state._calibShown = unstable;
+          $('compassCalib').classList.toggle('hidden', !unstable);
+        }
+      }
+      /* low-pass filter: pull the working heading only part-way toward
+         each new reading, so sensor noise never reaches the needle */
+      if (state.lpHeading == null) state.lpHeading = raw;
+      else state.lpHeading = (state.lpHeading + shortestDelta(state.lpHeading, raw) * 0.35 + 360) % 360;
+      if (state.smoothHeading == null) {
+        state.smoothHeading = state.lpHeading; state.targetHeading = state.lpHeading;
+      } else {
+        /* unwrap the target against the displayed angle: the dial always
+           rotates the short way round */
+        state.targetHeading = state.smoothHeading + shortestDelta(state.smoothHeading, state.lpHeading);
+      }
       if (state.compassOn && state.heading == null) {
         /* first real reading — the sensor is alive */
         clearTimeout(state._compassTimer);
         $('compassStatus').textContent = L().compassLive;
       }
-      state.heading = hdg;
-      updateCompass();
+      state.heading = raw;
+      applyCompass();
+      kickCompassLoop();
+    }
+    function onOrientation(e) {
+      let hdg = null, authoritative = false;
+      if (typeof e.webkitCompassHeading === 'number' && !isNaN(e.webkitCompassHeading)) {
+        /* iOS Safari: already degrees clockwise from north */
+        hdg = e.webkitCompassHeading; authoritative = true;
+      } else if (typeof e.alpha === 'number' && !isNaN(e.alpha)) {
+        /* alpha runs counter-clockwise from north — flip it, then
+           compensate for the screen's own rotation (portrait/landscape) */
+        hdg = (360 - e.alpha + screenAngleDeg()) % 360;
+        authoritative = (e.type === 'deviceorientationabsolute' || e.absolute === true);
+      }
+      if (hdg == null) return;
+      const now = performance.now();
+      if (authoritative) state._lastAuth = now;
+      else if (state._lastAuth && now - state._lastAuth < 2500) return;
+      /* a relative (non-absolute) stream must never fight the absolute
+         one — that fight is what threw the needle to the wrong side */
+      pushHeading(hdg);
     }
     async function startCompass() {
       try {
@@ -1471,7 +1756,10 @@
         window.addEventListener('deviceorientationabsolute', onOrientation, true);
         window.addEventListener('deviceorientation', onOrientation, true);
         state.compassOn = true;
-        state.heading = null;
+        state.heading = null; state.lpHeading = null;
+        state.smoothHeading = null; state.targetHeading = null;
+        state._lastAuth = 0; state._samples = []; state._calibShown = false;
+        $('compassCalib').classList.add('hidden');
         $('compassStatus').textContent = L().compassLive;
         $('compassBtn').querySelector('span').textContent = L().compassLive.split('—')[0].trim();
         /* if no sensor reading arrives, say so plainly — the static bearing
@@ -1597,6 +1885,20 @@
       $('hadithRef').textContent = state.lang === 'bn' ? h.refBn : h.refEn;
     }
 
+    /* ---------------- pages (bottom navigation) ---------------- */
+    const PAGES = ['home', 'month', 'qibla', 'tasbih', 'ramadan', 'hadith'];
+    function showPage(name) {
+      if (PAGES.indexOf(name) < 0) name = 'home';
+      state.page = name;
+      for (const p of PAGES) $('view-' + p).classList.toggle('active', p === name);
+      document.querySelectorAll('.bottomnav button').forEach((b) => {
+        b.classList.toggle('on', b.getAttribute('data-page') === name);
+      });
+      window.scrollTo(0, 0);
+      if (name === 'ramadan') renderRamadan();
+      if (name === 'qibla') applyCompass();
+    }
+
     /* ---------------- drawer ---------------- */
     function openDrawer() {
       const dr = $('drawer'); dr.hidden = false;
@@ -1663,7 +1965,7 @@
 
       $('methodSel').addEventListener('change', (e) => {
         state.method = +e.target.value; state.monthCache = {}; state.notified = {};
-        updateMethodNote(); loadAll();
+        loadAll();
       });
       $('schoolHanafi').addEventListener('click', () => setSchool(1));
       $('schoolShafi').addEventListener('click', () => setSchool(0));
@@ -1680,11 +1982,26 @@
 
       document.querySelectorAll('[data-goto]').forEach((b) => {
         b.addEventListener('click', () => {
+          const page = b.getAttribute('data-goto');
           closeDrawer();
-          const map = { times: '.prayer-grid', qibla: '.qibla-sec', month: '#monthTable', tasbih: '.tasbih-sec' };
-          const sel = map[b.getAttribute('data-goto')];
-          setTimeout(() => { const el = document.querySelector(sel); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 120);
+          setTimeout(() => showPage(page), 60);
         });
+      });
+
+      document.querySelectorAll('.bottomnav button').forEach((b) => {
+        b.addEventListener('click', () => showPage(b.getAttribute('data-page')));
+      });
+      $('thisMonthBtn').addEventListener('click', () => {
+        const n = new Date();
+        state.viewYear = n.getFullYear(); state.viewMonth = n.getMonth() + 1;
+        loadMonth(state.viewYear, state.viewMonth);
+      });
+      $('ramadanTableBtn').addEventListener('click', () => {
+        if (state.ramadanYM) {
+          state.viewYear = state.ramadanYM[0]; state.viewMonth = state.ramadanYM[1];
+          loadMonth(state.viewYear, state.viewMonth);
+        }
+        showPage('month');
       });
     }
     function setSchool(s) {
@@ -1692,7 +2009,7 @@
       state.school = s; state.monthCache = {}; state.notified = {};
       $('schoolHanafi').classList.toggle('on', s === 1);
       $('schoolShafi').classList.toggle('on', s === 0);
-      updateMethodNote(); loadAll();
+      loadAll();
     }
 
     /* ---------------- init ---------------- */
