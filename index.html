@@ -152,10 +152,47 @@
       .countdown small{display:block; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); margin-top:8px; font-weight:600}
       .hero-progress{height:8px; border-radius:99px; background:rgba(255,255,255,.18); margin-top:18px; overflow:hidden; max-width:520px}
       .hero-progress i{display:block; height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--gold),#eed88f); transition:width 1s linear}
-      .hero-clock{text-align:right}
-      @media (max-width:640px){ .hero-clock{text-align:left} }
+      .hero-clock{display:flex; align-items:center; gap:16px}
+      .hero-clock .cd-text{flex:1; min-width:0; text-align:right}
+      @media (max-width:640px){ .hero-clock .cd-text{text-align:left} }
       .hero-clock .now{font-size:15px; color:var(--gold-soft); letter-spacing:.12em; text-transform:uppercase; font-weight:600}
       .hero-clock .time{font-size:clamp(30px,6vw,42px); font-weight:700; font-variant-numeric:tabular-nums}
+      /* miniature closed mushaf standing beside the countdown */
+      .hero-book{flex:none; width:96px; display:flex; flex-direction:column; align-items:center; gap:7px; text-decoration:none}
+      .hb-book{position:relative; width:88px; height:124px; transform:rotate(-3.5deg); transition:transform .18s ease}
+      .hero-book:active .hb-book{transform:rotate(-3.5deg) scale(.96)}
+      .hb-book::after{
+        content:""; position:absolute; top:3px; bottom:3px; right:-4px; width:5px; border-radius:0 2px 2px 0;
+        background:repeating-linear-gradient(90deg,#f7efdb 0 1px,#cdbd92 1px 2px);
+        box-shadow:1px 0 2px rgba(0,0,0,.25);
+      }
+      .hb-cover{
+        position:absolute; inset:0; border-radius:3px 7px 7px 3px; overflow:hidden;
+        background:linear-gradient(115deg,#0a4a38 0%,#0e6b4f 34%,#0b5c43 62%,#084534 100%);
+        border:1px solid rgba(233,217,174,.75);
+        box-shadow:inset 7px 0 12px rgba(0,0,0,.38), inset -2px 0 5px rgba(255,255,255,.10), 0 12px 22px rgba(0,0,0,.42);
+        display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:10px 7px;
+      }
+      .hb-cover::before{
+        content:""; position:absolute; top:0; bottom:0; left:6px; width:2px;
+        background:linear-gradient(180deg,transparent, rgba(233,217,174,.85) 18%, rgba(233,217,174,.85) 82%, transparent);
+      }
+      .hb-cover::after{
+        content:""; position:absolute; inset:6px; border:1.5px solid rgba(212,175,90,.95); border-radius:2px 5px 5px 2px;
+        box-shadow:inset 0 0 0 2.5px #0b5c43, inset 0 0 0 3.5px rgba(212,175,90,.55); pointer-events:none;
+      }
+      .hb-ar{position:relative; z-index:1; font-family:"Amiri",serif; font-size:19px; line-height:1.55; color:#eed88f; text-align:center; text-shadow:0 1px 3px rgba(0,0,0,.4)}
+      .hb-orn{position:relative; z-index:1; color:var(--gold); font-size:10px; line-height:1}
+      .hb-bn{position:relative; z-index:1; font-size:11.5px; font-weight:700; color:#f7f1dc; text-align:center; line-height:1.3}
+      .hb-cap{font-size:12.5px; font-weight:600; color:var(--gold-soft); text-align:center; line-height:1.3}
+      @media (max-width:380px){
+        .hero-book{width:80px}
+        .hb-book{width:74px; height:106px}
+        .hb-ar{font-size:16px}
+        .hb-orn{display:none}
+        .hb-bn{font-size:11px}
+        .countdown{font-size:40px}
+      }
 
       /* ---------- layout ---------- */
       .wrap{max-width:1060px; margin:0 auto; padding:0 16px 56px}
@@ -382,23 +419,6 @@
       .sp-home-name{font-size:20px; font-weight:700; line-height:1.3}
       .sp-home-sub{font-size:14.5px; opacity:.92; line-height:1.5}
       .sp-home-arr{font-size:26px; color:var(--gold-soft); flex:none}
-      .quran-card{
-        display:flex; align-items:center; gap:14px; width:100%; text-decoration:none; text-align:left;
-        border:1px solid rgba(212,175,90,.55); border-radius:var(--radius); padding:18px; color:#f4efe0; min-height:44px;
-        box-shadow:var(--shadow), inset 0 0 0 1px rgba(212,175,90,.22);
-        background:
-          radial-gradient(700px 300px at 85% -10%, rgba(212,175,90,.32), transparent 60%),
-          linear-gradient(160deg,#0d6a4b 0%, var(--emerald-deep) 55%, var(--emerald-night) 100%);
-        transition:transform .15s ease;
-      }
-      .quran-card:active{transform:scale(.98)}
-      .quran-medal{
-        flex:none; width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-        background:radial-gradient(circle at 32% 28%, rgba(212,175,90,.42), rgba(212,175,90,.08) 72%);
-        border:1.5px solid var(--gold); color:var(--gold-soft);
-        box-shadow:inset 0 0 0 3px rgba(6,40,28,.55), 0 2px 8px rgba(0,0,0,.25);
-      }
-      .quran-medal svg{width:30px; height:30px}
       .menu-status{font-size:14px; color:var(--ink-soft); line-height:1.6; padding:8px 4px 10px; border-bottom:1px dashed var(--line)}
 
       /* ---------- monthly table ---------- */
@@ -722,9 +742,21 @@
             <div class="hero-progress" aria-hidden="true"><i id="dayProgress"></i></div>
           </div>
           <div class="hero-clock rise d3">
-            <div class="now" data-i18n="remaining">বাকি সময়</div>
-            <div class="countdown"><span id="countdown">--:--:--</span></div>
-            <div class="time" id="clockNow" style="margin-top:10px">--:--</div>
+            <div class="cd-text">
+              <div class="now" data-i18n="remaining">বাকি সময়</div>
+              <div class="countdown"><span id="countdown">--:--:--</span></div>
+              <div class="time" id="clockNow" style="margin-top:10px">--:--</div>
+            </div>
+            <a class="hero-book" href="quran.html">
+              <span class="hb-book">
+                <span class="hb-cover">
+                  <span class="hb-ar" lang="ar" dir="rtl">القرآن الكريم</span>
+                  <span class="hb-orn" aria-hidden="true">✦</span>
+                  <span class="hb-bn" data-i18n="quranTitle">পবিত্র কুরআন</span>
+                </span>
+              </span>
+              <span class="hb-cap" data-i18n="quranReadListen">পড়ুন ও শুনুন</span>
+            </a>
           </div>
         </div>
       </div>
@@ -786,21 +818,6 @@
             <div class="d-sub" data-i18n="iftarSub">মাগরিবের ওয়াক্ত শুরু</div>
           </div>
         </div>
-      </section>
-
-      <!-- ================= QURAN ================= -->
-      <section class="block rise d5" aria-label="Quran">
-        <a class="quran-card" href="quran.html">
-          <span class="quran-medal" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.2 4.9 7.6 4.2 4 4.2v13.1c3.6 0 6.2.7 8 2.3 1.8-1.6 4.4-2.3 8-2.3V4.2c-3.6 0-6.2.7-8 2.3z"/><path d="M12 6.5v13.1"/><path d="M7.2 8.6c1 .1 2 .3 2.8.7M7.2 12c1 .1 2 .3 2.8.7M16.8 8.6c-1 .1-2 .3-2.8.7M16.8 12c-1 .1-2 .3-2.8.7"/></svg>
-          </span>
-          <span class="sp-home-text">
-            <span class="sp-home-label">✦ <span data-i18n="quranKicker">আল-কুরআনুল কারীম</span></span>
-            <span class="sp-home-name" data-i18n="quranTitle">পবিত্র কুরআন</span>
-            <span class="sp-home-sub" data-i18n="quranSub">আরবি · বাংলা অর্থ · তিলাওয়াত</span>
-          </span>
-          <span class="sp-home-arr" aria-hidden="true">›</span>
-        </a>
       </section>
 
       <!-- ================= NEXT SPECIAL DAY ================= -->
@@ -1980,7 +1997,7 @@
         ramadanExpected:'সম্ভাব্য শুরু:', ramadanFar:'পরের রমজানের তারিখ শীঘ্রই জানা যাবে',
         ramadanTableBtn:'রমজানের ক্যালেন্ডার', thisMonth:'এই মাস',
         goRamadan:'রমজান', goHadith:'হাদিস', goQuran:'কুরআন',
-        quranKicker:'আল-কুরআনুল কারীম', quranTitle:'পবিত্র কুরআন', quranSub:'আরবি · বাংলা অর্থ · তিলাওয়াত',
+        quranKicker:'আল-কুরআনুল কারীম', quranTitle:'পবিত্র কুরআন', quranSub:'আরবি · বাংলা অর্থ · তিলাওয়াত', quranReadListen:'পড়ুন ও শুনুন',
         goDirectory:'সব জেলা ও উপজেলা', goQA:'প্রশ্ন ও উত্তর',
         goSpecial:'বিশেষ দিন', specialTitle:'বিশেষ ইসলামিক দিন', nextSpecial:'আসন্ন বিশেষ দিন',
         specialNote:'তারিখ চাঁদ দেখার উপর নির্ভরশীল — একদিন এদিক-ওদিক হতে পারে।',
@@ -2045,7 +2062,7 @@
         ramadanExpected:'Expected start:', ramadanFar:'The next Ramadan date will be known soon',
         ramadanTableBtn:'Ramadan calendar', thisMonth:'This month',
         goRamadan:'Ramadan', goHadith:'Hadith', goQuran:'Quran',
-        quranKicker:'Al-Quran Al-Kareem', quranTitle:'The Holy Quran', quranSub:'Arabic · Bangla meaning · Recitation',
+        quranKicker:'Al-Quran Al-Kareem', quranTitle:'The Holy Quran', quranSub:'Arabic · Bangla meaning · Recitation', quranReadListen:'Read & Listen',
         goDirectory:'All Districts & Upazilas', goQA:'Questions & Answers',
         goSpecial:'Special Days', specialTitle:'Special Islamic Days', nextSpecial:'Next special day',
         specialNote:'Dates depend on moon sighting — they may shift by a day.',
