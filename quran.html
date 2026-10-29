@@ -69,11 +69,11 @@ main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
 .ar-block .ayah.playing{background:rgba(201,162,39,.28);box-shadow:0 0 0 2px rgba(201,162,39,.25)}
 body.meaning .ar-block .ayah{cursor:pointer}
 .marker{color:#a87f14;font-size:.68em;white-space:nowrap;padding:0 2px}
-.surah-head{margin:6px 0 10px;padding:14px 12px 12px;border-radius:8px;text-align:center;
+.surah-head{margin:6px 0 10px;padding:16px 12px 13px;border-radius:8px;text-align:center;
   background:linear-gradient(180deg,#0e6a55,#0b5c4d);border:1px solid var(--gold);
   box-shadow:inset 0 0 0 3px rgba(231,207,122,.25)}
-.surah-head .sh-ar{display:block;font-family:'Amiri Quran',serif;font-size:calc(var(--arfs,27px)*.93);color:#f3d98b;line-height:2.0;margin-bottom:7px}
-.surah-head .sh-meta{display:block;font-size:12.5px;color:#dff5ea;margin-top:1px}
+.surah-head .sh-ar{display:block;font-family:'Amiri Quran',serif;font-size:calc(var(--arfs,27px)*1.18);font-weight:700;color:#f3d98b;line-height:2.0;margin-bottom:6px}
+.surah-head .sh-meta{display:block;font-size:12px;color:#cfe9db;margin-top:1px}
 .bismillah{direction:rtl;text-align:center;font-family:'Amiri Quran',serif;
   font-size:calc(var(--arfs,27px)*.96);line-height:1.9;color:#0b5c4d;margin:2px 0 8px}
 .page-foot{margin-top:14px;padding-top:8px;border-top:1px solid rgba(201,162,39,.4);
@@ -226,13 +226,17 @@ function fitScroll(el, page){
   if (fitCache[page]){ const c = fitCache[page]; apply(c[0], c[1]); el.style.overflowY = "hidden"; return c[0]; }
   const target = el.clientHeight - 10;
   const lastSz = FIT_SIZES[FIT_SIZES.length - 1];
+  /* measure the CONTENT wrapper, never the scroll box: with the text vertically
+     centered, the scroll box always reports full height and fools the fit */
+  const inner = el.querySelector ? el.querySelector(".page-inner") : null;
+  const measure = () => inner ? inner.offsetHeight : el.scrollHeight;
   let chosen = null;
   for (const sz of FIT_SIZES){
     apply(sz, 2.02);
-    const h1 = el.scrollHeight;
+    const h1 = measure();
     if (h1 > target && sz === lastSz){ chosen = [sz, 2.02]; break; }
     apply(sz, 2.5);
-    const h2 = el.scrollHeight;
+    const h2 = measure();
     const slope = (h2 - h1) / 0.48;
     if (slope < 1){ if (h1 <= target){ chosen = [sz, 2.35]; break; } continue; }
     const fixed = h1 - slope * 2.02;
@@ -241,13 +245,13 @@ function fitScroll(el, page){
     let lh = Math.min(lhNeed, 2.8);
     apply(sz, lh);
     let guard = 0;
-    while (el.scrollHeight > el.clientHeight - 4 && lh > 2.03 && guard++ < 4){ lh = Math.max(2.02, lh - 0.08); apply(sz, lh); }
+    while (measure() > el.clientHeight - 4 && lh > 2.03 && guard++ < 4){ lh = Math.max(2.02, lh - 0.08); apply(sz, lh); }
     chosen = [sz, Math.round(lh * 100) / 100];
     break;
   }
   if (!chosen) chosen = [lastSz, 2.02];
   fitCache[page] = chosen;
-  el.style.overflowY = (el.scrollHeight <= el.clientHeight - 4) ? "hidden" : "auto";
+  el.style.overflowY = (measure() <= el.clientHeight - 4) ? "hidden" : "auto";
   return chosen[0];
 }
 
