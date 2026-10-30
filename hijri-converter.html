@@ -154,10 +154,9 @@ function convH(){
   msg.textContent=wdOf(g[0],g[1],g[2])+" · হিজরি তারিখ: "+fmtH([hy,hm,hd]);
   document.getElementById('resH').classList.add('show');
 }
-gi.addEventListener('change',convG);gi.addEventListener('input',convG);
 document.getElementById('btnG').addEventListener('click',convG);
-['hy','hm','hd'].forEach(function(id){document.getElementById(id).addEventListener('change',convH);document.getElementById(id).addEventListener('input',convH);});
-convG();convH();
+gi.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();convG();}});
+document.getElementById('hy').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();convH();}});
 </script>
 
 </body>
