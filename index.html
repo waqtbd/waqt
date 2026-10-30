@@ -524,6 +524,25 @@
       .share-cp{background:linear-gradient(135deg,#e7c65a 0%,#b8860b 100%); text-shadow:0 1px 2px rgba(60,42,4,.4)}
       @media (max-width:380px){ .share-btn{padding:10px 13px} }
 
+      /* ---------- about / privacy / contact page links ---------- */
+      .drawer-page-links{display:flex; flex-wrap:wrap; justify-content:center; gap:8px}
+      .drawer-page-links a{
+        display:inline-flex; align-items:center; min-height:38px; padding:8px 15px;
+        border:1.5px solid var(--line); border-radius:999px; background:var(--surface-2);
+        color:var(--ink); font-size:14px; font-weight:600; text-decoration:none; line-height:1.2;
+        transition:transform .15s ease, border-color .15s ease;
+      }
+      .drawer-page-links a:active{transform:scale(.96)}
+      .page-footer-links{
+        margin-top:20px; padding:16px 6px 2px; border-top:1px solid var(--line);
+        display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px 12px;
+        text-align:center; font-size:14.5px; line-height:1.6;
+      }
+      .page-footer-links a{color:var(--emerald); font-weight:600; text-decoration:none}
+      @media (prefers-color-scheme: dark){ .page-footer-links a{color:var(--gold)} }
+      .page-footer-links a:hover{text-decoration:underline; text-underline-offset:3px}
+      .page-footer-links .sep{color:var(--ink-soft); opacity:.55}
+
       /* ---------- monthly table ---------- */
       .table-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
       .table-top{
@@ -997,6 +1016,10 @@
           </div>
         </div>
       </section>
+
+      <nav class="page-footer-links" aria-label="Site pages">
+        <a href="about.html" data-i18n="pageAbout">আমাদের সম্পর্কে</a><span class="sep" aria-hidden="true">·</span><a href="privacy.html" data-i18n="pagePrivacy">গোপনীয়তা নীতি</a><span class="sep" aria-hidden="true">·</span><a href="contact.html" data-i18n="pageContact">যোগাযোগ</a>
+      </nav>
     </div>
     </div><!-- /view-home -->
 
@@ -1334,6 +1357,14 @@
       <div class="drawer-sec">
         <h3>ℹ️ <span data-i18n="aboutTitle">Waqt সম্পর্কে</span></h3>
         <p style="margin:0; color:var(--ink-soft); font-size:15px; line-height:1.7" data-i18n="aboutText">Waqt — বাংলাদেশের ৬৪ জেলার নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, ক্যালেন্ডার, তসবিহ ও যাচাই করা হাদিস — এক জায়গায়, কোনো লগইন ছাড়াই।</p>
+      </div>
+
+      <div class="drawer-sec" style="padding-top:14px; padding-bottom:14px">
+        <nav class="drawer-page-links" aria-label="Site pages">
+          <a href="about.html" data-i18n="pageAbout">আমাদের সম্পর্কে</a>
+          <a href="privacy.html" data-i18n="pagePrivacy">গোপনীয়তা নীতি</a>
+          <a href="contact.html" data-i18n="pageContact">যোগাযোগ</a>
+        </nav>
       </div>
 
       <div class="drawer-sec">
@@ -2230,6 +2261,7 @@
         goDirectory:'সব জেলা ও উপজেলা', goQA:'প্রশ্ন ও উত্তর',
         moreServices:'ইসলামিক কর্নার',
         shareTitle:'শেয়ার করুন', shareSub:'ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন', shareCopy:'লিংক কপি', shareCopied:'কপি হয়েছে ✓',
+        pageAbout:'আমাদের সম্পর্কে', pagePrivacy:'গোপনীয়তা নীতি', pageContact:'যোগাযোগ',
         svcDua:'দোয়া সংকলন', svcDuaSub:'৩১টি দোয়া, আরবি ও অর্থসহ',
         svcSpecial:'বিশেষ ইসলামিক দিন', svcSpecialSub:'তারিখ ও কাউন্টডাউন',
         svcNames:'আল্লাহর ৯৯ নাম', svcNamesSub:'আসমাউল হুসনা, অর্থসহ',
@@ -2303,6 +2335,7 @@
         goDirectory:'All Districts & Upazilas', goQA:'Questions & Answers',
         moreServices:'Islamic Corner',
         shareTitle:'Share', shareSub:'Share Waqt with your friends', shareCopy:'Copy link', shareCopied:'Copied ✓',
+        pageAbout:'About', pagePrivacy:'Privacy Policy', pageContact:'Contact',
         svcDua:'Dua Collection', svcDuaSub:'31 duas with Arabic & meaning',
         svcSpecial:'Special Islamic Days', svcSpecialSub:'Dates & countdown',
         svcNames:'99 Names of Allah', svcNamesSub:'Asmaul Husna with meanings',
