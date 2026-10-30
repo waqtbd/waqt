@@ -459,6 +459,31 @@
       .sp-home-name{font-size:20px; font-weight:700; line-height:1.3}
       .sp-home-sub{font-size:14.5px; opacity:.92; line-height:1.5}
       .sp-home-arr{font-size:26px; color:var(--gold-soft); flex:none}
+
+      /* ---------- more services (standalone pages) ---------- */
+      .svc-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+      @media (min-width:760px){ .svc-grid{grid-template-columns:repeat(3,1fr)} }
+      .svc-card{
+        display:flex; flex-direction:column; gap:5px; min-height:118px;
+        background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+        box-shadow:var(--shadow); padding:16px 15px 14px; text-decoration:none; color:var(--ink);
+        transition:transform .15s ease;
+      }
+      .svc-card:active{transform:scale(.97)}
+      .svc-icon{
+        width:44px; height:44px; flex:none; border-radius:13px; margin-bottom:5px;
+        background:linear-gradient(145deg,var(--emerald) 0%,var(--emerald-deep) 100%);
+        display:grid; place-items:center; color:var(--gold-soft);
+        box-shadow:inset 0 0 0 1.5px rgba(212,175,90,.55), var(--shadow);
+      }
+      .svc-icon svg{width:23px; height:23px}
+      .svc-title{font-size:16.5px; font-weight:700; line-height:1.3}
+      .svc-sub{font-size:13.5px; color:var(--ink-soft); line-height:1.45}
+      .svc-arr{margin-top:auto; padding-top:4px; font-size:15px; font-weight:700; color:var(--gold-ink)}
+      .svc-new{
+        font-size:12px; font-weight:700; letter-spacing:.03em; background:var(--gold); color:#231a04;
+        border-radius:999px; padding:3px 10px; white-space:nowrap;
+      }
       .menu-status{font-size:14px; color:var(--ink-soft); line-height:1.6; padding:8px 4px 10px; border-bottom:1px dashed var(--line)}
 
       /* ---------- monthly table ---------- */
@@ -820,6 +845,53 @@
             </button>
           </div>
           <div class="chips" id="chipRow" aria-label="Divisions"></div>
+        </div>
+      </section>
+
+      <!-- ================= MORE SERVICES (new standalone pages) ================= -->
+      <section class="block rise d3" aria-label="More services">
+        <div class="sec-head">
+          <h2 data-i18n="moreServices">ইসলামিক কর্নার</h2>
+          <div class="rule"></div>
+          <span class="svc-new" data-i18n="svcNew">নতুন</span>
+        </div>
+        <div class="svc-grid">
+          <a class="svc-card" href="dua.html">
+            <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.8A8.4 8.4 0 1 1 9.2 4a6.8 6.8 0 0 0 10.8 10.8Z"/><path d="M17.5 3.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor" stroke="none"/></svg></span>
+            <span class="svc-title" data-i18n="svcDua">দোয়া সংকলন</span>
+            <span class="svc-sub" data-i18n="svcDuaSub">৩১টি দোয়া, আরবি ও অর্থসহ</span>
+            <span class="svc-arr" aria-hidden="true">›</span>
+          </a>
+          <a class="svc-card" href="bishesh-din.html">
+            <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M12 12.6l.9 1.9 2.1.3-1.5 1.5.35 2.1-1.85-1-1.85 1 .35-2.1-1.5-1.5 2.1-.3z" fill="currentColor" stroke="none"/></svg></span>
+            <span class="svc-title" data-i18n="svcSpecial">বিশেষ ইসলামিক দিন</span>
+            <span class="svc-sub" data-i18n="svcSpecialSub">তারিখ ও কাউন্টডাউন</span>
+            <span class="svc-arr" aria-hidden="true">›</span>
+          </a>
+          <a class="svc-card" href="asmaul-husna.html">
+            <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/><path d="M18.6 15.8l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" fill="currentColor" stroke="none"/></svg></span>
+            <span class="svc-title" data-i18n="svcNames">আল্লাহর ৯৯ নাম</span>
+            <span class="svc-sub" data-i18n="svcNamesSub">আসমাউল হুসনা, অর্থসহ</span>
+            <span class="svc-arr" aria-hidden="true">›</span>
+          </a>
+          <a class="svc-card" href="zakat-calculator.html">
+            <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7"/><path d="M8.3 12h.01M12 12h.01M15.7 12h.01M8.3 15.5h.01M12 15.5h.01M15.7 15.5h.01" stroke-width="2.6"/></svg></span>
+            <span class="svc-title" data-i18n="svcZakat">যাকাত ক্যালকুলেটর</span>
+            <span class="svc-sub" data-i18n="svcZakatSub">সহজে যাকাত হিসাব করুন</span>
+            <span class="svc-arr" aria-hidden="true">›</span>
+          </a>
+          <a class="svc-card" href="hijri-converter.html">
+            <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.8 21 6.8l-4 4"/><path d="M3 12.8v-1.5a3.5 3.5 0 0 1 3.5-3.5H21"/><path d="M7 21.2 3 17.2l4-4"/><path d="M21 11.2v1.5a3.5 3.5 0 0 1-3.5 3.5H3"/></svg></span>
+            <span class="svc-title" data-i18n="svcHijri">হিজরি কনভার্টার</span>
+            <span class="svc-sub" data-i18n="svcHijriSub">ইংরেজি ↔ হিজরি তারিখ রূপান্তর</span>
+            <span class="svc-arr" aria-hidden="true">›</span>
+          </a>
+          <a class="svc-card" href="proshno-uttor.html">
+            <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M9.4 9.2a2.9 2.9 0 0 1 5.6.8c0 1.9-2.9 2.3-2.9 3.9"/><path d="M12 17.2h.01" stroke-width="2.6"/></svg></span>
+            <span class="svc-title" data-i18n="svcQA">ইসলামিক প্রশ্নোত্তর</span>
+            <span class="svc-sub" data-i18n="svcQASub">৪০০ প্রশ্নের উত্তর</span>
+            <span class="svc-arr" aria-hidden="true">›</span>
+          </a>
         </div>
       </section>
 
@@ -1200,6 +1272,11 @@
         <div class="menu-status hidden" id="installHint" data-i18n="installHint">ব্রাউজারের মেনু (⋮) খুলে "Install app" (অথবা "Add to Home screen") চাপুন — Waqt আপনার হোম স্ক্রিনে যোগ হয়ে যাবে।</div>
         <a class="menu-link" href="directory.html"><span>🗺️</span> <span data-i18n="goDirectory">সব জেলা ও উপজেলা</span> <span class="arr">›</span></a>
         <a class="menu-link" href="proshno-uttor.html"><span>❓</span> <span data-i18n="goQA">প্রশ্ন ও উত্তর</span> <span class="arr">›</span></a>
+        <a class="menu-link" href="dua.html"><span>🤲</span> <span data-i18n="svcDua">দোয়া সংকলন</span> <span class="arr">›</span></a>
+        <a class="menu-link" href="bishesh-din.html"><span>📆</span> <span data-i18n="svcSpecial">বিশেষ ইসলামিক দিন</span> <span class="arr">›</span></a>
+        <a class="menu-link" href="asmaul-husna.html"><span>✨</span> <span data-i18n="svcNames">আল্লাহর ৯৯ নাম</span> <span class="arr">›</span></a>
+        <a class="menu-link" href="zakat-calculator.html"><span>🧮</span> <span data-i18n="svcZakat">যাকাত ক্যালকুলেটর</span> <span class="arr">›</span></a>
+        <a class="menu-link" href="hijri-converter.html"><span>🔄</span> <span data-i18n="svcHijri">হিজরি কনভার্টার</span> <span class="arr">›</span></a>
       </div>
 
       <div class="drawer-sec">
@@ -2063,6 +2140,13 @@
         goRamadan:'রমজান', goHadith:'হাদিস', goQuran:'কুরআন',
         quranKicker:'আল-কুরআনুল কারীম', quranTitle:'কুরআন মাজিদ', quranLine1:'কুরআন', quranLine2:'মাজিদ', quranSub:'আরবি · বাংলা অর্থ · তিলাওয়াত', quranReadListen:'পড়ুন ও শুনুন',
         goDirectory:'সব জেলা ও উপজেলা', goQA:'প্রশ্ন ও উত্তর',
+        moreServices:'ইসলামিক কর্নার', svcNew:'নতুন',
+        svcDua:'দোয়া সংকলন', svcDuaSub:'৩১টি দোয়া, আরবি ও অর্থসহ',
+        svcSpecial:'বিশেষ ইসলামিক দিন', svcSpecialSub:'তারিখ ও কাউন্টডাউন',
+        svcNames:'আল্লাহর ৯৯ নাম', svcNamesSub:'আসমাউল হুসনা, অর্থসহ',
+        svcZakat:'যাকাত ক্যালকুলেটর', svcZakatSub:'সহজে যাকাত হিসাব করুন',
+        svcHijri:'হিজরি কনভার্টার', svcHijriSub:'ইংরেজি ↔ হিজরি তারিখ রূপান্তর',
+        svcQA:'ইসলামিক প্রশ্নোত্তর', svcQASub:'৪০০ প্রশ্নের উত্তর',
         goSpecial:'বিশেষ দিন', specialTitle:'বিশেষ ইসলামিক দিন', nextSpecial:'আসন্ন বিশেষ দিন',
         specialNote:'তারিখ চাঁদ দেখার উপর নির্ভরশীল — একদিন এদিক-ওদিক হতে পারে।',
         probable:'সম্ভাব্য', passed:'পেরিয়ে গেছে', todayWord:'আজ', daysLeft:'দিন বাকি', inDays:'আর {n} দিন',
@@ -2128,6 +2212,13 @@
         goRamadan:'Ramadan', goHadith:'Hadith', goQuran:'Quran',
         quranKicker:'Al-Quran Al-Kareem', quranTitle:'The Holy Quran', quranLine1:'The Holy', quranLine2:'Quran', quranSub:'Arabic · Bangla meaning · Recitation', quranReadListen:'Read & Listen',
         goDirectory:'All Districts & Upazilas', goQA:'Questions & Answers',
+        moreServices:'Islamic Corner', svcNew:'New',
+        svcDua:'Dua Collection', svcDuaSub:'31 duas with Arabic & meaning',
+        svcSpecial:'Special Islamic Days', svcSpecialSub:'Dates & countdown',
+        svcNames:'99 Names of Allah', svcNamesSub:'Asmaul Husna with meanings',
+        svcZakat:'Zakat Calculator', svcZakatSub:'Calculate your zakat easily',
+        svcHijri:'Hijri Date Converter', svcHijriSub:'Gregorian ↔ Hijri date conversion',
+        svcQA:'Islamic Q&A', svcQASub:'Answers to 400 questions',
         goSpecial:'Special Days', specialTitle:'Special Islamic Days', nextSpecial:'Next special day',
         specialNote:'Dates depend on moon sighting — they may shift by a day.',
         probable:'Probable', passed:'Passed', todayWord:'Today', daysLeft:'days left', inDays:'In {n} days',
