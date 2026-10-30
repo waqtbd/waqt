@@ -490,6 +490,40 @@
       .svc-arr{margin-top:auto; padding-top:4px; font-size:15px; font-weight:700; color:var(--gold-ink)}
       .menu-status{font-size:14px; color:var(--ink-soft); line-height:1.6; padding:8px 4px 10px; border-bottom:1px dashed var(--line)}
 
+      /* ---------- premium share panel ---------- */
+      .share-panel{
+        background:linear-gradient(165deg,#ffffff 0%,#e9f4ee 100%);
+        border:1px solid #cfe3d8; border-top:3px solid var(--gold);
+        border-radius:20px; box-shadow:var(--shadow);
+        padding:24px 18px 20px; text-align:center;
+      }
+      @media (prefers-color-scheme: dark){
+        .share-panel{background:linear-gradient(165deg,var(--surface) 0%,#143327 100%); border-color:#1e3a2e; border-top-color:var(--gold)}
+      }
+      .share-panel.compact{padding:19px 13px 15px; border-radius:18px}
+      .share-title{margin:0; font-size:20px; font-weight:800; line-height:1.3; color:#0b5c4d}
+      @media (prefers-color-scheme: dark){ .share-title{color:var(--gold)} }
+      .share-panel.compact .share-title{font-size:18px}
+      .share-sub{margin:5px 0 0; font-size:14.5px; color:var(--ink-soft); line-height:1.55}
+      .share-row{display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin-top:16px}
+      .share-btn{
+        display:inline-flex; align-items:center; justify-content:center; gap:7px;
+        min-height:44px; padding:10px 16px; border:0; border-radius:999px;
+        color:#fff; font-family:inherit; font-size:13.5px; font-weight:700; line-height:1;
+        text-decoration:none; cursor:pointer;
+        box-shadow:0 6px 16px rgba(7,47,33,.18);
+        transition:transform .15s ease, box-shadow .15s ease;
+      }
+      .share-btn svg{width:16px; height:16px; flex:none}
+      .share-btn:hover{box-shadow:0 9px 22px rgba(7,47,33,.26)}
+      .share-btn:active{transform:scale(.96)}
+      .share-wa{background:linear-gradient(135deg,#2be07c 0%,#12a150 100%)}
+      .share-fb{background:linear-gradient(135deg,#3b8bff 0%,#0f5fd0 100%)}
+      .share-tg{background:linear-gradient(135deg,#4fc3f7 0%,#1d8ec9 100%)}
+      .share-x{background:linear-gradient(135deg,#3f4756 0%,#05070a 100%)}
+      .share-cp{background:linear-gradient(135deg,#e7c65a 0%,#b8860b 100%); text-shadow:0 1px 2px rgba(60,42,4,.4)}
+      @media (max-width:380px){ .share-btn{padding:10px 13px} }
+
       /* ---------- monthly table ---------- */
       .table-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
       .table-top{
@@ -948,6 +982,21 @@
           <span class="sp-home-arr" aria-hidden="true">›</span>
         </button>
       </section>
+
+      <!-- ================= SHARE ================= -->
+      <section class="block" aria-label="Share">
+        <div class="share-panel">
+          <h3 class="share-title" data-i18n="shareTitle">শেয়ার করুন</h3>
+          <p class="share-sub" data-i18n="shareSub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</p>
+          <div class="share-row">
+            <a class="share-btn share-wa" href="https://wa.me/?text=Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20%E2%80%94%20%E0%A6%86%E0%A6%9C%E0%A6%95%E0%A7%87%E0%A6%B0%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%9C%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC%20https%3A//waqtbd.github.io/waqt/" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.4 11.4 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a>
+            <a class="share-btn share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2F" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg><span>Facebook</span></a>
+            <a class="share-btn share-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2F&text=Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20%E2%80%94%20%E0%A6%86%E0%A6%9C%E0%A6%95%E0%A7%87%E0%A6%B0%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%9C%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 3.3 2.7 10.7c-.9.35-.85 1.2.1 1.45l4.7 1.45 1.8 5.6c.25.75 1.15.9 1.7.3l2.45-2.6 4.55 3.35c.65.48 1.6.15 1.8-.65l2.9-14.7c.2-1-.65-1.8-1.8-1.6zM8.6 12.9l9.4-5.9c.15-.1.3.12.15.22l-7.9 7.15-.3 3-1.35-4.47z"/></svg><span>Telegram</span></a>
+            <a class="share-btn share-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2F&text=Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20%E2%80%94%20%E0%A6%86%E0%A6%9C%E0%A6%95%E0%A7%87%E0%A6%B0%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%9C%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg><span>X</span></a>
+            <button type="button" class="share-btn share-cp js-copy-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></svg><span class="share-cp-label" data-i18n="shareCopy">লিংক কপি</span></button>
+          </div>
+        </div>
+      </section>
     </div>
     </div><!-- /view-home -->
 
@@ -1285,6 +1334,20 @@
       <div class="drawer-sec">
         <h3>ℹ️ <span data-i18n="aboutTitle">Waqt সম্পর্কে</span></h3>
         <p style="margin:0; color:var(--ink-soft); font-size:15px; line-height:1.7" data-i18n="aboutText">Waqt — বাংলাদেশের ৬৪ জেলার নামাজের সময়, কিবলার দিক, হিজরি তারিখ, সেহরি-ইফতার, ক্যালেন্ডার, তসবিহ ও যাচাই করা হাদিস — এক জায়গায়, কোনো লগইন ছাড়াই।</p>
+      </div>
+
+      <div class="drawer-sec">
+        <div class="share-panel compact">
+          <h3 class="share-title" data-i18n="shareTitle">শেয়ার করুন</h3>
+          <p class="share-sub" data-i18n="shareSub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</p>
+          <div class="share-row">
+            <a class="share-btn share-wa" href="https://wa.me/?text=Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20%E2%80%94%20%E0%A6%86%E0%A6%9C%E0%A6%95%E0%A7%87%E0%A6%B0%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%9C%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC%20https%3A//waqtbd.github.io/waqt/" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.4 11.4 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a>
+            <a class="share-btn share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2F" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg><span>Facebook</span></a>
+            <a class="share-btn share-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2F&text=Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20%E2%80%94%20%E0%A6%86%E0%A6%9C%E0%A6%95%E0%A7%87%E0%A6%B0%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%9C%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 3.3 2.7 10.7c-.9.35-.85 1.2.1 1.45l4.7 1.45 1.8 5.6c.25.75 1.15.9 1.7.3l2.45-2.6 4.55 3.35c.65.48 1.6.15 1.8-.65l2.9-14.7c.2-1-.65-1.8-1.8-1.6zM8.6 12.9l9.4-5.9c.15-.1.3.12.15.22l-7.9 7.15-.3 3-1.35-4.47z"/></svg><span>Telegram</span></a>
+            <a class="share-btn share-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2F&text=Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20%E2%80%94%20%E0%A6%86%E0%A6%9C%E0%A6%95%E0%A7%87%E0%A6%B0%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%9C%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg><span>X</span></a>
+            <button type="button" class="share-btn share-cp js-copy-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></svg><span class="share-cp-label" data-i18n="shareCopy">লিংক কপি</span></button>
+          </div>
+        </div>
       </div>
     </aside>
 
@@ -2166,6 +2229,7 @@
         quranKicker:'আল-কুরআনুল কারীম', quranTitle:'কুরআন মাজিদ', quranLine1:'কুরআন', quranLine2:'মাজিদ', quranSub:'আরবি · বাংলা অর্থ · তিলাওয়াত', quranReadListen:'পড়ুন ও শুনুন',
         goDirectory:'সব জেলা ও উপজেলা', goQA:'প্রশ্ন ও উত্তর',
         moreServices:'ইসলামিক কর্নার',
+        shareTitle:'শেয়ার করুন', shareSub:'ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন', shareCopy:'লিংক কপি', shareCopied:'কপি হয়েছে ✓',
         svcDua:'দোয়া সংকলন', svcDuaSub:'৩১টি দোয়া, আরবি ও অর্থসহ',
         svcSpecial:'বিশেষ ইসলামিক দিন', svcSpecialSub:'তারিখ ও কাউন্টডাউন',
         svcNames:'আল্লাহর ৯৯ নাম', svcNamesSub:'আসমাউল হুসনা, অর্থসহ',
@@ -2238,6 +2302,7 @@
         quranKicker:'Al-Quran Al-Kareem', quranTitle:'The Holy Quran', quranLine1:'The Holy', quranLine2:'Quran', quranSub:'Arabic · Bangla meaning · Recitation', quranReadListen:'Read & Listen',
         goDirectory:'All Districts & Upazilas', goQA:'Questions & Answers',
         moreServices:'Islamic Corner',
+        shareTitle:'Share', shareSub:'Share Waqt with your friends', shareCopy:'Copy link', shareCopied:'Copied ✓',
         svcDua:'Dua Collection', svcDuaSub:'31 duas with Arabic & meaning',
         svcSpecial:'Special Islamic Days', svcSpecialSub:'Dates & countdown',
         svcNames:'99 Names of Allah', svcNamesSub:'Asmaul Husna with meanings',
@@ -3237,6 +3302,32 @@
 
       $('locBtn').addEventListener('click', useMyLocation);
       $('nextSpecialCard').addEventListener('click', () => showPage('special'));
+      document.querySelectorAll('.js-copy-link').forEach((btn) => {
+        let timer = null;
+        btn.addEventListener('click', async () => {
+          const label = btn.querySelector('.share-cp-label');
+          const url = 'https://waqtbd.github.io/waqt/';
+          let ok = false;
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) { await navigator.clipboard.writeText(url); ok = true; }
+          } catch (e) { ok = false; }
+          if (!ok) {
+            try {
+              const ta = document.createElement('textarea');
+              ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+              document.body.appendChild(ta); ta.select();
+              ok = document.execCommand('copy');
+              document.body.removeChild(ta);
+            } catch (e) { ok = false; }
+          }
+          if (label) {
+            if (timer) clearTimeout(timer);
+            label.textContent = ok ? (L().shareCopied || 'Copied \u2713') : url;
+            timer = setTimeout(() => { label.textContent = L().shareCopy || 'Copy link'; }, 2200);
+          }
+          if (ok) toast(L().shareCopied);
+        });
+      });
       $('mosqueBtn').addEventListener('click', openNearbyMosques);
       $('mqClose').addEventListener('click', closeMosqueModal);
       $('mqScrim').addEventListener('click', closeMosqueModal);
