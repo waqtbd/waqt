@@ -164,6 +164,7 @@ function renderStatic() {
   document.getElementById("lbBn").className = (lang === "bn") ? "on" : "";
   document.getElementById("lbEn").className = (lang === "en") ? "on" : "";
 }
+function pnm(k, fri) { return (k === "dh" && fri) ? ((lang === "bn") ? "জুম্মা" : "Jummah") : S[lang].prayers[k]; }
 function renderDay() {
   var L = S[lang], now = new Date(), nx = nextPrayer();
   document.getElementById("dName").textContent = (lang === "bn") ? UPA.bn : UPA.en;
@@ -173,12 +174,12 @@ function renderDay() {
   for (var i = 0; i < PK.length; i++) {
     var k = PK[i], f = fmt(today[k]), isN = (!nx.tomorrow && nx.key === k);
     html += "<div class='p" + (isN ? " next" : "") + "'>" + (isN ? "<span class='badge'>" + L.next + "</span>" : "") +
-            "<div class='pn'>" + L.prayers[k] + "</div><div class='pt'>" + dg(f.t) + "</div><div class='ap'>" + f.ap + "</div></div>";
+            "<div class='pn'>" + pnm(k, now.getDay() === 5) + "</div><div class='pt'>" + dg(f.t) + "</div><div class='ap'>" + f.ap + "</div></div>";
   }
   document.getElementById("hero").innerHTML = html;
   var nf = fmt((nx.tomorrow ? nx.day : today)[nx.key]);
   document.getElementById("nextBar").innerHTML =
-    "<div class='nl'>" + L.next + ": <span class='nt'>" + L.prayers[nx.key] + " " + dg(nf.t) + " " + nf.ap + "</span>" + (nx.tomorrow ? " (" + L.tomorrow + ")" : "") + "</div>" +
+    "<div class='nl'>" + L.next + ": <span class='nt'>" + pnm(nx.key, (nx.tomorrow ? (now.getDay() + 1) % 7 : now.getDay()) === 5) + " " + dg(nf.t) + " " + nf.ap + "</span>" + (nx.tomorrow ? " (" + L.tomorrow + ")" : "") + "</div>" +
     "<div class='cd'><div class='cl'>" + L.left + "</div><div class='cv' id='cdv'>--:--:--</div></div>";
   var sf = fmt(today.s);
   document.getElementById("meta").innerHTML =
