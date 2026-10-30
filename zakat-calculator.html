@@ -128,19 +128,6 @@ details.note p{font-size:14px}
 <div class="frow">
 <div class="field"><label for="debt">ঋণ / দেনা (মোট সম্পদ থেকে বাদ যাবে)</label><div class="money"><input type="number" id="debt" inputmode="decimal" min="0" placeholder="০"></div><p class="hint">পরিশোধযোগ্য ঋণের পরিমাণ লিখুন — এটি মোট সম্পদ থেকে বিয়োগ হবে।</p></div>
 </div>
-<div class="overlay" id="zOverlay" hidden><div class="result" id="result">
-<button class="xbtn" id="xBtn" type="button" aria-label="বন্ধ করুন">✕</button><p class="rtitle">আপনার যাকাতের হিসাব</p>
-<div class="rrow dim"><span>মোট যাকাতযোগ্য সম্পদ</span><b id="rTotal">৳ ০</b></div>
-<div class="rrow dim"><span>বাদ: ঋণ / দেনা</span><b id="rDebt">৳ ০</b></div>
-<div class="rrow"><span>নিট সম্পদ</span><b id="rNet">৳ ০</b></div>
-<div class="rrow"><span>নিসাব (রূপার হিসাবে)</span><b id="rNisab">৳ ০</b></div>
-<hr>
-<div class="big"><span class="bl">আপনার যাকাত (২.৫%)</span><span class="bv" id="rZak">৳ ০</span></div>
-<span class="badge no" id="rBadge"></span>
-<div class="barwrap"><div class="bar" id="rBar"></div></div>
-<div class="barlab" id="rBarLab"></div>
-<button class="closebtn" id="closeBtn" type="button">বন্ধ করুন</button>
-</div></div>
 <button class="calcbtn" id="calcBtn" type="button">হিসাব করুন</button>
 <button class="resetbtn" id="reset" type="button">সব মুছে আবার শুরু করুন</button>
 </section>
@@ -162,7 +149,21 @@ details.note p{font-size:14px}
 <h3>আরও দেখুন</h3>
 <div class="dir"><a href="index.html">নামাজের সময়</a><a href="zakat-calculator.html">যাকাত ক্যালকুলেটর</a><a href="asmaul-husna.html">আল্লাহর ৯৯ নাম</a><a href="hijri-converter.html">হিজরি কনভার্টার</a><a href="quran.html">কুরআন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">সব জেলা ও উপজেলা</a></div>
 <p class="fnote">Waqt (ওয়াক্ত) — নামাজের সময়, হিজরি তারিখ, কিবলা ও ইসলামি জ্ঞানের বাংলা ওয়েবসাইট</p>
-</footer><script>
+</footer>
+<div class="overlay" id="zOverlay" hidden><div class="result" id="result">
+<button class="xbtn" id="xBtn" type="button" aria-label="বন্ধ করুন">✕</button><p class="rtitle">আপনার যাকাতের হিসাব</p>
+<div class="rrow dim"><span>মোট যাকাতযোগ্য সম্পদ</span><b id="rTotal">৳ ০</b></div>
+<div class="rrow dim"><span>বাদ: ঋণ / দেনা</span><b id="rDebt">৳ ০</b></div>
+<div class="rrow"><span>নিট সম্পদ</span><b id="rNet">৳ ০</b></div>
+<div class="rrow"><span>নিসাব (রূপার হিসাবে)</span><b id="rNisab">৳ ০</b></div>
+<hr>
+<div class="big"><span class="bl">আপনার যাকাত (২.৫%)</span><span class="bv" id="rZak">৳ ০</span></div>
+<span class="badge no" id="rBadge"></span>
+<div class="barwrap"><div class="bar" id="rBar"></div></div>
+<div class="barlab" id="rBarLab"></div>
+<button class="closebtn" id="closeBtn" type="button">বন্ধ করুন</button>
+</div></div>
+<script>
 var BN="\u09e6\u09e7\u09e8\u09e9\u09ea\u09eb\u09ec\u09ed\u09ee\u09ef";
 function bn(x){return String(x).replace(/\d/g,function(c){return BN[+c];});}
 function fmt(n){if(!isFinite(n))n=0;var s=Math.round(n).toLocaleString('en-IN');return bn(s);}
