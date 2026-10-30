@@ -309,8 +309,9 @@ async function render(page){
    moving fold line: the part still flat on the book (rest, clipped) and the
    folded-over corner (flap, clipped to the corner region and reflected across
    the fold line) — through the flap the incoming page's text ghosts like light
-   through thin paper. Next curls from the bottom-right corner; prev is the
-   exact mirror, curling from the bottom-left corner. */
+   through thin paper. As in a printed mushaf (read right-to-left), Next
+   curls from the bottom-left corner and sweeps right; prev is the exact
+   mirror, curling from the bottom-right corner. */
 async function flipTo(target, dir){
   let guard = 0;
   while (flipping && guard++ < 15) await new Promise(r => setTimeout(r, 60));
@@ -339,7 +340,7 @@ async function flipTo(target, dir){
   flipSound();
   /* fold geometry: corner C is dragged to D as progress s goes 0→1;
      the fold line is the perpendicular bisector of C→D */
-  const mirror = dir < 0, Cx = mirror ? 0 : W;
+  const mirror = dir > 0, Cx = mirror ? 0 : W;
   function clipHalf(poly, Mx, My, nx, ny, sign){
     const out = [];
     for (let i = 0; i < poly.length; i++){
@@ -399,12 +400,12 @@ function flipSound(){
 const nextPage = () => flipTo(cur + 1, 1);
 const prevPage = () => flipTo(cur - 1, -1);
 
-/* touch + taps follow the side touched: right side = next page, left side = previous page */
+/* touch + taps follow the side touched, mushaf direction: left side = next page, right side = previous page */
 let tx = 0, ty = 0;
 $("book").addEventListener("touchstart", e => { const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; }, {passive:true});
 $("book").addEventListener("touchend", e => {
   const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
-  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4){ dx > 0 ? prevPage() : nextPage(); }
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4){ dx > 0 ? nextPage() : prevPage(); }
 }, {passive:true});
 $("book").addEventListener("click", e => {
   if (window.getSelection && String(window.getSelection())) return;
@@ -413,11 +414,11 @@ $("book").addEventListener("click", e => {
     const ay = e.target.closest ? e.target.closest(".ayah") : null;
     if (ay && x > 0.10 && x < 0.90){ showMeaning(Number(ay.dataset.s), Number(ay.dataset.a)); return; }
   }
-  if (x < 0.16) prevPage(); else if (x > 0.84) nextPage();
+  if (x < 0.16) nextPage(); else if (x > 0.84) prevPage();
 });
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowLeft") prevPage();
-  if (e.key === "ArrowRight") nextPage();
+  if (e.key === "ArrowLeft") nextPage();
+  if (e.key === "ArrowRight") prevPage();
 });
 $("nextBtn").addEventListener("click", nextPage);
 $("prevBtn").addEventListener("click", prevPage);
