@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>যাকাত ক্যালকুলেটর | Waqt (ওয়াক্ত)</title>
+<meta name="description" content="নগদ টাকা, স্বর্ণ, রূপা ও ব্যবসার সম্পদের যাকাতের হিসাব করুন — নিসাব যাচাই ও কুরআন-হাদিসের সূত্রসহ।">
+<link rel="canonical" href="https://waqtbd.github.io/waqt/zakat-calculator.html">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Baloo Da 2",system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f6f7f4;color:#1f2937;line-height:1.65}
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,#0f766e,#0b5c4d);padding:7px 12px;box-shadow:0 2px 8px rgba(11,92,77,.25)}
+.topbar a{display:flex;align-items:center;gap:9px;text-decoration:none;width:fit-content}
+.topbar img{width:34px;height:34px;border-radius:50%;display:block}
+.bt b{display:block;color:#fff;font-size:15px;letter-spacing:2.5px;line-height:1.05;font-weight:700}
+.bt span{display:block;color:#f3d27a;font-size:11.5px;line-height:1.1}
+.banner{position:relative;overflow:hidden;background:linear-gradient(135deg,#0b5c4d 0%,#0f766e 55%,#0b5c4d 100%);color:#fff;text-align:center;padding:30px 14px 30px}
+.banner:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 90% at 50% -20%,rgba(201,162,39,.35),transparent 70%);pointer-events:none}
+.banner h1{position:relative;font-size:27px;margin:0;font-weight:800;line-height:1.3}
+.banner p{position:relative;opacity:.94;font-size:14.5px;margin:7px auto 0;max-width:620px}
+.banner .gold{position:relative;width:64px;height:3px;border-radius:99px;background:linear-gradient(90deg,transparent,#e8c96a,transparent);margin:13px auto 0}
+main{max-width:760px;margin:0 auto;padding:16px 12px 34px}
+.card{background:#fff;border:1px solid #e5e9e6;border-radius:18px;padding:18px 17px;box-shadow:0 2px 12px rgba(11,92,77,.07);margin-bottom:14px}
+.card h2{font-size:18px;margin:0 0 10px;color:#0b5c4d;line-height:1.45}
+.card p{margin:0 0 10px;font-size:15px}
+.card p:last-child{margin-bottom:0}
+.src{font-size:12.5px;color:#6b7280;border-top:1px dashed #e5e7eb;padding-top:9px;margin-top:12px}
+.src b{color:#92600a}
+footer{max-width:760px;margin:0 auto;padding:2px 12px 32px}
+footer h3{font-size:15.5px;color:#0b5c4d;margin:6px 0 9px}
+.dir{display:flex;flex-wrap:wrap;gap:6px}
+.dir a{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:6px 13px;font-size:13px;color:#1f2937;text-decoration:none;transition:border-color .2s,color .2s}
+.dir a:hover{border-color:#c9a227;color:#0b5c4d}
+.dir a.cur{background:#0b5c4d;color:#fff;border-color:#0b5c4d;font-weight:700}
+.fnote{color:#6b7280;font-size:12px;margin-top:16px;text-align:center}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.fade{animation:fadeUp .5s ease both}
+@media (prefers-reduced-motion:reduce){.fade{animation:none}}
+input,select{font-family:inherit}
+.field label{display:block;font-size:13.5px;font-weight:600;color:#374151;margin-bottom:6px}
+.field input,.field select{width:100%;padding:12px 13px;font-size:16px;border:1.5px solid #d9e2dc;border-radius:12px;background:#fbfdfc;color:#1f2937;outline:none;transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus{border-color:#0f766e;box-shadow:0 0 0 4px rgba(201,162,39,.22);background:#fff}
+.hint{font-size:12.5px;color:#6b7280;margin-top:5px}
+
+.sect{font-size:13px;font-weight:800;color:#92600a;letter-spacing:.4px;margin:16px 0 10px;display:flex;align-items:center;gap:8px}
+.sect:first-of-type{margin-top:2px}
+.sect:after{content:"";flex:1;height:1px;background:#eef0ea}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media (max-width:520px){.frow{grid-template-columns:1fr}}
+.money{position:relative}
+.money:before{content:"\u09f3";position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:16px;pointer-events:none}
+.money input{padding-left:32px}
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.result{position:sticky;bottom:10px;background:linear-gradient(135deg,#0b5c4d,#0f766e);border-radius:18px;color:#fff;padding:18px;box-shadow:0 10px 28px rgba(11,92,77,.35);margin-top:16px}
+.result .rrow{display:flex;justify-content:space-between;gap:10px;font-size:14.5px;padding:3px 0;opacity:.97}
+.result .rrow b{font-weight:700;white-space:nowrap}
+.result .rrow.dim{opacity:.82;font-size:13.5px}
+.result hr{border:0;border-top:1px dashed rgba(255,255,255,.35);margin:9px 0}
+.result .big{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.result .big .bl{font-size:15px;font-weight:700}
+.result .big .bv{font-size:30px;font-weight:800;color:#f3d27a;line-height:1.15;white-space:nowrap}
+.badge{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;border-radius:999px;padding:4px 13px}
+.badge.yes{background:#fffbeb;color:#92600a;border:1px solid #e8c96a}
+.badge.no{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.barwrap{height:9px;background:rgba(255,255,255,.18);border-radius:99px;margin-top:12px;overflow:hidden}
+.bar{height:100%;width:0%;background:linear-gradient(90deg,#e8c96a,#f3d27a);border-radius:99px;transition:width .45s ease}
+.barlab{font-size:12px;opacity:.85;margin-top:5px}
+.resetbtn{display:block;width:100%;margin-top:12px;background:#fff;border:1.5px solid #d9e2dc;color:#374151;font-weight:700;font-size:14.5px;padding:11px;border-radius:12px;cursor:pointer}
+.resetbtn:hover{border-color:#c9a227;color:#92600a}
+details.note{margin-top:4px}
+details.note summary{cursor:pointer;font-weight:700;color:#0b5c4d;font-size:15px;padding:4px 0}
+details.note p{font-size:14px}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G3YT4H1B0K');
+</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a></div>
+<header class="banner"><h1>যাকাত ক্যালকুলেটর</h1><div class="gold"></div><p>আপনার সম্পদের যাকাতের হিসাব করুন সহজে — নিসাব যাচাইসহ</p></header>
+<main>
+<section class="card fade">
+<p>নিচের ঘরগুলোতে আপনার যাকাতযোগ্য সম্পদের পরিমাণ লিখুন — হিসাব সাথে সাথে নিচের সবুজ বাক্সে আপডেট হবে। শুধু যেসব সম্পদ আপনার ক্ষেত্রে প্রযোজ্য, সেগুলোর ঘর পূরণ করুন; বাকিগুলো ফাঁকা রাখুন। হিসাবটি করা হয়েছে এই শর্তে যে সম্পদটি আপনার কাছে এক চান্দ্র বছর (হাওল) অতিক্রম করেছে।</p>
+<div class="sect">আজকের ধাতুর দাম (নিসাব হিসাবের জন্য)</div>
+<div class="frow">
+<div class="field"><label for="gprice">স্বর্ণের দাম — প্রতি গ্রাম (টাকা)</label><input type="number" id="gprice" inputmode="decimal" min="0" value="12000"><p class="hint">এটি একটি উদাহরণমূলক ডিফল্ট মান — হিসাবের আগে আজকের বাজারের দাম দিয়ে বদলে নিন।</p></div>
+<div class="field"><label for="sprice">রূপার দাম — প্রতি গ্রাম (টাকা)</label><input type="number" id="sprice" inputmode="decimal" min="0" value="250"><p class="hint">এটিও উদাহরণমূলক ডিফল্ট — আজকের বাজারের দাম বসিয়ে নিন।</p></div>
+</div>
+<div class="sect">নগদ অর্থ ও সঞ্চয়</div>
+<div class="frow">
+<div class="field"><label for="cash">নগদ টাকা (হাতে ও ঘরে)</label><div class="money"><input type="number" id="cash" inputmode="decimal" min="0" placeholder="০"></div></div>
+<div class="field"><label for="bank">ব্যাংকে জমা ও সঞ্চয়</label><div class="money"><input type="number" id="bank" inputmode="decimal" min="0" placeholder="০"></div></div>
+</div>
+<div class="sect">স্বর্ণ ও রূপা</div>
+<div class="frow">
+<div class="field"><label for="goldG">স্বর্ণ — পরিমাণ (গ্রাম)</label><input type="number" id="goldG" inputmode="decimal" min="0" placeholder="০"><p class="hint" id="goldBhori"></p><p class="hint" id="goldEq"></p></div>
+<div class="field"><label for="goldV">স্বর্ণের মূল্য — সরাসরি (টাকা)</label><div class="money"><input type="number" id="goldV" inputmode="decimal" min="0" placeholder="০"></div><p class="hint">ওজন জানা না থাকলে শুধু এই ঘরে মোট মূল্য লিখুন। একই স্বর্ণ দুই ঘরে হিসাব করবেন না।</p></div>
+</div>
+<div class="frow">
+<div class="field"><label for="silvG">রূপা — পরিমাণ (গ্রাম)</label><input type="number" id="silvG" inputmode="decimal" min="0" placeholder="০"><p class="hint" id="silvBhori"></p><p class="hint" id="silvEq"></p></div>
+<div class="field"><label for="silvV">রূপার মূল্য — সরাসরি (টাকা)</label><div class="money"><input type="number" id="silvV" inputmode="decimal" min="0" placeholder="০"></div><p class="hint">ওজন জানা না থাকলে শুধু এই ঘরে মোট মূল্য লিখুন। একই রূপা দুই ঘরে হিসাব করবেন না।</p></div>
+</div>
+<div class="sect">অন্যান্য সম্পদ ও দেনা</div>
+<div class="frow">
+<div class="field"><label for="trade">ব্যবসার পণ্য ও ব্যবসায়িক সম্পদ (বর্তমান বাজারমূল্য)</label><div class="money"><input type="number" id="trade" inputmode="decimal" min="0" placeholder="০"></div></div>
+<div class="field"><label for="other">অন্যান্য যাকাতযোগ্য সম্পদ (যেমন: পাওনা টাকা যা আদায়ের আশা আছে)</label><div class="money"><input type="number" id="other" inputmode="decimal" min="0" placeholder="০"></div></div>
+</div>
+<div class="frow">
+<div class="field"><label for="debt">ঋণ / দেনা (মোট সম্পদ থেকে বাদ যাবে)</label><div class="money"><input type="number" id="debt" inputmode="decimal" min="0" placeholder="০"></div><p class="hint">পরিশোধযোগ্য ঋণের পরিমাণ লিখুন — এটি মোট সম্পদ থেকে বিয়োগ হবে।</p></div>
+</div>
+<div class="result" id="result">
+<div class="rrow dim"><span>মোট যাকাতযোগ্য সম্পদ</span><b id="rTotal">৳ ০</b></div>
+<div class="rrow dim"><span>বাদ: ঋণ / দেনা</span><b id="rDebt">৳ ০</b></div>
+<div class="rrow"><span>নিট সম্পদ</span><b id="rNet">৳ ০</b></div>
+<div class="rrow"><span>নিসাব (রূপার হিসাবে)</span><b id="rNisab">৳ ০</b></div>
+<hr>
+<div class="big"><span class="bl">আপনার যাকাত (২.৫%)</span><span class="bv" id="rZak">৳ ০</span></div>
+<span class="badge no" id="rBadge"></span>
+<div class="barwrap"><div class="bar" id="rBar"></div></div>
+<div class="barlab" id="rBarLab"></div>
+</div>
+<button class="resetbtn" id="reset" type="button">সব মুছে আবার শুরু করুন</button>
+</section>
+<section class="card">
+<h2>হিসাবের ভিত্তি ও সূত্র</h2>
+<p id="nisabLine"></p>
+<p><b>যাকাতের হার:</b> নিসাব পরিমাণ সম্পদের উপর যাকাত চল্লিশ ভাগের এক ভাগ, অর্থাৎ ২.৫%। আবু বকর (রা.)-এর যাকাত-নির্দেশনায় রৌপ্যের যাকাত সম্পর্কে এসেছে — “রৌপ্যের যাকাত চল্লিশ ভাগের এক ভাগ (২.৫%); দুইশত দিরহামের কম হলে যাকাত ওয়াজিব নয়।”</p>
+<p><b>নিসাব:</b> নবীজি (সা.) বলেছেন, পাঁচ আওকিয়া (দুইশত দিরহাম) রৌপ্যের কমে যাকাত নেই — এ থেকেই রূপার নিসাব সাড়ে বায়ান্ন ভরি (৬১২.৩৬ গ্রাম) এবং স্বর্ণের নিসাব সাড়ে সাত ভরি (৮৭.৪৮ গ্রাম) নির্ধারিত।</p>
+<p><b>যাকাত কারা পাবেন:</b> আল্লাহ কুরআনে যাকাতের আটটি খাত নির্দিষ্ট করে দিয়েছেন — গরিব, মিসকিন, যাকাত ব্যবস্থাপক, নবমুসলিম ও মন জয় করা প্রয়োজন এমন ব্যক্তি, দাসমুক্তি, ঋণগ্রস্ত, আল্লাহর পথে ও মুসাফির।</p>
+<details class="note"><summary>আরও কিছু জরুরি কথা</summary>
+<p>• যাকাত ফরজ হওয়ার শর্তের মধ্যে রয়েছে: মুসলিম হওয়া, নিসাব পরিমাণ সম্পদের মালিক হওয়া এবং সেই সম্পদের উপর এক চান্দ্র বছর (হাওল) অতিক্রান্ত হওয়া।</p>
+<p>• নিজের বসবাসের বাড়ি, ব্যবহারের গাড়ি, আসবাব ও দৈনন্দিন প্রয়োজনীয় জিনিসের উপর যাকাত নেই।</p>
+<p>• এই ক্যালকুলেটর একটি সাধারণ হিসাবের সহায়ক মাত্র; জটিল ক্ষেত্রে (কোম্পানির শেয়ার, কৃষি উৎপাদন, পেনশন তহবিল ইত্যাদি) নির্ভরযোগ্য আলেমের পরামর্শ নিন।</p>
+</details>
+<p class="src"><b>সূত্র:</b> কুরআন, সূরা আত-তাওবা (৯): ৬০; সহীহ বুখারী, হাদিস ১৪৫৪ (যাকাতের হার — চল্লিশ ভাগের এক ভাগ) ও ১৪৪৭; সহীহ মুসলিম, হাদিস ৯৭৯ (নিসাব — পাঁচ আওকিয়ার কমে যাকাত নেই)</p>
+</section>
+</main>
+<footer>
+<h3>আরও দেখুন</h3>
+<div class="dir"><a href="index.html">নামাজের সময়</a><a href="zakat-calculator.html">যাকাত ক্যালকুলেটর</a><a href="asmaul-husna.html">আল্লাহর ৯৯ নাম</a><a href="hijri-converter.html">হিজরি কনভার্টার</a><a href="quran.html">কুরআন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">সব জেলা ও উপজেলা</a></div>
+<p class="fnote">Waqt (ওয়াক্ত) — নামাজের সময়, হিজরি তারিখ, কিবলা ও ইসলামি জ্ঞানের বাংলা ওয়েবসাইট</p>
+</footer><script>
+var BN="\u09e6\u09e7\u09e8\u09e9\u09ea\u09eb\u09ec\u09ed\u09ee\u09ef";
+function bn(x){return String(x).replace(/\d/g,function(c){return BN[+c];});}
+function fmt(n){if(!isFinite(n))n=0;var s=Math.round(n).toLocaleString('en-IN');return bn(s);}
+function val(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)||v<0?0:v;}
+var IDS=['cash','bank','goldG','goldV','silvG','silvV','trade','other','debt','gprice','sprice'];
+function calc(){
+  var gp=val('gprice'),sp=val('sprice');
+  var gold=val('goldG')*gp+val('goldV');
+  var silv=val('silvG')*sp+val('silvV');
+  document.getElementById('goldEq').textContent=gold>0?('= \u09f3 '+fmt(gold)):'';
+  document.getElementById('silvEq').textContent=silv>0?('= \u09f3 '+fmt(silv)):'';
+  var gv=val('goldG');document.getElementById('goldBhori').textContent=gv>0?('= '+bn((gv/11.664).toFixed(2))+' ভরি (১ ভরি = ১১.৬৬৪ গ্রাম)'):'';
+  var sv=val('silvG');document.getElementById('silvBhori').textContent=sv>0?('= '+bn((sv/11.664).toFixed(2))+' ভরি (১ ভরি = ১১.৬৬৪ গ্রাম)') :'';
+  var total=val('cash')+val('bank')+gold+silv+val('trade')+val('other');
+  var debt=val('debt');
+  var net=Math.max(0,total-debt);
+  var nisabS=612.36*sp, nisabG=87.48*gp;
+  var due=net>=nisabS&&nisabS>0;
+  var zak=due?net*0.025:0;
+  document.getElementById('rTotal').textContent='\u09f3 '+fmt(total);
+  document.getElementById('rDebt').textContent='\u09f3 '+fmt(debt);
+  document.getElementById('rNet').textContent='\u09f3 '+fmt(net);
+  document.getElementById('rNisab').textContent='\u09f3 '+fmt(nisabS);
+  document.getElementById('rZak').textContent='\u09f3 '+fmt(zak);
+  var b=document.getElementById('rBadge');
+  if(due){b.className='badge yes';b.textContent='আলহামদুলিল্লাহ — আপনার সম্পদ নিসাবের বেশি, যাকাত ফরজ হয়েছে';}
+  else{b.className='badge no';b.textContent='এখনো নিসাব পূর্ণ হয়নি — যাকাত ফরজ হয়নি';}
+  var pct=nisabS>0?Math.min(100,net/nisabS*100):0;
+  document.getElementById('rBar').style.width=pct+'%';
+  document.getElementById('rBarLab').textContent='নিসাব অর্জনের অগ্রগতি: '+bn(Math.floor(pct))+'%';
+  document.getElementById('nisabLine').innerHTML='বর্তমান দামে নিসাব: স্বর্ণের হিসাবে (সাড়ে সাত ভরি / ৮৭.৪৮ গ্রাম) = <b>\u09f3 '+fmt(nisabG)+'</b>; রূপার হিসাবে (সাড়ে বায়ান্ন ভরি / ৬১২.৩৬ গ্রাম) = <b>\u09f3 '+fmt(nisabS)+'</b>। এই ক্যালকুলেটরে নগদ ও মিশ্র সম্পদের জন্য রূপার নিসাব (কমটি) মাপকাঠি ধরা হয়েছে।';
+}
+IDS.forEach(function(id){document.getElementById(id).addEventListener('input',calc);});
+document.getElementById('reset').addEventListener('click',function(){
+  ['cash','bank','goldG','goldV','silvG','silvV','trade','other','debt'].forEach(function(id){document.getElementById(id).value='';});
+  calc();
+});
+calc();
+</script>
+
+</body>
+</html>

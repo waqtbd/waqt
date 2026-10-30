@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>হিজরি তারিখ কনভার্টার | Waqt (ওয়াক্ত)</title>
+<meta name="description" content="ইংরেজি তারিখ থেকে হিজরি এবং হিজরি থেকে ইংরেজি তারিখে রূপান্তর করুন — আজকের হিজরি তারিখসহ। গাণিতিক পঞ্জিকা অনুযায়ী আনুমানিক ফলাফল।">
+<link rel="canonical" href="https://waqtbd.github.io/waqt/hijri-converter.html">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Baloo Da 2",system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f6f7f4;color:#1f2937;line-height:1.65}
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,#0f766e,#0b5c4d);padding:7px 12px;box-shadow:0 2px 8px rgba(11,92,77,.25)}
+.topbar a{display:flex;align-items:center;gap:9px;text-decoration:none;width:fit-content}
+.topbar img{width:34px;height:34px;border-radius:50%;display:block}
+.bt b{display:block;color:#fff;font-size:15px;letter-spacing:2.5px;line-height:1.05;font-weight:700}
+.bt span{display:block;color:#f3d27a;font-size:11.5px;line-height:1.1}
+.banner{position:relative;overflow:hidden;background:linear-gradient(135deg,#0b5c4d 0%,#0f766e 55%,#0b5c4d 100%);color:#fff;text-align:center;padding:30px 14px 30px}
+.banner:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 90% at 50% -20%,rgba(201,162,39,.35),transparent 70%);pointer-events:none}
+.banner h1{position:relative;font-size:27px;margin:0;font-weight:800;line-height:1.3}
+.banner p{position:relative;opacity:.94;font-size:14.5px;margin:7px auto 0;max-width:620px}
+.banner .gold{position:relative;width:64px;height:3px;border-radius:99px;background:linear-gradient(90deg,transparent,#e8c96a,transparent);margin:13px auto 0}
+main{max-width:760px;margin:0 auto;padding:16px 12px 34px}
+.card{background:#fff;border:1px solid #e5e9e6;border-radius:18px;padding:18px 17px;box-shadow:0 2px 12px rgba(11,92,77,.07);margin-bottom:14px}
+.card h2{font-size:18px;margin:0 0 10px;color:#0b5c4d;line-height:1.45}
+.card p{margin:0 0 10px;font-size:15px}
+.card p:last-child{margin-bottom:0}
+.src{font-size:12.5px;color:#6b7280;border-top:1px dashed #e5e7eb;padding-top:9px;margin-top:12px}
+.src b{color:#92600a}
+footer{max-width:760px;margin:0 auto;padding:2px 12px 32px}
+footer h3{font-size:15.5px;color:#0b5c4d;margin:6px 0 9px}
+.dir{display:flex;flex-wrap:wrap;gap:6px}
+.dir a{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:6px 13px;font-size:13px;color:#1f2937;text-decoration:none;transition:border-color .2s,color .2s}
+.dir a:hover{border-color:#c9a227;color:#0b5c4d}
+.dir a.cur{background:#0b5c4d;color:#fff;border-color:#0b5c4d;font-weight:700}
+.fnote{color:#6b7280;font-size:12px;margin-top:16px;text-align:center}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.fade{animation:fadeUp .5s ease both}
+@media (prefers-reduced-motion:reduce){.fade{animation:none}}
+input,select{font-family:inherit}
+.field label{display:block;font-size:13.5px;font-weight:600;color:#374151;margin-bottom:6px}
+.field input,.field select{width:100%;padding:12px 13px;font-size:16px;border:1.5px solid #d9e2dc;border-radius:12px;background:#fbfdfc;color:#1f2937;outline:none;transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus{border-color:#0f766e;box-shadow:0 0 0 4px rgba(201,162,39,.22);background:#fff}
+.hint{font-size:12.5px;color:#6b7280;margin-top:5px}
+
+.today{background:linear-gradient(135deg,#0b5c4d,#0f766e);border-radius:18px;color:#fff;text-align:center;padding:20px 16px;margin-bottom:14px;box-shadow:0 6px 20px rgba(11,92,77,.22)}
+.today .tl{font-size:13px;opacity:.88;letter-spacing:.3px}
+.today .th{font-size:26px;font-weight:800;margin:3px 0 1px;line-height:1.35}
+.today .tg{font-size:14px;color:#f3d27a;font-weight:600}
+.swap{display:grid;grid-template-columns:1fr;gap:0}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media (max-width:480px){.row3{grid-template-columns:1fr 1fr 1fr;gap:8px}}
+.resbox{display:none;margin-top:15px;background:#fffbeb;border:1.5px solid #e8c96a;border-radius:14px;padding:15px;text-align:center}
+.resbox.show{display:block;animation:fadeUp .4s ease both}
+.resbox .rl{font-size:12.5px;color:#92600a;font-weight:700;letter-spacing:.3px}
+.resbox .rv{font-size:23px;font-weight:800;color:#0b5c4d;line-height:1.4;margin:2px 0}
+.resbox .rs{font-size:13.5px;color:#4b5563}
+.btn{display:block;width:100%;margin-top:13px;background:linear-gradient(135deg,#d4af37,#c9a227);color:#fff;font-weight:700;font-size:16px;padding:13px;border:0;border-radius:12px;cursor:pointer;box-shadow:0 2px 8px rgba(201,162,39,.35);transition:filter .2s}
+.btn:hover{filter:brightness(1.06)}
+.divider{display:flex;align-items:center;gap:10px;margin:4px 0 14px;color:#9ca3af;font-size:12.5px}
+.divider:before,.divider:after{content:"";flex:1;height:1px;background:#e5e7eb}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G3YT4H1B0K');
+</script>
+</head>
+<body>
+<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a></div>
+<header class="banner"><h1>হিজরি তারিখ কনভার্টার</h1><div class="gold"></div><p>ইংরেজি (গ্রেগরিয়ান) তারিখ থেকে হিজরি এবং হিজরি থেকে ইংরেজি — দুই দিকেই রূপান্তর</p></header>
+<main>
+<div class="today fade"><div class="tl">আজকের হিজরি তারিখ</div><div class="th" id="todayH">…</div><div class="tg" id="todayG">…</div></div>
+<section class="card fade">
+<h2>ইংরেজি থেকে হিজরি</h2>
+<div class="field"><label for="gdate">ইংরেজি তারিখ বেছে নিন</label><input type="date" id="gdate" min="0001-01-01" max="9999-12-31"></div>
+<button class="btn" id="btnG" type="button">হিজরি তারিখ দেখুন</button>
+<div class="resbox" id="resG"><div class="rl">হিজরি তারিখ</div><div class="rv" id="resGv"></div><div class="rs" id="resGs"></div></div>
+</section>
+<div class="divider">অথবা</div>
+<section class="card fade">
+<h2>হিজরি থেকে ইংরেজি</h2>
+<div class="row3">
+<div class="field"><label for="hd">দিন</label><select id="hd"></select></div>
+<div class="field"><label for="hm">মাস</label><select id="hm"></select></div>
+<div class="field"><label for="hy">বছর (হিজরি)</label><input type="number" id="hy" inputmode="numeric" min="1" max="9999"></div>
+</div>
+<button class="btn" id="btnH" type="button" onclick="convH()">ইংরেজি তারিখ দেখুন</button>
+<div class="resbox" id="resH"><div class="rl">ইংরেজি তারিখ</div><div class="rv" id="resHv"></div><div class="rs" id="resHs"></div></div>
+</section>
+<section class="card">
+<h2>মনে রাখুন</h2>
+<p>এই কনভার্টার গাণিতিক (সারণিভিত্তিক) হিজরি পঞ্জিকা অনুসরণ করে, তাই ফলাফল <b>আনুমানিক</b>। প্রকৃত হিজরি তারিখ চাঁদ দেখার উপর নির্ভরশীল — রমজান, ঈদসহ ধর্মীয় দিবসের ক্ষেত্রে স্থানীয় চাঁদ দেখা কমিটি ও ইসলামিক ফাউন্ডেশনের ঘোষণাই চূড়ান্ত। গাণিতিক হিসাবের সাথে বাস্তব তারিখে এক দিনের এদিক-ওদিক হতে পারে।</p>
+</section>
+</main>
+<footer>
+<h3>আরও দেখুন</h3>
+<div class="dir"><a href="index.html">নামাজের সময়</a><a href="hijri-converter.html">হিজরি কনভার্টার</a><a href="asmaul-husna.html">আল্লাহর ৯৯ নাম</a><a href="zakat-calculator.html">যাকাত ক্যালকুলেটর</a><a href="quran.html">কুরআন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">সব জেলা ও উপজেলা</a></div>
+<p class="fnote">Waqt (ওয়াক্ত) — নামাজের সময়, হিজরি তারিখ, কিবলা ও ইসলামি জ্ঞানের বাংলা ওয়েবসাইট</p>
+</footer><script>
+var HMON=["মুহাররম","সফর","রবিউল আউয়াল","রবিউস সানি","জুমাদাল উলা","জুমাদাস সানি","রজব","শাবান","রমজান","শাওয়াল","জিলকদ","জিলহজ"];
+var WDAY=["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
+var GMON=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
+var BN="\u09e6\u09e7\u09e8\u09e9\u09ea\u09eb\u09ec\u09ed\u09ee\u09ef";
+function bn(x){return String(x).replace(/\d/g,function(c){return BN[+c];});}
+function gJdn(y,m,d){var a=Math.floor((14-m)/12);var yy=y+4800-a;var mm=m+12*a-3;return d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045;}
+function jdnToGreg(jdn){var a=jdn+32044,b=Math.floor((4*a+3)/146097),c=a-Math.floor((146097*b)/4);var dd=Math.floor((4*c+3)/1461),e=c-Math.floor((1461*dd)/4),mm=Math.floor((5*e+2)/153);return [100*b+dd-4800+Math.floor(mm/10),mm+3-12*Math.floor(mm/10),e-Math.floor((153*mm+2)/5)+1];}
+var EPOCH=1948440;
+function dby(hy){return (hy-1)*354+Math.floor((11*hy+3)/30);}
+function mstart(hm){return Math.ceil(29.5*(hm-1));}
+function hToJdn(hy,hm,hd){return EPOCH+dby(hy)+mstart(hm)+hd-1;}
+function jdnToHijri(jdn){var days=jdn-EPOCH;var hy=Math.floor((30*days+10646)/10631);while(dby(hy+1)<=days)hy++;while(dby(hy)>days)hy--;var doy=days-dby(hy);var hm=1;while(hm<12&&mstart(hm+1)<=doy)hm++;return [hy,hm,doy-mstart(hm)+1];}
+function g2h(y,m,d){return jdnToHijri(gJdn(y,m,d));}
+function h2g(hy,hm,hd){return jdnToGreg(hToJdn(hy,hm,hd));}
+function wdOf(y,m,d){return WDAY[new Date(Date.UTC(y,m-1,d)).getUTCDay()];}
+function fmtH(h){return bn(h[2])+" "+HMON[h[1]-1]+" "+bn(h[0])+" হিজরি";}
+function fmtG(g){return bn(g[2])+" "+GMON[g[1]-1]+" "+bn(g[0]);}
+// today
+var now=new Date(),ty=now.getFullYear(),tm=now.getMonth()+1,td=now.getDate();
+var th=g2h(ty,tm,td);
+document.getElementById('todayH').textContent=fmtH(th);
+document.getElementById('todayG').textContent=wdOf(ty,tm,td)+", "+fmtG([ty,tm,td]);
+// fill hijri selects
+var hmSel=document.getElementById('hm'),hdSel=document.getElementById('hd');
+HMON.forEach(function(n,i){var o=document.createElement('option');o.value=i+1;o.textContent=bn(i+1)+". "+n;hmSel.appendChild(o);});
+for(var i=1;i<=30;i++){var o2=document.createElement('option');o2.value=i;o2.textContent=bn(i);hdSel.appendChild(o2);}
+// defaults
+var gi=document.getElementById('gdate');gi.value=ty+"-"+String(tm).padStart(2,'0')+"-"+String(td).padStart(2,'0');
+document.getElementById('hy').value=th[0];hmSel.value=th[1];hdSel.value=th[2];
+function convG(){
+  var v=gi.value;if(!v)return;
+  var p=v.split('-'),y=+p[0],m=+p[1],d=+p[2];
+  var h=g2h(y,m,d);
+  var r=document.getElementById('resG');
+  document.getElementById('resGv').textContent=fmtH(h);
+  document.getElementById('resGs').textContent=wdOf(y,m,d)+" · ইংরেজি তারিখ: "+fmtG([y,m,d]);
+  r.classList.add('show');
+}
+function convH(){
+  var hy=parseInt(document.getElementById('hy').value,10),hm=+hmSel.value,hd=+hdSel.value;
+  var msg=document.getElementById('resHs');
+  if(!hy||hy<1){document.getElementById('resHv').textContent='সঠিক হিজরি বছর লিখুন';msg.textContent='';document.getElementById('resH').classList.add('show');return;}
+  var ml=(hm%2===1)?30:29; if(hm===12&&(hy%30===2||hy%30===5||hy%30===7||hy%30===10||hy%30===13||hy%30===16||hy%30===18||hy%30===21||hy%30===24||hy%30===26||hy%30===29))ml=30;
+  if(hd>ml){document.getElementById('resHv').textContent='এই মাসে '+bn(ml)+' দিন';msg.textContent='অনুগ্রহ করে '+bn(ml)+' বা তার কম দিন বেছে নিন।';document.getElementById('resH').classList.add('show');return;}
+  var g=h2g(hy,hm,hd);
+  document.getElementById('resHv').textContent=fmtG(g);
+  msg.textContent=wdOf(g[0],g[1],g[2])+" · হিজরি তারিখ: "+fmtH([hy,hm,hd]);
+  document.getElementById('resH').classList.add('show');
+}
+gi.addEventListener('change',convG);gi.addEventListener('input',convG);
+document.getElementById('btnG').addEventListener('click',convG);
+['hy','hm','hd'].forEach(function(id){document.getElementById(id).addEventListener('change',convH);document.getElementById(id).addEventListener('input',convH);});
+convG();convH();
+</script>
+
+</body>
+</html>
