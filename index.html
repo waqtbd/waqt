@@ -1413,6 +1413,28 @@
       bn: {Fajr:'ফজর', Sunrise:'সূর্যোদয়', Dhuhr:'যোহর', Asr:'আসর', Maghrib:'মাগরিব', Isha:'এশা'},
       en: {Fajr:'Fajr', Sunrise:'Sunrise', Dhuhr:'Dhuhr', Asr:'Asr', Maghrib:'Maghrib', Isha:'Isha'}
     };
+    const JUMMAH_NAMES = { bn:'জুম্মা', en:'Jummah' };
+    /* On Fridays the midday (Dhuhr) prayer is Jummah — same time, only
+       the display name changes. `dateObj` is the Date (or weekday info)
+       of the day the prayer belongs to; when omitted it falls back to
+       today's date / today's loaded weekday. */
+    function prayerDisplayName(p, dateObj) {
+      if (p === 'Dhuhr') {
+        let friday = false, resolved = false;
+        if (dateObj instanceof Date) { friday = dateObj.getDay() === 5; resolved = true; }
+        else if (typeof dateObj === 'string') { friday = dateObj === 'Friday'; resolved = true; }
+        else if (dateObj && dateObj.weekday && dateObj.weekday.en) { friday = dateObj.weekday.en === 'Friday'; resolved = true; }
+        if (!resolved) {
+          try {
+            if (typeof state !== 'undefined' && state && state.today && state.today.date && state.today.date.gregorian && state.today.date.gregorian.weekday) {
+              friday = state.today.date.gregorian.weekday.en === 'Friday';
+            } else { friday = new Date().getDay() === 5; }
+          } catch (e) { friday = new Date().getDay() === 5; }
+        }
+        if (friday) return JUMMAH_NAMES[state.lang] || JUMMAH_NAMES.en;
+      }
+      return PRAYER_NAMES[state.lang][p];
+    }
     const PRAYER_ICONS = {
       Fajr:'<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 18h16M6 18a6 6 0 0 1 12 0M12 5V2.8M4.9 8.9L3.4 7.4M19.1 8.9l1.5-1.5M2.5 13.5H4M20 13.5h1.5"/></svg>',
       Sunrise:'<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 20h18M5 20a7 7 0 0 1 14 0M12 8V4M12 4L9.8 6.2M12 4l2.2 2.2M5.6 10.6L3.8 8.8M18.4 10.6l1.8-1.8"/></svg>',
@@ -2657,7 +2679,7 @@
                                : num(mins) + ' ' + (state.lang === 'bn' ? 'মিনিট বাকি' : 'min left');
         }
         card.innerHTML = PRAYER_ICONS[p] +
-          '<div class="p-name">' + PRAYER_NAMES[state.lang][p] + '</div>' +
+          '<div class="p-name">' + prayerDisplayName(p, at || now) + '</div>' +
           '<div class="p-time">' + f.text + '<span class="p-ampm">' + f.ampm + '</span></div>' +
           '<div class="p-left">' + leftTxt + '</div>' +
           (isNext ? '<span class="next-badge">' + L().nextBadge + '</span>' : '');
@@ -2667,7 +2689,7 @@
       /* hero next prayer */
       if (next) {
         const f = next.raw ? fmt12(next.raw) : (state.today ? fmt12(state.today.timings.Fajr) : null);
-        $('nextName').textContent = PRAYER_NAMES[state.lang][next.name] + (next.tomorrow ? ' (' + L().tomorrow + ')' : '');
+        $('nextName').textContent = prayerDisplayName(next.name, next.at) + (next.tomorrow ? ' (' + L().tomorrow + ')' : '');
         $('nextTime').textContent = next.at ? num(next.at.getHours() % 12 === 0 ? 12 : next.at.getHours() % 12) + ':' + num(pad(next.at.getMinutes())) + ' ' + (next.at.getHours() >= 12 ? 'PM' : 'AM') : '—';
       }
 
@@ -2729,6 +2751,10 @@
       $('clockNow').textContent = num(h) + ':' + num(pad(now.getMinutes())) + ':' + num(pad(now.getSeconds())) + ' ' + ap;
       const next = nextPrayerInfo();
       if (next && next.at) {
+        /* keep the hero next-prayer label Friday-aware on every tick,
+           so it switches to Jummah / জুম্মা without a reload */
+        const nn = $('nextName');
+        if (nn) nn.textContent = prayerDisplayName(next.name, next.at) + (next.tomorrow ? ' (' + L().tomorrow + ')' : '');
         let diff = Math.max(0, Math.floor((next.at - now) / 1000));
         const hh = Math.floor(diff / 3600), mm = Math.floor((diff % 3600) / 60), ss = diff % 60;
         $('countdown').textContent = num(pad(hh)) + ':' + num(pad(mm)) + ':' + num(pad(ss));
@@ -2771,7 +2797,7 @@
 
     /* ---------------- monthly table ---------------- */
     function renderMonthHead() {
-      const cols = [L().thDate, L().thHijri].concat(PRAYERS.map((p) => PRAYER_NAMES[state.lang][p]));
+      const cols = [L().thDate, L().thHijri].concat(PRAYERS.map((p) => prayerDisplayName(p)));
       $('monthHead').innerHTML = cols.map((c) => '<th>' + c + '</th>').join('');
     }
     function renderMonthTitle() {
