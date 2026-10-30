@@ -53,11 +53,20 @@ input,select{font-family:inherit}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 @media (max-width:520px){.frow{grid-template-columns:1fr}}
 .money{position:relative}
-.money:before{content:"\u09f3";position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:16px;pointer-events:none}
+.money:before{content:"৳";position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#0f766e;font-size:17px;font-weight:800;pointer-events:none}
 .money input{padding-left:32px}
 input[type=number]{-moz-appearance:textfield;appearance:textfield}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.result{position:sticky;bottom:10px;background:linear-gradient(135deg,#0b5c4d,#0f766e);border-radius:18px;color:#fff;padding:18px;box-shadow:0 10px 28px rgba(11,92,77,.35);margin-top:16px}
+.result{background:linear-gradient(135deg,#0b5c4d,#0f766e);border-radius:18px;color:#fff;padding:18px;box-shadow:0 10px 28px rgba(11,92,77,.35);width:100%;max-width:520px;position:relative;max-height:88vh;overflow-y:auto}
+.overlay{position:fixed;inset:0;background:rgba(6,40,32,.58);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px;z-index:200}
+.overlay[hidden]{display:none}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:none}}
+.overlay .result{animation:pop .28s ease both}
+.xbtn{position:absolute;top:10px;right:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);color:#fff;width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;line-height:1}
+.rtitle{font-size:16px;font-weight:800;color:#f3d27a;margin:0 26px 10px 0}
+.closebtn{display:block;width:100%;margin-top:14px;background:#fff;color:#0b5c4d;border:0;font-weight:800;font-size:15px;padding:12px;border-radius:12px;cursor:pointer}
+.calcbtn{display:block;width:100%;margin-top:16px;background:linear-gradient(135deg,#d4af37,#c9a227);color:#fff;font-weight:800;font-size:17px;padding:15px;border:0;border-radius:14px;cursor:pointer;box-shadow:0 6px 18px rgba(201,162,39,.4)}
+.calcbtn:active{transform:scale(.985)}
 .result .rrow{display:flex;justify-content:space-between;gap:10px;font-size:14.5px;padding:3px 0;opacity:.97}
 .result .rrow b{font-weight:700;white-space:nowrap}
 .result .rrow.dim{opacity:.82;font-size:13.5px}
@@ -91,7 +100,7 @@ details.note p{font-size:14px}
 <header class="banner"><h1>যাকাত ক্যালকুলেটর</h1><div class="gold"></div><p>আপনার সম্পদের যাকাতের হিসাব করুন সহজে — নিসাব যাচাইসহ</p></header>
 <main>
 <section class="card fade">
-<p>নিচের ঘরগুলোতে আপনার যাকাতযোগ্য সম্পদের পরিমাণ লিখুন — হিসাব সাথে সাথে নিচের সবুজ বাক্সে আপডেট হবে। শুধু যেসব সম্পদ আপনার ক্ষেত্রে প্রযোজ্য, সেগুলোর ঘর পূরণ করুন; বাকিগুলো ফাঁকা রাখুন। হিসাবটি করা হয়েছে এই শর্তে যে সম্পদটি আপনার কাছে এক চান্দ্র বছর (হাওল) অতিক্রম করেছে।</p>
+<p>নিচের ঘরগুলোতে আপনার যাকাতযোগ্য সম্পদের পরিমাণ লিখুন — সব লেখা শেষে নিচের "হিসাব করুন" বোতামে চাপ দিলে ফলাফল সামনে পপ-আপ হয়ে আসবে। শুধু যেসব সম্পদ আপনার ক্ষেত্রে প্রযোজ্য, সেগুলোর ঘর পূরণ করুন; বাকিগুলো ফাঁকা রাখুন। হিসাবটি করা হয়েছে এই শর্তে যে সম্পদটি আপনার কাছে এক চান্দ্র বছর (হাওল) অতিক্রম করেছে।</p>
 <div class="sect">আজকের ধাতুর দাম (নিসাব হিসাবের জন্য)</div>
 <div class="frow">
 <div class="field"><label for="gprice">স্বর্ণের দাম — প্রতি গ্রাম (টাকা)</label><input type="number" id="gprice" inputmode="decimal" min="0" value="12000"><p class="hint">এটি একটি উদাহরণমূলক ডিফল্ট মান — হিসাবের আগে আজকের বাজারের দাম দিয়ে বদলে নিন।</p></div>
@@ -119,7 +128,8 @@ details.note p{font-size:14px}
 <div class="frow">
 <div class="field"><label for="debt">ঋণ / দেনা (মোট সম্পদ থেকে বাদ যাবে)</label><div class="money"><input type="number" id="debt" inputmode="decimal" min="0" placeholder="০"></div><p class="hint">পরিশোধযোগ্য ঋণের পরিমাণ লিখুন — এটি মোট সম্পদ থেকে বিয়োগ হবে।</p></div>
 </div>
-<div class="result" id="result">
+<div class="overlay" id="zOverlay" hidden><div class="result" id="result">
+<button class="xbtn" id="xBtn" type="button" aria-label="বন্ধ করুন">✕</button><p class="rtitle">আপনার যাকাতের হিসাব</p>
 <div class="rrow dim"><span>মোট যাকাতযোগ্য সম্পদ</span><b id="rTotal">৳ ০</b></div>
 <div class="rrow dim"><span>বাদ: ঋণ / দেনা</span><b id="rDebt">৳ ০</b></div>
 <div class="rrow"><span>নিট সম্পদ</span><b id="rNet">৳ ০</b></div>
@@ -129,7 +139,9 @@ details.note p{font-size:14px}
 <span class="badge no" id="rBadge"></span>
 <div class="barwrap"><div class="bar" id="rBar"></div></div>
 <div class="barlab" id="rBarLab"></div>
-</div>
+<button class="closebtn" id="closeBtn" type="button">বন্ধ করুন</button>
+</div></div>
+<button class="calcbtn" id="calcBtn" type="button">হিসাব করুন</button>
 <button class="resetbtn" id="reset" type="button">সব মুছে আবার শুরু করুন</button>
 </section>
 <section class="card">
@@ -188,6 +200,15 @@ document.getElementById('reset').addEventListener('click',function(){
   ['cash','bank','goldG','goldV','silvG','silvV','trade','other','debt'].forEach(function(id){document.getElementById(id).value='';});
   calc();
 });
+var ov=document.getElementById('zOverlay');
+function showRes(){calc();ov.hidden=false;document.body.style.overflow='hidden';}
+function hideRes(){ov.hidden=true;document.body.style.overflow='';}
+document.getElementById('calcBtn').addEventListener('click',showRes);
+document.getElementById('closeBtn').addEventListener('click',hideRes);
+document.getElementById('xBtn').addEventListener('click',hideRes);
+ov.addEventListener('click',function(e){if(e.target===ov)hideRes();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)hideRes();});
+IDS.forEach(function(id){document.getElementById(id).addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();showRes();}});});
 calc();
 </script>
 
