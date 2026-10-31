@@ -77,7 +77,7 @@ main{max-width:780px;margin:0 auto;padding:18px 13px 36px}
 .ghostbtn{display:inline-block;text-align:center;background:#fff;color:var(--em);border:1.5px solid #bfe3d8;font-weight:700;font-size:15px;padding:10px 18px;border-radius:12px;text-decoration:none}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 @media (max-width:580px){.grid{grid-template-columns:1fr}.banner h1{font-size:26px}.cdunit .n{font-size:24px}}
-.tcard{display:block;background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px 16px 14px;text-decoration:none;color:var(--ink);box-shadow:0 3px 12px rgba(11,92,77,.07);transition:transform .22s ease,box-shadow .22s ease;animation:rise .55s ease both}
+.tcard{display:block;background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px 16px 14px;text-decoration:none;color:var(--ink);box-shadow:0 3px 12px rgba(11,92,77,.07);transition:transform .22s ease,box-shadow .22s ease}
 .tcard:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(11,92,77,.14)}
 .tcard h2,.tcard h3{font-size:17.5px;margin:0 0 4px;color:var(--em);line-height:1.4}
 .tcard p{font-size:13.5px;color:#4b5563;margin:0 0 10px}
@@ -93,7 +93,23 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
 .dir a.cur{background:var(--em);color:#fff;border-color:var(--em);font-weight:700}
 .foot{color:var(--mut);font-size:12.5px;margin-top:18px;text-align:center}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+/* ---------- scroll reveal (below-the-fold home content) ----------
+         Hidden state exists ONLY under html.sr-on, a class the reveal
+         script adds itself — with JS off or on any script error every
+         element is simply visible, exactly as without this feature. */
+      html.sr-on .sr{
+        opacity:0; transform:translateY(52px) scale(.97);
+        transition:opacity .9s ease-out, transform .9s cubic-bezier(.22,.61,.36,1);
+        transition-delay:var(--sr-delay,0s);
+      }
+      html.sr-on .sr.sr-in{opacity:1; transform:none}
+      .card.sr{animation:none}
+      @media (prefers-reduced-motion: reduce){
+        html.sr-on .sr{opacity:1 !important; transform:none !important; transition:none !important}
+      }
+
+      /* print: monthly timetable only */
+    </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
 <script>
@@ -109,19 +125,51 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
 <div class="orn">◆</div>
 <div><span class="chip">মোট ৮টি বিশেষ দিন</span></div></header>
 <main>
-<div class="grid"><a class="tcard" style="animation-delay:0.00s" href="shobe-meraj.html"><h3>শবে মেরাজ</h3>
-<p>২৭ রজব ১৪৪৮ হিজরি</p><span class="datechip2">৫ জানুয়ারি ২০২৭</span><span class="cnt" data-cd="2027-01-05T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard" style="animation-delay:0.06s" href="shobe-barat.html"><h3>শবে বরাত</h3>
-<p>১৫ শাবান ১৪৪৮ হিজরি</p><span class="datechip2">২৩ জানুয়ারি ২০২৭</span><span class="cnt" data-cd="2027-01-23T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard" style="animation-delay:0.12s" href="ramadan-shuru.html"><h3>রমজান</h3>
-<p>১ রমজান ১৪৪৮ হিজরি</p><span class="datechip2">৮ ফেব্রুয়ারি ২০২৭</span><span class="cnt" data-cd="2027-02-08T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard" style="animation-delay:0.18s" href="shobe-kadr.html"><h3>শবে কদর</h3>
-<p>২৭ রমজান ১৪৪৮ হিজরি</p><span class="datechip2">৬ মার্চ ২০২৭</span><span class="cnt" data-cd="2027-03-06T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard" style="animation-delay:0.24s" href="eid-ul-fitr.html"><h3>ঈদুল ফিতর</h3>
-<p>১ শাওয়াল ১৪৪৮ হিজরি</p><span class="datechip2">৯ মার্চ ২০২৭</span><span class="cnt" data-cd="2027-03-09T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard" style="animation-delay:0.30s" href="eid-ul-azha.html"><h3>ঈদুল আজহা</h3>
-<p>১০ জিলহজ ১৪৪৮ হিজরি</p><span class="datechip2">১৬ মে ২০২৭</span><span class="cnt" data-cd="2027-05-16T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard" style="animation-delay:0.36s" href="ashura.html"><h3>আশুরা</h3>
-<p>১০ মহররম ১৪৪৯ হিজরি</p><span class="datechip2">১৫ জুন ২০২৭</span><span class="cnt" data-cd="2027-06-15T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard" style="animation-delay:0.42s" href="eid-e-miladunnabi.html"><h3>ঈদে মিলাদুন্নবী</h3>
+<div class="grid"><a class="tcard sr" style="--sr-delay:0s" href="shobe-meraj.html"><h3>শবে মেরাজ</h3>
+<p>২৭ রজব ১৪৪৮ হিজরি</p><span class="datechip2">৫ জানুয়ারি ২০২৭</span><span class="cnt" data-cd="2027-01-05T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard sr" style="--sr-delay:.09s" href="shobe-barat.html"><h3>শবে বরাত</h3>
+<p>১৫ শাবান ১৪৪৮ হিজরি</p><span class="datechip2">২৩ জানুয়ারি ২০২৭</span><span class="cnt" data-cd="2027-01-23T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard sr" style="--sr-delay:.18s" href="ramadan-shuru.html"><h3>রমজান</h3>
+<p>১ রমজান ১৪৪৮ হিজরি</p><span class="datechip2">৮ ফেব্রুয়ারি ২০২৭</span><span class="cnt" data-cd="2027-02-08T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard sr" style="--sr-delay:.27s" href="shobe-kadr.html"><h3>শবে কদর</h3>
+<p>২৭ রমজান ১৪৪৮ হিজরি</p><span class="datechip2">৬ মার্চ ২০২৭</span><span class="cnt" data-cd="2027-03-06T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard sr" style="--sr-delay:.36s" href="eid-ul-fitr.html"><h3>ঈদুল ফিতর</h3>
+<p>১ শাওয়াল ১৪৪৮ হিজরি</p><span class="datechip2">৯ মার্চ ২০২৭</span><span class="cnt" data-cd="2027-03-09T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard sr" style="--sr-delay:.45s" href="eid-ul-azha.html"><h3>ঈদুল আজহা</h3>
+<p>১০ জিলহজ ১৪৪৮ হিজরি</p><span class="datechip2">১৬ মে ২০২৭</span><span class="cnt" data-cd="2027-05-16T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard sr" style="--sr-delay:.54s" href="ashura.html"><h3>আশুরা</h3>
+<p>১০ মহররম ১৪৪৯ হিজরি</p><span class="datechip2">১৫ জুন ২০২৭</span><span class="cnt" data-cd="2027-06-15T00:00:00+06:00">হিসাব চলছে…</span></a><a class="tcard sr" style="--sr-delay:.63s" href="eid-e-miladunnabi.html"><h3>ঈদে মিলাদুন্নবী</h3>
 <p>১২ রবিউল আউয়াল ১৪৪৯ হিজরি</p><span class="datechip2">১৪ আগস্ট ২০২৭</span><span class="cnt" data-cd="2027-08-14T00:00:00+06:00">হিসাব চলছে…</span></a></div>
-<section class="card" style="margin-top:15px"><h2>তারিখ সম্পর্কে জরুরি নোট</h2>
+<section class="card sr" style="margin-top:15px;--sr-delay:.72s"><h2>তারিখ সম্পর্কে জরুরি নোট</h2>
 <p>এই পেজের সব ইংরেজি (গ্রেগরিয়ান) তারিখ হিজরি ক্যালেন্ডারের হিসাব অনুযায়ী <b>আনুমানিক</b>। ইসলামি মাস চাঁদ দেখার মাধ্যমে শুরু হয়, তাই প্রকৃত তারিখ একদিন এদিক-সেদিক হতে পারে। চূড়ান্ত তারিখের জন্য জাতীয় চাঁদ দেখা কমিটির ঘোষণা অনুসরণ করুন।</p></section>
-<div class="waqt-share"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%20%E2%80%94%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AE%E0%A7%87%E0%A6%B0%E0%A6%BE%E0%A6%9C%2C%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AC%E0%A6%B0%E0%A6%BE%E0%A6%A4%2C%20%E0%A6%88%E0%A6%A6%2C%20%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%B0%E0%A6%BE%20%E0%A6%95%E0%A6%AC%E0%A7%87%3F%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/bishesh-din.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fbishesh-din.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fbishesh-din.html&text=%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%20%E2%80%94%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AE%E0%A7%87%E0%A6%B0%E0%A6%BE%E0%A6%9C%2C%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AC%E0%A6%B0%E0%A6%BE%E0%A6%A4%2C%20%E0%A6%88%E0%A6%A6%2C%20%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%B0%E0%A6%BE%20%E0%A6%95%E0%A6%AC%E0%A7%87%3F%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fbishesh-din.html&text=%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%20%E2%80%94%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AE%E0%A7%87%E0%A6%B0%E0%A6%BE%E0%A6%9C%2C%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AC%E0%A6%B0%E0%A6%BE%E0%A6%A4%2C%20%E0%A6%88%E0%A6%A6%2C%20%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%B0%E0%A6%BE%20%E0%A6%95%E0%A6%AC%E0%A7%87%3F%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/bishesh-din.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div></main><footer><h3>আরও দেখুন</h3><div class="dir"><a href="bishesh-din.html" class="cur">সব বিশেষ দিন</a><a href="shobe-meraj.html">শবে মেরাজ</a><a href="shobe-barat.html">শবে বরাত</a><a href="ramadan-shuru.html">রমজান</a><a href="shobe-kadr.html">শবে কদর</a><a href="eid-ul-fitr.html">ঈদুল ফিতর</a><a href="eid-ul-azha.html">ঈদুল আজহা</a><a href="ashura.html">আশুরা</a><a href="eid-e-miladunnabi.html">ঈদে মিলাদুন্নবী</a><a href="dua.html">দোয়া সংকলন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">জেলা ও উপজেলা</a><a href="index.html">Waqt হোম</a></div>
-<p class="foot">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer></body></html>
+<div class="waqt-share sr" style="--sr-delay:.72s"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%20%E2%80%94%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AE%E0%A7%87%E0%A6%B0%E0%A6%BE%E0%A6%9C%2C%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AC%E0%A6%B0%E0%A6%BE%E0%A6%A4%2C%20%E0%A6%88%E0%A6%A6%2C%20%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%B0%E0%A6%BE%20%E0%A6%95%E0%A6%AC%E0%A7%87%3F%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/bishesh-din.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fbishesh-din.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fbishesh-din.html&text=%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%20%E2%80%94%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AE%E0%A7%87%E0%A6%B0%E0%A6%BE%E0%A6%9C%2C%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AC%E0%A6%B0%E0%A6%BE%E0%A6%A4%2C%20%E0%A6%88%E0%A6%A6%2C%20%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%B0%E0%A6%BE%20%E0%A6%95%E0%A6%AC%E0%A7%87%3F%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fbishesh-din.html&text=%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%20%E2%80%94%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AE%E0%A7%87%E0%A6%B0%E0%A6%BE%E0%A6%9C%2C%20%E0%A6%B6%E0%A6%AC%E0%A7%87%20%E0%A6%AC%E0%A6%B0%E0%A6%BE%E0%A6%A4%2C%20%E0%A6%88%E0%A6%A6%2C%20%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%B0%E0%A6%BE%20%E0%A6%95%E0%A6%AC%E0%A7%87%3F%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/bishesh-din.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div></main><footer class="sr" style="--sr-delay:.72s"><h3>আরও দেখুন</h3><div class="dir"><a href="bishesh-din.html" class="cur">সব বিশেষ দিন</a><a href="shobe-meraj.html">শবে মেরাজ</a><a href="shobe-barat.html">শবে বরাত</a><a href="ramadan-shuru.html">রমজান</a><a href="shobe-kadr.html">শবে কদর</a><a href="eid-ul-fitr.html">ঈদুল ফিতর</a><a href="eid-ul-azha.html">ঈদুল আজহা</a><a href="ashura.html">আশুরা</a><a href="eid-e-miladunnabi.html">ঈদে মিলাদুন্নবী</a><a href="dua.html">দোয়া সংকলন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">জেলা ও উপজেলা</a><a href="index.html">Waqt হোম</a></div>
+<p class="foot">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer><!-- Scroll reveal: below-the-fold home sections rise in as they enter
+         the viewport. Runs in its own script so a failure anywhere else can
+         never hide content; the hidden state is gated behind the sr-on
+         class this script adds to <html> itself, and any error removes it. -->
+    <script>
+    (function () {
+      var root = document.documentElement;
+      function revealAll() {
+        root.classList.remove('sr-on');
+        var els = document.querySelectorAll('.sr');
+        for (var i = 0; i < els.length; i++) els[i].classList.add('sr-in');
+      }
+      try {
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var targets = document.querySelectorAll('.sr');
+        if (!targets.length) return;
+        root.classList.add('sr-on');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('sr-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+        targets.forEach(function (el) { io.observe(el); });
+      } catch (err) {
+        revealAll();
+      }
+    })();
+    </script>
+</body></html>
 <script>
 (function(){
   var D='০১২৩৪৫৬৭৮৯';

@@ -93,7 +93,22 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
 .dir a.cur{background:var(--em);color:#fff;border-color:var(--em);font-weight:700}
 .foot{color:var(--mut);font-size:12.5px;margin-top:18px;text-align:center}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+/* ---------- scroll reveal (below-the-fold home content) ----------
+         Hidden state exists ONLY under html.sr-on, a class the reveal
+         script adds itself — with JS off or on any script error every
+         element is simply visible, exactly as without this feature. */
+      html.sr-on .sr{
+        opacity:0; transform:translateY(52px) scale(.97);
+        transition:opacity .9s ease-out, transform .9s cubic-bezier(.22,.61,.36,1);
+        transition-delay:var(--sr-delay,0s);
+      }
+      html.sr-on .sr.sr-in{opacity:1; transform:none}
+      @media (prefers-reduced-motion: reduce){
+        html.sr-on .sr{opacity:1 !important; transform:none !important; transition:none !important}
+      }
+
+      /* print: monthly timetable only */
+    </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
 <script>
@@ -106,10 +121,42 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
 <div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a></div><header class="banner"><h1>দুশ্চিন্তা থেকে আশ্রয়ের দোয়া</h1>
 <p class="sub">Protection from anxiety · বিপদ ও দুশ্চিন্তা</p>
 <div class="orn">◆</div></header><main><section class="duacard"><div class="lab">আরবি দোয়া</div>
-<p class="ar">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ</p></section><section class="card"><h2>উচ্চারণ ও অর্থ</h2>
+<p class="ar">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ</p></section><section class="card sr" style="--sr-delay:0s"><h2>উচ্চারণ ও অর্থ</h2>
 <div class="kv"><div class="k">বাংলা উচ্চারণ</div><div class="v">আল্লাহুম্মা ইন্নী আ'ঊযু বিকা মিনাল হাম্মি ওয়াল হাযানি, ওয়াল 'আজযি ওয়াল কাসালি, ওয়াল বুখলি ওয়াল জুবনি, ওয়া দালা'ইদ দাইনি ওয়া গালাবাতির রিজাল</div></div>
 <div class="kv"><div class="k">বাংলা অর্থ</div><div class="v">হে আল্লাহ, আমি তোমার কাছে আশ্রয় চাই দুশ্চিন্তা ও দুঃখ থেকে, অক্ষমতা ও অলসতা থেকে, কৃপণতা ও ভীরুতা থেকে, ঋণের বোঝা ও মানুষের দাপট থেকে।</div></div>
 <div class="kv"><div class="k">English</div><div class="v en">O Allah, I seek refuge in You from anxiety and grief, from inability and laziness, from miserliness and cowardice, from the burden of debt and from being overpowered by men.</div></div>
-<p class="src"><b>সূত্র:</b> সহীহ বুখারী ৬৩৬৯ <span>(Sahih al-Bukhari 6369)</span></p></section><section class="card"><h2>আরও দোয়া পড়ুন</h2><div class="dir"><a href="halal-riziker-dua.html">হালাল রিজিকের দোয়া</a><a href="musa-er-dua.html">মূসা (আ.)-এর দোয়া</a><a href="shifar-dua.html">শিফার দোয়া</a></div>
-<div class="btnrow" style="margin-top:13px"><a class="mainbtn" href="dua.html">সব দোয়ার তালিকা</a></div></section><div class="waqt-share"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%A6%E0%A7%81%E0%A6%B6%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%BE%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%86%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E2%80%94%20%E0%A6%86%E0%A6%B0%E0%A6%AC%E0%A6%BF%2C%20%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A6%A3%20%E0%A6%93%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/duschinta-theke-ashroyer-dua.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fduschinta-theke-ashroyer-dua.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fduschinta-theke-ashroyer-dua.html&text=%E0%A6%A6%E0%A7%81%E0%A6%B6%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%BE%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%86%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E2%80%94%20%E0%A6%86%E0%A6%B0%E0%A6%AC%E0%A6%BF%2C%20%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A6%A3%20%E0%A6%93%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fduschinta-theke-ashroyer-dua.html&text=%E0%A6%A6%E0%A7%81%E0%A6%B6%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%BE%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%86%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E2%80%94%20%E0%A6%86%E0%A6%B0%E0%A6%AC%E0%A6%BF%2C%20%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A6%A3%20%E0%A6%93%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/duschinta-theke-ashroyer-dua.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div></main><footer><h3>আরও দেখুন</h3><div class="dir"><a href="dua.html" class="cur">সব দোয়া</a><a href="bishesh-din.html">বিশেষ ইসলামি দিন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">জেলা ও উপজেলা</a><a href="index.html">Waqt হোম</a></div>
-<p class="foot">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer></body></html>
+<p class="src"><b>সূত্র:</b> সহীহ বুখারী ৬৩৬৯ <span>(Sahih al-Bukhari 6369)</span></p></section><section class="card sr" style="--sr-delay:.09s"><h2>আরও দোয়া পড়ুন</h2><div class="dir"><a href="halal-riziker-dua.html">হালাল রিজিকের দোয়া</a><a href="musa-er-dua.html">মূসা (আ.)-এর দোয়া</a><a href="shifar-dua.html">শিফার দোয়া</a></div>
+<div class="btnrow" style="margin-top:13px"><a class="mainbtn" href="dua.html">সব দোয়ার তালিকা</a></div></section><div class="waqt-share sr" style="--sr-delay:.18s"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%A6%E0%A7%81%E0%A6%B6%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%BE%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%86%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E2%80%94%20%E0%A6%86%E0%A6%B0%E0%A6%AC%E0%A6%BF%2C%20%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A6%A3%20%E0%A6%93%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/duschinta-theke-ashroyer-dua.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fduschinta-theke-ashroyer-dua.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fduschinta-theke-ashroyer-dua.html&text=%E0%A6%A6%E0%A7%81%E0%A6%B6%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%BE%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%86%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E2%80%94%20%E0%A6%86%E0%A6%B0%E0%A6%AC%E0%A6%BF%2C%20%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A6%A3%20%E0%A6%93%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fduschinta-theke-ashroyer-dua.html&text=%E0%A6%A6%E0%A7%81%E0%A6%B6%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%BE%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%86%E0%A6%B6%E0%A7%8D%E0%A6%B0%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%B0%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E2%80%94%20%E0%A6%86%E0%A6%B0%E0%A6%AC%E0%A6%BF%2C%20%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A6%A3%20%E0%A6%93%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/duschinta-theke-ashroyer-dua.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div></main><footer class="sr" style="--sr-delay:.27s"><h3>আরও দেখুন</h3><div class="dir"><a href="dua.html" class="cur">সব দোয়া</a><a href="bishesh-din.html">বিশেষ ইসলামি দিন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">জেলা ও উপজেলা</a><a href="index.html">Waqt হোম</a></div>
+<p class="foot">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer><!-- Scroll reveal: below-the-fold home sections rise in as they enter
+         the viewport. Runs in its own script so a failure anywhere else can
+         never hide content; the hidden state is gated behind the sr-on
+         class this script adds to <html> itself, and any error removes it. -->
+    <script>
+    (function () {
+      var root = document.documentElement;
+      function revealAll() {
+        root.classList.remove('sr-on');
+        var els = document.querySelectorAll('.sr');
+        for (var i = 0; i < els.length; i++) els[i].classList.add('sr-in');
+      }
+      try {
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var targets = document.querySelectorAll('.sr');
+        if (!targets.length) return;
+        root.classList.add('sr-on');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('sr-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+        targets.forEach(function (el) { io.observe(el); });
+      } catch (err) {
+        revealAll();
+      }
+    })();
+    </script>
+</body></html>

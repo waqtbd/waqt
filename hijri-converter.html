@@ -75,7 +75,22 @@ input,select{font-family:inherit}
 .btn:hover{filter:brightness(1.06)}
 .divider{display:flex;align-items:center;gap:10px;margin:4px 0 14px;color:#9ca3af;font-size:12.5px}
 .divider:before,.divider:after{content:"";flex:1;height:1px;background:#e5e7eb}
-</style>
+/* ---------- scroll reveal (below-the-fold home content) ----------
+         Hidden state exists ONLY under html.sr-on, a class the reveal
+         script adds itself — with JS off or on any script error every
+         element is simply visible, exactly as without this feature. */
+      html.sr-on .sr{
+        opacity:0; transform:translateY(52px) scale(.97);
+        transition:opacity .9s ease-out, transform .9s cubic-bezier(.22,.61,.36,1);
+        transition-delay:var(--sr-delay,0s);
+      }
+      html.sr-on .sr.sr-in{opacity:1; transform:none}
+      @media (prefers-reduced-motion: reduce){
+        html.sr-on .sr{opacity:1 !important; transform:none !important; transition:none !important}
+      }
+
+      /* print: monthly timetable only */
+    </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
 <script>
@@ -107,12 +122,12 @@ input,select{font-family:inherit}
 <button class="btn" id="btnH" type="button" onclick="convH()">ইংরেজি তারিখ দেখুন</button>
 <div class="resbox" id="resH"><div class="rl">ইংরেজি তারিখ</div><div class="rv" id="resHv"></div><div class="rs" id="resHs"></div></div>
 </section>
-<section class="card">
+<section class="card sr" style="--sr-delay:0s">
 <h2>মনে রাখুন</h2>
 <p>এই কনভার্টার গাণিতিক (সারণিভিত্তিক) হিজরি পঞ্জিকা অনুসরণ করে, তাই ফলাফল <b>আনুমানিক</b>। প্রকৃত হিজরি তারিখ চাঁদ দেখার উপর নির্ভরশীল — রমজান, ঈদসহ ধর্মীয় দিবসের ক্ষেত্রে স্থানীয় চাঁদ দেখা কমিটি ও ইসলামিক ফাউন্ডেশনের ঘোষণাই চূড়ান্ত। গাণিতিক হিসাবের সাথে বাস্তব তারিখে এক দিনের এদিক-ওদিক হতে পারে।</p>
 </section>
 </main>
-<div class="waqt-share"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/hijri-converter.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html&text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html&text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/hijri-converter.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div><footer>
+<div class="waqt-share sr" style="--sr-delay:.09s"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/hijri-converter.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html&text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html&text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/hijri-converter.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div><footer class="sr" style="--sr-delay:.18s">
 <h3>আরও দেখুন</h3>
 <div class="dir"><a href="index.html">নামাজের সময়</a><a href="hijri-converter.html">হিজরি কনভার্টার</a><a href="asmaul-husna.html">আল্লাহর ৯৯ নাম</a><a href="zakat-calculator.html">যাকাত ক্যালকুলেটর</a><a href="quran.html">কুরআন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">সব জেলা ও উপজেলা</a></div>
 <p class="fnote">Waqt (ওয়াক্ত) — নামাজের সময়, হিজরি তারিখ, কিবলা ও ইসলামি জ্ঞানের বাংলা ওয়েবসাইট</p>
@@ -171,5 +186,37 @@ gi.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault()
 document.getElementById('hy').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();convH();}});
 </script>
 
+<!-- Scroll reveal: below-the-fold home sections rise in as they enter
+         the viewport. Runs in its own script so a failure anywhere else can
+         never hide content; the hidden state is gated behind the sr-on
+         class this script adds to <html> itself, and any error removes it. -->
+    <script>
+    (function () {
+      var root = document.documentElement;
+      function revealAll() {
+        root.classList.remove('sr-on');
+        var els = document.querySelectorAll('.sr');
+        for (var i = 0; i < els.length; i++) els[i].classList.add('sr-in');
+      }
+      try {
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var targets = document.querySelectorAll('.sr');
+        if (!targets.length) return;
+        root.classList.add('sr-on');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('sr-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+        targets.forEach(function (el) { io.observe(el); });
+      } catch (err) {
+        revealAll();
+      }
+    })();
+    </script>
 </body>
 </html>
