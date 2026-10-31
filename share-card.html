@@ -47,7 +47,6 @@ main{max-width:780px;margin:0 auto;padding:18px 13px 36px}
 .card{background:rgba(255,255,255,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;padding:20px 18px 16px;box-shadow:0 3px 14px rgba(11,92,77,.08);margin-bottom:15px;animation:rise .55s ease both}
 .card h2{font-size:19px;margin:0 0 10px;color:var(--em);line-height:1.45;display:flex;align-items:center;gap:9px}
 .card h2:before{content:"";width:9px;height:9px;border-radius:2px;background:linear-gradient(135deg,var(--gold2),var(--gold));transform:rotate(45deg);flex:none;box-shadow:0 0 0 3px rgba(201,162,39,.15)}
-.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 2px}
 .mainbtn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;text-align:center;background:linear-gradient(135deg,#d4af37,var(--gold));color:#fff;font-weight:700;font-size:15px;padding:11px 22px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;box-shadow:0 3px 10px rgba(201,162,39,.35);transition:transform .15s ease,box-shadow .15s ease}
 .mainbtn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(201,162,39,.4)}
 .mainbtn:active{transform:translateY(0) scale(.98);box-shadow:0 2px 6px rgba(201,162,39,.3)}
@@ -64,13 +63,11 @@ button:focus-visible,a:focus-visible{outline:3px solid rgba(201,162,39,.6);outli
 .pvacts{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:14px}
 .ctl-lab{font-size:13px;font-weight:800;color:var(--em);letter-spacing:.4px;margin:16px 0 8px}
 .ctl-lab:first-of-type{margin-top:2px}
-.catchips,.itemchips{display:flex;gap:8px;flex-wrap:wrap}
-.itemchips{flex-wrap:nowrap;overflow-x:auto;padding:6px 2px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .pchip{flex:none;min-height:44px;font-family:inherit;font-size:14px;font-weight:600;line-height:1.35;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:10px 16px;cursor:pointer;transition:border-color .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease,transform .12s ease;max-width:270px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pchip:hover{border-color:var(--gold)}
 .pchip:active{transform:scale(.97)}
 .pchip.on{background:linear-gradient(135deg,var(--em2),var(--em));color:#fff;border-color:var(--em);box-shadow:0 4px 12px rgba(11,92,77,.28),0 0 0 2px rgba(243,210,122,.55)}
-.topicrow{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:6px 2px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.topicrow{display:flex;gap:8px;flex-wrap:wrap;padding:6px 2px 4px}
 .navrow{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px}
 .navbtn{width:56px;height:56px;min-width:56px;border-radius:50%;border:1.5px solid #bfe3d8;background:linear-gradient(135deg,var(--em2),var(--em));color:#fff;font-size:32px;font-weight:700;line-height:1;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(11,92,77,.30),0 0 0 2px rgba(243,210,122,.35);transition:transform .15s ease,box-shadow .15s ease}
 .navbtn:hover{transform:translateY(-1px);box-shadow:0 9px 20px rgba(11,92,77,.35),0 0 0 2px rgba(243,210,122,.55)}
@@ -133,13 +130,6 @@ main .card:nth-child(2){animation-delay:.07s}
 <h2>কার্ড সাজান</h2>
 <div class="ctl-lab">বিষয় বেছে নিন</div>
 <div class="topicrow" id="topicChips"></div>
-<div class="ctl-lab">বিভাগ</div>
-<div class="catchips" id="catChips"></div>
-<div class="ctl-lab">তালিকা থেকে বেছে নিন</div>
-<div class="itemchips" id="itemChips"></div>
-<div class="btnrow">
-<button type="button" class="ghostbtn" id="shuffleBtn">অন্য একটি দেখুন</button>
-</div>
 <div class="ctl-lab">ডিজাইন বেছে নিন</div>
 <div class="bggrid" id="bgGrid"></div>
 </section>
@@ -162,11 +152,10 @@ var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
 var loadnote=document.getElementById('loadnote');
 var items=(typeof window.CARD_ITEMS!=='undefined' && window.CARD_ITEMS) ? window.CARD_ITEMS : [];
 var bgs=(typeof window.CARD_BGS!=='undefined' && window.CARD_BGS) ? window.CARD_BGS : [];
-var state={cat:'all', topic:'all', item:0, bg:0};
+var state={topic:'all', item:0, bg:0};
 if(items.length){ state.item=Math.floor(Date.now()/86400000)%items.length; }
 var logoImg=new Image(); logoImg.src='logo.png';
 var bgImgs={};
-var TYPE_BN={ayat:'আয়াত', dua:'দোয়া', hadith:'হাদিস'};
 var BN_DIGITS='০১২৩৪৫৬৭৮৯';
 function bnNum(n){ return String(n).replace(/[0-9]/g, function(d){ return BN_DIGITS[+d]; }); }
 function topicOf(it){ return (it && typeof it.topic==='string' && it.topic) ? it.topic : null; }
@@ -345,29 +334,10 @@ function draw(){
 function filteredIdx(){
   var out=[];
   for(var i=0;i<items.length;i++){
-    if(state.cat!=='all' && items[i].type!==state.cat) continue;
     if(state.topic!=='all' && topicOf(items[i])!==state.topic) continue;
     out.push(i);
   }
   return out;
-}
-function chipLabel(it){
-  var w=it.bn.split(/\s+/);
-  return w.slice(0,6).join(' ') + (w.length>6 ? '…' : '');
-}
-function buildCats(){
-  var cats=[{k:'all',t:'সব'},{k:'ayat',t:'আয়াত'},{k:'dua',t:'দোয়া'}];
-  if(items.some(function(it){return it.type==='hadith';})) cats.push({k:'hadith',t:'হাদিস'});
-  var box=document.getElementById('catChips'); box.innerHTML='';
-  cats.forEach(function(c){
-    var b=document.createElement('button');
-    b.type='button'; b.className='pchip'+(state.cat===c.k?' on':''); b.textContent=c.t;
-    b.addEventListener('click', function(){
-      state.cat=c.k;
-      applyFilter();
-    });
-    box.appendChild(b);
-  });
 }
 function buildTopics(){
   var box=document.getElementById('topicChips');
@@ -385,12 +355,12 @@ function buildTopics(){
     box.appendChild(b);
   });
 }
-/* topic/type changed: keep the current item if it survives the new working
-   set, otherwise jump to the set's first item; refresh every control. */
+/* topic changed: the working set is topic-only now — jump to the set's
+   first item and refresh the controls. */
 function applyFilter(){
   var f=filteredIdx();
-  if(f.indexOf(state.item)<0 && f.length) state.item=f[0];
-  buildCats(); buildTopics(); buildItems(); updateShuffle(); updateNav(); draw();
+  if(f.length) state.item=f[0];
+  buildTopics(); updateNav(); draw();
 }
 function updateNav(){
   var f=filteredIdx(), pos=f.indexOf(state.item);
@@ -403,19 +373,7 @@ function step(d){
   var pos=f.indexOf(state.item);
   if(pos<0) pos=0;
   state.item=f[(pos+d+f.length)%f.length];
-  buildItems(); updateNav(); draw();
-}
-function buildItems(){
-  var box=document.getElementById('itemChips'); box.innerHTML='';
-  filteredIdx().forEach(function(idx){
-    var b=document.createElement('button');
-    b.type='button'; b.className='pchip'+(state.item===idx?' on':'');
-    b.textContent=chipLabel(items[idx]); b.title=items[idx].ref||'';
-    b.addEventListener('click', function(){ state.item=idx; buildItems(); updateNav(); draw(); });
-    box.appendChild(b);
-  });
-  var on=box.querySelector('.pchip.on');
-  if(on) box.scrollLeft=on.offsetLeft - box.clientWidth/2 + on.clientWidth/2;
+  updateNav(); draw();
 }
 function buildBgs(){
   var box=document.getElementById('bgGrid'); box.innerHTML='';
@@ -433,9 +391,6 @@ function buildBgs(){
     });
     box.appendChild(btn);
   });
-}
-function updateShuffle(){
-  document.getElementById('shuffleBtn').textContent='অন্য একটি দেখুন';
 }
 var toastTimer=null;
 function toast(msg){
@@ -470,12 +425,6 @@ document.getElementById('shBtn').addEventListener('click', function(){
     }, 'image/png');
   } else { fallback(); }
 });
-document.getElementById('shuffleBtn').addEventListener('click', function(){
-  var f=filteredIdx().filter(function(i){ return i!==state.item; });
-  if(!f.length) return;
-  state.item=f[Math.floor(Math.random()*f.length)];
-  buildItems(); updateShuffle(); updateNav(); draw();
-});
 document.getElementById('prevBtn').addEventListener('click', function(){ step(-1); });
 document.getElementById('nextBtn').addEventListener('click', function(){ step(1); });
 
@@ -483,7 +432,7 @@ document.getElementById('nextBtn').addEventListener('click', function(){ step(1)
 var started=false;
 function ready(){
   if(started) return; started=true;
-  buildCats(); buildTopics(); buildItems(); buildBgs(); updateShuffle(); updateNav();
+  buildTopics(); buildBgs(); updateNav();
   loadnote.style.display='none';
   draw();
 }
