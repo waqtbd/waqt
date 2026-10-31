@@ -147,7 +147,7 @@ var THEMES={
   light:{ar:'#0B4636', bn:'#17352C', ref:'#92600A', orn:'#A87F14', brand:'#0B4636', brandSub:'#92600A', shadow:false},
   dark:{ar:'#FFF9E8', bn:'#FFFFFF', ref:'#F3D27A', orn:'#F3D27A', brand:'#FFFFFF', brandSub:'#F3D27A', shadow:true}
 };
-var GAP=0.64, ORN_ZONE=26, GAP_ORN_BN=23, LIFT=28;
+var GAP_AR_ORN=23, ORN_ZONE=26, GAP_ORN_BN=23, LIFT=28;
 var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
 var loadnote=document.getElementById('loadnote');
 var items=(typeof window.CARD_ITEMS!=='undefined' && window.CARD_ITEMS) ? window.CARD_ITEMS : [];
@@ -216,7 +216,7 @@ function layout(item, box){
     ctx.font='600 '+bs+'px "Baloo Da 2"'; ctx.direction='ltr';
     var bnLines=wrapBn(item.bn, bw), blh=bs*1.42;
     var rs=Math.max(20, Math.round(36*s/104));
-    var total=arH + Math.floor(s*GAP) + ORN_ZONE + GAP_ORN_BN + bnLines.length*blh + 14 + rs*1.35;
+    var total=arH + GAP_AR_ORN + ORN_ZONE + GAP_ORN_BN + bnLines.length*blh + 14 + rs*1.35;
     best={s:s, lines:lines, spans:spans, lineGap:lineGap, arH:arH, bs:bs,
           bnLines:bnLines, blh:blh, rs:rs, total:total, fits:(total<=bh)};
     if(total<=bh) break;
@@ -264,7 +264,7 @@ function drawText(item, th, box, L){
     ctx.fillText(L.lines[i], CX, top+sp.asc);
     inkBottom=top+sp.asc+sp.desc;
   }
-  var oy=inkBottom + Math.floor(L.s*GAP) + ORN_ZONE/2;
+  var oy=inkBottom + GAP_AR_ORN + ORN_ZONE/2;
   setShadow(false);
   ctx.strokeStyle=th.orn; ctx.fillStyle=th.orn; ctx.lineWidth=3;
   ctx.beginPath();
