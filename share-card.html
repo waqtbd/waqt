@@ -85,6 +85,7 @@ button:focus-visible,a:focus-visible{outline:3px solid rgba(201,162,39,.6);outli
 #toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:#0b3d31;color:#fff;font-size:14px;font-weight:600;padding:11px 20px;border-radius:999px;border:1px solid rgba(243,210,122,.4);box-shadow:0 12px 30px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:99;max-width:92vw;text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 .loadnote{font-size:14.5px;color:var(--mut);text-align:center;padding:10px 0 2px}
+.bghint{font-size:12.5px;color:var(--mut);text-align:center;margin:8px 0 0}
 footer{max-width:780px;margin:0 auto;padding:0 13px 32px}
 footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
 .dir{display:flex;flex-wrap:wrap;gap:7px}
@@ -116,6 +117,7 @@ main .card:nth-child(2){animation-delay:.07s}
 <h2 style="justify-content:center">আপনার কার্ড</h2>
 <canvas id="cv" width="1080" height="1440" aria-label="শেয়ার কার্ডের প্রিভিউ"></canvas>
 <p class="loadnote" id="loadnote">কার্ড তৈরি হচ্ছে…</p>
+<p class="bghint">কার্ডের উপর দুইবার ট্যাপ করলেই design বদলে যাবে</p>
 <div class="navrow">
 <button type="button" class="navbtn" id="prevBtn" aria-label="আগেরটি">‹</button>
 <span class="navcounter" id="navCounter"></span>
@@ -370,6 +372,12 @@ function step(d){
   state.item=f[(pos+d+f.length)%f.length];
   updateNav(); draw();
 }
+function pickBg(i){
+  var b=bgs[i]; if(!b) return;
+  state.bg=i; buildBgs();
+  var im2=bgImgs[b.id];
+  if(im2) draw(); else loadImg(b.src).then(function(g){ bgImgs[b.id]=g; draw(); });
+}
 function buildBgs(){
   var box=document.getElementById('bgGrid'); box.innerHTML='';
   bgs.forEach(function(b, i){
@@ -379,11 +387,7 @@ function buildBgs(){
     var im=document.createElement('img'); im.src=b.src; im.alt=b.name||''; im.loading='lazy';
     var sp=document.createElement('span'); sp.textContent=b.name||'';
     btn.appendChild(im); btn.appendChild(sp);
-    btn.addEventListener('click', function(){
-      state.bg=i; buildBgs();
-      var im2=bgImgs[b.id];
-      if(im2) draw(); else loadImg(b.src).then(function(g){ bgImgs[b.id]=g; draw(); });
-    });
+    btn.addEventListener('click', function(){ pickBg(i); });
     box.appendChild(btn);
   });
 }
@@ -422,6 +426,17 @@ document.getElementById('shBtn').addEventListener('click', function(){
 });
 document.getElementById('prevBtn').addEventListener('click', function(){ step(-1); });
 document.getElementById('nextBtn').addEventListener('click', function(){ step(1); });
+
+/* double-click / double-tap on the preview cycles to the next design,
+   reusing pickBg so the thumbnails stay in sync */
+function nextBg(){ if(bgs.length) pickBg((state.bg+1)%bgs.length); }
+cv.addEventListener('dblclick', function(){ nextBg(); });
+var lastTap=0;
+cv.addEventListener('touchend', function(e){
+  var now=Date.now();
+  if(now-lastTap<=320){ lastTap=0; if(e.cancelable) e.preventDefault(); nextBg(); }
+  else lastTap=now;
+}, {passive:false});
 
 /* ---- init: wait for fonts + images before the first draw ---- */
 var started=false;
