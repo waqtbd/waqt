@@ -3768,6 +3768,7 @@
         navigator.serviceWorker.register('sw.js').catch(() => {});
       });
     }
+    (function(){ if(!('serviceWorker' in navigator)) return; var had = !!navigator.serviceWorker.controller; var done = false; navigator.serviceWorker.addEventListener('controllerchange', function(){ if(!had || done) return; done = true; location.reload(); }); })();
     /* If the served manifest.json is missing or is not a real web app
        manifest (some preview hosts answer that URL with other JSON),
        supply an equivalent manifest from a Blob: name and short_name

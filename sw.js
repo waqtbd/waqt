@@ -1,8 +1,10 @@
 // Waqt service worker — offline support for the Waqt prayer-times site.
-// Strategy: pages (HTML), JavaScript, mosque data JSON and share-card
-// background images are network-first so updates arrive promptly; other
-// static assets are cache-first. Bump CACHE_VERSION to force a refresh.
-var CACHE_VERSION = 'waqt-v3';
+// PERMANENT RULE: network-first for everything — every same-origin GET is
+// fetched fresh (with HTTP-cache revalidation forced), and the cache is an
+// offline fallback only. Nothing is ever served cache-first, so site
+// updates always reach users on their next visit. Bump CACHE_VERSION on
+// each service-worker change to force the old caches to be purged.
+var CACHE_VERSION = 'waqt-v4';
 var PRECACHE = ['./', './index.html', './logo.png', './icon-192.png', './manifest.json'];
 
 self.addEventListener('install', function (event) {
@@ -32,39 +34,18 @@ self.addEventListener('fetch', function (event) {
   var url = new URL(request.url);
   if (url.origin !== self.location.origin) return; // let fonts/APIs go to network
 
-  var isPage = request.mode === 'navigate' || (request.headers.get('accept') || '').indexOf('text/html') !== -1;
-  var path = url.pathname;
-  var fileName = path.slice(path.lastIndexOf('/') + 1);
-  // Data-like files must never be pinned to a first-visit copy: all JS
-  // (e.g. card-data.js), mosque data JSON and share-card backgrounds are
-  // network-first just like pages. (Under the old cache-first rule these
-  // kept phones stuck on first-visit share-card data forever.)
-  var networkFirst = isPage
-    || path.endsWith('.js')
-    || (path.indexOf('/mosques/') !== -1 && path.endsWith('.json'))
-    || fileName.indexOf('card-bg') === 0;
-  if (networkFirst) {
-    // Network-first: fresh content wins, cache is the offline fallback.
-    event.respondWith(
-      fetch(request).then(function (response) {
-        var copy = response.clone();
-        caches.open(CACHE_VERSION).then(function (cache) { cache.put(request, copy); });
-        return response;
-      }).catch(function () {
-        return caches.match(request, { ignoreSearch: true });
-      })
-    );
-  } else {
-    // Cache-first for static assets (logo, manifest, etc.).
-    event.respondWith(
-      caches.match(request, { ignoreSearch: true }).then(function (cached) {
-        if (cached) return cached;
-        return fetch(request).then(function (response) {
-          var copy = response.clone();
-          caches.open(CACHE_VERSION).then(function (cache) { cache.put(request, copy); });
-          return response;
-        });
-      })
-    );
-  }
+  // Network-first for EVERY same-origin GET — pages, scripts, data and
+  // images alike. {cache: 'no-cache'} forces revalidation so the HTTP
+  // cache on GitHub Pages cannot serve a stale copy either. The service
+  // worker cache is written on success and read only when the network
+  // fails (offline fallback).
+  event.respondWith(
+    fetch(request, { cache: 'no-cache' }).then(function (response) {
+      var copy = response.clone();
+      caches.open(CACHE_VERSION).then(function (cache) { cache.put(request, copy); });
+      return response;
+    }).catch(function () {
+      return caches.match(request, { ignoreSearch: true });
+    })
+  );
 });

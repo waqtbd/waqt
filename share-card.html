@@ -451,5 +451,11 @@ if(!items.length || !bgs.length){
 }
 })();
 </script>
+<script>
+/* When a new service worker takes control, reload once so this open page
+   shows the new version in the same visit. The 'had' guard prevents a
+   reload loop on the very first install (no previous controller). */
+(function(){ if(!('serviceWorker' in navigator)) return; var had = !!navigator.serviceWorker.controller; var done = false; navigator.serviceWorker.addEventListener('controllerchange', function(){ if(!had || done) return; done = true; location.reload(); }); })();
+</script>
 </body>
 </html>
