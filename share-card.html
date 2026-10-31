@@ -70,6 +70,12 @@ button:focus-visible,a:focus-visible{outline:3px solid rgba(201,162,39,.6);outli
 .pchip:hover{border-color:var(--gold)}
 .pchip:active{transform:scale(.97)}
 .pchip.on{background:linear-gradient(135deg,var(--em2),var(--em));color:#fff;border-color:var(--em);box-shadow:0 4px 12px rgba(11,92,77,.28),0 0 0 2px rgba(243,210,122,.55)}
+.topicrow{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:6px 2px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.navrow{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px}
+.navbtn{width:56px;height:56px;min-width:56px;border-radius:50%;border:1.5px solid #bfe3d8;background:linear-gradient(135deg,var(--em2),var(--em));color:#fff;font-size:32px;font-weight:700;line-height:1;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(11,92,77,.30),0 0 0 2px rgba(243,210,122,.35);transition:transform .15s ease,box-shadow .15s ease}
+.navbtn:hover{transform:translateY(-1px);box-shadow:0 9px 20px rgba(11,92,77,.35),0 0 0 2px rgba(243,210,122,.55)}
+.navbtn:active{transform:scale(.96)}
+.navcounter{font-size:16px;font-weight:800;color:var(--em);min-width:64px;text-align:center;letter-spacing:.5px}
 .bggrid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
 @media (max-width:580px){.bggrid{grid-template-columns:repeat(2,1fr)}.banner h1{font-size:26px}}
 .bgcell{cursor:pointer;text-align:center;background:none;border:0;padding:0;font-family:inherit}
@@ -113,6 +119,11 @@ main .card:nth-child(2){animation-delay:.07s}
 <h2 style="justify-content:center">আপনার কার্ড</h2>
 <canvas id="cv" width="1080" height="1440" aria-label="শেয়ার কার্ডের প্রিভিউ"></canvas>
 <p class="loadnote" id="loadnote">কার্ড তৈরি হচ্ছে…</p>
+<div class="navrow">
+<button type="button" class="navbtn" id="prevBtn" aria-label="আগেরটি">‹</button>
+<span class="navcounter" id="navCounter"></span>
+<button type="button" class="navbtn" id="nextBtn" aria-label="পরেরটি">›</button>
+</div>
 <div class="pvacts">
 <button type="button" class="mainbtn" id="dlBtn">ডাউনলোড করুন</button>
 <button type="button" class="ghostbtn" id="shBtn">শেয়ার করুন</button>
@@ -120,6 +131,8 @@ main .card:nth-child(2){animation-delay:.07s}
 </section>
 <section class="card">
 <h2>কার্ড সাজান</h2>
+<div class="ctl-lab">বিষয় বেছে নিন</div>
+<div class="topicrow" id="topicChips"></div>
 <div class="ctl-lab">বিভাগ</div>
 <div class="catchips" id="catChips"></div>
 <div class="ctl-lab">তালিকা থেকে বেছে নিন</div>
@@ -149,11 +162,19 @@ var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
 var loadnote=document.getElementById('loadnote');
 var items=(typeof window.CARD_ITEMS!=='undefined' && window.CARD_ITEMS) ? window.CARD_ITEMS : [];
 var bgs=(typeof window.CARD_BGS!=='undefined' && window.CARD_BGS) ? window.CARD_BGS : [];
-var state={cat:'all', item:0, bg:0};
+var state={cat:'all', topic:'all', item:0, bg:0};
 if(items.length){ state.item=Math.floor(Date.now()/86400000)%items.length; }
 var logoImg=new Image(); logoImg.src='logo.png';
 var bgImgs={};
 var TYPE_BN={ayat:'আয়াত', dua:'দোয়া', hadith:'হাদিস'};
+var BN_DIGITS='০১২৩৪৫৬৭৮৯';
+function bnNum(n){ return String(n).replace(/[0-9]/g, function(d){ return BN_DIGITS[+d]; }); }
+function topicOf(it){ return (it && typeof it.topic==='string' && it.topic) ? it.topic : null; }
+function topicsList(){
+  var out=[];
+  items.forEach(function(it){ var t=topicOf(it); if(t && out.indexOf(t)<0) out.push(t); });
+  return out;
+}
 
 function loadImg(src){return new Promise(function(res){var im=new Image();im.onload=function(){res(im);};im.onerror=function(){res(null);};im.src=src;});}
 function setShadow(on){
@@ -323,7 +344,11 @@ function draw(){
 /* ---- UI ---- */
 function filteredIdx(){
   var out=[];
-  for(var i=0;i<items.length;i++) if(state.cat==='all' || items[i].type===state.cat) out.push(i);
+  for(var i=0;i<items.length;i++){
+    if(state.cat!=='all' && items[i].type!==state.cat) continue;
+    if(state.topic!=='all' && topicOf(items[i])!==state.topic) continue;
+    out.push(i);
+  }
   return out;
 }
 function chipLabel(it){
@@ -339,12 +364,46 @@ function buildCats(){
     b.type='button'; b.className='pchip'+(state.cat===c.k?' on':''); b.textContent=c.t;
     b.addEventListener('click', function(){
       state.cat=c.k;
-      var f=filteredIdx();
-      if(f.indexOf(state.item)<0 && f.length) state.item=f[0];
-      buildCats(); buildItems(); updateShuffle(); draw();
+      applyFilter();
     });
     box.appendChild(b);
   });
+}
+function buildTopics(){
+  var box=document.getElementById('topicChips');
+  if(state.topic!=='all' && topicsList().indexOf(state.topic)<0) state.topic='all';
+  box.innerHTML='';
+  var defs=[{k:'all', t:'সব বিষয়'}];
+  topicsList().forEach(function(t){ defs.push({k:t, t:t}); });
+  defs.forEach(function(d){
+    var b=document.createElement('button');
+    b.type='button'; b.className='pchip'+(state.topic===d.k?' on':''); b.textContent=d.t;
+    b.addEventListener('click', function(){
+      state.topic=d.k;
+      applyFilter();
+    });
+    box.appendChild(b);
+  });
+}
+/* topic/type changed: keep the current item if it survives the new working
+   set, otherwise jump to the set's first item; refresh every control. */
+function applyFilter(){
+  var f=filteredIdx();
+  if(f.indexOf(state.item)<0 && f.length) state.item=f[0];
+  buildCats(); buildTopics(); buildItems(); updateShuffle(); updateNav(); draw();
+}
+function updateNav(){
+  var f=filteredIdx(), pos=f.indexOf(state.item);
+  var c=document.getElementById('navCounter');
+  c.textContent = f.length ? (bnNum(pos+1)+' / '+bnNum(f.length)) : '';
+}
+function step(d){
+  var f=filteredIdx();
+  if(f.length<2){ updateNav(); return; }
+  var pos=f.indexOf(state.item);
+  if(pos<0) pos=0;
+  state.item=f[(pos+d+f.length)%f.length];
+  buildItems(); updateNav(); draw();
 }
 function buildItems(){
   var box=document.getElementById('itemChips'); box.innerHTML='';
@@ -352,9 +411,11 @@ function buildItems(){
     var b=document.createElement('button');
     b.type='button'; b.className='pchip'+(state.item===idx?' on':'');
     b.textContent=chipLabel(items[idx]); b.title=items[idx].ref||'';
-    b.addEventListener('click', function(){ state.item=idx; buildItems(); draw(); });
+    b.addEventListener('click', function(){ state.item=idx; buildItems(); updateNav(); draw(); });
     box.appendChild(b);
   });
+  var on=box.querySelector('.pchip.on');
+  if(on) box.scrollLeft=on.offsetLeft - box.clientWidth/2 + on.clientWidth/2;
 }
 function buildBgs(){
   var box=document.getElementById('bgGrid'); box.innerHTML='';
@@ -413,14 +474,16 @@ document.getElementById('shuffleBtn').addEventListener('click', function(){
   var f=filteredIdx().filter(function(i){ return i!==state.item; });
   if(!f.length) return;
   state.item=f[Math.floor(Math.random()*f.length)];
-  buildItems(); updateShuffle(); draw();
+  buildItems(); updateShuffle(); updateNav(); draw();
 });
+document.getElementById('prevBtn').addEventListener('click', function(){ step(-1); });
+document.getElementById('nextBtn').addEventListener('click', function(){ step(1); });
 
 /* ---- init: wait for fonts + images before the first draw ---- */
 var started=false;
 function ready(){
   if(started) return; started=true;
-  buildCats(); buildItems(); buildBgs(); updateShuffle();
+  buildCats(); buildTopics(); buildItems(); buildBgs(); updateShuffle(); updateNav();
   loadnote.style.display='none';
   draw();
 }
