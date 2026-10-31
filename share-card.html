@@ -67,7 +67,7 @@ button:focus-visible,a:focus-visible{outline:3px solid rgba(201,162,39,.6);outli
 .pchip:hover{border-color:var(--gold)}
 .pchip:active{transform:scale(.97)}
 .pchip.on{background:linear-gradient(135deg,var(--em2),var(--em));color:#fff;border-color:var(--em);box-shadow:0 4px 12px rgba(11,92,77,.28),0 0 0 2px rgba(243,210,122,.55)}
-.topicrow{display:flex;gap:8px;flex-wrap:wrap;padding:6px 2px 4px}
+.typerow{display:flex;gap:8px;flex-wrap:wrap;padding:6px 2px 4px}
 .navrow{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px}
 .navbtn{width:56px;height:56px;min-width:56px;border-radius:50%;border:1.5px solid #bfe3d8;background:linear-gradient(135deg,var(--em2),var(--em));color:#fff;font-size:32px;font-weight:700;line-height:1;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(11,92,77,.30),0 0 0 2px rgba(243,210,122,.35);transition:transform .15s ease,box-shadow .15s ease}
 .navbtn:hover{transform:translateY(-1px);box-shadow:0 9px 20px rgba(11,92,77,.35),0 0 0 2px rgba(243,210,122,.55)}
@@ -129,7 +129,7 @@ main .card:nth-child(2){animation-delay:.07s}
 <section class="card">
 <h2>কার্ড সাজান</h2>
 <div class="ctl-lab">বিষয় বেছে নিন</div>
-<div class="topicrow" id="topicChips"></div>
+<div class="typerow" id="typeChips"></div>
 <div class="ctl-lab">ডিজাইন বেছে নিন</div>
 <div class="bggrid" id="bgGrid"></div>
 </section>
@@ -152,19 +152,18 @@ var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
 var loadnote=document.getElementById('loadnote');
 var items=(typeof window.CARD_ITEMS!=='undefined' && window.CARD_ITEMS) ? window.CARD_ITEMS : [];
 var bgs=(typeof window.CARD_BGS!=='undefined' && window.CARD_BGS) ? window.CARD_BGS : [];
-var state={topic:'all', item:0, bg:0};
-if(items.length){ state.item=Math.floor(Date.now()/86400000)%items.length; }
+var TYPE_DEFS=[{k:'ayat', t:'আয়াত'},{k:'dua', t:'দোয়া'},{k:'hadith', t:'হাদিস'}];
+var state={type:'ayat', item:0, bg:0};
+if(items.length){
+  state.item=Math.floor(Date.now()/86400000)%items.length;
+  var dtype=items[state.item].type, known=false;
+  for(var ti=0; ti<TYPE_DEFS.length; ti++){ if(TYPE_DEFS[ti].k===dtype) known=true; }
+  state.type=known?dtype:'ayat';
+}
 var logoImg=new Image(); logoImg.src='logo.png';
 var bgImgs={};
 var BN_DIGITS='০১২৩৪৫৬৭৮৯';
 function bnNum(n){ return String(n).replace(/[0-9]/g, function(d){ return BN_DIGITS[+d]; }); }
-function topicOf(it){ return (it && typeof it.topic==='string' && it.topic) ? it.topic : null; }
-function topicsList(){
-  var out=[];
-  items.forEach(function(it){ var t=topicOf(it); if(t && out.indexOf(t)<0) out.push(t); });
-  return out;
-}
-
 function loadImg(src){return new Promise(function(res){var im=new Image();im.onload=function(){res(im);};im.onerror=function(){res(null);};im.src=src;});}
 function setShadow(on){
   if(on){ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=6;ctx.shadowOffsetX=0;ctx.shadowOffsetY=3;}
@@ -334,33 +333,29 @@ function draw(){
 function filteredIdx(){
   var out=[];
   for(var i=0;i<items.length;i++){
-    if(state.topic!=='all' && topicOf(items[i])!==state.topic) continue;
+    if(items[i].type!==state.type) continue;
     out.push(i);
   }
   return out;
 }
-function buildTopics(){
-  var box=document.getElementById('topicChips');
-  if(state.topic!=='all' && topicsList().indexOf(state.topic)<0) state.topic='all';
+function buildTypes(){
+  var box=document.getElementById('typeChips');
   box.innerHTML='';
-  var defs=[{k:'all', t:'সব বিষয়'}];
-  topicsList().forEach(function(t){ defs.push({k:t, t:t}); });
-  defs.forEach(function(d){
+  TYPE_DEFS.forEach(function(d){
     var b=document.createElement('button');
-    b.type='button'; b.className='pchip'+(state.topic===d.k?' on':''); b.textContent=d.t;
+    b.type='button'; b.className='pchip'+(state.type===d.k?' on':''); b.textContent=d.t;
     b.addEventListener('click', function(){
-      state.topic=d.k;
+      state.type=d.k;
       applyFilter();
     });
     box.appendChild(b);
   });
 }
-/* topic changed: the working set is topic-only now — jump to the set's
-   first item and refresh the controls. */
+/* type changed: jump to the type set's first item and refresh the controls. */
 function applyFilter(){
   var f=filteredIdx();
   if(f.length) state.item=f[0];
-  buildTopics(); updateNav(); draw();
+  buildTypes(); updateNav(); draw();
 }
 function updateNav(){
   var f=filteredIdx(), pos=f.indexOf(state.item);
@@ -432,7 +427,7 @@ document.getElementById('nextBtn').addEventListener('click', function(){ step(1)
 var started=false;
 function ready(){
   if(started) return; started=true;
-  buildTopics(); buildBgs(); updateNav();
+  buildTypes(); buildBgs(); updateNav();
   loadnote.style.display='none';
   draw();
 }
