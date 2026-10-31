@@ -797,6 +797,20 @@
         *,*::before,*::after{animation-duration:.001s !important; transition-duration:.001s !important; scroll-behavior:auto !important}
       }
 
+      /* ---------- scroll reveal (below-the-fold home content) ----------
+         Hidden state exists ONLY under html.sr-on, a class the reveal
+         script adds itself — with JS off or on any script error every
+         element is simply visible, exactly as without this feature. */
+      html.sr-on .sr{
+        opacity:0; transform:translateY(26px);
+        transition:opacity .7s ease-out, transform .7s cubic-bezier(.22,.61,.36,1);
+        transition-delay:var(--sr-delay,0s);
+      }
+      html.sr-on .sr.sr-in{opacity:1; transform:none}
+      @media (prefers-reduced-motion: reduce){
+        html.sr-on .sr{opacity:1 !important; transform:none !important; transition:none !important}
+      }
+
       /* print: monthly timetable only */
       @media print{
         body{background:#fff}
@@ -906,61 +920,61 @@
       </section>
 
       <!-- ================= MORE SERVICES (new standalone pages) ================= -->
-      <section class="block rise d3" aria-label="More services">
-        <div class="sec-head">
+      <section class="block" aria-label="More services">
+        <div class="sec-head sr">
           <h2 data-i18n="moreServices">ইসলামিক কর্নার</h2>
           <div class="rule"></div>
         </div>
         <div class="svc-grid">
-          <a class="svc-card" href="dua.html">
+          <a class="svc-card sr" style="--sr-delay:0s" href="dua.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.8A8.4 8.4 0 1 1 9.2 4a6.8 6.8 0 0 0 10.8 10.8Z"/><path d="M17.5 3.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor" stroke="none"/></svg></span>
             <span class="svc-title" data-i18n="svcDua">দোয়া সংকলন</span>
             <span class="svc-sub" data-i18n="svcDuaSub">৩১টি দোয়া, আরবি ও অর্থসহ</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <a class="svc-card" href="bishesh-din.html">
+          <a class="svc-card sr" style="--sr-delay:.06s" href="bishesh-din.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M12 12.6l.9 1.9 2.1.3-1.5 1.5.35 2.1-1.85-1-1.85 1 .35-2.1-1.5-1.5 2.1-.3z" fill="currentColor" stroke="none"/></svg></span>
             <span class="svc-title" data-i18n="svcSpecial">বিশেষ ইসলামিক দিন</span>
             <span class="svc-sub" data-i18n="svcSpecialSub">তারিখ ও কাউন্টডাউন</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <a class="svc-card" href="asmaul-husna.html">
+          <a class="svc-card sr" style="--sr-delay:.12s" href="asmaul-husna.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/><path d="M18.6 15.8l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" fill="currentColor" stroke="none"/></svg></span>
             <span class="svc-title" data-i18n="svcNames">আল্লাহর ৯৯ নাম</span>
             <span class="svc-sub" data-i18n="svcNamesSub">আসমাউল হুসনা, অর্থসহ</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <a class="svc-card" href="zakat-calculator.html">
+          <a class="svc-card sr" style="--sr-delay:.18s" href="zakat-calculator.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7"/><path d="M8.3 12h.01M12 12h.01M15.7 12h.01M8.3 15.5h.01M12 15.5h.01M15.7 15.5h.01" stroke-width="2.6"/></svg></span>
             <span class="svc-title" data-i18n="svcZakat">যাকাত ক্যালকুলেটর</span>
             <span class="svc-sub" data-i18n="svcZakatSub">সহজে যাকাত হিসাব করুন</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <a class="svc-card" href="hijri-converter.html">
+          <a class="svc-card sr" style="--sr-delay:.24s" href="hijri-converter.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.8 21 6.8l-4 4"/><path d="M3 12.8v-1.5a3.5 3.5 0 0 1 3.5-3.5H21"/><path d="M7 21.2 3 17.2l4-4"/><path d="M21 11.2v1.5a3.5 3.5 0 0 1-3.5 3.5H3"/></svg></span>
             <span class="svc-title" data-i18n="svcHijri">হিজরি কনভার্টার</span>
             <span class="svc-sub" data-i18n="svcHijriSub">ইংরেজি ↔ হিজরি তারিখ রূপান্তর</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <a class="svc-card" href="proshno-uttor.html">
+          <a class="svc-card sr" style="--sr-delay:.3s" href="proshno-uttor.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M9.4 9.2a2.9 2.9 0 0 1 5.6.8c0 1.9-2.9 2.3-2.9 3.9"/><path d="M12 17.2h.01" stroke-width="2.6"/></svg></span>
             <span class="svc-title" data-i18n="svcQA">ইসলামিক প্রশ্নোত্তর</span>
             <span class="svc-sub" data-i18n="svcQASub">১০০০ প্রশ্নের উত্তর</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <a class="svc-card" href="share-card.html">
+          <a class="svc-card sr" style="--sr-delay:.36s" href="share-card.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="9.8" r="1.7"/><path d="M4.2 17.2 10 12l3.1 2.8 2.5-2.2 4.2 3.8"/></svg></span>
             <span class="svc-title" data-i18n="svcCard">আয়াত ও দোয়া কার্ড</span>
             <span class="svc-sub" data-i18n="svcCardSub">সুন্দর ছবির কার্ড বানিয়ে শেয়ার করুন</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <a class="svc-card" href="boys-names.html">
+          <a class="svc-card sr" style="--sr-delay:.42s" href="boys-names.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.2" r="3.4"/><path d="M5.8 20c.7-3.2 3.2-4.8 6.2-4.8s5.5 1.6 6.2 4.8"/></svg></span>
             <span class="svc-title" data-i18n="svcBoys">ছেলেদের নাম</span>
             <span class="svc-sub" data-i18n="svcBoysSub">অর্থসহ সুন্দর ইসলামিক নামের সংগ্রহ</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <a class="svc-card" href="girls-names.html">
+          <a class="svc-card sr" style="--sr-delay:.48s" href="girls-names.html">
             <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.8" r="3.2"/><path d="M5.8 20.2c.7-3.2 3.2-4.8 6.2-4.8s5.5 1.6 6.2 4.8"/><path d="M12 3.6 9.9 2.2a1.6 1.6 0 1 0 0 2.8L12 3.6l2.1 1.4a1.6 1.6 0 1 0 0-2.8L12 3.6Z" fill="currentColor" stroke="none"/></svg></span>
             <span class="svc-title" data-i18n="svcGirls">মেয়েদের নাম</span>
             <span class="svc-sub" data-i18n="svcGirlsSub">অর্থসহ সুন্দর ইসলামিক নামের সংগ্রহ</span>
@@ -970,7 +984,7 @@
       </section>
 
       <!-- ================= PRAYER TIMES ================= -->
-      <section class="block rise d3" aria-label="Prayer times">
+      <section class="block sr" aria-label="Prayer times">
         <div class="sec-head">
           <h2 data-i18n="todayTimes">আজকের নামাজের সময়</h2>
           <div class="rule"></div>
@@ -988,19 +1002,19 @@
       </section>
 
       <!-- ================= SEHRI / IFTAR ================= -->
-      <section class="block sehri-sec rise d4" aria-label="Sehri and Iftar">
-        <div class="sec-head">
+      <section class="block sehri-sec" aria-label="Sehri and Iftar">
+        <div class="sec-head sr">
           <h2 data-i18n="sehriIftar">সেহরি ও ইফতার</h2>
           <div class="rule"></div>
           <span class="sec-note" data-i18n="sehriIftarNote">আজকের সময়</span>
         </div>
         <div class="duo">
-          <div class="duo-card sehri">
+          <div class="duo-card sehri sr" style="--sr-delay:.05s">
             <div class="d-label" data-i18n="sehriEnds">সেহরির শেষ সময়</div>
             <div class="d-time" id="sehriTime">—</div>
             <div class="d-sub" data-i18n="sehriSub">ফজরের ওয়াক্ত শুরু</div>
           </div>
-          <div class="duo-card iftar">
+          <div class="duo-card iftar sr" style="--sr-delay:.13s">
             <div class="d-label" data-i18n="iftarTime">ইফতারের সময়</div>
             <div class="d-time" id="iftarTime">—</div>
             <div class="d-sub" data-i18n="iftarSub">মাগরিবের ওয়াক্ত শুরু</div>
@@ -1009,7 +1023,7 @@
       </section>
 
       <!-- ================= NEXT SPECIAL DAY ================= -->
-      <section class="block rise d5" id="nextSpecialSec" aria-label="Next special day">
+      <section class="block sr" id="nextSpecialSec" aria-label="Next special day">
         <button type="button" class="sp-home-card" id="nextSpecialCard">
           <span class="sp-home-text">
             <span class="sp-home-label">✦ <span data-i18n="nextSpecial">আসন্ন বিশেষ দিন</span></span>
@@ -1022,7 +1036,7 @@
 
       <!-- ================= SHARE ================= -->
       <section class="block" aria-label="Share">
-        <div class="share-panel">
+        <div class="share-panel sr">
           <h3 class="share-title" data-i18n="shareTitle">শেয়ার করুন</h3>
           <p class="share-sub" data-i18n="shareSub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</p>
           <div class="share-row">
@@ -1035,7 +1049,7 @@
         </div>
       </section>
 
-      <nav class="page-footer-links" aria-label="Site pages">
+      <nav class="page-footer-links sr" aria-label="Site pages">
         <a href="about.html" data-i18n="pageAbout">আমাদের সম্পর্কে</a><span class="sep" aria-hidden="true">·</span><a href="privacy.html" data-i18n="pagePrivacy">গোপনীয়তা নীতি</a><span class="sep" aria-hidden="true">·</span><a href="contact.html" data-i18n="pageContact">যোগাযোগ</a><span class="sep" aria-hidden="true">·</span><a href="feedback.html" data-i18n="pageFeedback">মতামত ও রিভিউ</a>
       </nav>
     </div>
@@ -1279,7 +1293,7 @@
     </main>
 
     <!-- ================= FOOTER: time disclaimer — time-related views only ================= -->
-    <footer class="footer-sec" id="timeDisclaimer">
+    <footer class="footer-sec sr" id="timeDisclaimer">
       <div class="disc">
         <span data-i18n="discText">সময় হিসাব অনুযায়ী দেওয়া হয়েছে। স্থানীয় মসজিদ ও ইসলামিক ফাউন্ডেশন বাংলাদেশের সময়সূচিই চূড়ান্ত — দু-এক মিনিট এদিক-ওদিক হতে পারে।</span>
       </div>
@@ -3823,6 +3837,39 @@
     const startView = window.location.hash.replace(/^#/, '');
     if (PAGES.indexOf(startView) >= 0 && startView !== state.page) showPage(startView);
     tick();
+    </script>
+
+    <!-- Scroll reveal: below-the-fold home sections rise in as they enter
+         the viewport. Runs in its own script so a failure anywhere else can
+         never hide content; the hidden state is gated behind the sr-on
+         class this script adds to <html> itself, and any error removes it. -->
+    <script>
+    (function () {
+      var root = document.documentElement;
+      function revealAll() {
+        root.classList.remove('sr-on');
+        var els = document.querySelectorAll('.sr');
+        for (var i = 0; i < els.length; i++) els[i].classList.add('sr-in');
+      }
+      try {
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var targets = document.querySelectorAll('.sr');
+        if (!targets.length) return;
+        root.classList.add('sr-on');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('sr-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+        targets.forEach(function (el) { io.observe(el); });
+      } catch (err) {
+        revealAll();
+      }
+    })();
     </script>
   </body>
 </html>
