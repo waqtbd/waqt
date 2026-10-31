@@ -93,15 +93,13 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
 <div><span class="chip">আপনার মতামত আমাদের জন্য মূল্যবান</span></div></header>
 <main>
 <section class="card"><h2>ব্যবহারকারীদের মতামত</h2>
-<p>Waqt ব্যবহার করে যাঁরা নিজেদের অভিজ্ঞতা ও মতামত পাঠিয়েছেন, তাঁদের কথাই এখানে — নামসহ। প্রতিটি মতামত প্রকাশের আগে আমরা একবার দেখে নিই।</p>
-<div class="note"><b>এখনো প্রকাশিত কোনো মতামত নেই।</b> প্রথম মতামতটা আপনারই হোক — নিচের form-এ লিখে পাঠান।</div>
+
 </section>
 <section class="card" id="fbCard"><h2>আপনার মতামত জানান</h2>
 <p>সাইটটা কেমন লাগল, কোন সুবিধাটা সবচেয়ে কাজে লাগে, কোথায় উন্নতি চান — লিখে পাঠান। ভুল তথ্য বা ভুল সময় চোখে পড়লে সেটাও এখানেই জানাতে পারেন।</p>
 <div id="fbWrap">
 <form id="fbForm" novalidate>
 <div class="fld"><label for="fbName">আপনার নাম *</label><input id="fbName" type="text" maxlength="60" required placeholder="যেমন: মোঃ আব্দুল্লাহ"></div>
-<div class="fld"><label for="fbDist">জেলা (না দিলেও চলবে)</label><input id="fbDist" type="text" maxlength="40" placeholder="যেমন: বগুড়া"></div>
 <div class="fld"><label for="fbMsg">আপনার মতামত *</label><textarea id="fbMsg" maxlength="1000" required placeholder="আপনার অভিজ্ঞতা বা পরামর্শ লিখুন…"></textarea></div>
 <p class="consent">পাঠালে আপনার মতামত আমাদের কাছে পৌঁছাবে। বাছাই করা মতামত নামসহ এই পেজে প্রকাশিত হতে পারে।</p>
 <button type="submit" class="mainbtn" id="fbBtn">মতামত পাঠান</button>
@@ -124,7 +122,6 @@ document.getElementById('fbForm').addEventListener('submit', function (e) {
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
     body: JSON.stringify({
       name: document.getElementById('fbName').value.trim(),
-      district: document.getElementById('fbDist').value.trim(),
       message: document.getElementById('fbMsg').value.trim(),
       _subject: 'Waqt — নতুন মতামত / রিভিউ',
       _template: 'table',
