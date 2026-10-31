@@ -1,7 +1,8 @@
 // Waqt service worker — offline support for the Waqt prayer-times site.
-// Strategy: pages (HTML) are network-first so updates arrive promptly;
+// Strategy: pages (HTML), JavaScript, mosque data JSON and share-card
+// background images are network-first so updates arrive promptly; other
 // static assets are cache-first. Bump CACHE_VERSION to force a refresh.
-var CACHE_VERSION = 'waqt-v2';
+var CACHE_VERSION = 'waqt-v3';
 var PRECACHE = ['./', './index.html', './logo.png', './icon-192.png', './manifest.json'];
 
 self.addEventListener('install', function (event) {
@@ -32,8 +33,18 @@ self.addEventListener('fetch', function (event) {
   if (url.origin !== self.location.origin) return; // let fonts/APIs go to network
 
   var isPage = request.mode === 'navigate' || (request.headers.get('accept') || '').indexOf('text/html') !== -1;
-  if (isPage) {
-    // Network-first for pages: fresh content wins, cache is the offline fallback.
+  var path = url.pathname;
+  var fileName = path.slice(path.lastIndexOf('/') + 1);
+  // Data-like files must never be pinned to a first-visit copy: all JS
+  // (e.g. card-data.js), mosque data JSON and share-card backgrounds are
+  // network-first just like pages. (Under the old cache-first rule these
+  // kept phones stuck on first-visit share-card data forever.)
+  var networkFirst = isPage
+    || path.endsWith('.js')
+    || (path.indexOf('/mosques/') !== -1 && path.endsWith('.json'))
+    || fileName.indexOf('card-bg') === 0;
+  if (networkFirst) {
+    // Network-first: fresh content wins, cache is the offline fallback.
     event.respondWith(
       fetch(request).then(function (response) {
         var copy = response.clone();
