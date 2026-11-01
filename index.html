@@ -775,6 +775,20 @@
         html.sr-on .sr{opacity:1 !important; transform:none !important; transition:none !important}
       }
 
+      /* ---------- drawer reveal (same motion inside the 3-line menu) ----------
+         Hidden state exists ONLY under #drawer.dsr-on, a class the drawer
+         reveal script adds itself — with JS off or on any script error every
+         drawer row is simply visible, exactly as without this feature. */
+      #drawer.dsr-on .dsr{
+        opacity:0; transform:translateY(24px) scale(.98);
+        transition:opacity .9s ease-out, transform .9s cubic-bezier(.22,.61,.36,1);
+        transition-delay:var(--dsr-delay,0s);
+      }
+      #drawer.dsr-on .dsr.dsr-in{opacity:1; transform:none}
+      @media (prefers-reduced-motion: reduce){
+        #drawer.dsr-on .dsr{opacity:1 !important; transform:none !important; transition:none !important}
+      }
+
       /* print: monthly timetable only */
       @media print{
         body{background:#fff}
@@ -3827,6 +3841,72 @@
           });
         }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
         targets.forEach(function (el) { io.observe(el); });
+      } catch (err) {
+        revealAll();
+      }
+    })();
+    </script>
+
+    <!-- Drawer reveal: the hamburger menu's rows glide in with the same
+         motion as the scroll reveal above — the rows in view cascade when
+         the drawer opens, and lower rows reveal as they scroll into the
+         drawer's own visible area (the drawer is the observer root, since
+         it scrolls internally). Runs in its own script; the hidden state
+         is gated behind the dsr-on class this script adds to the drawer
+         itself, and closing the drawer resets the rows so the reveal
+         replays on the next open. -->
+    <script>
+    (function () {
+      var drawer = document.getElementById('drawer');
+      if (!drawer) return;
+      var rows = drawer.querySelectorAll('.setting-row, .drawer-sec > h3, .menu-link, .menu-status, .drawer-sec > p, .drawer-page-links, .share-panel');
+      if (!rows.length) return;
+      for (var i = 0; i < rows.length; i++) rows[i].classList.add('dsr');
+      var io = null;
+      var armed = false;
+      function revealAll() {
+        drawer.classList.remove('dsr-on');
+        for (var i = 0; i < rows.length; i++) rows[i].classList.add('dsr-in');
+      }
+      function reset() {
+        if (io) { io.disconnect(); io = null; }
+        armed = false;
+        drawer.classList.remove('dsr-on');
+        for (var i = 0; i < rows.length; i++) {
+          rows[i].classList.remove('dsr-in');
+          rows[i].style.removeProperty('--dsr-delay');
+        }
+      }
+      function arm() {
+        if (armed) return;
+        try {
+          if (!('IntersectionObserver' in window)) return;
+          if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          armed = true;
+          drawer.classList.add('dsr-on');
+          io = new IntersectionObserver(function (entries) {
+            var n = 0;
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.style.setProperty('--dsr-delay', Math.min(n * 0.06, 0.72).toFixed(2) + 's');
+                n++;
+                entry.target.classList.add('dsr-in');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { root: drawer, threshold: 0.05 });
+          rows.forEach(function (el) { io.observe(el); });
+        } catch (err) {
+          armed = false;
+          revealAll();
+        }
+      }
+      try {
+        var mo = new MutationObserver(function () {
+          if (drawer.classList.contains('open')) arm();
+          else if (armed) reset();
+        });
+        mo.observe(drawer, { attributes: true, attributeFilter: ['class'] });
       } catch (err) {
         revealAll();
       }
