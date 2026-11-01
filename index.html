@@ -811,6 +811,21 @@
         #drawer.dsr-on .dsr{opacity:1 !important; transform:none !important; transition:none !important}
       }
 
+      /* ---------- library reveal (same motion in the Hadith/Dua/Surah view) ----------
+         Hidden state exists ONLY under #view-hadith.lsr-on, a class the
+         library reveal script adds itself — with JS off or on any script
+         error every card is simply visible, exactly as without this
+         feature. Only the item cards animate; the view header does not. */
+      #view-hadith.lsr-on .lib-card.lsr{
+        opacity:0; transform:translateY(52px) scale(.97);
+        transition:opacity .9s ease-out, transform .9s cubic-bezier(.22,.61,.36,1);
+        transition-delay:var(--lsr-delay,0s);
+      }
+      #view-hadith.lsr-on .lib-card.lsr.lsr-in{opacity:1; transform:none}
+      @media (prefers-reduced-motion: reduce){
+        #view-hadith.lsr-on .lib-card.lsr{opacity:1 !important; transform:none !important; transition:none !important}
+      }
+
       /* print: monthly timetable only */
       @media print{
         body{background:#fff}
@@ -4004,6 +4019,60 @@
           else if (armed) reset();
         });
         mo.observe(drawer, { attributes: true, attributeFilter: ['class'] });
+      } catch (err) {
+        revealAll();
+      }
+    })();
+    </script>
+
+    <!-- Library reveal: the Hadith / Dua / Surah item cards rise in with
+         the same motion as the home scroll reveal (52px rise, .9s,
+         90ms stagger capped at .72s) the first time each card scrolls
+         into view. The cards are rendered by JS and rebuilt on every
+         tab / topic switch, so a MutationObserver re-tags and re-observes
+         each fresh batch. Runs in its own script; the hidden state is
+         gated behind the lsr-on class this script adds to the view
+         itself, and any error removes it, so no card can ever be stuck
+         invisible. The view header is never tagged and never animates. -->
+    <script>
+    (function () {
+      var view = document.getElementById('view-hadith');
+      if (!view) return;
+      var lists = view.querySelectorAll('.lib-list');
+      if (!lists.length) return;
+      var io = null;
+      function revealAll() {
+        view.classList.remove('lsr-on');
+        var els = view.querySelectorAll('.lib-card.lsr');
+        for (var i = 0; i < els.length; i++) els[i].classList.add('lsr-in');
+      }
+      function tag(card) {
+        if (card.classList.contains('lsr')) return;
+        card.classList.add('lsr');
+        if (io) io.observe(card);
+      }
+      function tagAll() {
+        var cards = view.querySelectorAll('.lib-list .lib-card');
+        for (var i = 0; i < cards.length; i++) tag(cards[i]);
+      }
+      try {
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        io = new IntersectionObserver(function (entries) {
+          var n = 0;
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.style.setProperty('--lsr-delay', Math.min(n * 0.09, 0.72).toFixed(2) + 's');
+              n++;
+              entry.target.classList.add('lsr-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
+        view.classList.add('lsr-on');
+        tagAll();
+        var mo = new MutationObserver(tagAll);
+        lists.forEach(function (l) { mo.observe(l, { childList: true }); });
       } catch (err) {
         revealAll();
       }
