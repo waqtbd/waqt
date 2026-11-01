@@ -291,10 +291,6 @@
       @media (prefers-color-scheme: dark){ .prayer .p-fazilat{color:var(--gold)} }
       .prayer.next .p-fazilat{color:var(--gold-soft)}
       .prayer .p-fazilat:active{opacity:.6}
-      /* Sunrise carries no visible fazilat line: its link renders empty
-         but keeps the same footer slot (margin + one line's height), so
-         the card keeps the exact rhythm of the other cards */
-      .prayer .p-fazilat-blank{display:block; height:18px}
       /* the whole card is tappable: the fazilat link stretches over the
          entire card, so a tap anywhere on the card follows that link's
          own href (the Friday Jummah swap included); the small line
@@ -1552,13 +1548,13 @@
     };
     const JUMMAH_NAMES = { bn:'জুম্মা', en:'Jummah' };
     /* Small "virtues" link at the bottom of every prayer card. Sunrise is
-       not a prayer itself, so its card links to the Ishraq page but shows
-       NO visible line — only the whole-card tap remains; on Fridays
+       not a prayer itself, so its card links to its own sunrise guide
+       page (suryoday.html) with a "what to do at sunrise" line; on Fridays
        the Dhuhr card's line switches to Jummah and links to its own page. */
     const FAZILAT = {
       Tahajjud:{ page:'namaz-tahajjud.html', bn:'তাহাজ্জুদের ফজিলত দেখতে ট্যাপ করুন', en:'Tap to see the virtues of Tahajjud' },
       Fajr:{ page:'namaz-fajr.html', bn:'ফজরের ফজিলত দেখতে ট্যাপ করুন', en:'Tap to see the virtues of Fajr' },
-      Sunrise:{ page:'namaz-ishrak.html', bn:'ইশরাকের ফজিলত দেখতে ট্যাপ করুন', en:'Tap to see the virtues of Ishraq' },
+      Sunrise:{ page:'suryoday.html', bn:'সূর্যোদয়ের সময় কী করা উচিত দেখতে ট্যাপ করুন', en:'Tap to see what to do at sunrise' },
       Ishraq:{ page:'namaz-ishrak.html', bn:'ইশরাকের ফজিলত দেখতে ট্যাপ করুন', en:'Tap to see the virtues of Ishraq' },
       Dhuhr:{ page:'namaz-dhuhr.html', bn:'যোহরের ফজিলত দেখতে ট্যাপ করুন', en:'Tap to see the virtues of Dhuhr', bnFriday:'জুম্মার ফজিলত দেখতে ট্যাপ করুন', enFriday:'Tap to see the virtues of Jummah', pageFriday:'namaz-jummah.html' },
       Asr:{ page:'namaz-asr.html', bn:'আসরের ফজিলত দেখতে ট্যাপ করুন', en:'Tap to see the virtues of Asr' },
@@ -2897,12 +2893,7 @@
           fzTxt = state.lang === 'bn' ? fz.bnFriday : fz.enFriday;
           fzPage = fz.pageFriday;
         }
-        /* Sunrise shows no fazilat line at all: its link is rendered
-           empty (aria-label only) so nothing is visible, while the
-           stretched ::after still makes the whole card open Ishraq. */
-        const fazilatHtml = p === 'Sunrise'
-          ? '<a class="p-fazilat p-fazilat-blank" href="' + fzPage + '" aria-label="' + fzTxt + '"></a>'
-          : '<a class="p-fazilat" href="' + fzPage + '">' + fzTxt + ' ›</a>';
+        const fazilatHtml = '<a class="p-fazilat" href="' + fzPage + '">' + fzTxt + ' ›</a>';
         card.innerHTML = PRAYER_ICONS[p] +
           '<div class="p-name">' + prayerDisplayName(p, at || now) +
             (item.nafl ? '<span class="nafl-pill">' + L().nafl + '</span>' : '') + '</div>' +
