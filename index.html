@@ -256,7 +256,10 @@
       .prayer{
         background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
         padding:18px 16px 15px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+        cursor:pointer; -webkit-tap-highlight-color:transparent;
+        transition:transform .12s ease, opacity .12s ease;
       }
+      .prayer:active{transform:scale(.99)}
       .prayer .p-icon{width:34px; height:34px; color:var(--emerald); margin-bottom:8px}
       @media (prefers-color-scheme: dark){ .prayer .p-icon{color:var(--gold)} }
       .prayer .p-name{font-size:17px; font-weight:600; color:var(--ink-soft)}
@@ -288,6 +291,11 @@
       @media (prefers-color-scheme: dark){ .prayer .p-fazilat{color:var(--gold)} }
       .prayer.next .p-fazilat{color:var(--gold-soft)}
       .prayer .p-fazilat:active{opacity:.6}
+      /* the whole card is tappable: the fazilat link stretches over the
+         entire card, so a tap anywhere on the card follows that link's
+         own href (the Friday Jummah swap included); the small line
+         itself stays visible exactly as before */
+      .prayer .p-fazilat::after{content:""; position:absolute; inset:0}
 
       /* ---------- sehri/iftar ---------- */
       .duo{display:grid; grid-template-columns:1fr 1fr; gap:12px}
