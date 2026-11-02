@@ -1656,4 +1656,19 @@
   <url><loc>https://waqtbd.github.io/waqt/shikkha-isha.html</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://waqtbd.github.io/waqt/shikkha-witr.html</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://waqtbd.github.io/waqt/shikkha-azan-audio.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url>
+    <loc>https://waqtbd.github.io/waqt/chand.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://waqtbd.github.io/waqt/hijri-birthday.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://waqtbd.github.io/waqt/amol-bagan.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
