@@ -39,6 +39,53 @@
         window.__waqtInstallPrompt = e;
       });
     </script>
+    <script>
+      /* FIRST-PAINT SKY — pick the phase photograph and its matching
+         gradient tones right here in <head>, before the hero can
+         paint, so the visitor never sees a wrong-coloured sky flash
+         while the main script (and then the weather) loads. The phase
+         comes from the local clock ONLY — the same fallback anchors
+         updateSkyPhoto() uses until the district's real prayer times
+         land (Fajr 05:00, Sunrise 06:00, Maghrib 18:00, Isha 19:30);
+         Open-Meteo is NOT waited for: if the weather later demands
+         the overcast photo, updateSkyPhoto() crossfades to it then.
+         The chosen photo is preloaded here so it is already in the
+         browser cache when the main script asks for it, and the
+         gradient waiting underneath carries the photo's own tones —
+         day = soft blue, sunset = warm amber, night = deep emerald
+         (an overcast arrival blends the gradient to soft grey in
+         renderSky() before its crossfade) — so the ~500ms fade-in
+         once the photo lands is barely noticeable. Classic mode is
+         left completely alone: its emerald hero is the design. */
+      (function () {
+        try {
+          var saved = null;
+          try { saved = localStorage.getItem('waqtHero'); } catch (e) {}
+          if (saved === 'classic') return;
+          var now = new Date();
+          var m = now.getHours() * 60 + now.getMinutes();
+          var name = 'day';
+          if (m >= 1170 || m < 300) name = 'night';
+          else if (m < 360 || m >= 1068) name = 'sunset';
+          var tones = {
+            day:    ['#5ea6db', '#a6cfe7', '#d8e9cc', 'rgba(255,214,130,0.24)'],
+            sunset: ['#c69076', '#ef8542', '#fbb35e', 'rgba(255,160,60,0.38)'],
+            night:  ['#0d6a4b', '#073f2e', '#052e21', 'rgba(212,175,90,0.05)']
+          };
+          var t = tones[name], root = document.documentElement;
+          root.style.setProperty('--sky1', t[0]);
+          root.style.setProperty('--sky2', t[1]);
+          root.style.setProperty('--sky3', t[2]);
+          root.style.setProperty('--sky-glow', t[3]);
+          if (name === 'night') root.style.setProperty('--sky-star', '1');
+          /* light phases take the dark-ink hero text, exactly as
+             updateLivingSky() will set it again a moment later */
+          root.classList.toggle('sky-light', name !== 'night');
+          var pre = new Image();
+          pre.src = 'sky-' + name + '.jpg';
+        } catch (e) { /* the sky is decoration — never break the page */ }
+      })();
+    </script>
     <meta name="theme-color" content="#0b5c4d">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -338,7 +385,10 @@
          the CSS-gradient sky above stays as the fallback. */
       .sky-photo{
         position:absolute; inset:0; overflow:hidden; pointer-events:none;
-        opacity:0; transition:opacity 1.6s ease, filter 1.2s ease;
+        /* ~500ms fade once the photo has loaded: the gradient waiting
+           underneath already carries the phase-matched tones (set in
+           <head> at first paint), so the swap is barely noticeable */
+        opacity:0; transition:opacity .5s ease, filter 1.2s ease;
       }
       .sky-photo.on{opacity:1}
       .sky-photo-img{
@@ -1380,19 +1430,19 @@
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
           <a class="svc-card sr" style="--sr-delay:.81s" href="chand.html">
-            <svg class="svc-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32.5 5.5A17.5 17.5 0 1 0 42.5 30 14 14 0 0 1 32.5 5.5Z" fill="rgba(193,154,61,.16)"/><path d="M37 8l.9 2.3L40.2 11l-2.3.9L37 14.2l-.9-2.3L33.8 11l2.3-.7Z" fill="#c19a3d" stroke="none"/></svg>
+            <img class="svc-icon" src="icons/ramadan.webp" alt="" aria-hidden="true" onerror="this.style.display='none'">
             <span class="svc-title" data-i18n="svcMoon">আজকের চাঁদ</span>
             <span class="svc-sub" data-i18n="svcMoonSub">চাঁদের বয়স, আলো ও আকৃতি লাইভ দেখুন</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
           <a class="svc-card sr" style="--sr-delay:.9s" href="hijri-birthday.html">
-            <svg class="svc-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="11" width="34" height="30" rx="4"/><path d="M7 20h34M15 6v8M33 6v8"/><path d="M30.5 25.5a6.8 6.8 0 1 0 3.8 12.3 5.4 5.4 0 0 1-3.8-12.3Z" fill="rgba(193,154,61,.18)" stroke="#c19a3d" stroke-width="2"/></svg>
+            <img class="svc-icon" src="icons/calendar.webp" alt="" aria-hidden="true" onerror="this.style.display='none'">
             <span class="svc-title" data-i18n="svcHijriBday">হিজরি জন্মদিন</span>
             <span class="svc-sub" data-i18n="svcHijriBdaySub">আপনার হিজরি বয়স ও জন্মদিন জানুন</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
           <a class="svc-card sr" style="--sr-delay:.99s" href="amol-bagan.html">
-            <svg class="svc-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 44V29"/><path d="M24 36c-5.5 0-9-3-9.6-8.4 5.3.3 8.8 3.2 9.6 8.4Z" fill="rgba(11,93,67,.18)"/><path d="M24 33c.5-4.8 3.4-7.8 8.2-8.3-.3 4.9-3.1 7.8-8.2 8.3Z" fill="rgba(11,93,67,.12)"/><g fill="rgba(193,154,61,.28)" stroke="#c19a3d" stroke-width="2"><ellipse cx="24" cy="8.6" rx="3.6" ry="5"/><ellipse cx="31.6" cy="13.4" rx="3.6" ry="5" transform="rotate(72 31.6 13.4)"/><ellipse cx="28.7" cy="21.9" rx="3.6" ry="5" transform="rotate(144 28.7 21.9)"/><ellipse cx="19.3" cy="21.9" rx="3.6" ry="5" transform="rotate(216 19.3 21.9)"/><ellipse cx="16.4" cy="13.4" rx="3.6" ry="5" transform="rotate(288 16.4 13.4)"/></g><circle cx="24" cy="15.4" r="3.6" fill="#c19a3d" stroke="none"/><circle cx="24" cy="15.4" r="1.4" fill="#8a6a1f" stroke="none"/></svg>
+            <img class="svc-icon" src="icons/flower.webp" alt="" aria-hidden="true" onerror="this.style.display='none'">
             <span class="svc-title" data-i18n="svcAmal">আমলের বাগান</span>
             <span class="svc-sub" data-i18n="svcAmalSub">প্রতিদিনের আমলে ফুল ফোটান</span>
             <span class="svc-arr" aria-hidden="true">›</span>
