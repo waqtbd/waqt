@@ -4597,17 +4597,27 @@
     /* ================================================================
        GENERATIVE SKY PHOTOGRAPHS
        In Realistic mode the hero's sky is one of four AI-generated
-       Islamic sky photographs at the site root. The phase comes from
-       the district's own prayer times (the same anchors as the
-       gradient sky): night → sky-night, dawn and the golden stretch
-       around Maghrib → sky-sunset, the rest of the day → sky-day.
-       Live weather overrides: overcast / fog / rain / thunder codes
-       — or cloud cover ≥ 80% — switch a DAY sky to sky-overcast;
-       at night the night photo stays and only gains a grey tint
-       (hero.sky-photo-grey). Only the needed photo is loaded, the
-       swap crossfades between the two stacked layers, and a failed
-       load simply leaves the gradient sky in place. The visible
-       drift comes from CSS: the oversized inner image pans slowly
+       Islamic sky photographs at the site root. The phase is NEVER
+       guessed from clock-hour buckets: it is computed from the
+       district's own prayer times (the same embedded timings that
+       drive the countdown) in four windows — dawn Fajr→Sunrise+20
+       and dusk Maghrib−60→Maghrib+35 take sky-sunset, day
+       Sunrise+20→Maghrib−60 takes sky-day, and night
+       Maghrib+35→Fajr takes sky-night. Because the timings are
+       local, the correct photo is chosen the moment the hero
+       initialises — the Open-Meteo fetch is never waited for — and
+       the per-minute tick (updateLivingSky → renderSky) re-evaluates
+       the window, so a page left open across Maghrib still darkens.
+       Live weather overrides are window-aware: overcast / fog /
+       rain / thunder codes — or cloud cover ≥ 80% — switch to
+       sky-overcast ONLY inside the day window; dawn and dusk keep
+       their golden photo under the grey veil, and at night the
+       night photo stays and only gains the grey tint
+       (hero.sky-photo-grey) — the bright overcast photo must never
+       appear after dark. Only the needed photo is loaded, the swap
+       crossfades between the two stacked layers, and a failed load
+       simply leaves the gradient sky in place. The visible drift
+       comes from CSS: the oversized inner image pans slowly
        sideways forever, and the vapour layer floats on top.
        ================================================================ */
     const SKY_PHOTO_URLS = { day: 'sky-day.jpg', sunset: 'sky-sunset.jpg', night: 'sky-night.jpg', overcast: 'sky-overcast.jpg' };
@@ -4617,21 +4627,38 @@
         if (heroMode === 'classic') return;
         const layers = [$('skyPhotoA'), $('skyPhotoB')];
         if (!layers[0] || !layers[1]) return;
-        let name = 'day';
+        /* Phase windows from the district's OWN prayer times —
+           never clock-hour buckets (skyTimes is set by
+           updateLivingSky() from the same embedded timings that
+           drive the countdown, so the displayed photo is correct at
+           first paint and re-evaluated on the per-minute tick):
+             dawn  Fajr → Sunrise+20        → sky-sunset
+             day   Sunrise+20 → Maghrib−60  → sky-day
+             dusk  Maghrib−60 → Maghrib+35  → sky-sunset
+             night Maghrib+35 → Fajr        → sky-night */
+        let name = 'day', phase = 'day';
         if (skyTimes) {
-          const n = skyNowMin;
-          if (n >= skyTimes.ish || n < skyTimes.f) name = 'night';
-          else if (n < skyTimes.sr || n >= skyTimes.mg - 12) name = 'sunset';
+          const n = skyNowMin, sf = skyTimes.f, ssr = skyTimes.sr, smg = skyTimes.mg;
+          if (n >= smg + 35 || n < sf) { name = 'night'; phase = 'night'; }
+          else if (n < ssr + 20) { name = 'sunset'; phase = 'dawn'; }
+          else if (n < smg - 60) { name = 'day'; phase = 'day'; }
+          else { name = 'sunset'; phase = 'dusk'; }
         } else {
           const h = new Date().getHours();
           name = (h >= 19 || h < 5) ? 'night' : ((h < 7 || h >= 17) ? 'sunset' : 'day');
+          phase = name;
         }
+        /* Weather override, window-aware: the bright overcast photo
+           is allowed ONLY inside the day window. Dawn and dusk keep
+           their golden photo and gain the grey veil; at night the
+           night photo stays with the grey tint — sky-overcast must
+           never show after dark. */
         let grey = false;
         if (wxCurrent) {
           const k = wxKind(wxCurrent);
-          const oc = k.code === 3 || k.fog || k.rain > 0 || k.thunder || k.snow;
-          if (name === 'night') grey = oc || k.cloud >= 0.8;
-          else if (oc || k.cloud >= 0.8) name = 'overcast';
+          const oc = k.code === 3 || k.fog || k.rain > 0 || k.thunder || k.snow || k.cloud >= 0.8;
+          if (phase === 'day') { if (oc) name = 'overcast'; }
+          else grey = oc;
         }
         if (layers[0].parentElement) layers[0].parentElement.classList.toggle('sky-photo-grey', grey);
         document.documentElement.style.setProperty('--wx-vapour',
@@ -4650,15 +4677,26 @@
         const back = layers[1 - skyPhotoTop], front = layers[skyPhotoTop];
         const imgEl = back.querySelector('.sky-photo-img');
         if (!imgEl) return;
-        imgEl.style.backgroundImage = 'url("' + SKY_PHOTO_URLS[name] + '")';
-        const pre = new Image();
-        pre.onload = () => {
+        const show = (url) => {
           if (seq !== skyPhotoSeq) return; /* a newer pick already won */
+          imgEl.style.backgroundImage = 'url("' + url + '")';
           back.classList.add('on'); front.classList.remove('on');
           skyPhotoTop = 1 - skyPhotoTop; skyPhotoName = name;
           document.documentElement.classList.add('sky-photo-on');
         };
-        pre.onerror = () => { /* photo missing: the gradient sky stays */ };
+        /* the photos live at the site root; hosts that bundle only
+           assets/ are served the identical copies from there (the
+           same root-then-assets pattern as clouds-tile.jpg). If
+           neither loads, the gradient sky simply stays. */
+        const pre = new Image();
+        pre.onload = () => show(SKY_PHOTO_URLS[name]);
+        pre.onerror = () => {
+          if (seq !== skyPhotoSeq) return;
+          const alt = new Image();
+          alt.onload = () => show('assets/' + SKY_PHOTO_URLS[name]);
+          alt.onerror = () => { /* photo missing: the gradient sky stays */ };
+          alt.src = 'assets/' + SKY_PHOTO_URLS[name];
+        };
         pre.src = SKY_PHOTO_URLS[name];
       } catch (e) { /* the sky is decoration — never break the page */ }
     }
