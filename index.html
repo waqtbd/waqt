@@ -98,7 +98,7 @@
            The mix stays light in light mode and dark in dark mode, so
            headings and text on the page background keep full contrast
            in every sky phase. */
-        background:linear-gradient(180deg, color-mix(in srgb, var(--sky1, #081c26) 22%, var(--bg)) 0, var(--bg) 560px);
+        background:linear-gradient(180deg, color-mix(in srgb, var(--sky1, #0b1b32) 22%, var(--bg)) 0, var(--bg) 560px);
         font-family:"Baloo Da 2",system-ui,sans-serif;
         -webkit-font-smoothing:antialiased; overflow-x:hidden;
       }
@@ -152,7 +152,7 @@
         background:
           radial-gradient(900px 340px at 50% 118%, var(--sky-glow, rgba(212,175,90,.28)), transparent 62%),
           radial-gradient(1100px 480px at 85% -10%, rgba(212,175,90,.20), transparent 60%),
-          linear-gradient(165deg, var(--sky1, #081c26) 0%, var(--sky2, #0e3238) 55%, var(--sky3, #12403f) 100%);
+          linear-gradient(165deg, var(--sky1, #0b1b32) 0%, var(--sky2, #162c47) 55%, var(--sky3, #122336) 100%);
       }
       /* twinkling star layer — visible only in the night phases
          (opacity comes from --sky-star); pure CSS dots, no canvas */
@@ -4446,7 +4446,7 @@
          through a mid tone into a hazy, warm horizon — the way a real
          sky grades — instead of flat pastel washes.
                     top              mid              bottom (horizon)  glow rgba              stars  light-hero-text */
-      night:     { a:[8,28,38],     b:[14,50,56],    c:[18,64,63],    g:[212,175,90,0.05],  st:1,    li:0 },
+      night:     { a:[11,27,50],    b:[22,44,71],    c:[18,35,54],    g:[212,175,90,0.05],  st:1,    li:0 },
       dawn:      { a:[172,158,198], b:[238,164,122], c:[252,203,128], g:[255,190,80,0.35],  st:0.15, li:1 },
       morning:   { a:[94,166,219],  b:[166,207,231], c:[216,233,204], g:[255,214,130,0.24], st:0,    li:1 },
       noon:      { a:[50,128,204],  b:[114,180,226], c:[188,221,213], g:[255,240,190,0.20], st:0,    li:1 },
