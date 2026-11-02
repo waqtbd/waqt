@@ -450,40 +450,41 @@
         .sky-clouds,.sky-mist,.sky-photo-img,.sky-vapour,.sky-live-clouds{animation:none}
       }
       /* ---------- hero style toggle + live weather chip ---------- */
-      .hero-toprow{display:flex; justify-content:flex-end; margin-bottom:10px}
-      .hero-mode-toggle{
-        display:inline-flex; padding:3px; border-radius:999px; gap:2px;
-        background:rgba(6,30,22,.34); border:1px solid rgba(255,255,255,.38);
+      .hero-toprow{display:flex; justify-content:flex-end; margin-bottom:8px}
+      .visually-hidden{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+      /* icon-only mode switch: one circular glass button carrying a
+         single plain cloud glyph — NOTHING above the cloud, no lines,
+         rays or marks of any kind — and each tap flips the hero
+         between Realistic and Classic */
+      .hero-mode-btn{
+        display:grid; place-items:center; width:46px; height:46px; min-width:46px; min-height:46px;
+        padding:0; border-radius:50%; border:1px solid rgba(255,255,255,.38);
+        background:rgba(6,30,22,.34); color:#fff;
         backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
         box-shadow:0 4px 14px rgba(0,0,0,.18);
       }
-      html.sky-light .hero-mode-toggle{background:rgba(255,255,255,.5); border-color:rgba(20,40,30,.32)}
-      .hero-mode-toggle button{
-        display:inline-flex; align-items:center; gap:6px; border:0; border-radius:999px;
-        padding:7px 12px; font-size:13.5px; font-weight:700; line-height:1.2;
-        background:transparent; color:inherit; min-height:34px; white-space:nowrap;
-      }
-      .hero-mode-toggle button svg{width:15px; height:15px; flex:none}
-      .hero-mode-toggle button.on{background:var(--gold); color:#231a04; box-shadow:0 2px 8px rgba(0,0,0,.25)}
-      .hero-mode-toggle button:active{transform:scale(.96)}
-      @media (max-width:380px){ .hero-mode-toggle button{padding:7px 9px; font-size:12.5px} }
+      html.sky-light .hero-mode-btn{background:rgba(255,255,255,.5); border-color:rgba(20,40,30,.32); color:#33503f}
+      .hero-mode-btn svg{width:24px; height:24px; display:block}
+      .hero-mode-btn:active{transform:scale(.94)}
       /* compact weather badge: one short line, right-aligned on the
          district row; it may shrink (ellipsis) but must NEVER wrap
          or push the hero taller, even on the narrowest phone */
       .wx-chip{
-        align-items:center; gap:6px; justify-self:end; margin-top:7px;
-        padding:5px 10px; font-size:12.5px; font-weight:600; line-height:1.25;
+        align-items:center; gap:7px; justify-self:end; margin-top:7px;
+        padding:6px 12px; font-size:15px; font-weight:600; line-height:1.25;
         white-space:nowrap; max-width:52vw; min-width:0;
       }
       .wx-chip:not(.hidden){display:inline-flex}
-      .wx-chip .wx-icon svg{width:16px; height:16px}
-      @media (max-width:380px){ .wx-chip{font-size:11.5px; padding:4px 8px; max-width:48vw} }
+      .wx-chip .wx-icon svg{width:24px; height:24px}
+      @media (max-width:380px){ .wx-chip{padding:5px 10px; max-width:48vw} }
       .wx-dot{width:8px; height:8px; flex:none; border-radius:50%; background:#2fbf71; box-shadow:0 0 0 3px rgba(47,191,113,.25); animation:wxPulse 2.2s ease-in-out infinite}
       @keyframes wxPulse{0%,100%{box-shadow:0 0 0 2px rgba(47,191,113,.30)} 50%{box-shadow:0 0 0 5px rgba(47,191,113,.10)}}
       @media (prefers-reduced-motion: reduce){ .wx-dot{animation:none} }
-      .wx-icon{display:inline-flex; flex:none}
-      .wx-icon svg{width:19px; height:19px}
-      #wxText{font-variant-numeric:tabular-nums; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0}
+      .wx-icon{display:inline-flex; flex:none; align-items:center}
+      .wx-icon svg{width:24px; height:24px; filter:drop-shadow(0 1px 2px rgba(8,26,18,.45))}
+      /* the badge is temperature-led now: the °C value is the big,
+         bold element, vertically centred with the condition glyph */
+      #wxText{font-size:19px; font-weight:800; letter-spacing:.01em; line-height:1; font-variant-numeric:tabular-nums; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0}
       /* ---------- classic hero (Classic): the original emerald look ----------
          Restores the pre-living-sky hero exactly: deep emerald gradient,
          gold glows, star pattern, light text, Quran book — every sky and
@@ -509,13 +510,13 @@
       html.hero-classic .sky-flash,
       html.hero-classic .sky-horizon,
       html.hero-classic .wx-chip{display:none !important}
-      html.hero-classic .hero-mode-toggle{background:rgba(6,30,22,.34); border-color:rgba(255,255,255,.38)}
+      html.hero-classic .hero-mode-btn{background:rgba(6,30,22,.34); border-color:rgba(255,255,255,.38); color:#fff}
       /* The 8-point star pattern is a textile-like texture — it belongs
          ONLY to the classic emerald hero. A real sky has no pattern, so
          in Realistic (living sky) mode the layer is removed completely. */
       .hero-pattern{position:absolute; inset:0; opacity:.09; pointer-events:none; display:none}
       html.hero-classic .hero-pattern{display:block}
-      .hero-inner{position:relative; max-width:1060px; margin:0 auto; padding:34px 18px 30px}
+      .hero-inner{position:relative; max-width:1060px; margin:0 auto; padding:20px 18px 18px}
       /* the location chip sits on its OWN line under the place heading —
          the labelled text ("জেলা: … · উপজেলা: …") is long, and sharing the
          heading's line made it overlap the heading on phone widths */
@@ -523,7 +524,7 @@
          badge on the right of the SAME row — the badge lives inside the
          hero's existing space, so Realistic mode's hero is exactly as
          tall as the Classic hero (no extra weather line, ever) */
-      .hero-place{display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; column-gap:10px; row-gap:9px}
+      .hero-place{display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; column-gap:10px; row-gap:6px}
       .hero-place .place-detail{grid-column:1 / -1; justify-self:start}
       .hero-place h1{font-size:clamp(30px,6vw,46px); margin:0; font-weight:700; letter-spacing:.01em}
       .hero-place .pin{color:var(--gold); font-size:.8em}
@@ -532,25 +533,25 @@
         color:#ffe9ad; padding:6px 13px; border-radius:999px; font-size:15.5px; font-weight:700; letter-spacing:.01em;
         line-height:1.5; overflow-wrap:break-word;
       }
-      .hero-dates{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+      .hero-dates{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
       .hero-date-chip{
         background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22);
         padding:6px 12px; border-radius:999px; font-size:14.5px; font-weight:500;
         backdrop-filter:blur(4px);
       }
       .hero-date-chip b{color:var(--gold-soft); font-weight:700}
-      .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:22px; margin-top:24px; align-items:end}
+      .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:18px; margin-top:14px; align-items:end}
       @media (max-width:640px){ .hero-grid{grid-template-columns:1fr} }
       .next-label{font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); font-weight:600}
-      .next-name{font-size:clamp(38px,8vw,58px); font-weight:700; line-height:1.05; margin:4px 0 2px}
+      .next-name{font-size:clamp(34px,7.6vw,54px); font-weight:700; line-height:1.05; margin:4px 0 2px}
       .next-time{font-size:clamp(20px,4vw,26px); color:#fff; font-weight:600}
       .countdown{
         font-variant-numeric:tabular-nums; font-weight:700;
-        font-size:clamp(40px,9vw,66px); line-height:1.1; letter-spacing:.01em;
+        font-size:clamp(36px,8.4vw,60px); line-height:1.1; letter-spacing:.01em;
         text-shadow:0 4px 24px rgba(0,0,0,.35);
       }
       .countdown small{display:block; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); margin-top:8px; font-weight:600}
-      .hero-progress{position:relative; height:10px; border-radius:99px; background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.45); box-shadow:inset 0 1px 3px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.12); margin-top:18px; max-width:520px}
+      .hero-progress{position:relative; height:10px; border-radius:99px; background:rgba(0,0,0,.38); border:1px solid rgba(255,255,255,.45); box-shadow:inset 0 1px 3px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.12); margin-top:12px; max-width:520px}
       .hero-progress i{position:relative; display:block; height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,#c9a227,var(--gold) 55%,#ffe9ad); box-shadow:0 0 10px rgba(240,217,138,.55); transition:width 1s linear}
       .hero-progress i::after{content:""; position:absolute; right:-7px; top:50%; transform:translateY(-50%); width:16px; height:16px; border-radius:50%; background:#ffe9ad; border:2.5px solid #c9a227; box-shadow:0 1px 6px rgba(0,0,0,.5), 0 0 0 2px rgba(255,233,173,.35)}
       .hero-clock{display:flex; align-items:center; gap:16px}
@@ -577,6 +578,13 @@
          carries the gold frame, calligraphy and ribbon artwork */
       .hb-photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
       .hb-cap{font-size:11px; font-weight:600; color:var(--gold-soft); text-align:center; line-height:1.25; max-width:96px; overflow-wrap:break-word}
+      /* compact hero on phones: a slightly smaller book keeps the
+         whole hero inside its frame without growing it */
+      @media (max-width:640px){
+        .hero-book{width:86px}
+        .hb-book{width:79px; height:112px}
+        .hb-cap{max-width:86px}
+      }
       @media (max-width:380px){
         .hero-book{width:80px}
         .hb-book{width:74px; height:106px}
@@ -1288,10 +1296,7 @@
       <svg class="sky-horizon" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 70 V52 H96 V44 H150 V52 H238 V38 H252 V52 H356 V46 H470 l6-14 6 14 H560 V52 H648 V40 a72 30 0 0 1 144 0 V52 H884 V34 h9 V20 h4 V34 h9 V52 H1010 V45 H1108 V52 H1218 l5-20 5 20 H1330 V47 H1440 V70 Z"/></svg>
       <div class="hero-inner">
         <div class="hero-toprow rise">
-          <div class="hero-mode-toggle" role="group" aria-label="Theme">
-            <button type="button" id="heroModeLiving" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 18a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 18h10.5Z"/><path d="M12 3v1.5M4.9 5.9l1 1M19.1 5.9l-1 1"/></svg><span data-i18n="heroLiving">Realistic</span></button>
-            <button type="button" id="heroModeClassic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5Z"/></svg><span data-i18n="heroClassic">Classic</span></button>
-          </div>
+          <button type="button" class="hero-mode-btn" id="heroModeBtn" aria-label="Classic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg><span class="visually-hidden" id="heroModeBtnText">Classic</span></button>
         </div>
         <div class="hero-place rise">
           <h1><span class="pin">◈</span> <span id="placeName">বগুড়া</span></h1>
@@ -1313,7 +1318,7 @@
             <div class="cd-text">
               <div class="now" data-i18n="remaining">বাকি সময়</div>
               <div class="countdown"><span id="countdown">--:--:--</span></div>
-              <div class="time" id="clockNow" style="margin-top:10px">--:--</div>
+              <div class="time" id="clockNow" style="margin-top:6px">--:--</div>
             </div>
             <a class="hero-book" href="quran.html">
               <span class="hb-book">
@@ -4390,9 +4395,9 @@
        HERO STYLE — Realistic vs Classic (labels are English-only in both UI languages)
        The classic hero is the original Waqt hero: deep emerald
        gradient, gold glows, star pattern, light text and the Quran
-       book, with every sky / weather layer off. The visitor picks
-       either style from the pill toggle inside the hero or from the
-       menu's settings; the choice is remembered on this device
+       book, with every sky / weather layer off. The visitor flips
+       between the styles with the icon-only cloud button inside the
+       hero or from the menu's settings; the choice is remembered on this device
        (localStorage 'waqtHero', the same store the weather cache
        already uses). Default is the living sky.
        ================================================================ */
@@ -4404,8 +4409,17 @@
     function applyHeroMode() {
       document.documentElement.classList.toggle('hero-classic', heroMode === 'classic');
       const on = (id, v) => { const b = $(id); if (b) b.classList.toggle('on', v); };
-      on('heroModeLiving', heroMode === 'living'); on('heroModeLiving2', heroMode === 'living');
-      on('heroModeClassic', heroMode === 'classic'); on('heroModeClassic2', heroMode === 'classic');
+      on('heroModeLiving2', heroMode === 'living');
+      on('heroModeClassic2', heroMode === 'classic');
+      /* the hero's icon-only button names the mode a tap will switch
+         TO (in Realistic it offers "Classic", and vice versa) */
+      const hb = $('heroModeBtn');
+      if (hb) {
+        const target = heroMode === 'living' ? L().heroClassic : L().heroLiving;
+        hb.setAttribute('aria-label', target);
+        const ht = $('heroModeBtnText');
+        if (ht) ht.textContent = target;
+      }
       if (heroMode === 'classic') {
         wxThunderOn = false;
         if (wxFlashTimer) { clearTimeout(wxFlashTimer); wxFlashTimer = null; }
@@ -4430,8 +4444,10 @@
     }
     function initHeroMode() {
       const bind = (id, m) => { const b = $(id); if (b) b.addEventListener('click', () => setHeroMode(m)); };
-      bind('heroModeLiving', 'living'); bind('heroModeLiving2', 'living');
-      bind('heroModeClassic', 'classic'); bind('heroModeClassic2', 'classic');
+      bind('heroModeLiving2', 'living');
+      bind('heroModeClassic2', 'classic');
+      const hb = $('heroModeBtn');
+      if (hb) hb.addEventListener('click', () => setHeroMode(heroMode === 'living' ? 'classic' : 'living'));
       applyHeroMode();
     }
 
@@ -4929,30 +4945,32 @@
     }
 
     /* ---------- live weather chip in the hero ---------- */
+    /* Premium badge glyphs — one filled duotone family: soft-white
+       clouds, gold sun / moon / bolt, sky-blue rain. (This weather
+       cloud is its own glyph set; the hero mode button's cloud is a
+       separate icon and stays bare, with nothing above it.) */
     function wxIcon(kind, isDay) {
-      const s = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
-      const cloud = '<path d="M17.5 15a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 15h10.5Z"/>';
-      if (kind === 'thunder') return '<svg ' + s + '>' + cloud + '<path d="M12.4 13.2 10.2 17h2l-1 3.2L15 15.6h-2.2l1.1-2.4Z" fill="currentColor" stroke="none"/></svg>';
-      if (kind === 'rain') return '<svg ' + s + '>' + cloud + '<path d="M8.5 17.5 8.1 20M12.5 17.5 12.1 20M16.5 17.5 16.1 20"/></svg>';
-      if (kind === 'snow') return '<svg ' + s + '>' + cloud + '<path d="M8.5 18h.01M12.5 19.5h.01M16.5 18h.01" stroke-width="2.6"/></svg>';
-      if (kind === 'fog') return '<svg ' + s + '><path d="M17.5 11.5a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 11.5h10.5Z"/><path d="M5 16h14M7.5 19.5h9"/></svg>';
+      const s = 'viewBox="0 0 24 24" aria-hidden="true"';
+      const cloud = '<path fill="#f5f8f6" d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>';
+      const cloudSm = '<g transform="translate(1.2 -1.6) scale(.92)">' + cloud + '</g>';
+      if (kind === 'thunder') return '<svg ' + s + '>' + cloudSm + '<path fill="#ffcf4d" d="M12.6 14.2 9.7 19.2h2.4l-1.2 3.4 4.3-5.6h-2.5l1.3-2.8z"/></svg>';
+      if (kind === 'rain') return '<svg ' + s + '>' + cloudSm + '<g stroke="#8fd8ff" stroke-width="2" stroke-linecap="round"><path d="M8 18.2 7.4 20.6M12.4 18.2l-.6 2.4M16.8 18.2l-.6 2.4"/></g></svg>';
+      if (kind === 'snow') return '<svg ' + s + '>' + cloudSm + '<g fill="#cfeaff"><circle cx="8" cy="19.4" r="1.3"/><circle cx="12.4" cy="20.6" r="1.3"/><circle cx="16.8" cy="19.4" r="1.3"/></g></svg>';
+      if (kind === 'fog') return '<svg ' + s + '>' + cloudSm + '<g stroke="#e8f0ec" stroke-width="2" stroke-linecap="round" opacity=".85"><path d="M5 18.6h14M7.5 21.4h9"/></g></svg>';
       if (kind === 'cloud') return '<svg ' + s + '>' + cloud + '</svg>';
-      if (kind === 'partly') return '<svg ' + s + '><circle cx="8" cy="8" r="3.2"/><path d="M8 2.8v1.4M2.8 8h1.4M4.3 4.3l1 1"/><path d="M18 19.5a3.8 3.8 0 0 0 0-7.6 5 5 0 0 0-9.6 1.2A3.4 3.4 0 0 0 9.5 19.5H18Z"/></svg>';
-      if (!isDay) return '<svg ' + s + '><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>';
-      return '<svg ' + s + '><circle cx="12" cy="12" r="4"/><path d="M12 3v1.8M12 19.2V21M3 12h1.8M19.2 12H21M5.6 5.6l1.3 1.3M17.1 17.1l1.3 1.3M18.4 5.6l-1.3 1.3M6.9 17.1l-1.3 1.3"/></svg>';
+      if (kind === 'partly') return '<svg ' + s + '><g stroke="#ffcf4d" stroke-width="1.9" stroke-linecap="round"><path d="M7 2.4v1.6M2.4 7h1.6M3.8 3.8l1.2 1.2"/></g><circle cx="7" cy="7" r="3.1" fill="#ffcf4d"/><g transform="translate(2.6 3.4) scale(.88)">' + cloud + '</g></svg>';
+      if (!isDay) return '<svg ' + s + '><path fill="#f2cd72" d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/><path fill="#f2cd72" d="M17.6 2.9l.55 1.55 1.55.55-1.55.55-.55 1.55-.55-1.55-1.55-.55 1.55-.55z"/></svg>';
+      return '<svg ' + s + '><g stroke="#ffcf4d" stroke-width="2" stroke-linecap="round"><path d="M12 2.8v2M12 19.2v2M2.8 12h2M19.2 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></g><circle cx="12" cy="12" r="4.4" fill="#ffcf4d"/></svg>';
     }
     function renderWxChip() {
       const chip = $('wxChip');
       if (!chip) return;
       if (!wxCurrent || heroMode === 'classic') { chip.classList.add('hidden'); return; }
-      const k = wxKind(wxCurrent), d = L();
-      const cond = (d.wxCond && (d.wxCond[k.code] || d.wxCond[3])) || '';
-      /* compact badge text: condition · temperature · cloud % only —
-         no "live weather" prefix, so the badge stays one short line */
-      let txt = cond;
-      if (wxCurrent.temperature_2m != null) txt += ' · ' + num(Math.round(+wxCurrent.temperature_2m) + '°C');
-      if (k.cloud >= 0.2) txt += ' · ' + d.wxCloud + ' ' + num(Math.round(k.cloud * 100) + '%');
-      $('wxText').textContent = txt;
+      const k = wxKind(wxCurrent);
+      /* premium badge: green dot + condition glyph + temperature
+         only. The condition word and cloud % no longer show here —
+         cloud cover still drives the sky layers internally. */
+      $('wxText').textContent = wxCurrent.temperature_2m != null ? num(Math.round(+wxCurrent.temperature_2m)) + '°C' : '';
       const kind = k.thunder ? 'thunder' : (k.snow ? 'snow' : (k.rain > 0 ? 'rain' : (k.fog ? 'fog' : (k.cloud >= 0.55 ? 'cloud' : (k.cloud >= 0.15 ? 'partly' : 'clear')))));
       $('wxIcon').innerHTML = wxIcon(kind, +wxCurrent.is_day === 1);
       chip.classList.remove('hidden');
