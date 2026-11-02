@@ -1513,7 +1513,7 @@
       <svg class="sky-horizon" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 70 V52 H96 V44 H150 V52 H238 V38 H252 V52 H356 V46 H470 l6-14 6 14 H560 V52 H648 V40 a72 30 0 0 1 144 0 V52 H884 V34 h9 V20 h4 V34 h9 V52 H1010 V45 H1108 V52 H1218 l5-20 5 20 H1330 V47 H1440 V70 Z"/></svg>
       <div class="hero-inner">
         <div class="hero-place rise">
-          <h1><span class="pin">◈</span> <span id="placeName">বগুড়া</span></h1>
+          <h1><span class="pin">◈</span> <span id="placeName">ঢাকা</span></h1>
           <span class="hero-date-chip wx-chip hidden" id="wxChip"><span class="wx-dot" aria-hidden="true"></span><span class="wx-icon" id="wxIcon" aria-hidden="true"></span><span id="wxText">—</span></span>
           <span class="place-detail hidden" id="placeDetail"></span>
         </div>
@@ -1557,7 +1557,7 @@
          the real values in. This small synchronous script runs
          DURING parsing, the moment the hero markup above exists,
          and computes the exact same first frame the main script
-         will compute: today's embedded Bogura times (the page's
+         will compute: today's embedded Dhaka times (the page's
          always-default first place, Karachi + Hanafi), both date
          pills, the next prayer and its time, the countdown, the
          clock, the progress line, the phase sky gradient, the
@@ -1581,20 +1581,20 @@
         var num = function (s) { return String(s).replace(/[0-9]/g, function (d) { return BND[+d]; }); };
         var pad = function (n) { return String(n).padStart(2, '0'); };
         /* today's embedded times for the default district — the same
-           delta encoding the main script decodes; only Bogura's row
+           delta encoding the main script decodes; only Dhaka's row
            and the shared Hijri row are duplicated here (~4KB) */
         var B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
         var HIJRI = 'EPtEPuEPvEPwEPxEPyEPzEP0EP1EP2EP3EP4EP5EP6EP7EP8EP9EP+EP/EQAEQBEQCEQDEQEEQFEQGEQHEQIEQJEQKEQLEQMEQNEQOEQPEQQEQREQSEQTEQUEQVEQWEQXEQYEQZEQaEQbEQcEQdEQeEQfEQgEQhEQiEQjEQkEQlEQmEQnEQoEQpEQqEQrEQsEQtEQuEQvEQwEQxEQyEQ0EQ1EQ2EQ3EQ4EQ5EQ6EQ7EQ8EQ9EQ+EQ/ERAERBERCERDEREERFERGERHERIERJERKERLERMERNEROERPERQERRERSERTERUERVERWERXERYERZERaERbERcERdEReERfERgERhERiERjERkERlERmERnERoERpERqERrERsERtERuERvERwERxERyERzER0ER1ER2ER3ER4ER5ER6ER7ER8ER9ER+ER/ESAESBESCESDESEESFESGESHESIESJESKESLESMESOESPESQESRESSESTESUESVESWESXESYESZESaESbEScESdESeESfESgEShESiESjESkESlESmESnESoESpESqESrESsEStESuESvESwESxESyESzES0ES1ES2ES3ES4ES5ES6ES7ES8ES9ES+ES/ETAETBETCETDETEETFETGETHETIETKETLETMETNETOETPETQETRETSETTETUETVETWETXETYETZETaETbETcETdETeETfETgEThETiETjETkETlETmETnEToETpETqETrETsETtETuETvETwETxETyETzET0ET1ET2ET3ET4ET5ET6ET7ET8ET9ET+ET/EUAEUBEUCEUDEUEEUGEUHEUIEUJEUKEULEUMEUNEUOEUPEUQEUREUSEUTEUUEUVEUWEUXEUYEUZEUaEUbEUcEUdEUeEUfEUgEUhEUiEUkEUlEUmEUnEUoEUpEUqEUrEUsEUtEUuEUvEUwEUxEUyEUzEU0EU1EU2EU3EU4EU5EU6EU7EU8EU9EU+EU/EVAEVBEVCEVDEVEEVFEVGEVHEVIEVJEVKEVLEVMEVNEVOEVPEVQEVREVSEVTEVUEVVEVWEVXEVYEVZEVaEVbEVcEVdEVeEVgEVhEViEVjEVkEVlEVmEVnEVoEVpEVqEVrEVsEVtEVuEVvEVwEVxEVyEVzEV0EV1EV2EV3EV4EV5EV6EV7EV8EV9EV+';
-        var BOG = 'EXFjLIPKQuR6ggggffhggfffghffffgggffehhgfffgggffghgfgffghgfffgggfffhhffffgggfffhhgfffggggffhhffffgggfffghgfffhggffgghggffhgffgfghgfffhggfffghggfggggfffhhgfgfggggfghhgfffggffffhhgfggggggffhhgfffghgggghggfffghgffghggggfghgffghhgggfgggffghhggfghhgfgfgghgfghhgfgfghgggghgggfgghgfgghhggffgggfgghhhggghhggfgghgggghggfgfghgggghhhggghgggfgghgggghhhfggghgggghggggghhhgggghgggghggggghhhgggghggghhgggggghhggghhghgghhhggggggghhhhggggghhggghgggghhhhhhgghgggghghgghghghhghghggghhggghghhhhghgggghghhhhghgggghghhghghgghggghhghhhgghghghhhhghgggghgghhhgghggghhghhhgghgghhhghhggggghhhghgghhhghhggggghhhgghghhggghgghhhhhhgggghggghhghggghhhhgghhggghghhggghghgghhhgggghhhgggghhgghhggggghhhggghhhgghghgggghghgfghhggggghhgghhhhggghggffghhhgggghhggghgggfhhhhggghhgfggghhgfghghggghhgffgghhgghhggffghhhgggghhgfghhgfgggghgfghhgfgghhhgfggggffghhhggggggffghhhffghhhgfggggfgghhhffgghggfghghfffghgfgghghgfgghgffghghffgghgffgghhfgghgggffghhffghggffgghhffghggffgghhfffgggffghhgffggghgfgghgffghghfffghgffggghffgghgffghghfffgggffgghhffghggfffghhffggggffgghhefggggfffhhhffggggffggghfffghgffggghffghhgfffgggffgghhffggghffggggeffghhffghggffgghhfffgggffgghhffggggffggghfffghgffggghefghhgfffgghffgghhffggggffggghfffghgffggghffgghgffgggheffhhhffggggfggghhffggghfffghgffggghffggggffgghhffggghfggghgfffhghffgghhffggghffgghgfgggghffgghhffggggfggghhgffgghffghhgffggghfggghhffggghfggghggfggghfggghhffghggffgghhggggghffgghhfggggggggghhffghghfggghggfggghfggghhggggggffghhhgghgghfggghhgfggggfggghhggghggfggghhgfggghgggghggghhghfggghgggggghgggghhggggggfgghghgghghgggggghgggghgggghghgggggggghghgggggghggghgggggghhgghgggggggggghghgghggghhgggggggghggggggggghhghgggggghhgggggggghggghhggggggghgghgggggghgggggghggghgggggghgggghgghgfghgggghghggggggggghhgggggggggfhhgggghgggfggggggfhhhggggggggghhggffhgggggghgggfhgggggghggffhggggghhggffgggggghhgggfhgggffgggggghhggffhggggfghgffghggggfhhggffgggggfhhggffhggffgghgggfhgggffhhggffgggfgfhhfgffhgggffgggfgfhhggffhggfffghggffhgfgffhhgfgfggggffhggfffghggffhgffffhhggffgggfffhhggffggffgfhgggffhhgfffgggfffhhfgffgggffehgggffghffffhggfffggggffhhgfffggffffhhgffeggggffhgffffghgfffhgggffggffffhhgffeggffefhggfffghggffhgffffghgfffgggffehgffffghggffhggfffggffffhhgfffgggfffggfgffhhgffeggffefhhgfffgggfffggffffhhgfffggggffhgffffghgfffhggfffghgfffggffffhggfffghggffhgffffghgfffgggfffhhgfffggffffhhggffgggfffgggfffhhffffgggffghhgggfgggfffhhgfffggffffghggfghggfffghgfgfhhgfffggggfghhgfffggffffhhgggggggfffhhgffg';
+        var DHA = 'ETFeLEPHQqR1ghgfffhggfffggffffhhgfffggggffggffffhhgfffgggfffghgfffhgfgfggggfffhhgfffgggfgfghfgffhggfffghgfffhggffgghgfffggfgffhhgfgfgggffghgggffghgfffgggfgghhggffghffffhggffgghgggfhggffgghgfffhggggfghgffghggggfghgffghhggfggggfgfhhggfggggfgfhhggfgghgfgghghgffghgggghhgfggggggffhhggggghgfgghgggfgghhggghhgfgghggggfghggfghhhggggggggghhgggghhgfgggghggghhggggghgggghhhgggggggghhhgggghhhggggggggghhhggghhghggggggghhhhghgghgggghghgghghghgghhhghghgggghghhggghgghhgghhgghhhgggggghhhhhhgggghghhhgghggghhghhhgghggghhgghhgghhgghhgghhgghhgghggghhhhhhgggggghhhhghhhgghggghgghhhghgghhhghhgghggghhghghghhggghgggghhhhghghhhhggggggghhhhggghhhgghgggggghhhggghhhhghhhgggggghggghhggghhhhgggghhggghgggghhhhgfghhgggggghgghhhhfgghhggggghhgfghghggghhggghghhffghggggghhhgggghggfghghfgghhhgfgghgggghghffhhhggggghhffghgggggghhffghhgggghghffgghggfghhhfggggggfghhhffggggggghhhfffgggffghhhgfgghgfgghghffgghgffggghgfghhgffggghfgghhgfffgghgfgghgffghggffgghhffggggfffhhhfggggggfgghhffghggfffgghffgghgffghggffgghhfffgggffgghhffghggffggghfffghgffggggffgghhfffhggffggghffgghgffggghfffghgffggghffggggfffhhgffggghffgghgeffgghffggggffgghhffggggfffghhffggggffghghfffghgffggghffgghgffggghfgfgggffgghhefggggfffghhffggghffggggffgghhfffgggffghhhffggggffggghfggghhfffgggffgghhffggggffgghhffggghfgfghgffggghffggghffgghgfgggghffghhggfggghfggghhfffgggffgghhfgggghffgghgffggghgggghhffggghfgghhgffggghgggghhffggggfggghhgfggghfgggggffghhhggggghffgghgggggghfggghhgfggggfgghhhggggghfghghggfggghfggghhggghgggggghhffgggggggghhgghgghfgghgggggghhgggggggggghhgggggggghhghgggghgfgggghgggghgggghgggghgghgggghgggggghhgghggggggggghhghhggggggggggggggghgggghghhhhggggggggggggghgghgggggghhggggggghghgggggghghgggggggghghgggghgggghggggggggggghhghgggggggghghggfghgggghgggfgghgggghggggfghgggghggggggghggfhhggfghgggggghgggfhgggfgghgggfhggggghgggffghgggghggggfhhggffgggggghhggffhggggfghggfghggfgfggggffhhgggfhgggfgghgggfhggfffhhggffgggggfhhfgfggggfffhggggfhhggffgggfffhhggffhggggfggffffhhggffgggfffhhgggfggggffhgffffhhggffgggfffhhggffggffffhggfgfghggffhggfffggfgffhhgfffggggffhgfffeghgfffhgggffggffffhhgfffggggffhgffffghgfffhgggffggfffeghgfffhgggffggffffhhgfffgggfffhgfgffghgfffgggffehgffffghgfffhgggffggffffghgfffhgffffgggfefghggffhgffffgggfffhhgfffggfffeggggffhhgfffggffffgggfffhhgfffggffffghggffhggfffgggfffhhfffggggfffghggffhgffgfgggfffghgfffhggfffghfgffhggfffghgffggggfffhgggffghffgfhggffgghggffgggfffhhgfffgggfgghhggffggffffhhgfggggggffhhgffgghgggf';
         var now = new Date();
         var di = Math.round((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(2026, 9, 1)) / 86400000);
         if (di < 0 || di >= 396) return; /* outside the embedded year the main script's own flow takes over */
         var cur = [], p, q, d;
-        for (p = 0; p < 6; p++) cur.push(B64.indexOf(BOG[2 * p]) * 64 + B64.indexOf(BOG[2 * p + 1]));
+        for (p = 0; p < 6; p++) cur.push(B64.indexOf(DHA[2 * p]) * 64 + B64.indexOf(DHA[2 * p + 1]));
         var series = [cur.slice()], idx = 12, nd;
         for (d = 1; d <= di + 1 && d < 396; d++) {
           nd = [];
-          for (q = 0; q < 6; q++) nd.push(cur[q] + (B64.indexOf(BOG[idx++]) - 32));
+          for (q = 0; q < 6; q++) nd.push(cur[q] + (B64.indexOf(DHA[idx++]) - 32));
           cur = nd; series.push(cur.slice());
         }
         var PRAYERS = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
@@ -1677,7 +1677,7 @@
         var wx = null;
         try {
           var raw = localStorage.getItem('waqtWx2');
-          if (raw) { var o = JSON.parse(raw); if (o && o.key === '24.83,89.33' && o.data && o.data.temperature_2m != null) wx = o.data; }
+          if (raw) { var o = JSON.parse(raw); if (o && o.key === '23.78,90.36' && o.data && o.data.temperature_2m != null) wx = o.data; }
         } catch (e) {}
         var wk = null;
         if (wx) {
@@ -5670,8 +5670,8 @@
     buildTicks();
     bindEvents();
     applyLang();
-    const bogura = DISTRICTS.find((d) => d[0] === 'bogura');
-    setPlace(districtPlace(bogura));
+    const dhaka = DISTRICTS.find((d) => d[0] === 'dhaka');
+    setPlace(districtPlace(dhaka));
     /* Restore the view named in the URL hash — this is what keeps a
        refresh on the page the user was actually looking at. */
     const startView = window.location.hash.replace(/^#/, '');
