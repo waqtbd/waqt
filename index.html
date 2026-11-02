@@ -1679,6 +1679,17 @@
           var raw = localStorage.getItem('waqtWx2');
           if (raw) { var o = JSON.parse(raw); if (o && o.key === '23.78,90.36' && o.data && o.data.temperature_2m != null) wx = o.data; }
         } catch (e) {}
+        /* per-place cache map ('waqtWx3'): the legacy slot above
+           holds only the LAST place fetched, so after a location
+           fix it holds GPS weather and Dhaka's own cached badge
+           would be missed here — check the map for Dhaka's entry
+           before giving up on a first-paint badge */
+        if (!wx) {
+          try {
+            var rawM = localStorage.getItem('waqtWx3');
+            if (rawM) { var mp = JSON.parse(rawM); var ent = mp && mp['23.78,90.36']; if (ent && ent.data && ent.data.temperature_2m != null) wx = ent.data; }
+          } catch (e) {}
+        }
         var wk = null;
         if (wx) {
           var code = +wx.weather_code;
@@ -5429,9 +5440,12 @@
        thunderstorm codes add occasional localised lightning blooms,
        fog codes lay a drifting mist over the horizon. The hero also
        gains a live weather chip (condition + temperature + cloud %).
-       Refetched when the district changes, cached ~30 minutes in
-       localStorage, refreshed periodically while open. Any failure
-       (offline, API down) silently leaves the pure time-of-day sky.
+       Refetched when the district changes, cached per place in
+       localStorage, refreshed periodically while open. The shown
+       district's weather never depends on geolocation: it loads
+       from the district's own coordinates, starts from that
+       district's own cache, and a failed fetch retries on its own
+       instead of leaving the badge empty.
        ================================================================ */
     const WX_RAIN = [51,53,55,56,57,61,63,65,66,67,80,81,82];
     const WX_SNOW = [71,73,75,77,85,86];
@@ -5639,32 +5653,124 @@
       }
       chip.classList.remove('hidden');
     }
+    /* ---------- weather cache: legacy slot + per-place map ----------
+       The cache used to be ONE slot ('waqtWx2') holding only the
+       LAST place fetched. After a single "আমার অবস্থান" fix that slot
+       held GPS weather, so the district actually on screen (Dhaka by
+       default) had NO cached weather at all: its badge depended
+       entirely on the one live fetch at boot, and when that fetch
+       failed it was silently swallowed — no badge until the visitor
+       happened to tap location and re-run the fetch by hand. The
+       map ('waqtWx3') keeps each recent place's weather under its
+       own coordinates, so the shown district's badge and sky always
+       start from that district's own last known weather, location
+       or no location. The legacy slot is still written on every
+       fetch, exactly as before, for the first-paint script. */
+    function wxCacheRead(key) {
+      try {
+        const rawM = localStorage.getItem('waqtWx3');
+        if (rawM) {
+          const m = JSON.parse(rawM);
+          const e = m && m[key];
+          if (e && e.data) return { key: key, ts: e.ts || 0, data: e.data };
+        }
+      } catch (e) { /* fall through to the legacy slot */ }
+      try {
+        const raw = localStorage.getItem('waqtWx2');
+        if (raw) {
+          const o = JSON.parse(raw);
+          if (o && o.key === key && o.data) return o;
+        }
+      } catch (e) { /* storage unavailable */ }
+      return null;
+    }
+    function wxCacheWrite(key, data, ts) {
+      try { localStorage.setItem('waqtWx2', JSON.stringify({ key: key, ts: ts, data: data })); } catch (e) {}
+      try {
+        let m = {};
+        const rawM = localStorage.getItem('waqtWx3');
+        if (rawM) { const p = JSON.parse(rawM); if (p && typeof p === 'object') m = p; }
+        m[key] = { ts: ts, data: data };
+        const keys = Object.keys(m);
+        if (keys.length > 10) {
+          keys.sort((a, b) => (m[a].ts || 0) - (m[b].ts || 0));
+          for (let i = 0; i < keys.length - 10; i++) delete m[keys[i]];
+        }
+        localStorage.setItem('waqtWx3', JSON.stringify(m));
+      } catch (e) { /* the cache is best-effort */ }
+    }
+    /* A failed fetch is no longer the end of the story: it schedules
+       its own retries with growing gaps (5s → 20s → 1m → 3m), and a
+       success or a place change cancels them. This — not the
+       visitor's location permission — is what guarantees the badge
+       eventually fills for the district on screen. */
+    let wxRetryTimer = null, wxRetryKey = null, wxRetryStep = 0;
+    function wxScheduleRetry(key) {
+      if (wxRetryKey !== key) { wxRetryKey = key; wxRetryStep = 0; }
+      if (wxRetryTimer) { clearTimeout(wxRetryTimer); wxRetryTimer = null; }
+      if (wxRetryStep >= 4) return;
+      const delays = [5000, 20000, 60000, 180000];
+      const delay = delays[Math.min(wxRetryStep, delays.length - 1)];
+      wxRetryStep++;
+      wxRetryTimer = setTimeout(() => {
+        wxRetryTimer = null;
+        if (!state.place || state.place.lat == null || state.place.lon == null) return;
+        if (wxKey(state.place.lat, state.place.lon) !== key) return; /* the place moved on */
+        if (wxForKey === key && wxCurrent && (Date.now() - wxFetchedAt) < 1800000) return; /* data arrived meanwhile */
+        fetchWeather();
+      }, delay);
+    }
+    /* One live fetch for a place key, from that place's OWN
+       coordinates. On success the result is cached and applied if
+       that place is still the one on screen. Any failure returns
+       false so the caller can retry — never silently terminal. */
+    async function wxFetchNow(key) {
+      const place = state.place;
+      if (!place || place.lat == null || place.lon == null) return false;
+      if (wxKey(place.lat, place.lon) !== key) return false;
+      try {
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + place.lat + '&longitude=' + place.lon +
+          '&current=weather_code,temperature_2m,apparent_temperature,relative_humidity_2m,cloud_cover,is_day,precipitation,wind_speed_10m,wind_direction_10m&timezone=auto';
+        const r = await fetch(url);
+        if (!r || !r.ok) return false;
+        const j = await r.json();
+        if (!j || !j.current) return false;
+        const ts = Date.now();
+        wxCacheWrite(key, j.current, ts);
+        if (state.place && state.place.lat != null && state.place.lon != null && wxKey(state.place.lat, state.place.lon) === key) {
+          wxForKey = key;
+          wxFetchedAt = ts;
+          if (wxRetryKey === key) { wxRetryStep = 0; if (wxRetryTimer) { clearTimeout(wxRetryTimer); wxRetryTimer = null; } }
+          applyWeather(j.current);
+        }
+        return true;
+      } catch (e) { return false; }
+    }
     async function fetchWeather() {
       try {
         if (!state.place || state.place.lat == null || state.place.lon == null) return;
         const key = wxKey(state.place.lat, state.place.lon);
         if (wxForKey === key && wxCurrent && (Date.now() - wxFetchedAt) < 1800000) { applyWeather(wxCurrent); return; }
-        try {
-          const raw = localStorage.getItem('waqtWx2');
-          if (raw) {
-            const o = JSON.parse(raw);
-            if (o && o.key === key && (Date.now() - o.ts) < 1800000 && o.data && o.data.temperature_2m != null) {
-              wxForKey = key; wxFetchedAt = o.ts; applyWeather(o.data); return;
-            }
-          }
-        } catch (e) { /* storage unavailable: fetch fresh below */ }
-        const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + state.place.lat + '&longitude=' + state.place.lon +
-          '&current=weather_code,temperature_2m,apparent_temperature,relative_humidity_2m,cloud_cover,is_day,precipitation,wind_speed_10m,wind_direction_10m&timezone=auto';
-        const r = await fetch(url);
-        if (!r || !r.ok) return; /* silent fallback: time-only sky */
-        const j = await r.json();
-        if (!j || !j.current) return;
-        wxForKey = key;
-        wxFetchedAt = Date.now();
-        applyWeather(j.current);
-        try { localStorage.setItem('waqtWx2', JSON.stringify({ key: key, ts: wxFetchedAt, data: j.current })); } catch (e) {}
-      } catch (e) { /* offline: the time-of-day sky simply stays */ }
+        /* the shown district's OWN cached weather, whatever its age,
+           whenever nothing for this district is on screen yet: the
+           badge and sky start from the district's last known weather
+           and the fresh fetch below only replaces it */
+        const cached = wxCacheRead(key);
+        if (cached && cached.data && cached.data.temperature_2m != null && wxForKey !== key) {
+          wxForKey = key; wxFetchedAt = cached.ts || 0; applyWeather(cached.data);
+        }
+        if (wxForKey === key && wxCurrent && (Date.now() - wxFetchedAt) < 1800000) return;
+        const ok = await wxFetchNow(key);
+        if (!ok) wxScheduleRetry(key);
+      } catch (e) {
+        /* offline: any cached weather above stays on screen, and a
+           retry is still scheduled instead of giving up silently */
+        try { if (state.place && state.place.lat != null && state.place.lon != null) wxScheduleRetry(wxKey(state.place.lat, state.place.lon)); } catch (e2) {}
+      }
     }
+    /* the network coming back is itself a reason to try again at
+       once, instead of waiting for the periodic refresh */
+    window.addEventListener('online', () => { fetchWeather(); });
 
     /* ---------------- init ---------------- */
     buildTicks();
