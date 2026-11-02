@@ -149,7 +149,7 @@
       /* twinkling star layer — visible only in the night phases
          (opacity comes from --sky-star); pure CSS dots, no canvas */
       .sky-stars{
-        position:absolute; inset:0; pointer-events:none; opacity:var(--sky-star, 0);
+        position:absolute; inset:-3%; pointer-events:none; opacity:var(--sky-star, 0);
         background-image:
           radial-gradient(1.6px 1.6px at 12% 22%, #fff 50%, transparent 51%),
           radial-gradient(1.2px 1.2px at 28% 64%, #ffe9ad 50%, transparent 51%),
@@ -185,84 +185,135 @@
          Driven by --wx-* variables from the Open-Meteo fetch; every layer
          defaults to fully transparent, so no weather data = pure time sky.
          Realism pass: the JS also blends the sky colours themselves toward
-         overcast grey as cloud cover rises, positions a real sun / moon
-         disc on its arc, stacks THREE cloud decks (far / mid / storm-dark)
-         drifting at different speeds for parallax depth, and draws the
-         rain on a canvas with wind slant — so a cloudy noon no longer
-         looks like sunshine. */
-      .sky-veil{position:absolute; inset:0; pointer-events:none; background:#59636d; opacity:var(--wx-veil, 0); transition:opacity 1.2s ease}
-      /* sun disc: travels the real sunrise→sunset arc (--sun-x / --sun-y
-         are set from JS each minute); clouds drift IN FRONT of it */
+         overcast grey as cloud cover rises, moves a soft sun / moon glow
+         along its arc, stacks THREE cloud decks (far / mid / storm-dark)
+         of huge blurred vapour masses drifting at different speeds for
+         parallax depth, and draws the rain on a canvas with wind slant —
+         so a cloudy noon no longer looks like sunshine. */
+      /* FEATHER RULE for every sky layer: no layer may ever show a
+         straight rectangular bound. Each layer is oversized well past
+         the hero's edges (negative inset), built only from radial
+         gradients that fade to transparent, and softened further with
+         blur and/or a mask gradient — including while it animates.
+         (The old mist layer was inset:0 and slid side to side, which
+         dragged its hard vertical edge across the hero as a visible
+         moving rectangle; the oversized insets below make that
+         impossible for every moving layer.) */
+      .sky-veil{
+        position:absolute; inset:-14%; pointer-events:none; opacity:var(--wx-veil, 0);
+        background:radial-gradient(ellipse 90% 80% at 50% 38%, rgba(116,128,140,.82) 0%, rgba(108,120,132,.62) 52%, rgba(100,112,124,.34) 76%, rgba(96,108,120,0) 100%);
+        filter:blur(16px); transition:opacity 1.2s ease;
+      }
+      /* sun: NO disc — a broad, soft glow travelling the real
+         sunrise→sunset arc (--sun-x / --sun-y are set from JS each
+         minute), the way a phone weather app renders it: one wide
+         radial wash whose brightness melts into the sky with no
+         edge anywhere, and the cloud masses drift IN FRONT of it */
       .sky-sun{
         position:absolute; left:var(--sun-x, 78%); top:var(--sun-y, 16%);
-        width:58px; height:58px; margin:-29px 0 0 -29px; border-radius:50%; pointer-events:none;
-        background:radial-gradient(circle, #fffdf4 0 30%, #ffedb5 52%, rgba(255,214,110,.55) 68%, rgba(255,214,110,0) 74%);
-        box-shadow:0 0 44px 20px rgba(255,220,130,.38), 0 0 120px 60px rgba(255,205,95,.16);
+        width:380px; height:380px; margin:-190px 0 0 -190px; border-radius:50%; pointer-events:none;
+        background:radial-gradient(circle, rgba(255,253,240,.88) 0%, rgba(255,246,205,.60) 24%, rgba(255,230,160,.34) 44%, rgba(255,216,130,.15) 62%, rgba(255,210,120,0) 76%);
+        filter:blur(7px);
         opacity:var(--sun-op, 0); transition:opacity 1.2s ease;
       }
-      /* crescent moon on the night arc (Maghrib → Fajr) */
+      /* crescent moon on the night arc (Maghrib → Fajr), its edge
+         softened and wrapped in a wide feathered halo so nothing
+         crisp or square ever shows */
       .sky-moon{
         position:absolute; left:var(--moon-x, 22%); top:var(--moon-y, 14%);
         width:40px; height:40px; margin:-20px 0 0 -20px; border-radius:50%; pointer-events:none;
         box-shadow:11px 5px 0 0 #f7f0d4;
         transform:rotate(-28deg);
-        filter:drop-shadow(0 0 12px rgba(247,240,212,.35));
+        filter:blur(.6px) drop-shadow(0 0 14px rgba(247,240,212,.4));
         opacity:var(--moon-op, 0); transition:opacity 1.2s ease;
       }
+      .sky-moon::before{
+        content:""; position:absolute; inset:-52px; border-radius:50%; pointer-events:none;
+        background:radial-gradient(circle, rgba(243,238,214,.34) 0%, rgba(243,238,214,.14) 42%, rgba(243,238,214,0) 68%);
+        filter:blur(4px);
+      }
+      /* ---------- cloud decks, MIUI-weather style ----------
+         The reference is a phone weather app: clouds are NOT shapes.
+         Each deck is a field of HUGE, heavily blurred billowing
+         masses — lighter and darker patches of vapour that drift
+         slowly and seamlessly, like fog banks crossing the sky.
+         Rules that keep it that way:
+         • every mass is a wide radial gradient whose alpha is
+           already ~0 well inside its own tile, and no mass crosses
+           a tile edge — so the repeat loop can never show a seam,
+           a cut-off blob, or a travelling outline;
+         • each deck is blurred hard (16–30px) on top of the soft
+           gradients, so no contour survives;
+         • drift is slow (7–13 px/s) and the loop distance equals
+           the tile width exactly — no jump, ever. */
       .sky-clouds{
-        position:absolute; inset:-4% -2%; pointer-events:none; background-repeat:repeat-x;
-        filter:brightness(var(--cloud-bright, 1)); transition:opacity 1.2s ease;
+        position:absolute; inset:-14% -16%; pointer-events:none; background-repeat:repeat-x;
+        transition:opacity 1.2s ease;
+        -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 14%, #000 84%, transparent 100%);
+        mask-image:linear-gradient(180deg, transparent 0, #000 14%, #000 84%, transparent 100%);
       }
-      /* far deck: small, soft, slow — high thin cloud */
+      /* far deck: high, thin vapour — very wide, very faint bright
+         patches sliding slowest, felt more than seen */
       .sky-clouds.far{
-        opacity:var(--wx-cloud-far, 0); animation:skyDriftFar 170s linear infinite;
+        opacity:var(--wx-cloud-far, 0); animation:skyDriftFar 240s linear infinite;
+        filter:blur(16px) brightness(var(--cloud-bright, 1));
         background-image:
-          radial-gradient(ellipse 210px 44px at 12% 30%, rgba(255,255,255,.75) 0%, transparent 68%),
-          radial-gradient(ellipse 300px 56px at 44% 16%, rgba(255,255,255,.6) 0%, transparent 70%),
-          radial-gradient(ellipse 240px 48px at 74% 34%, rgba(226,232,238,.65) 0%, transparent 68%),
-          radial-gradient(ellipse 340px 60px at 96% 12%, rgba(255,255,255,.55) 0%, transparent 70%);
-        background-size:900px 240px;
+          radial-gradient(ellipse 560px 120px at 18% 34%, rgba(255,255,255,.50) 0%, rgba(255,255,255,.30) 38%, rgba(255,255,255,.10) 64%, transparent 82%),
+          radial-gradient(ellipse 640px 110px at 55% 24%, rgba(255,255,255,.42) 0%, rgba(255,255,255,.24) 40%, rgba(255,255,255,.08) 66%, transparent 82%),
+          radial-gradient(ellipse 520px 130px at 83% 46%, rgba(232,238,244,.44) 0%, rgba(232,238,244,.25) 40%, rgba(232,238,244,.08) 66%, transparent 82%);
+        background-size:1600px 260px;
       }
-      @keyframes skyDriftFar{from{background-position:0 0} to{background-position:900px 0}}
-      /* mid deck: full puffs with shaded undersides, drifting the other way */
+      @keyframes skyDriftFar{from{background-position:0 0} to{background-position:1600px 0}}
+      /* mid deck: the main billowing mass — broad lit banks with
+         soft shaded bellies, blurred until only brightness moves */
       .sky-clouds.mid{
-        opacity:var(--wx-cloud-mid, 0); animation:skyDriftMid 105s linear infinite;
+        opacity:var(--wx-cloud-mid, 0); animation:skyDriftMid 200s linear infinite;
+        filter:blur(26px) brightness(var(--cloud-bright, 1));
         background-image:
-          radial-gradient(ellipse 250px 74px at 16% 26%, rgba(255,255,255,.95) 0%, transparent 66%),
-          radial-gradient(ellipse 260px 60px at 20% 40%, rgba(168,178,190,.55) 0%, transparent 70%),
-          radial-gradient(ellipse 330px 88px at 52% 14%, rgba(255,255,255,.9) 0%, transparent 66%),
-          radial-gradient(ellipse 330px 66px at 56% 30%, rgba(158,168,182,.5) 0%, transparent 70%),
-          radial-gradient(ellipse 270px 78px at 84% 30%, rgba(250,252,253,.92) 0%, transparent 66%),
-          radial-gradient(ellipse 280px 58px at 87% 44%, rgba(168,178,190,.52) 0%, transparent 70%);
-        background-size:1080px 300px;
+          radial-gradient(ellipse 820px 170px at 24% 30%, rgba(255,255,255,.62) 0%, rgba(255,255,255,.40) 38%, rgba(250,252,253,.15) 62%, transparent 80%),
+          radial-gradient(ellipse 900px 200px at 30% 48%, rgba(243,247,250,.55) 0%, rgba(231,237,243,.34) 42%, rgba(213,221,231,.12) 66%, transparent 82%),
+          radial-gradient(ellipse 760px 150px at 27% 62%, rgba(148,160,176,.34) 0%, rgba(148,160,176,.17) 46%, transparent 76%),
+          radial-gradient(ellipse 860px 180px at 72% 27%, rgba(255,255,255,.60) 0%, rgba(255,255,255,.38) 38%, rgba(250,252,253,.14) 62%, transparent 80%),
+          radial-gradient(ellipse 880px 210px at 74% 44%, rgba(242,246,249,.54) 0%, rgba(230,236,242,.33) 42%, rgba(212,220,230,.12) 66%, transparent 82%),
+          radial-gradient(ellipse 700px 140px at 70% 60%, rgba(142,154,170,.32) 0%, rgba(142,154,170,.15) 48%, transparent 76%);
+        background-size:1800px 340px;
       }
-      @keyframes skyDriftMid{from{background-position:0 0} to{background-position:-1080px 0}}
-      /* storm deck: low, dark, heavy — fades in with thick cover / rain */
+      @keyframes skyDriftMid{from{background-position:0 0} to{background-position:-1800px 0}}
+      /* storm deck: low, dark, heavy fog banks — neutral blue-greys
+         only (never brown), the widest and blurriest of the three */
       .sky-clouds.dark{
-        opacity:var(--wx-cloud-dark, 0); animation:skyDriftDark 64s linear infinite;
+        opacity:var(--wx-cloud-dark, 0); animation:skyDriftDark 160s linear infinite;
+        filter:blur(30px) brightness(var(--cloud-bright, 1));
         background-image:
-          radial-gradient(ellipse 380px 96px at 22% 18%, rgba(88,98,110,.88) 0%, transparent 68%),
-          radial-gradient(ellipse 460px 110px at 58% 6%, rgba(70,80,94,.9) 0%, transparent 68%),
-          radial-gradient(ellipse 400px 92px at 90% 22%, rgba(96,106,118,.85) 0%, transparent 68%),
-          radial-gradient(ellipse 560px 120px at 44% 36%, rgba(58,68,82,.75) 0%, transparent 70%);
-        background-size:1240px 320px;
+          radial-gradient(ellipse 1000px 220px at 26% 30%, rgba(104,116,130,.58) 0%, rgba(88,100,114,.38) 40%, rgba(76,88,102,.13) 66%, transparent 82%),
+          radial-gradient(ellipse 1100px 200px at 62% 26%, rgba(88,100,114,.60) 0%, rgba(74,86,100,.39) 40%, rgba(64,76,90,.13) 66%, transparent 82%),
+          radial-gradient(ellipse 760px 200px at 80% 40%, rgba(110,122,136,.55) 0%, rgba(94,106,120,.35) 42%, rgba(82,94,108,.12) 66%, transparent 82%),
+          radial-gradient(ellipse 1200px 220px at 45% 55%, rgba(66,78,92,.50) 0%, rgba(58,70,84,.31) 44%, rgba(52,64,78,.10) 68%, transparent 84%);
+        background-size:2000px 380px;
       }
-      @keyframes skyDriftDark{from{background-position:0 0} to{background-position:1240px 0}}
-      /* canvas rain / snow — drops are drawn by JS with wind slant */
+      @keyframes skyDriftDark{from{background-position:0 0} to{background-position:2000px 0}}
+      /* canvas rain / snow — drops are drawn by JS with wind slant;
+         the canvas itself is fully transparent between drops */
       .sky-rain-canvas{
         position:absolute; inset:0; width:100%; height:100%; pointer-events:none;
         opacity:var(--wx-rain, 0); transition:opacity .9s ease;
       }
+      /* mist: oversized far past both side edges and blurred, so its
+         slow sideways drift can never drag a straight edge into view */
       .sky-mist{
-        position:absolute; inset:0; pointer-events:none; opacity:var(--wx-mist, 0); transition:opacity 1.2s ease;
-        background:linear-gradient(180deg, rgba(233,237,240,.22) 0%, rgba(233,237,240,.55) 55%, rgba(233,237,240,.88) 82%, rgba(233,237,240,.95) 100%);
+        position:absolute; inset:-8% -20%; pointer-events:none; opacity:var(--wx-mist, 0); transition:opacity 1.2s ease;
+        background:linear-gradient(180deg, rgba(233,237,240,.16) 0%, rgba(233,237,240,.42) 48%, rgba(233,237,240,.78) 78%, rgba(233,237,240,.92) 100%);
+        filter:blur(10px);
+        -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%);
+        mask-image:linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%);
         animation:skyMist 24s ease-in-out infinite alternate;
       }
-      @keyframes skyMist{from{transform:translateX(-1.6%)} to{transform:translateX(1.6%)}}
+      @keyframes skyMist{from{transform:translateX(-1.2%)} to{transform:translateX(1.2%)}}
       /* lightning: a bright bloom from a random point near the top of
-         the storm deck (--bolt-x set by JS), not a flat white sheet */
+         the storm deck (--bolt-x set by JS), not a flat white sheet;
+         oversized + blurred so its bounds can never show */
       .sky-flash{
-        position:absolute; inset:0; pointer-events:none; opacity:0;
+        position:absolute; inset:-16%; pointer-events:none; opacity:0; filter:blur(6px);
         background:radial-gradient(720px 420px at var(--bolt-x, 50%) -6%, rgba(255,255,255,.96) 0%, rgba(205,225,255,.5) 42%, transparent 72%);
       }
       .sky-flash.on{opacity:.9}
@@ -292,15 +343,24 @@
       .hero-mode-toggle button.on{background:var(--gold); color:#231a04; box-shadow:0 2px 8px rgba(0,0,0,.25)}
       .hero-mode-toggle button:active{transform:scale(.96)}
       @media (max-width:380px){ .hero-mode-toggle button{padding:7px 9px; font-size:12.5px} }
-      .wx-chip{align-items:center; gap:8px}
+      /* compact weather badge: one short line, right-aligned on the
+         district row; it may shrink (ellipsis) but must NEVER wrap
+         or push the hero taller, even on the narrowest phone */
+      .wx-chip{
+        align-items:center; gap:6px; justify-self:end; margin-top:7px;
+        padding:5px 10px; font-size:12.5px; font-weight:600; line-height:1.25;
+        white-space:nowrap; max-width:52vw; min-width:0;
+      }
       .wx-chip:not(.hidden){display:inline-flex}
+      .wx-chip .wx-icon svg{width:16px; height:16px}
+      @media (max-width:380px){ .wx-chip{font-size:11.5px; padding:4px 8px; max-width:48vw} }
       .wx-dot{width:8px; height:8px; flex:none; border-radius:50%; background:#2fbf71; box-shadow:0 0 0 3px rgba(47,191,113,.25); animation:wxPulse 2.2s ease-in-out infinite}
       @keyframes wxPulse{0%,100%{box-shadow:0 0 0 2px rgba(47,191,113,.30)} 50%{box-shadow:0 0 0 5px rgba(47,191,113,.10)}}
       @media (prefers-reduced-motion: reduce){ .wx-dot{animation:none} }
       .wx-icon{display:inline-flex; flex:none}
       .wx-icon svg{width:19px; height:19px}
-      #wxText{font-variant-numeric:tabular-nums}
-      /* ---------- classic hero (আগের হিরো): the original emerald look ----------
+      #wxText{font-variant-numeric:tabular-nums; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0}
+      /* ---------- classic hero (Classic): the original emerald look ----------
          Restores the pre-living-sky hero exactly: deep emerald gradient,
          gold glows, star pattern, light text, Quran book — every sky and
          weather layer switched off. The toggle itself stays visible so
@@ -323,12 +383,21 @@
       html.hero-classic .sky-horizon,
       html.hero-classic .wx-chip{display:none !important}
       html.hero-classic .hero-mode-toggle{background:rgba(6,30,22,.34); border-color:rgba(255,255,255,.38)}
-      .hero-pattern{position:absolute; inset:0; opacity:.09; pointer-events:none}
+      /* The 8-point star pattern is a textile-like texture — it belongs
+         ONLY to the classic emerald hero. A real sky has no pattern, so
+         in Realistic (living sky) mode the layer is removed completely. */
+      .hero-pattern{position:absolute; inset:0; opacity:.09; pointer-events:none; display:none}
+      html.hero-classic .hero-pattern{display:block}
       .hero-inner{position:relative; max-width:1060px; margin:0 auto; padding:34px 18px 30px}
       /* the location chip sits on its OWN line under the place heading —
          the labelled text ("জেলা: … · উপজেলা: …") is long, and sharing the
          heading's line made it overlap the heading on phone widths */
-      .hero-place{display:flex; flex-direction:column; align-items:flex-start; gap:9px}
+      /* district heading row: name on the left, the compact live-weather
+         badge on the right of the SAME row — the badge lives inside the
+         hero's existing space, so Realistic mode's hero is exactly as
+         tall as the Classic hero (no extra weather line, ever) */
+      .hero-place{display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; column-gap:10px; row-gap:9px}
+      .hero-place .place-detail{grid-column:1 / -1; justify-self:start}
       .hero-place h1{font-size:clamp(30px,6vw,46px); margin:0; font-weight:700; letter-spacing:.01em}
       .hero-place .pin{color:var(--gold); font-size:.8em}
       .place-detail{
@@ -395,8 +464,9 @@
         box-shadow:var(--shadow); color:#f4efe0; padding:15px 17px 13px; position:relative; overflow:hidden;
       }
       .mm-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
-      .mm-title{font-size:17.5px; font-weight:700; margin:0}
-      .mm-title .mm-dot{color:var(--gold)}
+      .mm-title{font-size:17.5px; font-weight:700; margin:0; display:flex; align-items:center; gap:9px}
+      .mm-kaaba{width:27px; height:27px; flex:none; display:inline-grid; place-items:center; background:rgba(255,255,255,.10); border:1px solid rgba(233,217,174,.5); border-radius:8px; padding:3px}
+      .mm-kaaba svg{width:100%; height:100%; display:block}
       .mm-note{margin-left:auto; font-size:12.5px; color:var(--gold-soft); opacity:.9; font-weight:600}
       .mm-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; margin-top:11px}
       @media (max-width:520px){ .mm-grid{grid-template-columns:1fr} }
@@ -1114,18 +1184,18 @@
       <div class="hero-inner">
         <div class="hero-toprow rise">
           <div class="hero-mode-toggle" role="group" aria-label="Hero style">
-            <button type="button" id="heroModeLiving" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 18a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 18h10.5Z"/><path d="M12 3v1.5M4.9 5.9l1 1M19.1 5.9l-1 1"/></svg><span data-i18n="heroLiving">জীবন্ত আকাশ</span></button>
-            <button type="button" id="heroModeClassic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5Z"/></svg><span data-i18n="heroClassic">আগের হিরো</span></button>
+            <button type="button" id="heroModeLiving" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 18a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 18h10.5Z"/><path d="M12 3v1.5M4.9 5.9l1 1M19.1 5.9l-1 1"/></svg><span data-i18n="heroLiving">Realistic</span></button>
+            <button type="button" id="heroModeClassic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5Z"/></svg><span data-i18n="heroClassic">Classic</span></button>
           </div>
         </div>
         <div class="hero-place rise">
           <h1><span class="pin">◈</span> <span id="placeName">বগুড়া</span></h1>
+          <span class="hero-date-chip wx-chip hidden" id="wxChip"><span class="wx-dot" aria-hidden="true"></span><span class="wx-icon" id="wxIcon" aria-hidden="true"></span><span id="wxText">—</span></span>
           <span class="place-detail hidden" id="placeDetail"></span>
         </div>
         <div class="hero-dates rise d1">
           <span class="hero-date-chip" id="gregDate">—</span>
           <span class="hero-date-chip" id="hijriDate">—</span>
-          <span class="hero-date-chip wx-chip hidden" id="wxChip"><span class="wx-dot" aria-hidden="true"></span><span class="wx-icon" id="wxIcon" aria-hidden="true"></span><span id="wxText">—</span></span>
         </div>
         <div class="hero-grid">
           <div class="rise d2">
@@ -1162,12 +1232,12 @@
       <section class="block hidden" id="mmSection" style="margin-top:18px" aria-label="Makkah and Madinah now">
         <div class="mm-card">
           <div class="mm-head">
-            <h2 class="mm-title"><span class="mm-dot">✦</span> <span data-i18n="mmTitle">এখন মক্কা-মদিনায়</span></h2>
+            <h2 class="mm-title"><span class="mm-kaaba" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 20 6.6v10.8L12 21.2 4 17.4V6.6Z" fill="#17181c"/><path d="M12 2.8 20 6.6 12 10.4 4 6.6Z" fill="#23242a"/><path d="M4 9.1l8 3.8 8-3.8v2.3l-8 3.8-8-3.8Z" fill="#d4af5a"/><rect x="10.6" y="14.6" width="2.8" height="4" rx=".5" fill="#d4af5a"/></svg></span> <span data-i18n="mmTitle">এখন মক্কা-মদিনায়</span></h2>
             <span class="mm-note" data-i18n="mmNote">উম্মুল কুরা ক্যালেন্ডার অনুযায়ী</span>
           </div>
           <div class="mm-grid">
             <div class="mm-city">
-              <span class="mm-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3 L20 7.5 V16.5 L12 21 L4 16.5 V7.5 Z" fill="rgba(212,175,90,.16)"/><path d="M4 10.2 L20 10.2" stroke="#d4af5a"/><path d="M10.2 13.2 h3.6 v4.1 h-3.6 z" fill="#d4af5a" stroke="none"/></svg></span>
+              <span class="mm-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 20 6.6v10.8L12 21.2 4 17.4V6.6Z" fill="#17181c"/><path d="M12 2.8 20 6.6 12 10.4 4 6.6Z" fill="#26272e"/><path d="M4 9.1l8 3.8 8-3.8v2.3l-8 3.8-8-3.8Z" fill="#d4af5a"/><rect x="10.6" y="14.6" width="2.8" height="4" rx=".5" fill="#d4af5a"/></svg></span>
               <div class="mm-city-main">
                 <div class="mm-city-top"><span class="mm-city-name" data-i18n="mmMakkah">মক্কা</span><span class="mm-city-time" id="mmMakkahTime">—</span></div>
                 <div class="mm-line" id="mmMakkahNow">—</div>
@@ -1284,7 +1354,7 @@
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
           <a class="svc-card sr" style="--sr-delay:.99s" href="amol-bagan.html">
-            <svg class="svc-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 42v-13"/><path d="M24 29C17 29 12.5 24.8 12 18c6.8.4 11 4.6 12 11Z" fill="rgba(11,93,67,.14)"/><path d="M24 26c.6-6 4.4-9.8 10-10.4-.4 6-3.8 9.8-10 10.4Z" fill="rgba(193,154,61,.16)"/><circle cx="24" cy="11" r="3.4" fill="#c19a3d" stroke="none"/><path d="M24 5.4v-1M24 17.6v-1M18.4 11h-1M30.6 11h-1M20 7l-.8-.8M28 7l.8-.8M20 15l-.8.8M28 15l.8.8" stroke="#c19a3d" stroke-width="1.8"/></svg>
+            <svg class="svc-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 44V29"/><path d="M24 36c-5.5 0-9-3-9.6-8.4 5.3.3 8.8 3.2 9.6 8.4Z" fill="rgba(11,93,67,.18)"/><path d="M24 33c.5-4.8 3.4-7.8 8.2-8.3-.3 4.9-3.1 7.8-8.2 8.3Z" fill="rgba(11,93,67,.12)"/><g fill="rgba(193,154,61,.28)" stroke="#c19a3d" stroke-width="2"><ellipse cx="24" cy="8.6" rx="3.6" ry="5"/><ellipse cx="31.6" cy="13.4" rx="3.6" ry="5" transform="rotate(72 31.6 13.4)"/><ellipse cx="28.7" cy="21.9" rx="3.6" ry="5" transform="rotate(144 28.7 21.9)"/><ellipse cx="19.3" cy="21.9" rx="3.6" ry="5" transform="rotate(216 19.3 21.9)"/><ellipse cx="16.4" cy="13.4" rx="3.6" ry="5" transform="rotate(288 16.4 13.4)"/></g><circle cx="24" cy="15.4" r="3.6" fill="#c19a3d" stroke="none"/><circle cx="24" cy="15.4" r="1.4" fill="#8a6a1f" stroke="none"/></svg>
             <span class="svc-title" data-i18n="svcAmal">আমলের বাগান</span>
             <span class="svc-sub" data-i18n="svcAmalSub">প্রতিদিনের আমলে ফুল ফোটান</span>
             <span class="svc-arr" aria-hidden="true">›</span>
@@ -1673,10 +1743,10 @@
         </div>
         <div class="setting-row" style="flex-direction:column; align-items:stretch; gap:8px">
           <label><span data-i18n="heroLabel">হিরোর ধরন</span>
-            <span class="hint" data-i18n="heroHint">জীবন্ত আকাশ লাইভ আবহাওয়া অনুযায়ী বদলায়; আগের হিরো হলো চিরচেনা এমারল্ড রূপ</span></label>
+            <span class="hint" data-i18n="heroHint">Realistic লাইভ আবহাওয়া অনুযায়ী বদলায়; Classic হলো চিরচেনা এমারল্ড রূপ</span></label>
           <div class="seg" role="group" aria-label="Hero style" style="width:100%">
-            <button type="button" id="heroModeLiving2" class="on" style="flex:1"><span data-i18n="heroLiving">জীবন্ত আকাশ</span></button>
-            <button type="button" id="heroModeClassic2" style="flex:1"><span data-i18n="heroClassic">আগের হিরো</span></button>
+            <button type="button" id="heroModeLiving2" class="on" style="flex:1"><span data-i18n="heroLiving">Realistic</span></button>
+            <button type="button" id="heroModeClassic2" style="flex:1"><span data-i18n="heroClassic">Classic</span></button>
           </div>
         </div>
       </div>
@@ -1705,8 +1775,8 @@
         <a class="menu-link" href="boys-names.html"><img class="dl-icon" src="data:image/webp;base64,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" alt="" aria-hidden="true"> <span data-i18n="svcBoys">ছেলেদের নাম</span> <span class="arr">›</span></a>
         <a class="menu-link" href="girls-names.html"><img class="dl-icon" src="data:image/webp;base64,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" alt="" aria-hidden="true"> <span data-i18n="svcGirls">মেয়েদের নাম</span> <span class="arr">›</span></a>
         <a class="menu-link" href="chand.html"><svg class="dl-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32.5 5.5A17.5 17.5 0 1 0 42.5 30 14 14 0 0 1 32.5 5.5Z"/></svg> <span data-i18n="svcMoon">আজকের চাঁদ</span> <span class="arr">›</span></a>
-        <a class="menu-link" href="hijri-birthday.html"><svg class="dl-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="11" width="34" height="30" rx="4"/><path d="M7 20h34M15 6v8M33 6v8"/></svg> <span data-i18n="svcHijriBday">হিজরি জন্মদিন</span> <span class="arr">›</span></a>
-        <a class="menu-link" href="amol-bagan.html"><svg class="dl-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 42v-13"/><path d="M24 29C17 29 12.5 24.8 12 18c6.8.4 11 4.6 12 11Z"/><circle cx="24" cy="11" r="3.4"/></svg> <span data-i18n="svcAmal">আমলের বাগান</span> <span class="arr">›</span></a>
+        <a class="menu-link" href="hijri-birthday.html"><svg class="dl-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="11" width="34" height="30" rx="4"/><path d="M7 20h34M15 6v8M33 6v8"/><path d="M29.5 26a5.6 5.6 0 1 0 3.2 10.2 4.5 4.5 0 0 1-3.2-10.2Z" stroke-width="2.4"/></svg> <span data-i18n="svcHijriBday">হিজরি জন্মদিন</span> <span class="arr">›</span></a>
+        <a class="menu-link" href="amol-bagan.html"><svg class="dl-icon-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 44V29"/><path d="M24 36c-5.5 0-9-3-9.6-8.4 5.3.3 8.8 3.2 9.6 8.4Z"/><g stroke-width="2.6"><ellipse cx="24" cy="8.6" rx="3.6" ry="5"/><ellipse cx="31.6" cy="13.4" rx="3.6" ry="5" transform="rotate(72 31.6 13.4)"/><ellipse cx="28.7" cy="21.9" rx="3.6" ry="5" transform="rotate(144 28.7 21.9)"/><ellipse cx="19.3" cy="21.9" rx="3.6" ry="5" transform="rotate(216 19.3 21.9)"/><ellipse cx="16.4" cy="13.4" rx="3.6" ry="5" transform="rotate(288 16.4 13.4)"/></g><circle cx="24" cy="15.4" r="3.4" fill="currentColor" stroke="none"/></svg> <span data-i18n="svcAmal">আমলের বাগান</span> <span class="arr">›</span></a>
       </div>
 
       <div class="drawer-sec">
@@ -2649,8 +2719,8 @@
         svcAmal:'আমলের বাগান', svcAmalSub:'প্রতিদিনের আমলে ফুল ফোটান',
         mmTitle:'এখন মক্কা-মদিনায়', mmNote:'উম্মুল কুরা ক্যালেন্ডার অনুযায়ী',
         mmMakkah:'মক্কা', mmMadinah:'মদিনা',
-        heroLiving:'জীবন্ত আকাশ', heroClassic:'আগের হিরো', heroLabel:'হিরোর ধরন',
-        heroHint:'জীবন্ত আকাশ লাইভ আবহাওয়া অনুযায়ী বদলায়; আগের হিরো হলো চিরচেনা এমারল্ড রূপ',
+        heroLiving:'Realistic', heroClassic:'Classic', heroLabel:'হিরোর ধরন',
+        heroHint:'Realistic লাইভ আবহাওয়া অনুযায়ী বদলায়; Classic হলো চিরচেনা এমারল্ড রূপ',
         wxLive:'লাইভ আবহাওয়া', wxCloud:'মেঘ',
         wxCond:{0:'পরিষ্কার আকাশ',1:'প্রায় পরিষ্কার',2:'আংশিক মেঘলা',3:'মেঘলা',45:'কুয়াশা',48:'ঘন কুয়াশা',51:'গুঁড়ি গুঁড়ি বৃষ্টি',53:'গুঁড়ি গুঁড়ি বৃষ্টি',55:'ঘন গুঁড়ি বৃষ্টি',56:'হিম গুঁড়ি বৃষ্টি',57:'হিম গুঁড়ি বৃষ্টি',61:'হালকা বৃষ্টি',63:'মাঝারি বৃষ্টি',65:'ভারী বৃষ্টি',66:'হিম বৃষ্টি',67:'হিম বৃষ্টি',71:'হালকা তুষারপাত',73:'তুষারপাত',75:'ভারী তুষারপাত',77:'তুষার কণা',80:'হালকা বৃষ্টির ঝাপটা',81:'বৃষ্টির ঝাপটা',82:'প্রবল বৃষ্টির ঝাপটা',85:'তুষারের ঝাপটা',86:'তুষারের ঝাপটা',95:'বজ্রবৃষ্টি',96:'শিলাসহ বজ্রবৃষ্টি',99:'শিলাসহ বজ্রবৃষ্টি'},
         goSpecial:'বিশেষ দিন', specialTitle:'বিশেষ ইসলামিক দিন', nextSpecial:'আসন্ন বিশেষ দিন',
@@ -2737,8 +2807,8 @@
         svcAmal:'Amal Garden', svcAmalSub:'Bloom a flower with every daily good deed',
         mmTitle:'Now in Makkah & Madinah', mmNote:'Umm al-Qura calendar',
         mmMakkah:'Makkah', mmMadinah:'Madinah',
-        heroLiving:'Living Sky', heroClassic:'Classic Hero', heroLabel:'Hero style',
-        heroHint:'The Living Sky follows the live weather; the Classic Hero is the familiar emerald look',
+        heroLiving:'Realistic', heroClassic:'Classic', heroLabel:'Hero style',
+        heroHint:'Realistic follows the live weather; Classic is the familiar emerald look',
         wxLive:'Live weather', wxCloud:'Cloud',
         wxCond:{0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Dense fog',51:'Light drizzle',53:'Drizzle',55:'Dense drizzle',56:'Freezing drizzle',57:'Freezing drizzle',61:'Light rain',63:'Moderate rain',65:'Heavy rain',66:'Freezing rain',67:'Freezing rain',71:'Light snow',73:'Snowfall',75:'Heavy snow',77:'Snow grains',80:'Light rain showers',81:'Rain showers',82:'Violent rain showers',85:'Snow showers',86:'Snow showers',95:'Thunderstorm',96:'Thunderstorm with hail',99:'Thunderstorm with hail'},
         goSpecial:'Special Days', specialTitle:'Special Islamic Days', nextSpecial:'Next special day',
@@ -4249,7 +4319,7 @@
 
 
     /* ================================================================
-       HERO STYLE — জীবন্ত আকাশ (living sky) vs আগের হিরো (classic)
+       HERO STYLE — Realistic vs Classic (labels are English-only in both UI languages)
        The classic hero is the original Waqt hero: deep emerald
        gradient, gold glows, star pattern, light text and the Quran
        book, with every sky / weather layer off. The visitor picks
@@ -4298,7 +4368,7 @@
     }
 
     /* ================================================================
-       LIVING SKY (জীবন্ত আকাশ)
+       REALISTIC SKY
        The hero + page-top wash follow the selected district's own
        prayer times. Anchor palettes sit at the phase boundaries
        (Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha); the colours for the
@@ -4313,14 +4383,17 @@
        is set once and left static (no twinkle, no per-minute drift).
        ================================================================ */
     const SKY_PALETTES = {
-      /*          top              mid              bottom           glow rgba              stars  light-hero-text */
-      night:     { a:[6,24,43],     b:[5,46,33],     c:[4,21,14],     g:[212,175,90,0.05],  st:1,    li:0 },
-      dawn:      { a:[238,186,118], b:[232,150,102], c:[104,84,148],  g:[255,190,80,0.35],  st:0.15, li:1 },
-      morning:   { a:[168,216,230], b:[240,214,150], c:[140,186,164], g:[255,214,130,0.28], st:0,    li:1 },
-      noon:      { a:[126,200,232], b:[196,230,238], c:[168,214,192], g:[255,240,190,0.22], st:0,    li:1 },
-      afternoon: { a:[248,206,128], b:[244,186,108], c:[148,178,138], g:[255,205,110,0.26], st:0,    li:1 },
-      golden:    { a:[252,176,84],  b:[240,122,52],  c:[210,130,80],  g:[255,160,60,0.40],  st:0,    li:1 },
-      dusk:      { a:[35,38,94],    b:[150,70,60],   c:[64,32,74],    g:[255,120,50,0.32],  st:0.35, li:0 }
+      /* Photographic phase palettes: deep saturated zenith easing
+         through a mid tone into a hazy, warm horizon — the way a real
+         sky grades — instead of flat pastel washes.
+                    top              mid              bottom (horizon)  glow rgba              stars  light-hero-text */
+      night:     { a:[7,18,38],     b:[10,33,45],    c:[5,20,16],     g:[212,175,90,0.05],  st:1,    li:0 },
+      dawn:      { a:[172,158,198], b:[238,164,122], c:[252,203,128], g:[255,190,80,0.35],  st:0.15, li:1 },
+      morning:   { a:[94,166,219],  b:[166,207,231], c:[216,233,204], g:[255,214,130,0.24], st:0,    li:1 },
+      noon:      { a:[50,128,204],  b:[114,180,226], c:[188,221,213], g:[255,240,190,0.20], st:0,    li:1 },
+      afternoon: { a:[72,142,204],  b:[148,190,219], c:[233,215,162], g:[255,205,110,0.24], st:0,    li:1 },
+      golden:    { a:[198,144,118], b:[239,133,66],  c:[251,179,94],  g:[255,160,60,0.38],  st:0,    li:1 },
+      dusk:      { a:[30,34,84],    b:[148,72,68],   c:[70,36,78],    g:[255,120,50,0.32],  st:0.35, li:0 }
     };
     function skyLerp(x, y, t) { return Math.round(x + (y - x) * t); }
     function skyMix(p, q, t) {
@@ -4390,10 +4463,15 @@
         if (wxCurrent) { const k = wxKind(wxCurrent); cloud = k.cloud; rainI = k.rain; thunder = k.thunder; }
         const dayF = skyBase.li;
         if (wxCurrent && (cloud > 0.02 || rainI > 0)) {
-          const t = Math.min(0.88, cloud * 0.82 + rainI * 0.22);
-          const ocA = [skyLerp(30, 102, dayF), skyLerp(38, 114, dayF), skyLerp(48, 126, dayF)];
-          const ocB = [skyLerp(26, 124, dayF), skyLerp(34, 134, dayF), skyLerp(44, 142, dayF)];
-          const ocC = [skyLerp(20, 140, dayF), skyLerp(28, 150, dayF), skyLerp(36, 152, dayF)];
+          /* Overcast REPLACES the phase colours almost fully with a
+             neutral, cool daylight grey (bright flat grey by day, deep
+             neutral grey by night). Blending only part-way with the
+             warm phase colours underneath is what produced the muddy
+             brown-grey sky on cloudy afternoons. */
+          const t = Math.min(0.94, cloud * 0.92 + rainI * 0.25);
+          const ocA = [skyLerp(24, 108, dayF), skyLerp(28, 120, dayF), skyLerp(34, 132, dayF)];
+          const ocB = [skyLerp(32, 146, dayF), skyLerp(37, 156, dayF), skyLerp(44, 164, dayF)];
+          const ocC = [skyLerp(40, 176, dayF), skyLerp(46, 182, dayF), skyLerp(52, 179, dayF)];
           a = skyMixC(a, ocA, t); b = skyMixC(b, ocB, t); c = skyMixC(c, ocC, t);
           const shade = 1 - rainI * 0.20 - (thunder ? 0.06 : 0);
           a = skyShadeC(a, shade); b = skyShadeC(b, shade); c = skyShadeC(c, shade);
@@ -4494,7 +4572,7 @@
         const root = document.documentElement.style;
         if (heroMode === 'classic') { stopRainFx(); renderWxChip(); return; }
         const cloud = k.cloud;
-        root.setProperty('--wx-veil', String(Math.min(0.5, cloud * 0.22 + k.rain * 0.20 + (k.fog ? 0.10 : 0)).toFixed(3)));
+        root.setProperty('--wx-veil', String(Math.min(0.34, cloud * 0.15 + k.rain * 0.13 + (k.fog ? 0.08 : 0)).toFixed(3)));
         root.setProperty('--wx-cloud-far', cloud <= 0.03 ? '0' : String(Math.min(0.92, cloud * 1.15).toFixed(3)));
         root.setProperty('--wx-cloud-mid', cloud < 0.18 ? '0' : String(Math.min(0.96, (cloud - 0.1) * 1.15).toFixed(3)));
         root.setProperty('--wx-cloud-dark', String(Math.min(0.92, Math.max(cloud > 0.55 ? (cloud - 0.55) * 1.5 : 0, k.rain * 0.55, k.thunder ? 0.6 : 0)).toFixed(3)));
@@ -4640,7 +4718,9 @@
       if (!wxCurrent || heroMode === 'classic') { chip.classList.add('hidden'); return; }
       const k = wxKind(wxCurrent), d = L();
       const cond = (d.wxCond && (d.wxCond[k.code] || d.wxCond[3])) || '';
-      let txt = d.wxLive + ' · ' + cond;
+      /* compact badge text: condition · temperature · cloud % only —
+         no "live weather" prefix, so the badge stays one short line */
+      let txt = cond;
       if (wxCurrent.temperature_2m != null) txt += ' · ' + num(Math.round(+wxCurrent.temperature_2m) + '°C');
       if (k.cloud >= 0.2) txt += ' · ' + d.wxCloud + ' ' + num(Math.round(k.cloud * 100) + '%');
       $('wxText').textContent = txt;
