@@ -1183,7 +1183,7 @@
       <svg class="sky-horizon" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 70 V52 H96 V44 H150 V52 H238 V38 H252 V52 H356 V46 H470 l6-14 6 14 H560 V52 H648 V40 a72 30 0 0 1 144 0 V52 H884 V34 h9 V20 h4 V34 h9 V52 H1010 V45 H1108 V52 H1218 l5-20 5 20 H1330 V47 H1440 V70 Z"/></svg>
       <div class="hero-inner">
         <div class="hero-toprow rise">
-          <div class="hero-mode-toggle" role="group" aria-label="Hero style">
+          <div class="hero-mode-toggle" role="group" aria-label="Theme">
             <button type="button" id="heroModeLiving" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 18a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 18h10.5Z"/><path d="M12 3v1.5M4.9 5.9l1 1M19.1 5.9l-1 1"/></svg><span data-i18n="heroLiving">Realistic</span></button>
             <button type="button" id="heroModeClassic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5Z"/></svg><span data-i18n="heroClassic">Classic</span></button>
           </div>
@@ -1742,9 +1742,9 @@
           </div>
         </div>
         <div class="setting-row" style="flex-direction:column; align-items:stretch; gap:8px">
-          <label><span data-i18n="heroLabel">হিরোর ধরন</span>
-            <span class="hint" data-i18n="heroHint">Realistic লাইভ আবহাওয়া অনুযায়ী বদলায়; Classic হলো চিরচেনা এমারল্ড রূপ</span></label>
-          <div class="seg" role="group" aria-label="Hero style" style="width:100%">
+          <label><span data-i18n="heroLabel">থিম</span>
+            <span class="hint" data-i18n="heroHint">Realistic থিমে আকাশ লাইভ আবহাওয়া অনুযায়ী বদলায়; Classic হলো পুরনো এমারল্ড রূপ</span></label>
+          <div class="seg" role="group" aria-label="Theme" style="width:100%">
             <button type="button" id="heroModeLiving2" class="on" style="flex:1"><span data-i18n="heroLiving">Realistic</span></button>
             <button type="button" id="heroModeClassic2" style="flex:1"><span data-i18n="heroClassic">Classic</span></button>
           </div>
@@ -2719,8 +2719,8 @@
         svcAmal:'আমলের বাগান', svcAmalSub:'প্রতিদিনের আমলে ফুল ফোটান',
         mmTitle:'এখন মক্কা-মদিনায়', mmNote:'উম্মুল কুরা ক্যালেন্ডার অনুযায়ী',
         mmMakkah:'মক্কা', mmMadinah:'মদিনা',
-        heroLiving:'Realistic', heroClassic:'Classic', heroLabel:'হিরোর ধরন',
-        heroHint:'Realistic লাইভ আবহাওয়া অনুযায়ী বদলায়; Classic হলো চিরচেনা এমারল্ড রূপ',
+        heroLiving:'Realistic', heroClassic:'Classic', heroLabel:'থিম',
+        heroHint:'Realistic থিমে আকাশ লাইভ আবহাওয়া অনুযায়ী বদলায়; Classic হলো পুরনো এমারল্ড রূপ',
         wxLive:'লাইভ আবহাওয়া', wxCloud:'মেঘ',
         wxCond:{0:'পরিষ্কার আকাশ',1:'প্রায় পরিষ্কার',2:'আংশিক মেঘলা',3:'মেঘলা',45:'কুয়াশা',48:'ঘন কুয়াশা',51:'গুঁড়ি গুঁড়ি বৃষ্টি',53:'গুঁড়ি গুঁড়ি বৃষ্টি',55:'ঘন গুঁড়ি বৃষ্টি',56:'হিম গুঁড়ি বৃষ্টি',57:'হিম গুঁড়ি বৃষ্টি',61:'হালকা বৃষ্টি',63:'মাঝারি বৃষ্টি',65:'ভারী বৃষ্টি',66:'হিম বৃষ্টি',67:'হিম বৃষ্টি',71:'হালকা তুষারপাত',73:'তুষারপাত',75:'ভারী তুষারপাত',77:'তুষার কণা',80:'হালকা বৃষ্টির ঝাপটা',81:'বৃষ্টির ঝাপটা',82:'প্রবল বৃষ্টির ঝাপটা',85:'তুষারের ঝাপটা',86:'তুষারের ঝাপটা',95:'বজ্রবৃষ্টি',96:'শিলাসহ বজ্রবৃষ্টি',99:'শিলাসহ বজ্রবৃষ্টি'},
         goSpecial:'বিশেষ দিন', specialTitle:'বিশেষ ইসলামিক দিন', nextSpecial:'আসন্ন বিশেষ দিন',
@@ -2807,7 +2807,7 @@
         svcAmal:'Amal Garden', svcAmalSub:'Bloom a flower with every daily good deed',
         mmTitle:'Now in Makkah & Madinah', mmNote:'Umm al-Qura calendar',
         mmMakkah:'Makkah', mmMadinah:'Madinah',
-        heroLiving:'Realistic', heroClassic:'Classic', heroLabel:'Hero style',
+        heroLiving:'Realistic', heroClassic:'Classic', heroLabel:'Theme',
         heroHint:'Realistic follows the live weather; Classic is the familiar emerald look',
         wxLive:'Live weather', wxCloud:'Cloud',
         wxCond:{0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Dense fog',51:'Light drizzle',53:'Drizzle',55:'Dense drizzle',56:'Freezing drizzle',57:'Freezing drizzle',61:'Light rain',63:'Moderate rain',65:'Heavy rain',66:'Freezing rain',67:'Freezing rain',71:'Light snow',73:'Snowfall',75:'Heavy snow',77:'Snow grains',80:'Light rain showers',81:'Rain showers',82:'Violent rain showers',85:'Snow showers',86:'Snow showers',95:'Thunderstorm',96:'Thunderstorm with hail',99:'Thunderstorm with hail'},
