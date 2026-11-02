@@ -110,6 +110,8 @@ html.sr-on .sr.sr-in{opacity:1;transform:none}
 .hubback{display:inline-block;margin:0 0 14px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13.5px;font-weight:700;color:var(--em);text-decoration:none}
 .hubback:hover{border-color:var(--gold)}
 
+.hadithline{font-size:14.5px;color:var(--mut);margin:0 0 13px;line-height:1.55}
+.hadithline span{font-weight:700;color:var(--em)}
 .scene{position:relative;height:92px;border-radius:14px;overflow:hidden;margin:0 0 14px;background:linear-gradient(180deg,#bfe6ff,#e8f7ff);transition:background 1s}
 .scene.night{background:linear-gradient(180deg,#0b2440,#274b63)}
 .scene.dawn{background:linear-gradient(180deg,#8fb8dd,#f7d9a8)}
@@ -197,14 +199,8 @@ html.sr-on .sr.sr-in{opacity:1;transform:none}
 </defs></svg>
 
 <main>
-<a class="hubback" href="namaz-shikkha.html">← নামাজ শিক্ষা</a>
-<section class="card sr" style="--sr-delay:0s">
-<div class="scene" id="scene"><div class="orb"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="bfly" aria-hidden="true"><svg viewBox="0 0 30 24" width="30" height="24"><g class="w"><ellipse cx="8" cy="9" rx="7" ry="5" fill="#f2a65a" transform="rotate(-24 8 9)"/><ellipse cx="22" cy="9" rx="7" ry="5" fill="#e86a92" transform="rotate(24 22 9)"/><ellipse cx="9" cy="16" rx="5" ry="3.6" fill="#c084fc" transform="rotate(20 9 16)"/><ellipse cx="21" cy="16" rx="5" ry="3.6" fill="#fb7185" transform="rotate(-20 21 16)"/></g><rect x="14" y="5" width="2.4" height="14" rx="1.2" fill="#5b4636"/></svg></div><div class="grassline"></div></div>
-<p class="msg" id="sceneMsg">আজকের আমলগুলো টিক দিন — বাগানে ফুল ফুটবে</p>
-<p>রাসুলুল্লাহ (সা.) বলেছেন — <b>আল্লাহর কাছে সবচেয়ে প্রিয় আমল হলো যা নিয়মিত করা হয়, যদিও তা অল্প হয়।</b></p>
-<span class="src" style="display:block;margin-top:2px;font-size:13px;color:var(--mut);font-weight:600">সূত্র: সহীহ বুখারি ও সহীহ মুসলিম</span>
-</section>
-<section class="card sr" style="--sr-delay:.09s"><h2>আজকের আমল</h2>
+<section class="card sr" style="--sr-delay:0s"><h2>আজকের আমল</h2>
+<p class="hadithline">আল্লাহর কাছে সবচেয়ে প্রিয় আমল হলো যা নিয়মিত করা হয়, যদিও তা অল্প হয়। <span>(সহীহ বুখারি ও সহীহ মুসলিম)</span></p>
 <p class="gnote" id="todayLine"></p>
 <div id="checks"></div>
 <div class="pbar"><i id="pfill"></i></div>
@@ -386,10 +382,6 @@ function celebrate(){
 document.getElementById('gPrev').addEventListener('click',function(){viewM--;if(viewM<0){viewM=11;viewY--;}renderGarden(false);renderStats();});
 document.getElementById('gNext').addEventListener('click',function(){viewM++;if(viewM>11){viewM=0;viewY++;}renderGarden(false);renderStats();});
 (function(){
- var h=new Date().getHours(),sc=document.getElementById('scene');
- if(h>=19||h<5){sc.classList.add('night');}
- else if(h>=5&&h<8){sc.classList.add('dawn');}
- else if(h>=16&&h<19){sc.classList.add('dusk');}
  var days=['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
  document.getElementById('todayLine').textContent='আজ '+days[now.getDay()]+', '+bn(now.getDate())+' '+MONTHS[now.getMonth()]+' '+bn(now.getFullYear());
  renderChecks();renderStats();renderGarden(false);
