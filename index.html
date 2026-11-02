@@ -359,9 +359,17 @@
         animation:skyPan 48s ease-in-out infinite alternate; will-change:transform;
       }
       @keyframes skyPan{from{transform:translateX(-4.2%)} to{transform:translateX(4.2%)}}
-      /* overcast night: a grey tint washed over the night photograph
-         (feathered by the filter itself — no layer edge anywhere) */
-      .hero.sky-photo-grey .sky-photo{filter:grayscale(.55) brightness(.78)}
+      /* cloudy sky over a photo phase (dawn / dusk / night): the
+         treatment must only ever DARKEN — a cloudy night is darker
+         than a clear one, never lighter. Slight desaturation plus a
+         brightness cut on the photo itself, and a flat black veil at
+         22% laid over it (inset:0 inside the already-feathered photo
+         layer, so no edge of its own can ever show). */
+      .hero.sky-photo-grey .sky-photo{filter:saturate(.7) brightness(.84)}
+      .hero.sky-photo-grey .sky-photo::after{
+        content:""; position:absolute; inset:0; pointer-events:none;
+        background:rgba(3,6,12,.22);
+      }
       /* once a photograph is live it carries its own stars, moon,
          clouds and skyline — the CSS simulations stand down */
       html.sky-photo-on .sky-stars,
@@ -400,7 +408,8 @@
          repeat never jumps. Per-phase opacity comes from
          --live-cloud-a / --live-cloud-b, set by updateSkyPhoto()
          alongside --wx-vapour (day .5/.32, sunset .45/.3,
-         overcast-or-rain .28/.18, night .3/.2). The layers sit
+         overcast-or-rain .28/.18, night .16/.10 — kept very low so
+         the screen blend cannot re-lighten the dark night photo). The layers sit
          above the sky photo and vapour, below the rain canvas,
          lightning and hero text; hidden in Classic mode. */
       .sky-live-clouds{
@@ -4651,15 +4660,33 @@
         if (layers[0].parentElement) layers[0].parentElement.classList.toggle('sky-photo-grey', grey);
         document.documentElement.style.setProperty('--wx-vapour',
           name === 'night' ? (grey ? '0.16' : '0.08') : (name === 'overcast' ? '0.18' : (name === 'sunset' ? '0.22' : '0.30')));
-        /* live drifting cloud layers: per-phase opacity — overcast
-           (and rain, which always routes here or sets the night grey
-           tint) stays low because the photo already carries clouds;
-           a clear day gets the fullest drift */
-        const cloudFx = (grey || name === 'overcast') ? ['0.28', '0.18']
-          : (name === 'night' ? ['0.30', '0.20']
-          : (name === 'sunset' ? ['0.45', '0.30'] : ['0.50', '0.32']));
-        document.documentElement.style.setProperty('--live-cloud-a', cloudFx[0]);
-        document.documentElement.style.setProperty('--live-cloud-b', cloudFx[1]);
+        /* live drifting cloud layers: per-phase opacity caps —
+           overcast (and rain, which always routes here or sets the
+           night grey tint) stays low because the photo already
+           carries clouds; a clear day gets the fullest drift.
+           NIGHT is checked FIRST and kept far lower (.16/.10, clear
+           or cloudy): the layers blend in screen mode, so at the
+           old .30/.20 they re-lightened the dark night photograph
+           into a pale wash that no longer matched the real sky
+           outside.
+           CLEAR-SKY RULE: when live weather is known, the caps are
+           also scaled by the real cloud cover — cover ≤ 10% means
+           a genuinely clear sky, so the layers vanish entirely (a
+           clear day or a star-clean night shows NO drifting
+           clouds); above that they grow proportionally, reaching
+           the full phase caps at ~90–100% cover. With no weather
+           data at all (fetch failed, nothing cached) the phase
+           caps apply unchanged, exactly as before. */
+        let cloudFx = name === 'night' ? [0.16, 0.10]
+          : ((grey || name === 'overcast') ? [0.28, 0.18]
+          : (name === 'sunset' ? [0.45, 0.30] : [0.50, 0.32]));
+        if (wxCurrent) {
+          const cover = wxKind(wxCurrent).cloud;
+          const scale = cover <= 0.10 ? 0 : Math.min(1, (cover - 0.10) / 0.80);
+          cloudFx = [cloudFx[0] * scale, cloudFx[1] * scale];
+        }
+        document.documentElement.style.setProperty('--live-cloud-a', cloudFx[0].toFixed(3));
+        document.documentElement.style.setProperty('--live-cloud-b', cloudFx[1].toFixed(3));
         if (name === skyPhotoName) return;
         const seq = ++skyPhotoSeq;
         const back = layers[1 - skyPhotoTop], front = layers[skyPhotoTop];
