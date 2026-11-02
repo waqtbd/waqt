@@ -322,8 +322,59 @@
         position:absolute; left:0; right:0; bottom:0; width:100%; height:56px;
         pointer-events:none; color:#06231a; opacity:.30;
       }
+      /* ---------- generative sky photographs (Realistic mode) ----------
+         The sky itself is now a set of AI-generated Islamic sky
+         photographs served from the site root — sky-day.jpg,
+         sky-sunset.jpg, sky-night.jpg, sky-overcast.jpg. JS picks one
+         by prayer-time phase + live weather and crossfades between
+         the two stacked layers below. Each layer is inset:0 with an
+         OVERSIZED inner image (~124% wide) whose slow sideways pan
+         carries the photograph's own clouds visibly across the hero
+         — and because the inner image overflows every edge at every
+         point of the pan, no straight bound can ever show while it
+         moves. The mosque skyline baked into each photo is anchored
+         to the hero's bottom edge (background-position: 50% 100%).
+         If a photo fails to load, html.sky-photo-on is never set and
+         the CSS-gradient sky above stays as the fallback. */
+      .sky-photo{
+        position:absolute; inset:0; overflow:hidden; pointer-events:none;
+        opacity:0; transition:opacity 1.6s ease, filter 1.2s ease;
+      }
+      .sky-photo.on{opacity:1}
+      .sky-photo-img{
+        position:absolute; top:0; bottom:0; left:-12%; width:124%;
+        background-size:cover; background-position:50% 100%; background-repeat:no-repeat;
+        animation:skyPan 48s ease-in-out infinite alternate; will-change:transform;
+      }
+      @keyframes skyPan{from{transform:translateX(-4.2%)} to{transform:translateX(4.2%)}}
+      /* overcast night: a grey tint washed over the night photograph
+         (feathered by the filter itself — no layer edge anywhere) */
+      .hero.sky-photo-grey .sky-photo{filter:grayscale(.55) brightness(.78)}
+      /* once a photograph is live it carries its own stars, moon,
+         clouds and skyline — the CSS simulations stand down */
+      html.sky-photo-on .sky-stars,
+      html.sky-photo-on .sky-sun,
+      html.sky-photo-on .sky-moon,
+      html.sky-photo-on .sky-clouds,
+      html.sky-photo-on .sky-horizon{display:none}
+      /* soft vapour drifting over the photograph — huge blurred
+         masses, feathered on every side, always on the move, so the
+         sky never sits still even between cloud banks */
+      .sky-vapour{
+        position:absolute; inset:-16% -18%; pointer-events:none; background-repeat:repeat-x;
+        opacity:var(--wx-vapour, .26); filter:blur(20px); transition:opacity 1.2s ease;
+        background-image:
+          radial-gradient(ellipse 720px 150px at 22% 30%, rgba(255,255,255,.50) 0%, rgba(255,255,255,.26) 42%, transparent 78%),
+          radial-gradient(ellipse 860px 170px at 68% 22%, rgba(255,255,255,.44) 0%, rgba(255,255,255,.22) 44%, transparent 78%),
+          radial-gradient(ellipse 640px 130px at 88% 44%, rgba(240,246,250,.40) 0%, rgba(240,246,250,.18) 46%, transparent 78%);
+        background-size:1700px 320px;
+        animation:skyVapour 110s linear infinite;
+        -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 18%, #000 78%, transparent 100%);
+        mask-image:linear-gradient(180deg, transparent 0, #000 18%, #000 78%, transparent 100%);
+      }
+      @keyframes skyVapour{from{background-position:0 0} to{background-position:-1700px 0}}
       @media (prefers-reduced-motion: reduce){
-        .sky-clouds,.sky-mist{animation:none}
+        .sky-clouds,.sky-mist,.sky-photo-img,.sky-vapour{animation:none}
       }
       /* ---------- hero style toggle + live weather chip ---------- */
       .hero-toprow{display:flex; justify-content:flex-end; margin-bottom:10px}
@@ -372,6 +423,8 @@
           radial-gradient(1100px 480px at 85% -10%, rgba(212,175,90,.20), transparent 60%),
           linear-gradient(165deg, #0d6a4b 0%, #073f2e 55%, #052e21 100%);
       }
+      html.hero-classic .sky-photo,
+      html.hero-classic .sky-vapour,
       html.hero-classic .sky-stars,
       html.hero-classic .sky-sun,
       html.hero-classic .sky-moon,
@@ -1161,6 +1214,8 @@
     <div class="view active" id="view-home">
     <!-- ================= HERO ================= -->
     <div class="hero">
+      <div class="sky-photo" id="skyPhotoA" aria-hidden="true"><div class="sky-photo-img"></div></div>
+      <div class="sky-photo" id="skyPhotoB" aria-hidden="true"><div class="sky-photo-img"></div></div>
       <div class="sky-stars" id="skyStars" aria-hidden="true"></div>
       <div class="sky-sun" aria-hidden="true"></div>
       <div class="sky-moon" aria-hidden="true"></div>
@@ -1168,6 +1223,7 @@
       <div class="sky-clouds far" aria-hidden="true"></div>
       <div class="sky-clouds mid" aria-hidden="true"></div>
       <div class="sky-clouds dark" aria-hidden="true"></div>
+      <div class="sky-vapour" aria-hidden="true"></div>
       <div class="sky-mist" aria-hidden="true"></div>
       <canvas class="sky-rain-canvas" id="skyRainCanvas" aria-hidden="true"></canvas>
       <div class="sky-flash" id="skyFlash" aria-hidden="true"></div>
@@ -1245,7 +1301,7 @@
               </div>
             </div>
             <div class="mm-city">
-              <span class="mm-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c2 1.8 3 3.4 3 5.2 0 .5-.4.8-.9.8H9.9c-.5 0-.9-.3-.9-.8 0-1.8 1-3.4 3-5.2Z" fill="rgba(212,175,90,.16)"/><path d="M12 1.6v1.4M5 20.5v-7M19 20.5v-7M5 13.5h14M3.5 20.5h17M7.5 20.5v-4.2h9v4.2" /></svg></span>
+              <span class="mm-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#d4af5a" d="M10.51 1.74 A1.9 1.9 0 1 0 10.51 4.66 A1.55 1.55 0 1 1 10.51 1.74 Z"/><rect x="9.02" y="4.6" width=".5" height="2.2" fill="#d4af5a"/><path d="M3.4 15.1c0-3.95 2.55-6.2 5.85-8.35 3.3 2.15 5.85 4.4 5.85 8.35Z" fill="#0e7a4e"/><ellipse cx="6.5" cy="11.2" rx="1.05" ry="2.5" fill="#ffffff" opacity=".15" transform="rotate(16 6.5 11.2)"/><rect x="1.8" y="15.1" width="15" height="5.6" rx=".7" fill="#efe9d8"/><path d="M4.6 20.7v-2.5a1.05 1.05 0 0 1 2.1 0v2.5Z" fill="#0b5136"/><path d="M8.2 20.7v-2.5a1.05 1.05 0 0 1 2.1 0v2.5Z" fill="#0b5136"/><path d="M11.8 20.7v-2.5a1.05 1.05 0 0 1 2.1 0v2.5Z" fill="#0b5136"/><rect x="18.55" y="7.2" width="1.8" height="13.5" fill="#efe9d8"/><rect x="17.9" y="10.6" width="3.1" height="1.05" rx=".5" fill="#d4af5a"/><path d="M19.45 3.6 20.9 7.2h-2.9Z" fill="#0e7a4e"/><circle cx="19.45" cy="3.1" r=".55" fill="#d4af5a"/></svg></span>
               <div class="mm-city-main">
                 <div class="mm-city-top"><span class="mm-city-name" data-i18n="mmMadinah">মদিনা</span><span class="mm-city-time" id="mmMadinahTime">—</span></div>
                 <div class="mm-line" id="mmMadinahNow">—</div>
@@ -4508,6 +4564,66 @@
         }
         root.setProperty('--sun-op', sunOp.toFixed(3));
         root.setProperty('--moon-op', moonOp.toFixed(3));
+        updateSkyPhoto();
+      } catch (e) { /* the sky is decoration — never break the page */ }
+    }
+    /* ================================================================
+       GENERATIVE SKY PHOTOGRAPHS
+       In Realistic mode the hero's sky is one of four AI-generated
+       Islamic sky photographs at the site root. The phase comes from
+       the district's own prayer times (the same anchors as the
+       gradient sky): night → sky-night, dawn and the golden stretch
+       around Maghrib → sky-sunset, the rest of the day → sky-day.
+       Live weather overrides: overcast / fog / rain / thunder codes
+       — or cloud cover ≥ 80% — switch a DAY sky to sky-overcast;
+       at night the night photo stays and only gains a grey tint
+       (hero.sky-photo-grey). Only the needed photo is loaded, the
+       swap crossfades between the two stacked layers, and a failed
+       load simply leaves the gradient sky in place. The visible
+       drift comes from CSS: the oversized inner image pans slowly
+       sideways forever, and the vapour layer floats on top.
+       ================================================================ */
+    const SKY_PHOTO_URLS = { day: 'sky-day.jpg', sunset: 'sky-sunset.jpg', night: 'sky-night.jpg', overcast: 'sky-overcast.jpg' };
+    let skyPhotoName = '', skyPhotoTop = 0, skyPhotoSeq = 0;
+    function updateSkyPhoto() {
+      try {
+        if (heroMode === 'classic') return;
+        const layers = [$('skyPhotoA'), $('skyPhotoB')];
+        if (!layers[0] || !layers[1]) return;
+        let name = 'day';
+        if (skyTimes) {
+          const n = skyNowMin;
+          if (n >= skyTimes.ish || n < skyTimes.f) name = 'night';
+          else if (n < skyTimes.sr || n >= skyTimes.mg - 12) name = 'sunset';
+        } else {
+          const h = new Date().getHours();
+          name = (h >= 19 || h < 5) ? 'night' : ((h < 7 || h >= 17) ? 'sunset' : 'day');
+        }
+        let grey = false;
+        if (wxCurrent) {
+          const k = wxKind(wxCurrent);
+          const oc = k.code === 3 || k.fog || k.rain > 0 || k.thunder || k.snow;
+          if (name === 'night') grey = oc || k.cloud >= 0.8;
+          else if (oc || k.cloud >= 0.8) name = 'overcast';
+        }
+        if (layers[0].parentElement) layers[0].parentElement.classList.toggle('sky-photo-grey', grey);
+        document.documentElement.style.setProperty('--wx-vapour',
+          name === 'night' ? (grey ? '0.16' : '0.08') : (name === 'overcast' ? '0.18' : (name === 'sunset' ? '0.22' : '0.30')));
+        if (name === skyPhotoName) return;
+        const seq = ++skyPhotoSeq;
+        const back = layers[1 - skyPhotoTop], front = layers[skyPhotoTop];
+        const imgEl = back.querySelector('.sky-photo-img');
+        if (!imgEl) return;
+        imgEl.style.backgroundImage = 'url("' + SKY_PHOTO_URLS[name] + '")';
+        const pre = new Image();
+        pre.onload = () => {
+          if (seq !== skyPhotoSeq) return; /* a newer pick already won */
+          back.classList.add('on'); front.classList.remove('on');
+          skyPhotoTop = 1 - skyPhotoTop; skyPhotoName = name;
+          document.documentElement.classList.add('sky-photo-on');
+        };
+        pre.onerror = () => { /* photo missing: the gradient sky stays */ };
+        pre.src = SKY_PHOTO_URLS[name];
       } catch (e) { /* the sky is decoration — never break the page */ }
     }
     function initLivingSky() {
