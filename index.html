@@ -1557,8 +1557,9 @@
          the real values in. This small synchronous script runs
          DURING parsing, the moment the hero markup above exists,
          and computes the exact same first frame the main script
-         will compute: today's embedded Dhaka times (the page's
-         always-default first place, Karachi + Hanafi), both date
+         will compute: today's embedded times for the district this
+         device opens on (the saved district when one is stored,
+         otherwise the Dhaka default; Karachi + Hanafi), both date
          pills, the next prayer and its time, the countdown, the
          clock, the progress line, the phase sky gradient, the
          cached-weather badge and sky effects, and the sky-phase
@@ -1580,21 +1581,43 @@
         var BND = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
         var num = function (s) { return String(s).replace(/[0-9]/g, function (d) { return BND[+d]; }); };
         var pad = function (n) { return String(n).padStart(2, '0'); };
-        /* today's embedded times for the default district — the same
-           delta encoding the main script decodes; only Dhaka's row
-           and the shared Hijri row are duplicated here (~4KB) */
+        /* today's embedded times for the opening district — the same
+           delta encoding the main script decodes; Dhaka's row is
+           duplicated here (~4KB) as the default, and a saved
+           district's own row arrives via localStorage (see below);
+           the shared Hijri row is duplicated here too */
         var B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
         var HIJRI = 'EPtEPuEPvEPwEPxEPyEPzEP0EP1EP2EP3EP4EP5EP6EP7EP8EP9EP+EP/EQAEQBEQCEQDEQEEQFEQGEQHEQIEQJEQKEQLEQMEQNEQOEQPEQQEQREQSEQTEQUEQVEQWEQXEQYEQZEQaEQbEQcEQdEQeEQfEQgEQhEQiEQjEQkEQlEQmEQnEQoEQpEQqEQrEQsEQtEQuEQvEQwEQxEQyEQ0EQ1EQ2EQ3EQ4EQ5EQ6EQ7EQ8EQ9EQ+EQ/ERAERBERCERDEREERFERGERHERIERJERKERLERMERNEROERPERQERRERSERTERUERVERWERXERYERZERaERbERcERdEReERfERgERhERiERjERkERlERmERnERoERpERqERrERsERtERuERvERwERxERyERzER0ER1ER2ER3ER4ER5ER6ER7ER8ER9ER+ER/ESAESBESCESDESEESFESGESHESIESJESKESLESMESOESPESQESRESSESTESUESVESWESXESYESZESaESbEScESdESeESfESgEShESiESjESkESlESmESnESoESpESqESrESsEStESuESvESwESxESyESzES0ES1ES2ES3ES4ES5ES6ES7ES8ES9ES+ES/ETAETBETCETDETEETFETGETHETIETKETLETMETNETOETPETQETRETSETTETUETVETWETXETYETZETaETbETcETdETeETfETgEThETiETjETkETlETmETnEToETpETqETrETsETtETuETvETwETxETyETzET0ET1ET2ET3ET4ET5ET6ET7ET8ET9ET+ET/EUAEUBEUCEUDEUEEUGEUHEUIEUJEUKEULEUMEUNEUOEUPEUQEUREUSEUTEUUEUVEUWEUXEUYEUZEUaEUbEUcEUdEUeEUfEUgEUhEUiEUkEUlEUmEUnEUoEUpEUqEUrEUsEUtEUuEUvEUwEUxEUyEUzEU0EU1EU2EU3EU4EU5EU6EU7EU8EU9EU+EU/EVAEVBEVCEVDEVEEVFEVGEVHEVIEVJEVKEVLEVMEVNEVOEVPEVQEVREVSEVTEVUEVVEVWEVXEVYEVZEVaEVbEVcEVdEVeEVgEVhEViEVjEVkEVlEVmEVnEVoEVpEVqEVrEVsEVtEVuEVvEVwEVxEVyEVzEV0EV1EV2EV3EV4EV5EV6EV7EV8EV9EV+';
         var DHA = 'ETFeLEPHQqR1ghgfffhggfffggffffhhgfffggggffggffffhhgfffgggfffghgfffhgfgfggggfffhhgfffgggfgfghfgffhggfffghgfffhggffgghgfffggfgffhhgfgfgggffghgggffghgfffgggfgghhggffghffffhggffgghgggfhggffgghgfffhggggfghgffghggggfghgffghhggfggggfgfhhggfggggfgfhhggfgghgfgghghgffghgggghhgfggggggffhhggggghgfgghgggfgghhggghhgfgghggggfghggfghhhggggggggghhgggghhgfgggghggghhggggghgggghhhgggggggghhhgggghhhggggggggghhhggghhghggggggghhhhghgghgggghghgghghghgghhhghghgggghghhggghgghhgghhgghhhgggggghhhhhhgggghghhhgghggghhghhhgghggghhgghhgghhgghhgghhgghhgghggghhhhhhgggggghhhhghhhgghggghgghhhghgghhhghhgghggghhghghghhggghgggghhhhghghhhhggggggghhhhggghhhgghgggggghhhggghhhhghhhgggggghggghhggghhhhgggghhggghgggghhhhgfghhgggggghgghhhhfgghhggggghhgfghghggghhggghghhffghggggghhhgggghggfghghfgghhhgfgghgggghghffhhhggggghhffghgggggghhffghhgggghghffgghggfghhhfggggggfghhhffggggggghhhfffgggffghhhgfgghgfgghghffgghgffggghgfghhgffggghfgghhgfffgghgfgghgffghggffgghhffggggfffhhhfggggggfgghhffghggfffgghffgghgffghggffgghhfffgggffgghhffghggffggghfffghgffggggffgghhfffhggffggghffgghgffggghfffghgffggghffggggfffhhgffggghffgghgeffgghffggggffgghhffggggfffghhffggggffghghfffghgffggghffgghgffggghfgfgggffgghhefggggfffghhffggghffggggffgghhfffgggffghhhffggggffggghfggghhfffgggffgghhffggggffgghhffggghfgfghgffggghffggghffgghgfgggghffghhggfggghfggghhfffgggffgghhfgggghffgghgffggghgggghhffggghfgghhgffggghgggghhffggggfggghhgfggghfgggggffghhhggggghffgghgggggghfggghhgfggggfgghhhggggghfghghggfggghfggghhggghgggggghhffgggggggghhgghgghfgghgggggghhgggggggggghhgggggggghhghgggghgfgggghgggghgggghgggghgghgggghgggggghhgghggggggggghhghhggggggggggggggghgggghghhhhggggggggggggghgghgggggghhggggggghghgggggghghgggggggghghgggghgggghggggggggggghhghgggggggghghggfghgggghgggfgghgggghggggfghgggghggggggghggfhhggfghgggggghgggfhgggfgghgggfhggggghgggffghgggghggggfhhggffgggggghhggffhggggfghggfghggfgfggggffhhgggfhgggfgghgggfhggfffhhggffgggggfhhfgfggggfffhggggfhhggffgggfffhhggffhggggfggffffhhggffgggfffhhgggfggggffhgffffhhggffgggfffhhggffggffffhggfgfghggffhggfffggfgffhhgfffggggffhgfffeghgfffhgggffggffffhhgfffggggffhgffffghgfffhgggffggfffeghgfffhgggffggffffhhgfffgggfffhgfgffghgfffgggffehgffffghgfffhgggffggffffghgfffhgffffgggfefghggffhgffffgggfffhhgfffggfffeggggffhhgfffggffffgggfffhhgfffggffffghggffhggfffgggfffhhfffggggfffghggffhgffgfgggfffghgfffhggfffghfgffhggfffghgffggggfffhgggffghffgfhggffgghggffgggfffhhgfffgggfgghhggffggffffhhgfggggggffhhgffgghgggf';
+        /* the district saved on this device (localStorage 'waqtPlace',
+           written by the main script's setPlace whenever a visitor
+           picks a district or the "আমার অবস্থান" flow resolves one):
+           when present, the first frame is built from THAT district's
+           own embedded row, name and weather-cache key — a refresh
+           with location off opens on the saved district, never on a
+           flash of Dhaka. Nothing saved → Dhaka default below. */
+        var SAVED = null;
+        try {
+          var rawP = localStorage.getItem('waqtPlace');
+          if (rawP) {
+            var pj = JSON.parse(rawP);
+            if (pj && pj.k && pj.bn && typeof pj.row === 'string' && pj.row.length > 100) SAVED = pj;
+          }
+        } catch (e) {}
+        var ROW = SAVED ? SAVED.row : DHA;
+        var WXK = (SAVED && isFinite(+SAVED.lat) && isFinite(+SAVED.lon))
+          ? (+SAVED.lat).toFixed(2) + ',' + (+SAVED.lon).toFixed(2)
+          : '23.78,90.36';
+        if (SAVED) $('placeName').textContent = SAVED.bn;
         var now = new Date();
         var di = Math.round((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(2026, 9, 1)) / 86400000);
         if (di < 0 || di >= 396) return; /* outside the embedded year the main script's own flow takes over */
         var cur = [], p, q, d;
-        for (p = 0; p < 6; p++) cur.push(B64.indexOf(DHA[2 * p]) * 64 + B64.indexOf(DHA[2 * p + 1]));
+        for (p = 0; p < 6; p++) cur.push(B64.indexOf(ROW[2 * p]) * 64 + B64.indexOf(ROW[2 * p + 1]));
         var series = [cur.slice()], idx = 12, nd;
         for (d = 1; d <= di + 1 && d < 396; d++) {
           nd = [];
-          for (q = 0; q < 6; q++) nd.push(cur[q] + (B64.indexOf(DHA[idx++]) - 32));
+          for (q = 0; q < 6; q++) nd.push(cur[q] + (B64.indexOf(ROW[idx++]) - 32));
           cur = nd; series.push(cur.slice());
         }
         var PRAYERS = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
@@ -1671,23 +1694,24 @@
           if (nowMin >= t0 && nowMin <= t1) { base = t1 > t0 ? mixP(anchors[i][1], anchors[i + 1][1], (nowMin - t0) / (t1 - t0)) : anchors[i + 1][1]; break; }
           if (nowMin < t0) { base = anchors[i][1]; break; }
         }
-        /* the last cached weather for the default district — the same
+        /* the last cached weather for the opening district — the same
            localStorage cache fetchWeather() maintains; the fresh
            fetch later only refines what this paints */
         var wx = null;
         try {
           var raw = localStorage.getItem('waqtWx2');
-          if (raw) { var o = JSON.parse(raw); if (o && o.key === '23.78,90.36' && o.data && o.data.temperature_2m != null) wx = o.data; }
+          if (raw) { var o = JSON.parse(raw); if (o && o.key === WXK && o.data && o.data.temperature_2m != null) wx = o.data; }
         } catch (e) {}
         /* per-place cache map ('waqtWx3'): the legacy slot above
            holds only the LAST place fetched, so after a location
-           fix it holds GPS weather and Dhaka's own cached badge
-           would be missed here — check the map for Dhaka's entry
-           before giving up on a first-paint badge */
+           fix it holds GPS weather and the opening district's own
+           cached badge would be missed here — check the map for
+           the opening district's entry before giving up on a
+           first-paint badge */
         if (!wx) {
           try {
             var rawM = localStorage.getItem('waqtWx3');
-            if (rawM) { var mp = JSON.parse(rawM); var ent = mp && mp['23.78,90.36']; if (ent && ent.data && ent.data.temperature_2m != null) wx = ent.data; }
+            if (rawM) { var mp = JSON.parse(rawM); var ent = mp && mp[WXK]; if (ent && ent.data && ent.data.temperature_2m != null) wx = ent.data; }
           } catch (e) {}
         }
         var wk = null;
@@ -3636,6 +3660,39 @@
     function districtPlace(d) {
       return { labelBn: d[1], labelEn: d[2], lat: d[3], lon: d[4], key: d[0], embedKey: d[0] };
     }
+    /* The visitor's district is remembered ON THIS DEVICE
+       (localStorage 'waqtPlace'): a district explicitly picked from
+       search, and the district the "আমার অবস্থান" flow resolves to,
+       are both saved — so a later load, refresh or return visit
+       with location OFF opens on that district instead of falling
+       back to the Dhaka default. Only a device with nothing saved
+       gets Dhaka. The saved entry also carries the district's own
+       embedded times row, name and coordinates so the synchronous
+       first-paint bootstrap (mid-document, long before this script)
+       can build the complete first frame for the saved district —
+       no Dhaka flash, per the no-loading rule — and its weather
+       badge can start from that district's per-place cache. */
+    function saveDistrictKey(key) {
+      if (!key) return;
+      try {
+        const d = DISTRICTS.find((x) => x[0] === key);
+        if (!d) return;
+        localStorage.setItem('waqtPlace', JSON.stringify({
+          k: d[0], bn: d[1], en: d[2], lat: d[3], lon: d[4],
+          row: (EMBED.districts[d[0]] || '')
+        }));
+      } catch (e) {}
+    }
+    function savedDistrict() {
+      try {
+        const raw = localStorage.getItem('waqtPlace');
+        if (!raw) return null;
+        const pj = JSON.parse(raw);
+        const key = pj && (pj.k || pj.key);
+        if (!key) return null;
+        return DISTRICTS.find((x) => x[0] === key) || null;
+      } catch (e) { return null; }
+    }
     function placeLabel() {
       if (!state.place) return '—';
       return state.lang === 'bn' ? state.place.labelBn : state.place.labelEn;
@@ -3661,6 +3718,12 @@
 
     function setPlace(place, opts) {
       state.place = place;
+      /* remember the district on this device: a searched-and-picked
+         district (place.key) and the district a GPS fix resolves to
+         (place.embedKey on the custom location) both count, so the
+         next load opens here; re-running the location flow after
+         travelling simply overwrites the saved district */
+      saveDistrictKey(place.key || place.embedKey);
       if (typeof fetchWeather === 'function') fetchWeather();
       state.monthCache = {};
       renderPlaceLabel(); renderChips(); renderQibla();
@@ -5777,7 +5840,10 @@
     bindEvents();
     applyLang();
     const dhaka = DISTRICTS.find((d) => d[0] === 'dhaka');
-    setPlace(districtPlace(dhaka));
+    /* a district saved on this device wins over the default: the
+       site opens where the visitor last chose / was located, and
+       only a first-time visitor with nothing saved gets Dhaka */
+    setPlace(districtPlace(savedDistrict() || dhaka));
     /* Restore the view named in the URL hash — this is what keeps a
        refresh on the page the user was actually looking at. */
     const startView = window.location.hash.replace(/^#/, '');
