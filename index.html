@@ -306,6 +306,31 @@
       html.sky-light .hero .hero-date-chip b{color:#7a5a10}
       html.sky-light .hero .hb-cap{color:#5d430a}
       html.sky-light .hero .hero-progress{background:rgba(255,255,255,.45); border-color:rgba(20,40,30,.32); box-shadow:inset 0 1px 3px rgba(20,40,30,.18)}
+      /* Desktop + OS dark scheme repair: in the dark palette --gold-soft
+         flips to a DARK brown (#3a2f16) because everywhere else it is a
+         background tint — but the hero's small gold labels (Hijri date,
+         next-prayer label, remaining-time label, Quran caption), the
+         date chips and the header theme icon use it as a FOREGROUND
+         colour. On a dark-scheme laptop they rendered murky brown and
+         washed out against the sky in BOTH themes (the night photo and
+         Classic's emerald alike), while the phone (light scheme) showed
+         the intended light cream. Restore that same light cream here —
+         desktop widths in dark scheme only, so phone rendering is
+         untouched — plus a soft dark halo on the small hero labels so
+         they stay legible over the mottled light-and-dark sky photos.
+         The sky-light rules above outrank these colours, so bright
+         day phases keep their deep, readable text exactly as before. */
+      @media (min-width:641px) and (prefers-color-scheme: dark){
+        .theme-btn{color:#e9d9ae}
+        .hero .next-label,
+        .hero .hero-clock .now,
+        .hero .hero-date-chip b,
+        .hero .hb-cap{color:#e9d9ae}
+        html:not(.sky-light) .hero .next-label,
+        html:not(.sky-light) .hero .hero-clock .now,
+        html:not(.sky-light) .hero .hero-date-chip,
+        html:not(.sky-light) .hero .hb-cap{text-shadow:0 1px 5px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.5)}
+      }
       /* ---------- weather layers (over the sky, under the hero text) ----------
          Driven by --wx-* variables from the Open-Meteo fetch; every layer
          defaults to fully transparent, so no weather data = pure time sky.
