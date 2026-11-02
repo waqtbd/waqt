@@ -183,36 +183,146 @@
       html.sky-light .hero .hero-progress{background:rgba(255,255,255,.45); border-color:rgba(20,40,30,.32); box-shadow:inset 0 1px 3px rgba(20,40,30,.18)}
       /* ---------- weather layers (over the sky, under the hero text) ----------
          Driven by --wx-* variables from the Open-Meteo fetch; every layer
-         defaults to fully transparent, so no weather data = pure time sky. */
-      .sky-veil{position:absolute; inset:0; pointer-events:none; background:#606a74; opacity:var(--wx-veil, 0)}
+         defaults to fully transparent, so no weather data = pure time sky.
+         Realism pass: the JS also blends the sky colours themselves toward
+         overcast grey as cloud cover rises, positions a real sun / moon
+         disc on its arc, stacks THREE cloud decks (far / mid / storm-dark)
+         drifting at different speeds for parallax depth, and draws the
+         rain on a canvas with wind slant — so a cloudy noon no longer
+         looks like sunshine. */
+      .sky-veil{position:absolute; inset:0; pointer-events:none; background:#59636d; opacity:var(--wx-veil, 0); transition:opacity 1.2s ease}
+      /* sun disc: travels the real sunrise→sunset arc (--sun-x / --sun-y
+         are set from JS each minute); clouds drift IN FRONT of it */
+      .sky-sun{
+        position:absolute; left:var(--sun-x, 78%); top:var(--sun-y, 16%);
+        width:58px; height:58px; margin:-29px 0 0 -29px; border-radius:50%; pointer-events:none;
+        background:radial-gradient(circle, #fffdf4 0 30%, #ffedb5 52%, rgba(255,214,110,.55) 68%, rgba(255,214,110,0) 74%);
+        box-shadow:0 0 44px 20px rgba(255,220,130,.38), 0 0 120px 60px rgba(255,205,95,.16);
+        opacity:var(--sun-op, 0); transition:opacity 1.2s ease;
+      }
+      /* crescent moon on the night arc (Maghrib → Fajr) */
+      .sky-moon{
+        position:absolute; left:var(--moon-x, 22%); top:var(--moon-y, 14%);
+        width:40px; height:40px; margin:-20px 0 0 -20px; border-radius:50%; pointer-events:none;
+        box-shadow:11px 5px 0 0 #f7f0d4;
+        transform:rotate(-28deg);
+        filter:drop-shadow(0 0 12px rgba(247,240,212,.35));
+        opacity:var(--moon-op, 0); transition:opacity 1.2s ease;
+      }
       .sky-clouds{
-        position:absolute; inset:0; pointer-events:none; opacity:var(--wx-cloud, 0);
+        position:absolute; inset:-4% -2%; pointer-events:none; background-repeat:repeat-x;
+        filter:brightness(var(--cloud-bright, 1)); transition:opacity 1.2s ease;
+      }
+      /* far deck: small, soft, slow — high thin cloud */
+      .sky-clouds.far{
+        opacity:var(--wx-cloud-far, 0); animation:skyDriftFar 170s linear infinite;
         background-image:
-          radial-gradient(ellipse 340px 90px at 18% 26%, rgba(255,255,255,.85) 0%, transparent 70%),
-          radial-gradient(ellipse 460px 120px at 62% 14%, rgba(148,158,168,.65) 0%, transparent 70%),
-          radial-gradient(ellipse 380px 100px at 88% 38%, rgba(255,255,255,.7) 0%, transparent 70%),
-          radial-gradient(ellipse 520px 130px at 38% 48%, rgba(120,130,142,.5) 0%, transparent 70%);
-        background-size:760px 300px, 980px 340px, 760px 300px, 1100px 380px;
-        background-repeat:repeat-x;
-        animation:skyDrift 95s linear infinite;
+          radial-gradient(ellipse 210px 44px at 12% 30%, rgba(255,255,255,.75) 0%, transparent 68%),
+          radial-gradient(ellipse 300px 56px at 44% 16%, rgba(255,255,255,.6) 0%, transparent 70%),
+          radial-gradient(ellipse 240px 48px at 74% 34%, rgba(226,232,238,.65) 0%, transparent 68%),
+          radial-gradient(ellipse 340px 60px at 96% 12%, rgba(255,255,255,.55) 0%, transparent 70%);
+        background-size:900px 240px;
       }
-      @keyframes skyDrift{from{background-position:0 0, 0 0, 0 0, 0 0} to{background-position:760px 0, -980px 0, 760px 0, -1100px 0}}
-      .sky-rain{
-        position:absolute; inset:-12% 0; pointer-events:none; opacity:var(--wx-rain, 0);
-        background-image:repeating-linear-gradient(103deg, transparent 0 9px, rgba(205,225,250,.55) 9px 10.5px, transparent 10.5px 19px);
-        background-size:130px 230px;
-        animation:skyRain .5s linear infinite;
+      @keyframes skyDriftFar{from{background-position:0 0} to{background-position:900px 0}}
+      /* mid deck: full puffs with shaded undersides, drifting the other way */
+      .sky-clouds.mid{
+        opacity:var(--wx-cloud-mid, 0); animation:skyDriftMid 105s linear infinite;
+        background-image:
+          radial-gradient(ellipse 250px 74px at 16% 26%, rgba(255,255,255,.95) 0%, transparent 66%),
+          radial-gradient(ellipse 260px 60px at 20% 40%, rgba(168,178,190,.55) 0%, transparent 70%),
+          radial-gradient(ellipse 330px 88px at 52% 14%, rgba(255,255,255,.9) 0%, transparent 66%),
+          radial-gradient(ellipse 330px 66px at 56% 30%, rgba(158,168,182,.5) 0%, transparent 70%),
+          radial-gradient(ellipse 270px 78px at 84% 30%, rgba(250,252,253,.92) 0%, transparent 66%),
+          radial-gradient(ellipse 280px 58px at 87% 44%, rgba(168,178,190,.52) 0%, transparent 70%);
+        background-size:1080px 300px;
       }
-      @keyframes skyRain{from{background-position:0 -230px} to{background-position:-26px 0}}
+      @keyframes skyDriftMid{from{background-position:0 0} to{background-position:-1080px 0}}
+      /* storm deck: low, dark, heavy — fades in with thick cover / rain */
+      .sky-clouds.dark{
+        opacity:var(--wx-cloud-dark, 0); animation:skyDriftDark 64s linear infinite;
+        background-image:
+          radial-gradient(ellipse 380px 96px at 22% 18%, rgba(88,98,110,.88) 0%, transparent 68%),
+          radial-gradient(ellipse 460px 110px at 58% 6%, rgba(70,80,94,.9) 0%, transparent 68%),
+          radial-gradient(ellipse 400px 92px at 90% 22%, rgba(96,106,118,.85) 0%, transparent 68%),
+          radial-gradient(ellipse 560px 120px at 44% 36%, rgba(58,68,82,.75) 0%, transparent 70%);
+        background-size:1240px 320px;
+      }
+      @keyframes skyDriftDark{from{background-position:0 0} to{background-position:1240px 0}}
+      /* canvas rain / snow — drops are drawn by JS with wind slant */
+      .sky-rain-canvas{
+        position:absolute; inset:0; width:100%; height:100%; pointer-events:none;
+        opacity:var(--wx-rain, 0); transition:opacity .9s ease;
+      }
       .sky-mist{
-        position:absolute; inset:0; pointer-events:none; opacity:var(--wx-mist, 0);
-        background:linear-gradient(180deg, rgba(232,236,238,.25) 0%, rgba(232,236,238,.8) 78%, rgba(232,236,238,.92) 100%);
+        position:absolute; inset:0; pointer-events:none; opacity:var(--wx-mist, 0); transition:opacity 1.2s ease;
+        background:linear-gradient(180deg, rgba(233,237,240,.22) 0%, rgba(233,237,240,.55) 55%, rgba(233,237,240,.88) 82%, rgba(233,237,240,.95) 100%);
+        animation:skyMist 24s ease-in-out infinite alternate;
       }
-      .sky-flash{position:absolute; inset:0; pointer-events:none; background:#fff; opacity:0}
-      .sky-flash.on{opacity:.45}
+      @keyframes skyMist{from{transform:translateX(-1.6%)} to{transform:translateX(1.6%)}}
+      /* lightning: a bright bloom from a random point near the top of
+         the storm deck (--bolt-x set by JS), not a flat white sheet */
+      .sky-flash{
+        position:absolute; inset:0; pointer-events:none; opacity:0;
+        background:radial-gradient(720px 420px at var(--bolt-x, 50%) -6%, rgba(255,255,255,.96) 0%, rgba(205,225,255,.5) 42%, transparent 72%);
+      }
+      .sky-flash.on{opacity:.9}
+      /* distant mosque-and-rooftop silhouette grounding the horizon */
+      .sky-horizon{
+        position:absolute; left:0; right:0; bottom:0; width:100%; height:56px;
+        pointer-events:none; color:#06231a; opacity:.30;
+      }
       @media (prefers-reduced-motion: reduce){
-        .sky-clouds,.sky-rain{animation:none}
+        .sky-clouds,.sky-mist{animation:none}
       }
+      /* ---------- hero style toggle + live weather chip ---------- */
+      .hero-toprow{display:flex; justify-content:flex-end; margin-bottom:10px}
+      .hero-mode-toggle{
+        display:inline-flex; padding:3px; border-radius:999px; gap:2px;
+        background:rgba(6,30,22,.34); border:1px solid rgba(255,255,255,.38);
+        backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+        box-shadow:0 4px 14px rgba(0,0,0,.18);
+      }
+      html.sky-light .hero-mode-toggle{background:rgba(255,255,255,.5); border-color:rgba(20,40,30,.32)}
+      .hero-mode-toggle button{
+        display:inline-flex; align-items:center; gap:6px; border:0; border-radius:999px;
+        padding:7px 12px; font-size:13.5px; font-weight:700; line-height:1.2;
+        background:transparent; color:inherit; min-height:34px; white-space:nowrap;
+      }
+      .hero-mode-toggle button svg{width:15px; height:15px; flex:none}
+      .hero-mode-toggle button.on{background:var(--gold); color:#231a04; box-shadow:0 2px 8px rgba(0,0,0,.25)}
+      .hero-mode-toggle button:active{transform:scale(.96)}
+      @media (max-width:380px){ .hero-mode-toggle button{padding:7px 9px; font-size:12.5px} }
+      .wx-chip{align-items:center; gap:8px}
+      .wx-chip:not(.hidden){display:inline-flex}
+      .wx-dot{width:8px; height:8px; flex:none; border-radius:50%; background:#2fbf71; box-shadow:0 0 0 3px rgba(47,191,113,.25); animation:wxPulse 2.2s ease-in-out infinite}
+      @keyframes wxPulse{0%,100%{box-shadow:0 0 0 2px rgba(47,191,113,.30)} 50%{box-shadow:0 0 0 5px rgba(47,191,113,.10)}}
+      @media (prefers-reduced-motion: reduce){ .wx-dot{animation:none} }
+      .wx-icon{display:inline-flex; flex:none}
+      .wx-icon svg{width:19px; height:19px}
+      #wxText{font-variant-numeric:tabular-nums}
+      /* ---------- classic hero (আগের হিরো): the original emerald look ----------
+         Restores the pre-living-sky hero exactly: deep emerald gradient,
+         gold glows, star pattern, light text, Quran book — every sky and
+         weather layer switched off. The toggle itself stays visible so
+         the living sky is one tap away again. */
+      html.hero-classic .hero{
+        color:#f4efe0;
+        background:
+          radial-gradient(900px 340px at 50% 118%, rgba(212,175,90,.28), transparent 62%),
+          radial-gradient(1100px 480px at 85% -10%, rgba(212,175,90,.20), transparent 60%),
+          linear-gradient(165deg, #0d6a4b 0%, #073f2e 55%, #052e21 100%);
+      }
+      html.hero-classic .sky-stars,
+      html.hero-classic .sky-sun,
+      html.hero-classic .sky-moon,
+      html.hero-classic .sky-veil,
+      html.hero-classic .sky-clouds,
+      html.hero-classic .sky-mist,
+      html.hero-classic .sky-rain-canvas,
+      html.hero-classic .sky-flash,
+      html.hero-classic .sky-horizon,
+      html.hero-classic .wx-chip{display:none !important}
+      html.hero-classic .hero-mode-toggle{background:rgba(6,30,22,.34); border-color:rgba(255,255,255,.38)}
       .hero-pattern{position:absolute; inset:0; opacity:.09; pointer-events:none}
       .hero-inner{position:relative; max-width:1060px; margin:0 auto; padding:34px 18px 30px}
       /* the location chip sits on its OWN line under the place heading —
@@ -982,10 +1092,14 @@
     <!-- ================= HERO ================= -->
     <div class="hero">
       <div class="sky-stars" id="skyStars" aria-hidden="true"></div>
+      <div class="sky-sun" aria-hidden="true"></div>
+      <div class="sky-moon" aria-hidden="true"></div>
       <div class="sky-veil" aria-hidden="true"></div>
-      <div class="sky-clouds" aria-hidden="true"></div>
+      <div class="sky-clouds far" aria-hidden="true"></div>
+      <div class="sky-clouds mid" aria-hidden="true"></div>
+      <div class="sky-clouds dark" aria-hidden="true"></div>
       <div class="sky-mist" aria-hidden="true"></div>
-      <div class="sky-rain" aria-hidden="true"></div>
+      <canvas class="sky-rain-canvas" id="skyRainCanvas" aria-hidden="true"></canvas>
       <div class="sky-flash" id="skyFlash" aria-hidden="true"></div>
       <svg class="hero-pattern" width="100%" height="100%" aria-hidden="true">
         <defs>
@@ -996,7 +1110,14 @@
         </defs>
         <rect width="100%" height="100%" fill="url(#starpat)"/>
       </svg>
+      <svg class="sky-horizon" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 70 V52 H96 V44 H150 V52 H238 V38 H252 V52 H356 V46 H470 l6-14 6 14 H560 V52 H648 V40 a72 30 0 0 1 144 0 V52 H884 V34 h9 V20 h4 V34 h9 V52 H1010 V45 H1108 V52 H1218 l5-20 5 20 H1330 V47 H1440 V70 Z"/></svg>
       <div class="hero-inner">
+        <div class="hero-toprow rise">
+          <div class="hero-mode-toggle" role="group" aria-label="Hero style">
+            <button type="button" id="heroModeLiving" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 18a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 18h10.5Z"/><path d="M12 3v1.5M4.9 5.9l1 1M19.1 5.9l-1 1"/></svg><span data-i18n="heroLiving">জীবন্ত আকাশ</span></button>
+            <button type="button" id="heroModeClassic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5Z"/></svg><span data-i18n="heroClassic">আগের হিরো</span></button>
+          </div>
+        </div>
         <div class="hero-place rise">
           <h1><span class="pin">◈</span> <span id="placeName">বগুড়া</span></h1>
           <span class="place-detail hidden" id="placeDetail"></span>
@@ -1004,6 +1125,7 @@
         <div class="hero-dates rise d1">
           <span class="hero-date-chip" id="gregDate">—</span>
           <span class="hero-date-chip" id="hijriDate">—</span>
+          <span class="hero-date-chip wx-chip hidden" id="wxChip"><span class="wx-dot" aria-hidden="true"></span><span class="wx-icon" id="wxIcon" aria-hidden="true"></span><span id="wxText">—</span></span>
         </div>
         <div class="hero-grid">
           <div class="rise d2">
@@ -1547,6 +1669,14 @@
           <div class="seg" role="group" aria-label="Language">
             <button type="button" id="langBn2" class="on">বাংলা</button>
             <button type="button" id="langEn2">English</button>
+          </div>
+        </div>
+        <div class="setting-row" style="flex-direction:column; align-items:stretch; gap:8px">
+          <label><span data-i18n="heroLabel">হিরোর ধরন</span>
+            <span class="hint" data-i18n="heroHint">জীবন্ত আকাশ লাইভ আবহাওয়া অনুযায়ী বদলায়; আগের হিরো হলো চিরচেনা এমারল্ড রূপ</span></label>
+          <div class="seg" role="group" aria-label="Hero style" style="width:100%">
+            <button type="button" id="heroModeLiving2" class="on" style="flex:1"><span data-i18n="heroLiving">জীবন্ত আকাশ</span></button>
+            <button type="button" id="heroModeClassic2" style="flex:1"><span data-i18n="heroClassic">আগের হিরো</span></button>
           </div>
         </div>
       </div>
@@ -2519,6 +2649,10 @@
         svcAmal:'আমলের বাগান', svcAmalSub:'প্রতিদিনের আমলে ফুল ফোটান',
         mmTitle:'এখন মক্কা-মদিনায়', mmNote:'উম্মুল কুরা ক্যালেন্ডার অনুযায়ী',
         mmMakkah:'মক্কা', mmMadinah:'মদিনা',
+        heroLiving:'জীবন্ত আকাশ', heroClassic:'আগের হিরো', heroLabel:'হিরোর ধরন',
+        heroHint:'জীবন্ত আকাশ লাইভ আবহাওয়া অনুযায়ী বদলায়; আগের হিরো হলো চিরচেনা এমারল্ড রূপ',
+        wxLive:'লাইভ আবহাওয়া', wxCloud:'মেঘ',
+        wxCond:{0:'পরিষ্কার আকাশ',1:'প্রায় পরিষ্কার',2:'আংশিক মেঘলা',3:'মেঘলা',45:'কুয়াশা',48:'ঘন কুয়াশা',51:'গুঁড়ি গুঁড়ি বৃষ্টি',53:'গুঁড়ি গুঁড়ি বৃষ্টি',55:'ঘন গুঁড়ি বৃষ্টি',56:'হিম গুঁড়ি বৃষ্টি',57:'হিম গুঁড়ি বৃষ্টি',61:'হালকা বৃষ্টি',63:'মাঝারি বৃষ্টি',65:'ভারী বৃষ্টি',66:'হিম বৃষ্টি',67:'হিম বৃষ্টি',71:'হালকা তুষারপাত',73:'তুষারপাত',75:'ভারী তুষারপাত',77:'তুষার কণা',80:'হালকা বৃষ্টির ঝাপটা',81:'বৃষ্টির ঝাপটা',82:'প্রবল বৃষ্টির ঝাপটা',85:'তুষারের ঝাপটা',86:'তুষারের ঝাপটা',95:'বজ্রবৃষ্টি',96:'শিলাসহ বজ্রবৃষ্টি',99:'শিলাসহ বজ্রবৃষ্টি'},
         goSpecial:'বিশেষ দিন', specialTitle:'বিশেষ ইসলামিক দিন', nextSpecial:'আসন্ন বিশেষ দিন',
         specialNote:'তারিখ চাঁদ দেখার উপর নির্ভরশীল — একদিন এদিক-ওদিক হতে পারে।',
         probable:'সম্ভাব্য', passed:'পেরিয়ে গেছে', todayWord:'আজ', daysLeft:'দিন বাকি', inDays:'আর {n} দিন',
@@ -2603,6 +2737,10 @@
         svcAmal:'Amal Garden', svcAmalSub:'Bloom a flower with every daily good deed',
         mmTitle:'Now in Makkah & Madinah', mmNote:'Umm al-Qura calendar',
         mmMakkah:'Makkah', mmMadinah:'Madinah',
+        heroLiving:'Living Sky', heroClassic:'Classic Hero', heroLabel:'Hero style',
+        heroHint:'The Living Sky follows the live weather; the Classic Hero is the familiar emerald look',
+        wxLive:'Live weather', wxCloud:'Cloud',
+        wxCond:{0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Dense fog',51:'Light drizzle',53:'Drizzle',55:'Dense drizzle',56:'Freezing drizzle',57:'Freezing drizzle',61:'Light rain',63:'Moderate rain',65:'Heavy rain',66:'Freezing rain',67:'Freezing rain',71:'Light snow',73:'Snowfall',75:'Heavy snow',77:'Snow grains',80:'Light rain showers',81:'Rain showers',82:'Violent rain showers',85:'Snow showers',86:'Snow showers',95:'Thunderstorm',96:'Thunderstorm with hail',99:'Thunderstorm with hail'},
         goSpecial:'Special Days', specialTitle:'Special Islamic Days', nextSpecial:'Next special day',
         specialNote:'Dates depend on moon sighting — they may shift by a day.',
         probable:'Probable', passed:'Passed', todayWord:'Today', daysLeft:'days left', inDays:'In {n} days',
@@ -2838,6 +2976,7 @@
       if (typeof renderSpecialDays === 'function') renderSpecialDays();
       if (state.today) { renderToday(); renderMonthHead(); }
       if (typeof renderMakkahMadinah === 'function') renderMakkahMadinah();
+      if (typeof renderWxChip === 'function') renderWxChip();
       renderQibla(); renderMonthTitle();
     }
     function setLang(l) { if (state.lang !== l) { state.lang = l; applyLang(); } }
@@ -4110,17 +4249,68 @@
 
 
     /* ================================================================
+       HERO STYLE — জীবন্ত আকাশ (living sky) vs আগের হিরো (classic)
+       The classic hero is the original Waqt hero: deep emerald
+       gradient, gold glows, star pattern, light text and the Quran
+       book, with every sky / weather layer off. The visitor picks
+       either style from the pill toggle inside the hero or from the
+       menu's settings; the choice is remembered on this device
+       (localStorage 'waqtHero', the same store the weather cache
+       already uses). Default is the living sky.
+       ================================================================ */
+    let heroMode = 'living';
+    try {
+      const hm = localStorage.getItem('waqtHero');
+      if (hm === 'classic' || hm === 'living') heroMode = hm;
+    } catch (e) { /* storage unavailable: living sky it is */ }
+    function applyHeroMode() {
+      document.documentElement.classList.toggle('hero-classic', heroMode === 'classic');
+      const on = (id, v) => { const b = $(id); if (b) b.classList.toggle('on', v); };
+      on('heroModeLiving', heroMode === 'living'); on('heroModeLiving2', heroMode === 'living');
+      on('heroModeClassic', heroMode === 'classic'); on('heroModeClassic2', heroMode === 'classic');
+      if (heroMode === 'classic') {
+        wxThunderOn = false;
+        if (wxFlashTimer) { clearTimeout(wxFlashTimer); wxFlashTimer = null; }
+        stopRainFx();
+        const root = document.documentElement.style;
+        root.setProperty('--sky1', '#0d6a4b');
+        root.setProperty('--sky2', '#073f2e');
+        root.setProperty('--sky3', '#052e21');
+        root.setProperty('--wx-rain', '0');
+        document.documentElement.classList.remove('sky-light');
+        renderWxChip();
+      } else {
+        updateLivingSky();
+        if (wxCurrent) applyWeather(wxCurrent); else renderSky();
+      }
+    }
+    function setHeroMode(m) {
+      if (m !== 'classic' && m !== 'living') return;
+      heroMode = m;
+      try { localStorage.setItem('waqtHero', m); } catch (e) {}
+      applyHeroMode();
+    }
+    function initHeroMode() {
+      const bind = (id, m) => { const b = $(id); if (b) b.addEventListener('click', () => setHeroMode(m)); };
+      bind('heroModeLiving', 'living'); bind('heroModeLiving2', 'living');
+      bind('heroModeClassic', 'classic'); bind('heroModeClassic2', 'classic');
+      applyHeroMode();
+    }
+
+    /* ================================================================
        LIVING SKY (জীবন্ত আকাশ)
        The hero + page-top wash follow the selected district's own
        prayer times. Anchor palettes sit at the phase boundaries
        (Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha); the colours for the
        current minute are interpolated between the two nearest anchors
-       and written to CSS variables, so the sky drifts gradually all
-       day. Every palette keeps a deep base — the hero's light text
-       stays readable in every phase. Recomputed on each render of
-       today's times (district / method change) and once a minute.
-       With prefers-reduced-motion the sky is set once and left static
-       (no twinkle, no per-minute drift).
+       and kept in skyBase; renderSky() then writes them to CSS
+       variables — after blending in the REAL weather (below), so the
+       sky drifts gradually all day AND greys over when it is actually
+       cloudy outside. The sun and moon discs travel their real arcs
+       (sunrise→Maghrib, Maghrib→Fajr) behind the cloud decks.
+       Recomputed on each render of today's times (district / method
+       change) and once a minute. With prefers-reduced-motion the sky
+       is set once and left static (no twinkle, no per-minute drift).
        ================================================================ */
     const SKY_PALETTES = {
       /*          top              mid              bottom           glow rgba              stars  light-hero-text */
@@ -4144,10 +4334,14 @@
       };
     }
     function skyRgb(v) { return 'rgb(' + v[0] + ',' + v[1] + ',' + v[2] + ')'; }
+    function skyMixC(c1, c2, t) { return [skyLerp(c1[0], c2[0], t), skyLerp(c1[1], c2[1], t), skyLerp(c1[2], c2[2], t)]; }
+    function skyShadeC(c, f) { return [Math.round(c[0] * f), Math.round(c[1] * f), Math.round(c[2] * f)]; }
+    let skyBase = null, skyNowMin = 0, skyTimes = null;
     function updateLivingSky() {
       try {
         const now = new Date();
         const nowMin = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+        skyNowMin = nowMin;
         /* phase anchors from the SELECTED district's times on screen;
            clock-based fallbacks until the first times render */
         let f = 300, sr = 360, dh = 720, asr = 930, mg = 1080, ish = 1170;
@@ -4157,6 +4351,7 @@
           const mf = mins('Fajr'), msr = mins('Sunrise'), mdh = mins('Dhuhr'), mas = mins('Asr'), mmg = mins('Maghrib'), mis = mins('Isha');
           if (mf != null && msr != null && mdh != null && mas != null && mmg != null && mis != null) { f = mf; sr = msr; dh = mdh; asr = mas; mg = mmg; ish = mis; }
         }
+        skyTimes = { f: f, sr: sr, dh: dh, asr: asr, mg: mg, ish: ish };
         const P = SKY_PALETTES;
         const anchors = [
           [0, P.night], [f, P.night],
@@ -4175,94 +4370,308 @@
           }
           if (nowMin < t0) { cur = anchors[i][1]; break; }
         }
+        skyBase = cur;
+        renderSky();
+      } catch (e) { /* the sky is decoration — never break the page */ }
+    }
+    /* Writes skyBase to the CSS variables, first blending in the live
+       weather: cloud cover pulls every sky colour toward a grey
+       overcast palette (day-grey or night-grey by phase), rain darkens
+       the whole sky, the sun's glow and the stars fade behind cloud,
+       and the light/dark hero-text decision is re-taken from the
+       BLENDED sky's luminance — so text stays readable in a storm. */
+    function renderSky() {
+      try {
+        if (heroMode === 'classic' || !skyBase) return;
         const root = document.documentElement.style;
-        root.setProperty('--sky1', skyRgb(cur.a));
-        root.setProperty('--sky2', skyRgb(cur.b));
-        root.setProperty('--sky3', skyRgb(cur.c));
-        root.setProperty('--sky-glow', 'rgba(' + cur.g[0] + ',' + cur.g[1] + ',' + cur.g[2] + ',' + cur.g[3] + ')');
-        root.setProperty('--sky-star', String(cur.st));
-        document.documentElement.classList.toggle('sky-light', cur.li > 0.5);
+        let a = skyBase.a.slice(), b = skyBase.b.slice(), c = skyBase.c.slice();
+        let glowA = skyBase.g[3], star = skyBase.st, li = skyBase.li;
+        let cloud = 0, rainI = 0, thunder = false;
+        if (wxCurrent) { const k = wxKind(wxCurrent); cloud = k.cloud; rainI = k.rain; thunder = k.thunder; }
+        const dayF = skyBase.li;
+        if (wxCurrent && (cloud > 0.02 || rainI > 0)) {
+          const t = Math.min(0.88, cloud * 0.82 + rainI * 0.22);
+          const ocA = [skyLerp(30, 102, dayF), skyLerp(38, 114, dayF), skyLerp(48, 126, dayF)];
+          const ocB = [skyLerp(26, 124, dayF), skyLerp(34, 134, dayF), skyLerp(44, 142, dayF)];
+          const ocC = [skyLerp(20, 140, dayF), skyLerp(28, 150, dayF), skyLerp(36, 152, dayF)];
+          a = skyMixC(a, ocA, t); b = skyMixC(b, ocB, t); c = skyMixC(c, ocC, t);
+          const shade = 1 - rainI * 0.20 - (thunder ? 0.06 : 0);
+          a = skyShadeC(a, shade); b = skyShadeC(b, shade); c = skyShadeC(c, shade);
+          glowA = glowA * (1 - cloud * 0.92);
+          star = Math.max(0, star * (1 - cloud));
+          const lum = 0.299 * b[0] + 0.587 * b[1] + 0.114 * b[2];
+          li = lum > 148 ? 1 : 0;
+        }
+        root.setProperty('--sky1', skyRgb(a));
+        root.setProperty('--sky2', skyRgb(b));
+        root.setProperty('--sky3', skyRgb(c));
+        root.setProperty('--sky-glow', 'rgba(' + skyBase.g[0] + ',' + skyBase.g[1] + ',' + skyBase.g[2] + ',' + glowA.toFixed(3) + ')');
+        root.setProperty('--sky-star', String(star.toFixed(3)));
+        document.documentElement.classList.toggle('sky-light', li > 0.5);
+        root.setProperty('--cloud-bright', ((0.42 + 0.58 * dayF) * (1 - rainI * 0.18)).toFixed(3));
+        /* sun disc on the sunrise→Maghrib arc, moon on Maghrib→Fajr */
+        let sunOp = 0, moonOp = 0;
+        if (skyTimes) {
+          const sr = skyTimes.sr, mg = skyTimes.mg, f = skyTimes.f;
+          if (skyNowMin > sr && skyNowMin < mg) {
+            const p = (skyNowMin - sr) / (mg - sr), elev = Math.sin(p * Math.PI);
+            root.setProperty('--sun-x', (36 + p * 58).toFixed(1) + '%');
+            root.setProperty('--sun-y', (76 - elev * 58).toFixed(1) + '%');
+            sunOp = Math.min(1, 0.25 + elev * 1.1) * (1 - cloud * 0.94) * (1 - rainI * 0.7);
+          }
+          if (skyNowMin >= mg || skyNowMin < f) {
+            const span = (f + 1440) - mg;
+            const q = (skyNowMin >= mg ? skyNowMin - mg : skyNowMin + 1440 - mg) / span;
+            const elev = Math.sin(Math.max(0, Math.min(1, q)) * Math.PI);
+            root.setProperty('--moon-x', (38 + q * 56).toFixed(1) + '%');
+            root.setProperty('--moon-y', (68 - elev * 50).toFixed(1) + '%');
+            moonOp = Math.min(1, 0.3 + elev) * (1 - cloud * 0.9);
+          }
+        }
+        root.setProperty('--sun-op', sunOp.toFixed(3));
+        root.setProperty('--moon-op', moonOp.toFixed(3));
       } catch (e) { /* the sky is decoration — never break the page */ }
     }
     function initLivingSky() {
+      initHeroMode();
+      initRainFx();
       updateLivingSky();
       const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduced) setInterval(updateLivingSky, 60000);
+      /* live weather refresh while the page stays open (~31 min, just
+         past the cache window, so fresh data actually lands) */
+      setInterval(() => { fetchWeather(); }, 1860000);
     }
 
 
     /* ================================================================
        LIVING SKY — REAL WEATHER LAYER (Open-Meteo, no key needed)
        The time-of-day sky stays the base; the selected district's
-       CURRENT weather only modulates it: cloud_cover lays a grey veil
-       + drifting clouds, rain codes add animated rain and a darker
-       sky, thunderstorm codes add rare subtle lightning flashes, fog
-       codes add a misty veil. Refetched when the district changes and
-       cached ~30 minutes in localStorage. Any failure (offline, API
-       down) silently leaves the pure time-of-day sky.
+       CURRENT weather drives everything else: cloud_cover blends the
+       sky grey (renderSky) and stacks three drifting cloud decks,
+       rain / drizzle / showers fall on a canvas with wind slant,
+       thunderstorm codes add occasional localised lightning blooms,
+       fog codes lay a drifting mist over the horizon. The hero also
+       gains a live weather chip (condition + temperature + cloud %).
+       Refetched when the district changes, cached ~30 minutes in
+       localStorage, refreshed periodically while open. Any failure
+       (offline, API down) silently leaves the pure time-of-day sky.
        ================================================================ */
     const WX_RAIN = [51,53,55,56,57,61,63,65,66,67,80,81,82];
+    const WX_SNOW = [71,73,75,77,85,86];
     const WX_THUNDER = [95,96,99];
     const WX_FOG = [45,48];
-    let wxForKey = null, wxCurrent = null, wxThunderOn = false, wxFlashTimer = null;
+    let wxForKey = null, wxCurrent = null, wxFetchedAt = 0, wxThunderOn = false, wxFlashTimer = null;
     function wxKey(lat, lon) { return (+lat).toFixed(2) + ',' + (+lon).toFixed(2); }
+    /* Normalises an Open-Meteo "current" object into the handful of
+       factors every layer needs: cloud 0..1, rain intensity 0..1. */
+    function wxKind(cur) {
+      const code = +cur.weather_code;
+      const cloud = Math.max(0, Math.min(100, +cur.cloud_cover || 0)) / 100;
+      let rain = 0;
+      if (code === 51 || code === 53) rain = 0.3;
+      else if (code === 55) rain = 0.45;
+      else if (code === 56 || code === 57 || code === 61 || code === 80) rain = 0.55;
+      else if (code === 63 || code === 66 || code === 81) rain = 0.75;
+      else if (code === 65 || code === 67 || code === 82) rain = 0.95;
+      if (WX_THUNDER.indexOf(code) >= 0) rain = Math.max(rain, 0.85);
+      const precip = +cur.precipitation || 0;
+      if (rain > 0 && precip >= 8) rain = 1;
+      else if (rain > 0 && precip >= 3) rain = Math.max(rain, 0.8);
+      const snow = WX_SNOW.indexOf(code) >= 0;
+      if (snow) rain = Math.max(rain, 0.5);
+      return {
+        code: code, cloud: cloud, rain: rain, snow: snow,
+        thunder: WX_THUNDER.indexOf(code) >= 0,
+        fog: WX_FOG.indexOf(code) >= 0
+      };
+    }
     function applyWeather(cur) {
       try {
         if (!cur) return;
         wxCurrent = cur;
-        const code = +cur.weather_code;
-        const cloud = Math.max(0, Math.min(100, +cur.cloud_cover || 0)) / 100;
-        const rain = WX_RAIN.indexOf(code) >= 0 || WX_THUNDER.indexOf(code) >= 0;
-        const thunder = WX_THUNDER.indexOf(code) >= 0;
-        const fog = WX_FOG.indexOf(code) >= 0;
+        const k = wxKind(cur);
         const root = document.documentElement.style;
-        root.setProperty('--wx-veil', String(Math.min(0.55, cloud * 0.28 + (rain ? 0.22 : 0) + (fog ? 0.10 : 0)).toFixed(3)));
-        root.setProperty('--wx-cloud', String(Math.min(0.92, Math.max(cloud * 0.95, fog ? 0.35 : 0)).toFixed(3)));
-        root.setProperty('--wx-rain', rain ? '0.55' : '0');
-        root.setProperty('--wx-mist', fog ? '0.6' : (cloud > 0.85 ? '0.15' : '0'));
-        /* lightning: rare, subtle double flashes — never under
-           prefers-reduced-motion */
-        wxThunderOn = thunder;
+        if (heroMode === 'classic') { stopRainFx(); renderWxChip(); return; }
+        const cloud = k.cloud;
+        root.setProperty('--wx-veil', String(Math.min(0.5, cloud * 0.22 + k.rain * 0.20 + (k.fog ? 0.10 : 0)).toFixed(3)));
+        root.setProperty('--wx-cloud-far', cloud <= 0.03 ? '0' : String(Math.min(0.92, cloud * 1.15).toFixed(3)));
+        root.setProperty('--wx-cloud-mid', cloud < 0.18 ? '0' : String(Math.min(0.96, (cloud - 0.1) * 1.15).toFixed(3)));
+        root.setProperty('--wx-cloud-dark', String(Math.min(0.92, Math.max(cloud > 0.55 ? (cloud - 0.55) * 1.5 : 0, k.rain * 0.55, k.thunder ? 0.6 : 0)).toFixed(3)));
+        root.setProperty('--wx-mist', k.fog ? '0.8' : (cloud > 0.9 ? '0.16' : '0'));
+        root.setProperty('--wx-rain', k.rain > 0 ? String(Math.min(1, 0.35 + k.rain * 0.65).toFixed(3)) : (k.snow ? '0.7' : '0'));
+        renderSky();
+        startRainFx(k);
+        /* lightning: occasional localised blooms from a random point
+           of the storm deck — never under prefers-reduced-motion */
+        wxThunderOn = k.thunder;
         const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (wxFlashTimer) { clearTimeout(wxFlashTimer); wxFlashTimer = null; }
-        if (thunder && !reduced) {
+        if (k.thunder && !reduced) {
           const flash = () => {
-            if (!wxThunderOn) return;
+            if (!wxThunderOn || heroMode === 'classic') return;
             const el = $('skyFlash');
             if (el) {
+              el.style.setProperty('--bolt-x', (15 + Math.random() * 70).toFixed(0) + '%');
               el.classList.add('on');
-              setTimeout(() => { el.classList.remove('on'); }, 90);
-              if (Math.random() < 0.5) setTimeout(() => { el.classList.add('on'); setTimeout(() => { el.classList.remove('on'); }, 70); }, 240);
+              setTimeout(() => { el.classList.remove('on'); }, 110);
+              if (Math.random() < 0.55) setTimeout(() => { el.classList.add('on'); setTimeout(() => { el.classList.remove('on'); }, 80); }, 260);
+              if (Math.random() < 0.3) setTimeout(() => { el.classList.add('on'); setTimeout(() => { el.classList.remove('on'); }, 60); }, 520);
             }
             wxFlashTimer = setTimeout(flash, 6000 + Math.random() * 9000);
           };
           wxFlashTimer = setTimeout(flash, 3500 + Math.random() * 6000);
         }
+        renderWxChip();
       } catch (e) { /* weather is decoration — never break the page */ }
+    }
+
+    /* ---------- canvas rain / snow ----------
+       Drops are individual particles: length and speed scale with the
+       rain intensity, the slant follows the live wind (speed +
+       direction), and snow drifts with a sway. The loop pauses when
+       the tab is hidden or the hero is scrolled out of view, and
+       never runs under prefers-reduced-motion or the classic hero. */
+    const rainFx = { mode: null, raf: null, drops: [], ctx: null, w: 0, h: 0, visible: true, intensity: 0, slant: 0 };
+    function initRainFx() {
+      const c = $('skyRainCanvas');
+      if (!c) return;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver((es) => { rainFx.visible = !es[0] || es[0].isIntersecting; }, { threshold: 0.02 }).observe(c);
+      }
+      window.addEventListener('resize', () => { if (rainFx.mode) sizeRainCanvas(); });
+    }
+    function sizeRainCanvas() {
+      const c = $('skyRainCanvas');
+      if (!c || !c.parentElement) return false;
+      const r = c.parentElement.getBoundingClientRect();
+      if (r.width < 10 || r.height < 10) return false;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      c.width = Math.round(r.width * dpr);
+      c.height = Math.round(r.height * dpr);
+      rainFx.w = c.width; rainFx.h = c.height;
+      rainFx.ctx = c.getContext('2d');
+      return !!rainFx.ctx;
+    }
+    function startRainFx(k) {
+      try {
+        const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced || heroMode === 'classic' || (!k.rain && !k.snow)) { stopRainFx(); return; }
+        rainFx.mode = k.snow ? 'snow' : 'rain';
+        rainFx.intensity = k.rain;
+        if (!sizeRainCanvas()) { rainFx.mode = null; return; }
+        const u = rainFx.h / 340; /* size unit: ~device px per CSS px of hero height */
+        const ws = +wxCurrent.wind_speed_10m || 10;
+        const wd = (+wxCurrent.wind_direction_10m || 230) * Math.PI / 180;
+        rainFx.slant = Math.sin(wd) * Math.min(3.2, ws * 0.09) * -1;
+        const n = rainFx.mode === 'rain'
+          ? Math.max(40, Math.min(420, Math.round((90 + 280 * k.rain) * (rainFx.w / 1000))))
+          : Math.max(30, Math.min(180, Math.round((70 + 100 * k.rain) * (rainFx.w / 1000))));
+        rainFx.drops = [];
+        for (let i = 0; i < n; i++) {
+          if (rainFx.mode === 'rain') {
+            rainFx.drops.push({
+              x: Math.random() * rainFx.w, y: Math.random() * rainFx.h,
+              len: (11 + Math.random() * 15) * u * (0.7 + k.rain * 0.6),
+              sp: (13 + Math.random() * 11 + k.rain * 10) * u
+            });
+          } else {
+            rainFx.drops.push({
+              x: Math.random() * rainFx.w, y: Math.random() * rainFx.h,
+              r: (1 + Math.random() * 2.1) * u, sp: (0.5 + Math.random() * 0.9) * u,
+              ph: Math.random() * 6.28
+            });
+          }
+        }
+        if (rainFx.raf) cancelAnimationFrame(rainFx.raf);
+        const step = () => {
+          rainFx.raf = requestAnimationFrame(step);
+          if (document.hidden || !rainFx.visible || !rainFx.ctx) return;
+          const ctx = rainFx.ctx, W = rainFx.w, H = rainFx.h, uu = H / 340;
+          ctx.clearRect(0, 0, W, H);
+          if (rainFx.mode === 'rain') {
+            ctx.strokeStyle = 'rgba(216,233,252,0.55)';
+            ctx.lineWidth = Math.max(1, W / 760);
+            ctx.beginPath();
+            for (const d of rainFx.drops) {
+              ctx.moveTo(d.x, d.y);
+              ctx.lineTo(d.x + rainFx.slant * uu * 1.6, d.y + d.len);
+              d.y += d.sp; d.x += rainFx.slant * uu;
+              if (d.y > H) { d.y = -d.len - Math.random() * 30; d.x = Math.random() * (W + 60) - 30; }
+            }
+            ctx.stroke();
+          } else {
+            ctx.fillStyle = 'rgba(255,255,255,0.88)';
+            for (const d of rainFx.drops) {
+              d.ph += 0.012;
+              d.y += d.sp; d.x += Math.sin(d.ph) * 0.45 * uu + rainFx.slant * uu * 0.3;
+              if (d.y > H + 4) { d.y = -4; d.x = Math.random() * W; }
+              ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.29); ctx.fill();
+            }
+          }
+        };
+        step();
+      } catch (e) { /* precipitation is decoration — never break the page */ }
+    }
+    function stopRainFx() {
+      rainFx.mode = null;
+      if (rainFx.raf) { cancelAnimationFrame(rainFx.raf); rainFx.raf = null; }
+      const c = $('skyRainCanvas');
+      if (c && rainFx.ctx) rainFx.ctx.clearRect(0, 0, c.width, c.height);
+      if (heroMode === 'classic') document.documentElement.style.setProperty('--wx-rain', '0');
+    }
+
+    /* ---------- live weather chip in the hero ---------- */
+    function wxIcon(kind, isDay) {
+      const s = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+      const cloud = '<path d="M17.5 15a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 15h10.5Z"/>';
+      if (kind === 'thunder') return '<svg ' + s + '>' + cloud + '<path d="M12.4 13.2 10.2 17h2l-1 3.2L15 15.6h-2.2l1.1-2.4Z" fill="currentColor" stroke="none"/></svg>';
+      if (kind === 'rain') return '<svg ' + s + '>' + cloud + '<path d="M8.5 17.5 8.1 20M12.5 17.5 12.1 20M16.5 17.5 16.1 20"/></svg>';
+      if (kind === 'snow') return '<svg ' + s + '>' + cloud + '<path d="M8.5 18h.01M12.5 19.5h.01M16.5 18h.01" stroke-width="2.6"/></svg>';
+      if (kind === 'fog') return '<svg ' + s + '><path d="M17.5 11.5a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.5 1.5A4 4 0 0 0 7 11.5h10.5Z"/><path d="M5 16h14M7.5 19.5h9"/></svg>';
+      if (kind === 'cloud') return '<svg ' + s + '>' + cloud + '</svg>';
+      if (kind === 'partly') return '<svg ' + s + '><circle cx="8" cy="8" r="3.2"/><path d="M8 2.8v1.4M2.8 8h1.4M4.3 4.3l1 1"/><path d="M18 19.5a3.8 3.8 0 0 0 0-7.6 5 5 0 0 0-9.6 1.2A3.4 3.4 0 0 0 9.5 19.5H18Z"/></svg>';
+      if (!isDay) return '<svg ' + s + '><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>';
+      return '<svg ' + s + '><circle cx="12" cy="12" r="4"/><path d="M12 3v1.8M12 19.2V21M3 12h1.8M19.2 12H21M5.6 5.6l1.3 1.3M17.1 17.1l1.3 1.3M18.4 5.6l-1.3 1.3M6.9 17.1l-1.3 1.3"/></svg>';
+    }
+    function renderWxChip() {
+      const chip = $('wxChip');
+      if (!chip) return;
+      if (!wxCurrent || heroMode === 'classic') { chip.classList.add('hidden'); return; }
+      const k = wxKind(wxCurrent), d = L();
+      const cond = (d.wxCond && (d.wxCond[k.code] || d.wxCond[3])) || '';
+      let txt = d.wxLive + ' · ' + cond;
+      if (wxCurrent.temperature_2m != null) txt += ' · ' + num(Math.round(+wxCurrent.temperature_2m) + '°C');
+      if (k.cloud >= 0.2) txt += ' · ' + d.wxCloud + ' ' + num(Math.round(k.cloud * 100) + '%');
+      $('wxText').textContent = txt;
+      const kind = k.thunder ? 'thunder' : (k.snow ? 'snow' : (k.rain > 0 ? 'rain' : (k.fog ? 'fog' : (k.cloud >= 0.55 ? 'cloud' : (k.cloud >= 0.15 ? 'partly' : 'clear')))));
+      $('wxIcon').innerHTML = wxIcon(kind, +wxCurrent.is_day === 1);
+      chip.classList.remove('hidden');
     }
     async function fetchWeather() {
       try {
         if (!state.place || state.place.lat == null || state.place.lon == null) return;
         const key = wxKey(state.place.lat, state.place.lon);
-        if (wxForKey === key && wxCurrent) { applyWeather(wxCurrent); return; }
+        if (wxForKey === key && wxCurrent && (Date.now() - wxFetchedAt) < 1800000) { applyWeather(wxCurrent); return; }
         try {
-          const raw = localStorage.getItem('waqtWx');
+          const raw = localStorage.getItem('waqtWx2');
           if (raw) {
             const o = JSON.parse(raw);
-            if (o && o.key === key && (Date.now() - o.ts) < 1800000 && o.data) {
-              wxForKey = key; applyWeather(o.data); return;
+            if (o && o.key === key && (Date.now() - o.ts) < 1800000 && o.data && o.data.temperature_2m != null) {
+              wxForKey = key; wxFetchedAt = o.ts; applyWeather(o.data); return;
             }
           }
         } catch (e) { /* storage unavailable: fetch fresh below */ }
         const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + state.place.lat + '&longitude=' + state.place.lon +
-          '&current=weather_code,cloud_cover,is_day,precipitation&timezone=auto';
+          '&current=weather_code,temperature_2m,apparent_temperature,relative_humidity_2m,cloud_cover,is_day,precipitation,wind_speed_10m,wind_direction_10m&timezone=auto';
         const r = await fetch(url);
         if (!r || !r.ok) return; /* silent fallback: time-only sky */
         const j = await r.json();
         if (!j || !j.current) return;
         wxForKey = key;
+        wxFetchedAt = Date.now();
         applyWeather(j.current);
-        try { localStorage.setItem('waqtWx', JSON.stringify({ key: key, ts: Date.now(), data: j.current })); } catch (e) {}
+        try { localStorage.setItem('waqtWx2', JSON.stringify({ key: key, ts: wxFetchedAt, data: j.current })); } catch (e) {}
       } catch (e) { /* offline: the time-of-day sky simply stays */ }
     }
 
