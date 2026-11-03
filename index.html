@@ -3472,7 +3472,6 @@
         compassNoSensor:'লাইভ কম্পাস থেকে সাড়া মিলছে না — ফোনে কম্পাস সেন্সর না থাকলে এমন হয়। উপরের ডিগ্রিটি উত্তর থেকে ঘড়ির কাঁটার দিকে মাপা: সেটাই কিবলা।',
         methodNetNeeded:'অন্য পদ্ধতির জন্য ইন্টারনেট দরকার — ডিফল্ট পদ্ধতির সময় দেখানো হচ্ছে',
         compassDenied:'কম্পাসের অনুমতি পাওয়া যায়নি', locFail:'অবস্থান পাওয়া যায়নি — জেলা search করে বেছে নিন',
-        locDenied:'লোকেশন অনুমতি বন্ধ আছে — ব্রাউজারের সাইট সেটিংস (Site settings → Location) থেকে এই সাইটের অনুমতি দিন, অথবা ফোনের লোকেশন (GPS) চালু করে আবার চেষ্টা করুন',
         locGetting:'অবস্থান নেওয়া হচ্ছে…', roundComplete:'রাউন্ড শেষ! মাশাআল্লাহ',
         ramadanNow:'রমজান চলছে — এই মাসে রোজা',
         hijriWord:'হিজরি', dateWord:'তারিখ',
@@ -3559,7 +3558,6 @@
         compassNoSensor:'No response from the live compass — this phone may not have a compass sensor. Use the degree above, measured clockwise from north: that is the Qibla.',
         methodNetNeeded:'Other methods need an internet connection — showing the default method times',
         compassDenied:'Compass permission was not granted', locFail:'Location not found — search and pick your district instead',
-        locDenied:'Location permission is blocked — allow location for this site in your browser site settings (Site settings → Location), or turn on phone location (GPS), then try again',
         locGetting:'Getting your location…', roundComplete:'Round complete! MashaAllah',
         ramadanNow:'Ramadan is ongoing — fasting this month',
         hijriWord:'Hijri', dateWord:'Date',
@@ -4509,7 +4507,7 @@
         /* A denied site permission never shows a prompt and is NOT
            "not found" — say exactly what is wrong (the same rule the
            mosque flow already follows). */
-        if (err && err.code === 1) { toast(L().locDenied); return; }
+        if (err && err.code === 1) { toast(L().locFail); return; }
         /* A slow first fix can time out — retry once, coarse, before
            giving up. */
         if (err && err.code === 3) {
