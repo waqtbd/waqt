@@ -1878,24 +1878,85 @@
        class, so the cloud layers, vapour and starfield fade in WITH
        the photo, exactly as the network-loaded path behaved), the
        cloudy-sky treatment when the pick carries it, and the
-       sky-matched Quran cover on the front cover layer. */
+       sky-matched Quran cover on the front cover layer.
+       HD-FIRST REVEAL (large screens, Sunny's order 2026-11-03):
+       a desktop / retina visitor must never SEE the standard photo
+       and then the HD swap — the first photograph revealed there
+       is the 1920px one. The HD file starts loading the moment the
+       pick is known (here, still inside the first parse) and the
+       reveal waits for it; the phase-matched gradient — the
+       designed layer under every photograph — carries the hero
+       meanwhile, with all page content already painted. If HD has
+       not landed within 3500ms (inside the head watchdog's 4s
+       window) or fails on both the root and assets/ copies, the
+       inlined standard photo is revealed exactly as before, and
+       the main script's post-load HD crossfade still upgrades it
+       when HD eventually arrives — the page can never stick.
+       Small screens take the original path untouched and never
+       request an HD file. State is shared with the main script
+       through B.hdPending (the pick whose HD reveal is in flight)
+       and B.hdApplied (the pick already showing in HD), so its
+       upgrade never races this reveal or re-swaps an HD photo
+       that is already on screen. */
     (function () {
       try {
         var B = window.__WAQT_BOOT; if (!B || !B.photo) return;
-        if (window.__SKY_URI && window.__SKY_URI[B.photo]) {
+        var applied = false;
+        function applyPhoto(url) {
+          if (applied) return false;
+          /* a genuine phase swap in the main script already lit the
+             hero with a newer pick: stand down entirely */
+          if (document.documentElement.classList.contains('sky-photo-on')) { applied = true; return false; }
           var a = document.getElementById('skyPhotoA');
-          if (a) {
-            var img = a.querySelector('.sky-photo-img');
-            if (img) img.style.backgroundImage = 'url("' + window.__SKY_URI[B.photo] + '")';
-            /* .boot = no fade for this first application: the photo is
-               already decoded from its data URI, so it goes on at full
-               strength in this same frame instead of crossfading up
-               through the flat phase gradient over .6s */
-            a.classList.add('boot');
-            a.classList.add('on');
-            document.documentElement.classList.add('sky-photo-on');
-            if (B.grey && a.parentElement) a.parentElement.classList.add('sky-photo-grey');
-          }
+          if (!a) return false;
+          var img = a.querySelector('.sky-photo-img');
+          if (img) img.style.backgroundImage = 'url("' + url + '")';
+          /* .boot = no fade for this first application: the photo
+             goes on at full strength in the frame it is revealed,
+             instead of crossfading up through the flat phase
+             gradient over .6s */
+          a.classList.add('boot');
+          a.classList.add('on');
+          document.documentElement.classList.add('sky-photo-on');
+          if (B.grey && a.parentElement) a.parentElement.classList.add('sky-photo-grey');
+          applied = true;
+          return true;
+        }
+        function applySd() {
+          if (window.__SKY_URI && window.__SKY_URI[B.photo]) applyPhoto(window.__SKY_URI[B.photo]);
+          B.hdPending = '';
+        }
+        /* the same predicate and URL map as the main script's
+           SKY_HD_LARGE / SKY_PHOTO_HD_URLS (duplicated here because
+           this script runs long before that one is parsed) */
+        var HD_URLS = { day: 'sky-hd-day.jpg', dawn: 'sky-hd-dawn.jpg', sunset: 'sky-hd-sunset.jpg', night: 'sky-hd-night.jpg', overcast: 'sky-hd-overcast.jpg' };
+        var large = !!(window.matchMedia && (window.matchMedia('(min-width: 1024px)').matches || ((window.devicePixelRatio || 1) >= 2 && window.innerWidth >= 768)));
+        var hdUrl = large && HD_URLS[B.photo];
+        if (hdUrl && window.__SKY_URI && window.__SKY_URI[B.photo]) {
+          B.hdPending = B.photo;
+          var pre = new Image();
+          pre.onload = function () {
+            if (applyPhoto(hdUrl)) B.hdApplied = B.photo;
+            B.hdPending = '';
+          };
+          pre.onerror = function () {
+            if (applied) { B.hdPending = ''; return; }
+            var alt = new Image();
+            alt.onload = function () {
+              if (applyPhoto('assets/' + hdUrl)) B.hdApplied = B.photo;
+              B.hdPending = '';
+            };
+            alt.onerror = function () { applySd(); };
+            alt.src = 'assets/' + hdUrl;
+          };
+          pre.src = hdUrl;
+          /* safety net: never hold the reveal past the watchdog
+             window — if HD is still in flight, the standard photo
+             reveals exactly as before and the main script's
+             crossfade upgrade takes over from there */
+          setTimeout(applySd, 3500);
+        } else {
+          applySd();
         }
         if (window.__COVER_URI && window.__COVER_URI[B.cover]) {
           var hbp = document.getElementById('hbPhotoA');
@@ -5315,12 +5376,28 @@
     let skyHdName = '', skyHdBusy = '';
     /* HD UPGRADE (large screens only): once the standard photo for
        the current pick is on screen, preload its 1920px version and
-       crossfade to it ONLY when it has fully loaded — first paint
-       always uses the inlined image, phones never fetch these, and
-       a failed HD load simply leaves the standard photo up. */
+       crossfade to it ONLY when it has fully loaded — phones never
+       fetch these, and a failed HD load simply leaves the standard
+       photo up. On large screens the FIRST pick normally bypasses
+       this path entirely: the first-paint script reveals its HD
+       photo directly (HD-FIRST, above in upgradeSkyPhotoHd), and
+       this upgrade remains for later picks, for the first reveal's
+       timed-out / failed fallback, and for picks made before this
+       script existed in the page. */
     function upgradeSkyPhotoHd(name) {
       try {
         if (!SKY_HD_LARGE || !name || skyHdName === name || skyHdBusy === name) return;
+        /* HD-FIRST reveal (see the first-paint script): on large
+           screens the pick's HD photo is either already on screen
+           (hdApplied — nothing to upgrade, ever) or being fetched
+           for the direct first reveal (hdPending — do not start a
+           competing load whose crossfade would race it). If the
+           first reveal fell back to the standard photo, both flags
+           are clear by the time the timer / error path ran, and
+           this upgrade proceeds exactly as before. */
+        const boot = window.__WAQT_BOOT;
+        if (boot && boot.hdApplied === name) { skyHdName = name; return; }
+        if (boot && boot.hdPending && boot.hdPending === name) return;
         const url = SKY_PHOTO_HD_URLS[name];
         if (!url) return;
         skyHdBusy = name;
