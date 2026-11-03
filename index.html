@@ -5255,6 +5255,13 @@
        sideways forever, and the vapour layer floats on top.
        ================================================================ */
     const SKY_PHOTO_URLS = { day: 'sky-day.jpg', dawn: 'sky-dawn.jpg', sunset: 'sky-sunset.jpg', night: 'sky-night.jpg', overcast: 'sky-overcast.jpg' };
+    /* HD SKIES (large screens only): 1920px versions for desktop /
+       retina heroes, where the 1000px photos upscale into mush.
+       Small screens never touch these files — they keep exactly the
+       current 1000px photos and the inlined first-paint data URIs. */
+    const SKY_PHOTO_HD_URLS = { day: 'sky-hd-day.jpg', dawn: 'sky-hd-dawn.jpg', sunset: 'sky-hd-sunset.jpg', night: 'sky-hd-night.jpg', overcast: 'sky-hd-overcast.jpg' };
+    const BOLT_HD_URLS = ['sky-thunder-hd-left.jpg', 'sky-thunder-hd-center.jpg', 'sky-thunder-hd-right.jpg'];
+    const SKY_HD_LARGE = !!(window.matchMedia && (window.matchMedia('(min-width: 1024px)').matches || ((window.devicePixelRatio || 1) >= 2 && window.innerWidth >= 768)));
     /* SKY-MATCHED QURAN COVER (Realistic mode only): the hero Quran
        cover takes the DEEP colour of the sky currently showing —
        day → deep royal blue, dawn → deep rosewood, sunset (dusk) → deep amber-brown,
@@ -5305,6 +5312,46 @@
        sees the same name and changes nothing — no second fade, no
        swap. Layer A (index 0) is the one the bootstrap lit. */
     let skyPhotoName = (window.__WAQT_BOOT && window.__WAQT_BOOT.photo) || '', skyPhotoTop = 0, skyPhotoSeq = 0, skyPhotoArmed = false;
+    let skyHdName = '', skyHdBusy = '';
+    /* HD UPGRADE (large screens only): once the standard photo for
+       the current pick is on screen, preload its 1920px version and
+       crossfade to it ONLY when it has fully loaded — first paint
+       always uses the inlined image, phones never fetch these, and
+       a failed HD load simply leaves the standard photo up. */
+    function upgradeSkyPhotoHd(name) {
+      try {
+        if (!SKY_HD_LARGE || !name || skyHdName === name || skyHdBusy === name) return;
+        const url = SKY_PHOTO_HD_URLS[name];
+        if (!url) return;
+        skyHdBusy = name;
+        const seq = skyPhotoSeq;
+        const done = () => { if (skyHdBusy === name) skyHdBusy = ''; };
+        const apply = (u2) => {
+          if (seq !== skyPhotoSeq || skyPhotoName !== name || heroMode === 'classic') { done(); return; }
+          const layers = [$('skyPhotoA'), $('skyPhotoB')];
+          if (!layers[0] || !layers[1]) { done(); return; }
+          const back = layers[1 - skyPhotoTop], front = layers[skyPhotoTop];
+          const imgEl = back.querySelector('.sky-photo-img');
+          if (!imgEl) { done(); return; }
+          imgEl.style.backgroundImage = 'url("' + u2 + '")';
+          back.classList.remove('boot'); front.classList.remove('boot');
+          back.classList.add('on'); front.classList.remove('on');
+          skyPhotoTop = 1 - skyPhotoTop;
+          skyHdName = name;
+          done();
+        };
+        const pre = new Image();
+        pre.onload = () => apply(url);
+        pre.onerror = () => {
+          if (seq !== skyPhotoSeq) { done(); return; }
+          const alt = new Image();
+          alt.onload = () => apply('assets/' + url);
+          alt.onerror = () => { done(); /* HD missing: the standard photo stays */ };
+          alt.src = 'assets/' + url;
+        };
+        pre.src = url;
+      } catch (e) { /* the HD upgrade is decoration — never break the page */ }
+    }
     function updateSkyPhoto() {
       try {
         if (heroMode === 'classic') return;
@@ -5408,7 +5455,7 @@
         /* the Quran cover follows the same pick — it crossfades
            together with the sky-photo swap below */
         updateQuranCover(name);
-        if (name === skyPhotoName) return;
+        if (name === skyPhotoName) { upgradeSkyPhotoHd(name); return; }
         const seq = ++skyPhotoSeq;
         const back = layers[1 - skyPhotoTop], front = layers[skyPhotoTop];
         const imgEl = back.querySelector('.sky-photo-img');
@@ -5422,6 +5469,7 @@
           back.classList.add('on'); front.classList.remove('on');
           skyPhotoTop = 1 - skyPhotoTop; skyPhotoName = name;
           document.documentElement.classList.add('sky-photo-on');
+          upgradeSkyPhotoHd(name);
         };
         /* the photos live at the site root; hosts that bundle only
            assets/ are served the identical copies from there (the
@@ -5616,7 +5664,7 @@
         if (wxFlashTimer) { clearTimeout(wxFlashTimer); wxFlashTimer = null; }
         if (k.thunder && !reduced) {
           const boltEl = $('skyBoltPhoto');
-          const BOLT_URLS = ['sky-thunder-left.jpg', 'sky-thunder-center.jpg', 'sky-thunder-right.jpg'];
+          const BOLT_URLS = SKY_HD_LARGE ? BOLT_HD_URLS : ['sky-thunder-left.jpg', 'sky-thunder-center.jpg', 'sky-thunder-right.jpg'];
           const boltOK = [];
           let lastBolt = -1;
           BOLT_URLS.forEach((u, i) => { const im = new Image(); im.onload = () => { boltOK.push(i); }; im.src = u; });
@@ -5687,16 +5735,43 @@
         const ws = +wxCurrent.wind_speed_10m || 10;
         const wd = (+wxCurrent.wind_direction_10m || 230) * Math.PI / 180;
         rainFx.slant = Math.sin(wd) * Math.min(3.2, ws * 0.09) * -1;
+        /* drop count follows hero AREA, not width alone, so the
+           density per unit area is the same at every size (the old
+           width-only rule went ~4x sparser on a big desktop hero);
+           the calibration keeps a typical phone hero at exactly the
+           count it always had */
         const n = rainFx.mode === 'rain'
-          ? Math.max(40, Math.min(420, Math.round((90 + 280 * k.rain) * (rainFx.w / 1000))))
+          ? Math.max(40, Math.min(1200, Math.round((90 + 280 * k.rain) * (rainFx.w * rainFx.h) / 1120000)))
           : Math.max(30, Math.min(180, Math.round((70 + 100 * k.rain) * (rainFx.w / 1000))));
         rainFx.drops = [];
         for (let i = 0; i < n; i++) {
           if (rainFx.mode === 'rain') {
+            /* speed and streak length are hero-height fractions —
+               the same proportions at phone and desktop sizes (the
+               canvas is DPR-scaled, and both are computed from its
+               height): at heavy rain (intensity .95) a drop falls
+               ~0.575 hero heights per second with a streak of 4–6%
+               of the hero height — the proportions approved in the
+               phone demo — and lighter rain scales down linearly
+               with its intensity value.
+               FRAME FIX: drops drift sideways as they fall, so a
+               drop that crosses the whole hero must ENTER from
+               outside the drift-opposite edge. Each drop spawns in
+               its own entry interval — the hero width widened by
+               its total drift over one full fall (driftTotal =
+               vx * H / vy, signed) plus a 10% margin — and starts
+               pre-shifted along its trajectory, so coverage is
+               uniform over the whole hero from the first frame:
+               no dry wedge on the drift-opposite side, ever. */
+            const sp = rainFx.h * (0.20 + 0.395 * k.rain) * (0.78 + Math.random() * 0.44) / 60;
+            const len = rainFx.h * (0.04 + Math.random() * 0.02) * (0.82 + 0.18 * k.rain);
+            const driftTotal = (rainFx.slant * u) * rainFx.h / sp;
+            const ad = Math.abs(driftTotal);
+            const lo = Math.min(0, -driftTotal) - ad * 0.1, hi = Math.max(rainFx.w, rainFx.w - driftTotal) + ad * 0.1;
+            const y0 = Math.random() * rainFx.h;
             rainFx.drops.push({
-              x: Math.random() * rainFx.w, y: Math.random() * rainFx.h,
-              len: (11 + Math.random() * 15) * u * (0.7 + k.rain * 0.6),
-              sp: (13 + Math.random() * 11 + k.rain * 10) * u
+              x: lo + Math.random() * (hi - lo) + driftTotal * (y0 / rainFx.h), y: y0,
+              len: len, sp: sp, lo: lo, hi: hi
             });
           } else {
             rainFx.drops.push({
@@ -5707,9 +5782,17 @@
           }
         }
         if (rainFx.raf) cancelAnimationFrame(rainFx.raf);
-        const step = () => {
+        let lastT = 0;
+        const step = (t) => {
           rainFx.raf = requestAnimationFrame(step);
-          if (document.hidden || !rainFx.visible || !rainFx.ctx) return;
+          if (document.hidden || !rainFx.visible || !rainFx.ctx) { lastT = 0; return; }
+          /* speeds are defined per SECOND, not per frame: scale the
+             step by the real frame interval so a 120 Hz desktop
+             gets the same fall speed as a 60 Hz phone (clamped
+             against tab-switch jumps) */
+          const now = (typeof t === 'number') ? t : performance.now();
+          const dtF = lastT ? Math.min(3, Math.max(0.25, (now - lastT) / 16.667)) : 1;
+          lastT = now;
           const ctx = rainFx.ctx, W = rainFx.w, H = rainFx.h, uu = H / 340;
           ctx.clearRect(0, 0, W, H);
           if (rainFx.mode === 'rain') {
@@ -5719,15 +5802,15 @@
             for (const d of rainFx.drops) {
               ctx.moveTo(d.x, d.y);
               ctx.lineTo(d.x + rainFx.slant * uu * 1.6, d.y + d.len);
-              d.y += d.sp; d.x += rainFx.slant * uu;
-              if (d.y > H) { d.y = -d.len - Math.random() * 30; d.x = Math.random() * (W + 60) - 30; }
+              d.y += d.sp * dtF; d.x += rainFx.slant * uu * dtF;
+              if (d.y > H) { d.y = -d.len - Math.random() * 30; d.x = d.lo + Math.random() * (d.hi - d.lo); }
             }
             ctx.stroke();
           } else {
             ctx.fillStyle = 'rgba(255,255,255,0.88)';
             for (const d of rainFx.drops) {
-              d.ph += 0.012;
-              d.y += d.sp; d.x += Math.sin(d.ph) * 0.45 * uu + rainFx.slant * uu * 0.3;
+              d.ph += 0.012 * dtF;
+              d.y += d.sp * dtF; d.x += (Math.sin(d.ph) * 0.45 * uu + rainFx.slant * uu * 0.3) * dtF;
               if (d.y > H + 4) { d.y = -4; d.x = Math.random() * W; }
               ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.29); ctx.fill();
             }
