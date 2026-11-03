@@ -5546,6 +5546,12 @@
           back.classList.add('on'); front.classList.remove('on');
           skyPhotoTop = 1 - skyPhotoTop; skyPhotoName = name;
           document.documentElement.classList.add('sky-photo-on');
+          /* a genuine swap just put this pick's STANDARD photo on
+             screen, so any HD-FIRST claim from the first reveal is
+             stale from this moment — clear it, or the upgrade below
+             would wrongly skip a pick that returns later (weather
+             toggling day / overcast on a page left open) */
+          if (window.__WAQT_BOOT) window.__WAQT_BOOT.hdApplied = '';
           upgradeSkyPhotoHd(name);
         };
         /* the photos live at the site root; hosts that bundle only
