@@ -5515,8 +5515,8 @@
                keep their precedence exactly as before. */
             if (k.fog) name = 'haze';
             else if (oc) name = 'overcast';
-            else if (k.cloud >= 0.25) name = 'partly';
             else if (k.vis != null && k.vis < 10000) name = 'haze';
+            else if (k.cloud >= 0.25) name = 'partly';
           }
           else grey = oc;
         }
