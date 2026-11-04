@@ -5504,19 +5504,26 @@
           const k = wxKind(wxCurrent);
           const oc = k.code === 3 || k.fog || k.rain > 0 || k.thunder || k.snow || k.cloud >= 0.8;
           if (phase === 'day') {
-            /* ACCURACY PACK: inside the day window the photograph
-               now follows the measured sky, not just the phase —
-               fog codes and a clear-but-hazy day (cover under 25%,
-               visibility under 10 km) take the haze photo, and a
-               partly cloudy day (cover 25% up to the overcast
-               threshold) takes the partly photo, with the haze veil
-               on top when visibility is also under 6 km. Rain,
-               thunder, snow and the code-3 / 80%+ overcast rules
-               keep their precedence exactly as before. */
+            /* ACCURACY PACK + CODE-FIRST CROSS-CHECK (2026-11-04):
+               inside the day window the photograph follows the
+               measured sky, cross-checking three signals so one bad
+               number cannot hijack the photo — the model's raw cloud
+               percentage alone repeatedly cried "cloudy" over a
+               clear-but-hazy sky (Bogura 2026-11-04: code 1-2, vis
+               7.5 km, yet cover read 46-63%). Rules: fog codes take
+               the haze photo; rain / thunder / snow and code 3 take
+               the overcast photo; visibility under 10 km takes the
+               haze photo (low haze outranks the partly photo); the
+               partly and bright-overcast photos now additionally
+               require weather code >= 2, with cover >= 25% / >= 80%
+               respectively — a clear or mainly-clear code keeps the
+               clear day photo no matter what the raw cover says.
+               The haze veil still rides on top under 6 km. */
             if (k.fog) name = 'haze';
-            else if (oc) name = 'overcast';
+            else if (k.rain > 0 || k.thunder || k.snow || k.code === 3) name = 'overcast';
             else if (k.vis != null && k.vis < 10000) name = 'haze';
-            else if (k.cloud >= 0.25) name = 'partly';
+            else if (k.code >= 2 && k.cloud >= 0.8) name = 'overcast';
+            else if (k.code >= 2 && k.cloud >= 0.25) name = 'partly';
           }
           else grey = oc;
         }
