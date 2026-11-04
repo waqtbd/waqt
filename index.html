@@ -719,7 +719,6 @@
       html.hero-classic .sky-flash,
       html.hero-classic .sky-bolt-photo,
       html.hero-classic .sky-horizon,
-      html.hero-classic .wx-chip{display:none !important}
       /* The 8-point star pattern is a textile-like texture — it belongs
          ONLY to the classic emerald hero. A real sky has no pattern, so
          in Realistic (living sky) mode the layer is removed completely. */
@@ -6028,7 +6027,7 @@
     function renderWxChip() {
       const chip = $('wxChip');
       if (!chip) return;
-      if (!wxCurrent || heroMode === 'classic') { chip.classList.add('hidden'); return; }
+      if (!wxCurrent) { chip.classList.add('hidden'); return; } /* weather badge shows in Classic too (Sunny, 2026-11-04) */
       const k = wxKind(wxCurrent);
       /* premium badge: green dot + condition icon + temperature
          only. The condition word and cloud % no longer show here —
