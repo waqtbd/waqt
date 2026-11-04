@@ -1854,10 +1854,16 @@
         if (wk) {
           var oc2 = wk.code === 3 || wk.fog || wk.rain > 0 || wk.thunder || wk.snow || wk.cloud >= 0.8;
           if (phase === 'day') {
+            /* MUST stay identical to updateSkyPhoto()'s day pick
+               (code-first cross-check) — when this copy kept the old
+               cloud-first order, first paint flashed the partly
+               photo for a moment before the main script swapped in
+               the correct haze photo (Sunny, 2026-11-04). */
             if (wk.fog) name = 'haze';
-            else if (oc2) name = 'overcast';
-            else if (wk.cloud >= 0.25) name = 'partly';
+            else if (wk.rain > 0 || wk.thunder || wk.snow || wk.code === 3) name = 'overcast';
             else if (wk.vis != null && wk.vis < 10000) name = 'haze';
+            else if (wk.code >= 2 && wk.cloud >= 0.8) name = 'overcast';
+            else if (wk.code >= 2 && wk.cloud >= 0.25) name = 'partly';
           }
           else grey = oc2;
         }
