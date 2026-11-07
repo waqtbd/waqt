@@ -105,6 +105,34 @@
         background:var(--surface); border:1px solid var(--line); border-radius:18px;
         box-shadow:var(--shadow); padding:18px 16px; margin-top:16px; min-height:220px;
       }
+      /* ---------- quiz review (read-only) ---------- */
+      .quiz-review-btn{
+        display:block; width:100%; margin-top:13px; padding:11px 18px; font:inherit;
+        font-size:15px; font-weight:700; color:var(--emerald-deep);
+        background:rgba(11,93,67,.07); border:1.5px solid var(--emerald); border-radius:12px;
+        cursor:pointer; -webkit-tap-highlight-color:transparent;
+      }
+      .quiz-review-btn:focus, .quiz-review-btn:focus-visible, .quiz-review-btn:active{outline:none}
+      .quiz-review-btn[hidden]{display:none}
+      @media (prefers-color-scheme: dark){ .quiz-review-btn{color:#7bd7ae} }
+      .quiz-review-link{
+        display:block; margin:12px 0 0 auto; background:none; border:0; padding:0; font:inherit;
+        font-size:14px; font-weight:700; color:#0b5d43; text-decoration:underline; cursor:pointer;
+        -webkit-tap-highlight-color:transparent;
+      }
+      .quiz-review-link:focus, .quiz-review-link:focus-visible, .quiz-review-link:active{outline:none}
+      .quiz-review-link[hidden]{display:none}
+      @media (prefers-color-scheme: dark){ .quiz-review-link{color:#7bd7ae} }
+      .quiz-review{margin-top:14px; border-top:1px dashed var(--line); padding-top:4px}
+      .quiz-review[hidden]{display:none}
+      .quiz-rev-item{padding:11px 0; border-bottom:1px dashed var(--line)}
+      .quiz-rev-item:last-child{border-bottom:0}
+      .quiz-rev-q{margin:0 0 6px; font-size:15.5px; font-weight:700; line-height:1.55; color:var(--ink)}
+      .quiz-rev-line{margin:0 0 4px; font-size:14.5px; line-height:1.55; color:var(--ink)}
+      .quiz-rev-line .ok{color:#0b5d43; font-weight:700}
+      .quiz-rev-line .no{color:#c0392b; font-weight:700}
+      @media (prefers-color-scheme: dark){ .quiz-rev-line .ok{color:#7bd7ae} }
+      .quiz-rev-exp{margin:5px 0 0; font-size:14px; line-height:1.6; color:var(--ink)}
       /* ---------- bottom account block ---------- */
       .quiz-acct{margin-top:18px}
       .quiz-acct-in{
@@ -286,11 +314,16 @@
             <p class="quiz-source" id="waqtQuizSource"></p>
             <button type="button" class="quiz-next" id="waqtQuizNext">পরের প্রশ্ন ›</button>
           </div>
+          <button type="button" class="quiz-review-link" id="waqtQuizReviewLink" hidden>আজকের উত্তরগুলো</button>
         </div>
         <div id="waqtQuizSummary" hidden>
           <p class="quiz-sum-title" id="waqtQuizSumTitle"></p>
           <p class="quiz-sum-line" id="waqtQuizSumTotal"></p>
           <p class="quiz-sum-line" id="waqtQuizSumStreak"></p>
+          <button type="button" class="quiz-review-btn" id="waqtQuizReviewBtn">সব প্রশ্ন ও উত্তর দেখুন</button>
+        </div>
+        <div class="quiz-review" id="waqtQuizReview" hidden>
+          <div id="waqtQuizReviewList"></div>
         </div>
       </section>
 
@@ -641,7 +674,11 @@
           sumEl = document.getElementById('waqtQuizSummary'),
           sumTitle = document.getElementById('waqtQuizSumTitle'),
           sumTotal = document.getElementById('waqtQuizSumTotal'),
-          sumStreak = document.getElementById('waqtQuizSumStreak');
+          sumStreak = document.getElementById('waqtQuizSumStreak'),
+          reviewEl = document.getElementById('waqtQuizReview'),
+          reviewList = document.getElementById('waqtQuizReviewList'),
+          reviewBtn = document.getElementById('waqtQuizReviewBtn'),
+          reviewLink = document.getElementById('waqtQuizReviewLink');
       if (!optsEl) return;
 
       var BN = '০১২৩৪৫৬৭৮৯';
@@ -800,6 +837,7 @@
         resultEl.hidden = true;
         buildOptions(item, null);
         paintStreak();
+        refreshReviewBits();
       }
       function renderLocked() {
         var item = daySet[cur];
@@ -815,6 +853,7 @@
         nextBtn.textContent = (cur >= PER_DAY - 1) ? 'ফলাফল দেখুন ›' : 'পরের প্রশ্ন ›';
         resultEl.hidden = false;
         paintStreak();
+        refreshReviewBits();
       }
       function renderSummary() {
         playEl.hidden = true;
@@ -832,8 +871,58 @@
         if (es > 0) sumStreak.textContent = '🔥 ' + bn(es) + ' দিন টানা সঠিক';
         else if (!completedElsewhere && cc < 3) sumStreak.textContent = 'আজ streak হয়নি — ৫টার মধ্যে অন্তত ৩টা সঠিক হলেই streak বাড়ে';
         else sumStreak.textContent = 'আগামীকাল আবার নতুন ৫টি প্রশ্ন আসবে ইনশাআল্লাহ';
+        reviewBtn.hidden = (state.day.picks.length === 0);
         paintStreak();
+        refreshReviewBits();
       }
+      /* ---------- review: today's answered questions (read-only) ---------- */
+      function buildReview() {
+        reviewList.innerHTML = '';
+        state.day.picks.forEach(function (pick, i) {
+          var item = daySet[i];
+          if (!item) return;
+          var box = document.createElement('div');
+          box.className = 'quiz-rev-item';
+          var q = document.createElement('p');
+          q.className = 'quiz-rev-q';
+          q.textContent = 'প্রশ্ন ' + bn(i + 1) + ': ' + item.q;
+          box.appendChild(q);
+          var mine = document.createElement('p');
+          mine.className = 'quiz-rev-line';
+          mine.textContent = 'আপনার উত্তর: ';
+          var mv = document.createElement('span');
+          mv.className = pick.correct ? 'ok' : 'no';
+          mv.textContent = item.options[pick.picked] + (pick.correct ? ' ✓' : ' ✗');
+          mine.appendChild(mv);
+          box.appendChild(mine);
+          var corr = document.createElement('p');
+          corr.className = 'quiz-rev-line';
+          corr.textContent = 'সঠিক উত্তর: ' + item.options[item.answer];
+          box.appendChild(corr);
+          var ex = document.createElement('p');
+          ex.className = 'quiz-rev-exp';
+          ex.textContent = item.explain;
+          box.appendChild(ex);
+          var so = document.createElement('p');
+          so.className = 'quiz-source';
+          so.textContent = 'সূত্র: ' + item.source;
+          box.appendChild(so);
+          reviewList.appendChild(box);
+        });
+      }
+      function toggleReview() {
+        var show = reviewEl.hidden;
+        if (show) buildReview();
+        reviewEl.hidden = !show;
+        reviewBtn.textContent = show ? 'উত্তরগুলো লুকান' : 'সব প্রশ্ন ও উত্তর দেখুন';
+      }
+      reviewBtn.addEventListener('click', toggleReview);
+      reviewLink.addEventListener('click', toggleReview);
+      function refreshReviewBits() {
+        reviewLink.hidden = !(state.day.picks.length > 0);
+        if (!reviewEl.hidden) buildReview();
+      }
+
       function render() {
         if (!daySet) return;
         if (state.day.completed) { renderSummary(); return; }
