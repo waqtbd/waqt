@@ -2266,7 +2266,7 @@
       </section>
 
       <nav class="page-footer-links sr" aria-label="Site pages">
-        <a href="about.html" data-i18n="pageAbout">আমাদের সম্পর্কে</a><span class="sep" aria-hidden="true">·</span><a href="privacy.html" data-i18n="pagePrivacy">গোপনীয়তা নীতি</a><span class="sep" aria-hidden="true">·</span><a href="contact.html" data-i18n="pageContact">যোগাযোগ</a><span class="sep" aria-hidden="true">·</span><a href="feedback.html" data-i18n="pageFeedback">মতামত ও রিভিউ</a><span class="sep" aria-hidden="true">·</span><a href="#" id="waqtFooterAccountLink">অ্যাকাউন্ট</a>
+        <a href="about.html" data-i18n="pageAbout">আমাদের সম্পর্কে</a><span class="sep" aria-hidden="true">·</span><a href="privacy.html" data-i18n="pagePrivacy">গোপনীয়তা নীতি</a><span class="sep" aria-hidden="true">·</span><a href="contact.html" data-i18n="pageContact">যোগাযোগ</a><span class="sep" aria-hidden="true">·</span><a href="feedback.html" data-i18n="pageFeedback">মতামত ও রিভিউ</a><span class="sep" aria-hidden="true">·</span><a href="#" id="waqtFooterAccountLink" data-i18n="acctLink">অ্যাকাউন্ট</a>
       </nav>
     </div>
     </div><!-- /view-home -->
@@ -2555,9 +2555,9 @@
         <div class="wa-card" id="waqtCardOut">
           <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
           <div class="wa-card-txt">
-            <div class="wa-card-title">আপনার Waqt অ্যাকাউন্ট</div>
+            <div class="wa-card-title" data-i18n="acctYourTitle">আপনার Waqt অ্যাকাউন্ট</div>
           </div>
-          <button type="button" class="wa-btn-gold" id="waqtOpenAuthBtn">সাইন ইন / সাইন আপ</button>
+          <button type="button" class="wa-btn-gold" id="waqtOpenAuthBtn" data-i18n="acctSignInUp">সাইন ইন / সাইন আপ</button>
         </div>
         <div class="wa-card wa-card-in" id="waqtCardIn" hidden>
           <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
@@ -2565,7 +2565,7 @@
             <div class="wa-card-title" id="waqtUserName"></div>
             <div class="wa-card-sub" id="waqtUserEmail"></div>
           </div>
-          <button type="button" class="wa-btn-out" id="waqtSignOutBtn">সাইন আউট</button>
+          <button type="button" class="wa-btn-out" id="waqtSignOutBtn" data-i18n="acctSignOut">সাইন আউট</button>
         </div>
       </div>
 
@@ -2668,44 +2668,44 @@
     <div class="wa-modal" id="waqtAuthModal" role="dialog" aria-modal="true" aria-label="Waqt অ্যাকাউন্ট" hidden>
       <div class="wa-modal-head">
         <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
-        <h2>Waqt অ্যাকাউন্ট</h2>
+        <h2 data-i18n="acctTitle">Waqt অ্যাকাউন্ট</h2>
         <button type="button" class="drawer-close" id="waqtAuthClose" aria-label="Close">✕</button>
       </div>
-      <p class="wa-modal-sub">অ্যাকাউন্ট খুললে আপনার কুইজের streak ও অগ্রগতি সব ডিভাইসে নিরাপদে সেভ থাকবে — ফোন বদলালেও হারাবে না।</p>
+      <p class="wa-modal-sub" data-i18n="acctModalSub">অ্যাকাউন্ট খুললে আপনার কুইজের streak ও অগ্রগতি সব ডিভাইসে নিরাপদে সেভ থাকবে — ফোন বদলালেও হারাবে না।</p>
       <div class="wa-tabs">
-        <button type="button" class="wa-tab on" id="waqtTabLogin">লগইন</button>
-        <button type="button" class="wa-tab" id="waqtTabSignup">সাইন আপ</button>
+        <button type="button" class="wa-tab on" id="waqtTabLogin" data-i18n="acctLogin">লগইন</button>
+        <button type="button" class="wa-tab" id="waqtTabSignup" data-i18n="acctSignup">সাইন আপ</button>
       </div>
       <p class="wa-note wa-note-ok" id="waqtAuthNote" hidden></p>
       <p class="wa-note wa-note-err" id="waqtAuthError" hidden></p>
       <form id="waqtLoginForm" novalidate>
         <label class="wa-field"><span>Email</span>
-          <input type="email" id="waqtLoginEmail" autocomplete="email" placeholder="আপনার email ঠিকানা" />
+          <input type="email" id="waqtLoginEmail" autocomplete="email" placeholder="আপনার email ঠিকানা" data-i18n-ph="acctEmailPh" />
         </label>
         <label class="wa-field"><span>Password</span>
-          <input type="password" id="waqtLoginPass" autocomplete="current-password" placeholder="আপনার password" />
+          <input type="password" id="waqtLoginPass" autocomplete="current-password" placeholder="আপনার password" data-i18n-ph="acctPassPh" />
         </label>
-        <button type="submit" class="wa-btn-primary" id="waqtLoginBtn">লগইন</button>
-        <button type="button" class="wa-link" id="waqtForgotBtn">পাসওয়ার্ড ভুলে গেছেন?</button>
+        <button type="submit" class="wa-btn-primary" id="waqtLoginBtn" data-i18n="acctLogin">লগইন</button>
+        <button type="button" class="wa-link" id="waqtForgotBtn" data-i18n="acctForgot">পাসওয়ার্ড ভুলে গেছেন?</button>
       </form>
       <form id="waqtSignupForm" hidden novalidate>
-        <label class="wa-field"><span>আপনার নাম</span>
-          <input type="text" id="waqtSignupName" autocomplete="name" placeholder="আপনার নাম লিখুন" />
+        <label class="wa-field"><span data-i18n="acctNameLabel">আপনার নাম</span>
+          <input type="text" id="waqtSignupName" autocomplete="name" placeholder="আপনার নাম লিখুন" data-i18n-ph="acctNamePh" />
         </label>
         <label class="wa-field"><span>Email</span>
-          <input type="email" id="waqtSignupEmail" autocomplete="email" placeholder="আপনার email ঠিকানা" />
+          <input type="email" id="waqtSignupEmail" autocomplete="email" placeholder="আপনার email ঠিকানা" data-i18n-ph="acctEmailPh" />
         </label>
         <label class="wa-field"><span>Password</span>
-          <input type="password" id="waqtSignupPass" autocomplete="new-password" placeholder="কমপক্ষে ৮ অক্ষরের password" />
+          <input type="password" id="waqtSignupPass" autocomplete="new-password" placeholder="কমপক্ষে ৮ অক্ষরের password" data-i18n-ph="acctNewPassPh" />
         </label>
         <ul class="wa-pw-rules" id="waqtPwRules" aria-live="polite">
-          <li id="waqtRuleLen"><span class="wa-rule-mark"></span>কমপক্ষে ৮টি অক্ষর</li>
-          <li id="waqtRuleUpper"><span class="wa-rule-mark"></span>একটি বড় হাতের অক্ষর (A–Z)</li>
-          <li id="waqtRuleLower"><span class="wa-rule-mark"></span>একটি ছোট হাতের অক্ষর (a–z)</li>
-          <li id="waqtRuleDigit"><span class="wa-rule-mark"></span>একটি সংখ্যা (0–9)</li>
-          <li id="waqtRuleSpecial"><span class="wa-rule-mark"></span>একটি বিশেষ চিহ্ন (!@#$%^&* ইত্যাদি)</li>
+          <li id="waqtRuleLen"><span class="wa-rule-mark"></span><span data-i18n="acctRuleLen">কমপক্ষে ৮টি অক্ষর</span></li>
+          <li id="waqtRuleUpper"><span class="wa-rule-mark"></span><span data-i18n="acctRuleUpper">একটি বড় হাতের অক্ষর (A–Z)</span></li>
+          <li id="waqtRuleLower"><span class="wa-rule-mark"></span><span data-i18n="acctRuleLower">একটি ছোট হাতের অক্ষর (a–z)</span></li>
+          <li id="waqtRuleDigit"><span class="wa-rule-mark"></span><span data-i18n="acctRuleDigit">একটি সংখ্যা (0–9)</span></li>
+          <li id="waqtRuleSpecial"><span class="wa-rule-mark"></span><span data-i18n="acctRuleSpecial">একটি বিশেষ চিহ্ন (!@#$%^&* ইত্যাদি)</span></li>
         </ul>
-        <button type="submit" class="wa-btn-primary" id="waqtSignupBtn">অ্যাকাউন্ট তৈরি করুন</button>
+        <button type="submit" class="wa-btn-primary" id="waqtSignupBtn" data-i18n="acctCreateBtn">অ্যাকাউন্ট তৈরি করুন</button>
       </form>
     </div>
 
@@ -3654,7 +3654,22 @@
         ramadanNow:'রমজান চলছে — এই মাসে রোজা',
         hijriWord:'হিজরি', dateWord:'তারিখ',
         thDate:'তারিখ', thHijri:'হিজরি', now:'এখন',
-        monthNames:['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর']
+        monthNames:['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'],
+        acctTitle:'Waqt অ্যাকাউন্ট', acctYourTitle:'আপনার Waqt অ্যাকাউন্ট', acctSignInUp:'সাইন ইন / সাইন আপ', acctSignOut:'সাইন আউট', 
+        acctLink:'অ্যাকাউন্ট', acctModalSub:'অ্যাকাউন্ট খুললে আপনার কুইজের streak ও অগ্রগতি সব ডিভাইসে নিরাপদে সেভ থাকবে — ফোন বদলালেও হারাবে না।', 
+        acctLogin:'লগইন', acctSignup:'সাইন আপ', acctNameLabel:'আপনার নাম', acctNamePh:'আপনার নাম লিখুন', acctEmailPh:'আপনার email ঠিকানা', 
+        acctPassPh:'আপনার password', acctNewPassPh:'কমপক্ষে ৮ অক্ষরের password', acctForgot:'পাসওয়ার্ড ভুলে গেছেন?', 
+        acctCreateBtn:'অ্যাকাউন্ট তৈরি করুন', acctRuleLen:'কমপক্ষে ৮টি অক্ষর', acctRuleUpper:'একটি বড় হাতের অক্ষর (A–Z)', 
+        acctRuleLower:'একটি ছোট হাতের অক্ষর (a–z)', acctRuleDigit:'একটি সংখ্যা (0–9)', acctRuleSpecial:'একটি বিশেষ চিহ্ন (!@#$%^&* ইত্যাদি)', 
+        acctStreakNote:'অ্যাকাউন্ট থাকলে আপনার কুইজের streak ও অগ্রগতি যেকোনো ফোনেই সেভ থাকবে।', 
+        acctSignedInNote:'সাইন ইন করা আছে — আপনার অগ্রগতি সেভ হচ্ছে ✓', acctWait:'অপেক্ষা করুন…', 
+        acctErrBadCred:'Email বা password সঠিক নয় — আবার চেষ্টা করুন।', acctErrExists:'এই email দিয়ে আগেই অ্যাকাউন্ট আছে — লগইন করুন।', 
+        acctErrPwRules:'Password-এর সব শর্ত পূরণ হয়নি — আবার দেখুন।', 
+        acctErrPwRulesList:'Password-এর সব শর্ত পূরণ হয়নি — password-এর নিচের তালিকাটি দেখুন।', acctErrEmail:'সঠিক email ঠিকানা দিন।', 
+        acctErrRate:'অনেকবার চেষ্টা করা হয়েছে — কিছুক্ষণ পর আবার চেষ্টা করুন।', acctErrNetwork:'ইন্টারনেট সংযোগে সমস্যা হয়েছে — আবার চেষ্টা করুন।', 
+        acctErrGeneric:'কিছু একটা সমস্যা হয়েছে — আবার চেষ্টা করুন।', acctErrNoConn:'সংযোগ হয়নি — একটু পর আবার চেষ্টা করুন।', 
+        acctErrName:'আপনার নাম লিখুন।', acctErrPassEmpty:'আপনার password দিন।', acctErrForgotEmail:'আগে উপরে আপনার email লিখুন, তারপর আবার চাপুন।', 
+        acctOkCreated:'অ্যাকাউন্ট তৈরি হয়েছে — এখন লগইন করুন', acctOkReset:'Password বদলানোর link আপনার email-এ পাঠানো হয়েছে — inbox দেখুন।', 
       },
       en: {
         brandSub:'Wakto · ওয়াক্ত', nextPrayer:'Next prayer', remaining:'Time remaining',
@@ -3740,7 +3755,23 @@
         ramadanNow:'Ramadan is ongoing — fasting this month',
         hijriWord:'Hijri', dateWord:'Date',
         thDate:'Date', thHijri:'Hijri', now:'Now',
-        monthNames:['January','February','March','April','May','June','July','August','September','October','November','December']
+        monthNames:['January','February','March','April','May','June','July','August','September','October','November','December'],
+        acctTitle:'Waqt Account', acctYourTitle:'Your Waqt Account', acctSignInUp:'Sign In / Sign Up', acctSignOut:'Sign Out', acctLink:'Account', 
+        acctModalSub:'With an account, your quiz streak and progress stay saved safely on every device — even if you change your phone.', 
+        acctLogin:'Log In', acctSignup:'Sign Up', acctNameLabel:'Your name', acctNamePh:'Enter your name', acctEmailPh:'Your email address', 
+        acctPassPh:'Your password', acctNewPassPh:'At least 8 characters', acctForgot:'Forgot your password?', acctCreateBtn:'Create Account', 
+        acctRuleLen:'At least 8 characters', acctRuleUpper:'One uppercase letter (A–Z)', acctRuleLower:'One lowercase letter (a–z)', 
+        acctRuleDigit:'One number (0–9)', acctRuleSpecial:'One special character (!@#$%)', 
+        acctStreakNote:'With an account, your quiz streak and progress stay saved on any phone.', 
+        acctSignedInNote:'You are signed in — your progress is being saved ✓', acctWait:'Please wait…', 
+        acctErrBadCred:'Incorrect email or password — please try again.', acctErrExists:'An account with this email already exists — please log in.', 
+        acctErrPwRules:'The password does not meet all the rules yet — please check again.', 
+        acctErrPwRulesList:'The password does not meet all the rules yet — see the list below the password field.', 
+        acctErrEmail:'Please enter a valid email address.', acctErrRate:'Too many attempts — please wait a while and try again.', 
+        acctErrNetwork:'There was an internet connection problem — please try again.', acctErrGeneric:'Something went wrong — please try again.', 
+        acctErrNoConn:'Could not connect — please try again shortly.', acctErrName:'Please enter your name.', 
+        acctErrPassEmpty:'Please enter your password.', acctErrForgotEmail:'First type your email above, then tap again.', 
+        acctOkCreated:'Account created — now please log in', acctOkReset:'A password reset link has been sent to your email — check your inbox.', 
       }
     };
     const HIJRI_MONTHS = {
@@ -3830,7 +3861,7 @@
     /* ---------------- state ---------------- */
     const $ = (id) => document.getElementById(id);
     const state = {
-      lang: 'bn',
+      lang: (function () { try { return localStorage.getItem('waqtLang') === 'en' ? 'en' : 'bn'; } catch (e) { return 'bn'; } })(),
       place: null,           // {labelBn, labelEn, lat, lon}
       method: 1,             // Aladhan method id
       school: 1,             // 1 = Hanafi, 0 = Shafi'i
@@ -3945,7 +3976,7 @@
       if (typeof renderWxChip === 'function') renderWxChip();
       renderQibla(); renderMonthTitle();
     }
-    function setLang(l) { if (state.lang !== l) { state.lang = l; applyLang(); } }
+    function setLang(l) { if (state.lang !== l) { state.lang = l; try { localStorage.setItem('waqtLang', l); } catch (e) {} applyLang(); } }
 
     /* ---------------- place ---------------- */
     function districtPlace(d) {
@@ -6571,6 +6602,8 @@
       var client = null, clientPromise = null;
 
       function $(id) { return document.getElementById(id); }
+      /* Account strings come from the site dictionary (I18N via L()) so they follow the BN/EN toggle. */
+      function T(k) { try { var d = L(); if (d && d[k] != null) return d[k]; } catch (e) {} return k; }
       function libReady() {
         return typeof window !== 'undefined' && window.supabase &&
           typeof window.supabase.createClient === 'function';
@@ -6662,13 +6695,13 @@
       }
       function friendlyError(e) {
         var m = (e && e.message) ? String(e.message) : '';
-        if (/invalid login credentials/i.test(m)) return 'Email বা password সঠিক নয় — আবার চেষ্টা করুন।';
-        if (/already registered/i.test(m)) return 'এই email দিয়ে আগেই অ্যাকাউন্ট আছে — লগইন করুন।';
-        if (/at least 6|password should/i.test(m)) return 'Password-এর সব শর্ত পূরণ হয়নি — আবার দেখুন।';
-        if (/invalid.*email|email.*invalid|validate email/i.test(m)) return 'সঠিক email ঠিকানা দিন।';
-        if (/rate limit/i.test(m)) return 'অনেকবার চেষ্টা করা হয়েছে — কিছুক্ষণ পর আবার চেষ্টা করুন।';
-        if (/failed to fetch|network/i.test(m)) return 'ইন্টারনেট সংযোগে সমস্যা হয়েছে — আবার চেষ্টা করুন।';
-        return 'কিছু একটা সমস্যা হয়েছে — আবার চেষ্টা করুন।';
+        if (/invalid login credentials/i.test(m)) return T('acctErrBadCred');
+        if (/already registered/i.test(m)) return T('acctErrExists');
+        if (/at least 6|password should/i.test(m)) return T('acctErrPwRules');
+        if (/invalid.*email|email.*invalid|validate email/i.test(m)) return T('acctErrEmail');
+        if (/rate limit/i.test(m)) return T('acctErrRate');
+        if (/failed to fetch|network/i.test(m)) return T('acctErrNetwork');
+        return T('acctErrGeneric');
       }
       function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
@@ -6726,8 +6759,8 @@
         var name = $('waqtSignupName').value.trim();
         var email = $('waqtSignupEmail').value.trim();
         var pass = $('waqtSignupPass').value;
-        if (!name) { showNote('err', 'আপনার নাম লিখুন।'); return; }
-        if (!validEmail(email)) { showNote('err', 'সঠিক email ঠিকানা দিন।'); return; }
+        if (!name) { showNote('err', T('acctErrName')); return; }
+        if (!validEmail(email)) { showNote('err', T('acctErrEmail')); return; }
         if (!pwAllOk(pass)) {
           paintPwRules();
           var pwBox = $('waqtPwRules');
@@ -6735,13 +6768,13 @@
             pwBox.classList.add('alert');
             setTimeout(function () { pwBox.classList.remove('alert'); }, 2600);
           }
-          showNote('err', 'Password-এর সব শর্ত পূরণ হয়নি — password-এর নিচের তালিকাটি দেখুন।');
+          showNote('err', T('acctErrPwRulesList'));
           return;
         }
         var btn = $('waqtSignupBtn');
-        btn.disabled = true; btn.textContent = 'অপেক্ষা করুন…';
+        btn.disabled = true; btn.textContent = T('acctWait');
         getClient().then(function (c) {
-          if (!c) { showNote('err', 'সংযোগ হয়নি — একটু পর আবার চেষ্টা করুন।'); return null; }
+          if (!c) { showNote('err', T('acctErrNoConn')); return null; }
           return c.auth.signUp({
             email: email, password: pass,
             options: { data: { name: name } }
@@ -6760,11 +6793,11 @@
               switchView('login');
               $('waqtLoginEmail').value = email;
               $('waqtSignupPass').value = '';
-              showNote('ok', 'অ্যাকাউন্ট তৈরি হয়েছে — এখন লগইন করুন');
+              showNote('ok', T('acctOkCreated'));
             });
           });
         }).catch(function (e) { showNote('err', friendlyError(e)); })
-          .then(function () { btn.disabled = false; btn.textContent = 'অ্যাকাউন্ট তৈরি করুন'; });
+          .then(function () { btn.disabled = false; btn.textContent = T('acctCreateBtn'); });
       });
 
       /* ---------- log in ---------- */
@@ -6772,12 +6805,12 @@
         ev.preventDefault();
         var email = $('waqtLoginEmail').value.trim();
         var pass = $('waqtLoginPass').value;
-        if (!validEmail(email)) { showNote('err', 'সঠিক email ঠিকানা দিন।'); return; }
-        if (!pass) { showNote('err', 'আপনার password দিন।'); return; }
+        if (!validEmail(email)) { showNote('err', T('acctErrEmail')); return; }
+        if (!pass) { showNote('err', T('acctErrPassEmpty')); return; }
         var btn = $('waqtLoginBtn');
-        btn.disabled = true; btn.textContent = 'অপেক্ষা করুন…';
+        btn.disabled = true; btn.textContent = T('acctWait');
         getClient().then(function (c) {
-          if (!c) { showNote('err', 'সংযোগ হয়নি — একটু পর আবার চেষ্টা করুন।'); return null; }
+          if (!c) { showNote('err', T('acctErrNoConn')); return null; }
           return c.auth.signInWithPassword({ email: email, password: pass })
             .then(function (res) {
               if (res.error) { showNote('err', friendlyError(res.error)); return; }
@@ -6785,23 +6818,23 @@
               closeAuth();
             });
         }).catch(function (e) { showNote('err', friendlyError(e)); })
-          .then(function () { btn.disabled = false; btn.textContent = 'লগইন'; });
+          .then(function () { btn.disabled = false; btn.textContent = T('acctLogin'); });
       });
 
       /* ---------- forgot password ---------- */
       $('waqtForgotBtn').addEventListener('click', function () {
         var email = $('waqtLoginEmail').value.trim();
         if (!validEmail(email)) {
-          showNote('err', 'আগে উপরে আপনার email লিখুন, তারপর আবার চাপুন।');
+          showNote('err', T('acctErrForgotEmail'));
           return;
         }
         getClient().then(function (c) {
-          if (!c) { showNote('err', 'সংযোগ হয়নি — একটু পর আবার চেষ্টা করুন।'); return null; }
+          if (!c) { showNote('err', T('acctErrNoConn')); return null; }
           return c.auth.resetPasswordForEmail(email, {
             redirectTo: 'https://waqtbd.github.io/waqt/'
           }).then(function (res) {
             if (res.error) { showNote('err', friendlyError(res.error)); return; }
-            showNote('ok', 'Password বদলানোর link আপনার email-এ পাঠানো হয়েছে — inbox দেখুন।');
+            showNote('ok', T('acctOkReset'));
           });
         }).catch(function (e) { showNote('err', friendlyError(e)); });
       });
