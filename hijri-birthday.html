@@ -258,14 +258,14 @@ function calc(){
  document.getElementById('resCard').scrollIntoView({behavior:'smooth',block:'center'});
 }
 var BGS=[
- {n:'এমেরল্ড',g:['#0f766e','#0b5c4d'],s:'#0d6a58'},
- {n:'নেভি ব্লু',g:['#16365f','#0a1e3c'],s:'#10294d'},
- {n:'রয়েল ব্লু',g:['#27479e','#14265c'],s:'#1d3882'},
- {n:'ডার্ক টিল',g:['#0c5a68','#06333d'],s:'#094856'},
- {n:'মেরুন',g:['#741a2b','#450a16'],s:'#5d1220'},
- {n:'প্লাম',g:['#4e2269','#2c1140'],s:'#3e1a56'},
- {n:'চারকোল',g:['#22352d','#0c1411'],s:'#17251f'},
- {n:'ব্রোঞ্জ',g:['#67481f','#39270e'],s:'#503718'}
+ {n:'এমেরল্ড',g:['#0f766e','#0a1e3c'],s:'#0d6a58'},
+ {n:'নেভি ব্লু',g:['#16365f','#065a68'],s:'#10294d'},
+ {n:'রয়েল ব্লু',g:['#27479e','#37135c'],s:'#1d3882'},
+ {n:'ডার্ক টিল',g:['#0c5a68','#0a2c50'],s:'#094856'},
+ {n:'মেরুন',g:['#741a2b','#3d1257'],s:'#5d1220'},
+ {n:'প্লাম',g:['#4e2269','#0a1e3c'],s:'#3e1a56'},
+ {n:'চারকোল',g:['#22352d','#0b5c4d'],s:'#17251f'},
+ {n:'ব্রোঞ্জ',g:['#67481f','#450a16'],s:'#503718'}
 ];
 var bgPick={t:'g',i:0};
 (function(){
@@ -287,7 +287,7 @@ function drawCard(){
  if(bgPick.t==='g'){var gr=x.createLinearGradient(0,0,0,H);gr.addColorStop(0,bp.g[0]);gr.addColorStop(1,bp.g[1]);x.fillStyle=gr;}
  else{x.fillStyle=bp.s;}
  x.fillRect(0,0,W,H);
- var rg=x.createRadialGradient(540,300,40,540,300,560);rg.addColorStop(0,'rgba(243,210,122,.35)');rg.addColorStop(1,'rgba(243,210,122,0)');
+ var rg=x.createRadialGradient(540,220,26,540,220,350);rg.addColorStop(0,'rgba(243,210,122,.13)');rg.addColorStop(1,'rgba(243,210,122,0)');
  x.fillStyle=rg;x.fillRect(0,0,W,H);
  x.strokeStyle='#c9a227';x.lineWidth=4;x.strokeRect(38,38,W-76,H-76);
  x.strokeStyle='#f3d27a';x.lineWidth=1.6;x.strokeRect(56,56,W-112,H-112);
@@ -316,7 +316,9 @@ function drawCard(){
  if(wm&&wm.complete&&wm.naturalWidth){
   var lw=336,lh=Math.round(lw*wm.naturalHeight/wm.naturalWidth);
   var bandTop=1100,bandBot=1383,ly=bandTop+Math.round((bandBot-bandTop-lh)/2);
-  x.drawImage(wm,540-lw/2,ly,lw,lh);
+  // The lockup's visible ink (alpha bbox x 11..562 of its 840px width, centre at 34.11% of width) sits left of the image-box centre — offset the draw so the INK centres on x=540, not the box.
+  var ldx=Math.round(540-lw*0.3411);
+  x.drawImage(wm,ldx,ly,lw,lh);
  }else if(wm&&!wm._hbWait){wm._hbWait=1;wm.addEventListener('load',function(){wm._hbWait=0;if(res)drawCard();});}
 }
 document.getElementById('calcBtn').addEventListener('click',function(){
