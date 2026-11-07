@@ -1508,6 +1508,7 @@
         display:flex; align-items:center; justify-content:center; color:#e9d9ae;
       }
       .wa-avatar svg{width:26px; height:26px}
+      .wa-avatar img{width:100%; height:100%; border-radius:50%; object-fit:cover; display:block}
       .wa-card-txt{flex:1; min-width:0}
       .wa-card-title{font-size:16.5px; font-weight:800; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
       .wa-card-sub{font-size:13px; line-height:1.45; opacity:.88; margin-top:2px; word-break:break-word}
@@ -2573,7 +2574,7 @@
           <button type="button" class="wa-btn-gold" id="waqtOpenAuthBtn" data-i18n="acctSignInUp">সাইন ইন / সাইন আপ</button>
         </div>
         <div class="wa-card wa-card-in" id="waqtCardIn" hidden>
-          <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
+          <div class="wa-avatar" id="waqtUserAvatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
           <div class="wa-card-txt">
             <div class="wa-card-title" id="waqtUserName"></div>
             <div class="wa-card-sub" id="waqtUserEmail"></div>
@@ -6666,6 +6667,33 @@
           $('waqtUserName').textContent = name || user.email || '';
           $('waqtUserEmail').textContent = name ? (user.email || '') : '';
           out.hidden = true; inn.hidden = false;
+          // Google profile photo in the avatar circle when available (fallback: generic icon).
+          var avatarBox = $('waqtUserAvatar');
+          if (avatarBox) {
+            var avatarUrl = meta.avatar_url || meta.picture || '';
+            var avatarImg = avatarBox.querySelector('img.wa-avatar-img');
+            var avatarIcon = avatarBox.querySelector('svg');
+            if (avatarUrl) {
+              if (!avatarImg) {
+                avatarImg = document.createElement('img');
+                avatarImg.className = 'wa-avatar-img';
+                avatarImg.alt = '';
+                avatarImg.setAttribute('referrerpolicy', 'no-referrer');
+                avatarImg.onerror = function () {
+                  this.hidden = true;
+                  var ic = avatarBox.querySelector('svg');
+                  if (ic) ic.style.display = '';
+                };
+                avatarBox.appendChild(avatarImg);
+              }
+              avatarImg.hidden = false;
+              if (avatarImg.getAttribute('src') !== avatarUrl) avatarImg.src = avatarUrl;
+              if (avatarIcon) avatarIcon.style.display = 'none';
+            } else {
+              if (avatarImg) avatarImg.hidden = true;
+              if (avatarIcon) avatarIcon.style.display = '';
+            }
+          }
           // Prefer the name stored in public.profiles when available.
           getClient().then(function (c) {
             if (!c) return;
