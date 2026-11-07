@@ -1544,6 +1544,17 @@
       .wa-modal-head h2{margin:0; font-size:20px; flex:1; color:var(--emerald-deep)}
       @media (prefers-color-scheme: dark){ .wa-modal-head h2{color:var(--gold)} }
       .wa-modal-sub{font-size:14px; color:var(--ink-soft); line-height:1.55; margin:0 0 14px}
+      .wa-btn-google{
+        width:100%; display:flex; align-items:center; justify-content:center; gap:11px;
+        background:#fff; color:#1f1f1f; border:1.5px solid #dadce0; border-radius:999px;
+        padding:12px 14px; font-family:inherit; font-size:16px; font-weight:700; cursor:pointer;
+        box-shadow:0 4px 14px rgba(7,47,33,.10); transition:transform .12s ease, box-shadow .2s ease;
+      }
+      .wa-btn-google:active{transform:scale(.98)}
+      .wa-btn-google:disabled{opacity:.6}
+      .wa-btn-google svg{width:20px; height:20px; flex:0 0 auto}
+      .wa-or{display:flex; align-items:center; gap:12px; margin:14px 2px 16px; color:var(--ink-soft); font-size:13.5px; font-weight:600}
+      .wa-or::before, .wa-or::after{content:''; flex:1; height:1px; background:var(--line)}
       .wa-tabs{display:flex; gap:6px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:4px; margin-bottom:16px}
       .wa-tab{flex:1; border:0; background:transparent; padding:9px 6px; border-radius:999px; font-size:15.5px; font-weight:700; color:var(--ink-soft)}
       .wa-tab.on{background:var(--emerald); color:#fff; box-shadow:0 4px 12px rgba(7,47,33,.22)}
@@ -1577,8 +1588,8 @@
       .wa-pw-rules.alert{border-color:var(--danger); box-shadow:0 0 0 3px rgba(179,56,46,.15)}
 
       /* ---------- no browser tap-highlight / focus rectangle on auth controls ---------- */
-      .wa-btn-gold, .wa-btn-primary, .wa-btn-out, .wa-tab, .wa-link,
-      #waqtOpenAuthBtn, #waqtFooterAccountLink, #waqtAuthClose{
+      .wa-btn-gold, .wa-btn-primary, .wa-btn-out, .wa-tab, .wa-link, .wa-btn-google,
+      #waqtOpenAuthBtn, #waqtFooterAccountLink, #waqtAuthClose, #waqtGoogleBtn{
         -webkit-tap-highlight-color: transparent;
       }
       .wa-btn-gold:focus, .wa-btn-gold:focus-visible, .wa-btn-gold:active,
@@ -1586,6 +1597,8 @@
       .wa-btn-out:focus, .wa-btn-out:focus-visible, .wa-btn-out:active,
       .wa-tab:focus, .wa-tab:focus-visible, .wa-tab:active,
       .wa-link:focus, .wa-link:focus-visible, .wa-link:active,
+      .wa-btn-google:focus, .wa-btn-google:focus-visible, .wa-btn-google:active,
+      #waqtGoogleBtn:focus, #waqtGoogleBtn:focus-visible, #waqtGoogleBtn:active,
       #waqtOpenAuthBtn:focus, #waqtOpenAuthBtn:focus-visible, #waqtOpenAuthBtn:active,
       #waqtFooterAccountLink:focus, #waqtFooterAccountLink:focus-visible, #waqtFooterAccountLink:active,
       #waqtAuthClose:focus, #waqtAuthClose:focus-visible, #waqtAuthClose:active{
@@ -2672,6 +2685,8 @@
         <button type="button" class="drawer-close" id="waqtAuthClose" aria-label="Close">✕</button>
       </div>
       <p class="wa-modal-sub" data-i18n="acctModalSub">অ্যাকাউন্ট খুললে আপনার কুইজের streak ও অগ্রগতি সব ডিভাইসে নিরাপদে সেভ থাকবে — ফোন বদলালেও হারাবে না।</p>
+      <button type="button" class="wa-btn-google" id="waqtGoogleBtn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span data-i18n="acctGoogle">Google দিয়ে চালিয়ে যান</span></button>
+      <div class="wa-or"><span data-i18n="acctOr">অথবা</span></div>
       <div class="wa-tabs">
         <button type="button" class="wa-tab on" id="waqtTabLogin" data-i18n="acctLogin">লগইন</button>
         <button type="button" class="wa-tab" id="waqtTabSignup" data-i18n="acctSignup">সাইন আপ</button>
@@ -3659,7 +3674,7 @@
         acctLink:'অ্যাকাউন্ট', acctModalSub:'অ্যাকাউন্ট খুললে আপনার কুইজের streak ও অগ্রগতি সব ডিভাইসে নিরাপদে সেভ থাকবে — ফোন বদলালেও হারাবে না।', 
         acctLogin:'লগইন', acctSignup:'সাইন আপ', acctNameLabel:'আপনার নাম', acctNamePh:'আপনার নাম লিখুন', acctEmailPh:'আপনার email ঠিকানা', 
         acctPassPh:'আপনার password', acctNewPassPh:'কমপক্ষে ৮ অক্ষরের password', acctForgot:'পাসওয়ার্ড ভুলে গেছেন?', 
-        acctCreateBtn:'অ্যাকাউন্ট তৈরি করুন', acctRuleLen:'কমপক্ষে ৮টি অক্ষর', acctRuleUpper:'একটি বড় হাতের অক্ষর (A–Z)', 
+        acctCreateBtn:'অ্যাকাউন্ট তৈরি করুন', acctGoogle:'Google দিয়ে চালিয়ে যান', acctOr:'অথবা', acctRuleLen:'কমপক্ষে ৮টি অক্ষর', acctRuleUpper:'একটি বড় হাতের অক্ষর (A–Z)', 
         acctRuleLower:'একটি ছোট হাতের অক্ষর (a–z)', acctRuleDigit:'একটি সংখ্যা (0–9)', acctRuleSpecial:'একটি বিশেষ চিহ্ন (!@#$%^&* ইত্যাদি)', 
         acctStreakNote:'অ্যাকাউন্ট থাকলে আপনার কুইজের streak ও অগ্রগতি যেকোনো ফোনেই সেভ থাকবে।', 
         acctSignedInNote:'সাইন ইন করা আছে — আপনার অগ্রগতি সেভ হচ্ছে ✓', acctWait:'অপেক্ষা করুন…', 
@@ -3759,7 +3774,7 @@
         acctTitle:'Waqt Account', acctYourTitle:'Your Waqt Account', acctSignInUp:'Sign In / Sign Up', acctSignOut:'Sign Out', acctLink:'Account', 
         acctModalSub:'With an account, your quiz streak and progress stay saved safely on every device — even if you change your phone.', 
         acctLogin:'Log In', acctSignup:'Sign Up', acctNameLabel:'Your name', acctNamePh:'Enter your name', acctEmailPh:'Your email address', 
-        acctPassPh:'Your password', acctNewPassPh:'At least 8 characters', acctForgot:'Forgot your password?', acctCreateBtn:'Create Account', 
+        acctPassPh:'Your password', acctNewPassPh:'At least 8 characters', acctForgot:'Forgot your password?', acctCreateBtn:'Create Account', acctGoogle:'Continue with Google', acctOr:'or', 
         acctRuleLen:'At least 8 characters', acctRuleUpper:'One uppercase letter (A–Z)', acctRuleLower:'One lowercase letter (a–z)', 
         acctRuleDigit:'One number (0–9)', acctRuleSpecial:'One special character (!@#$%)', 
         acctStreakNote:'With an account, your quiz streak and progress stay saved on any phone.', 
@@ -6749,6 +6764,22 @@
       });
       $('waqtTabLogin').addEventListener('click', function () { switchView('login'); });
       $('waqtTabSignup').addEventListener('click', function () { switchView('signup'); });
+
+      /* ---------- Google sign-in (OAuth redirect; session handled by getSession/onAuthStateChange) ---------- */
+      var gBtn = $('waqtGoogleBtn');
+      if (gBtn) gBtn.addEventListener('click', function () {
+        gBtn.disabled = true;
+        getClient().then(function (c) {
+          if (!c) { gBtn.disabled = false; showNote('err', T('acctErrNoConn')); return null; }
+          return c.auth.signInWithOAuth({
+            provider: 'google',
+            options: { redirectTo: window.location.origin + window.location.pathname }
+          }).then(function (res) {
+            if (res && res.error) { gBtn.disabled = false; showNote('err', friendlyError(res.error)); }
+            /* on success the browser leaves for Google and returns signed in */
+          });
+        }).catch(function (e) { gBtn.disabled = false; showNote('err', friendlyError(e)); });
+      });
       $('waqtSignOutBtn').addEventListener('click', function () {
         window.waqtAuth.signOut().then(function () { renderUser(null); });
       });
