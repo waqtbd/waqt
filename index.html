@@ -1492,7 +1492,84 @@
         .table-card{box-shadow:none; border:0}
         table.month th{background:#073f2e !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
       }
+
+      /* ---------- Waqt account (Supabase auth) ---------- */
+      .waqt-account-sec{padding-bottom:4px}
+      .wa-card{
+        display:flex; align-items:center; gap:13px;
+        background:linear-gradient(150deg, var(--emerald-deep), var(--emerald));
+        border:1px solid var(--gold); border-radius:16px; padding:15px 16px;
+        color:#fff; box-shadow:var(--shadow);
+      }
+      .wa-card[hidden]{display:none}
+      .wa-avatar{
+        flex:0 0 auto; width:46px; height:46px; border-radius:50%;
+        background:rgba(255,255,255,.14); border:1.5px solid var(--gold);
+        display:flex; align-items:center; justify-content:center; color:#e9d9ae;
+      }
+      .wa-avatar svg{width:26px; height:26px}
+      .wa-card-txt{flex:1; min-width:0}
+      .wa-card-title{font-size:16.5px; font-weight:800; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+      .wa-card-sub{font-size:13px; line-height:1.45; opacity:.88; margin-top:2px; word-break:break-word}
+      .wa-btn-gold{
+        flex:0 0 auto; border:0; border-radius:999px; padding:10px 15px;
+        background:linear-gradient(160deg, #e9d9ae, var(--gold)); color:#3a2c07;
+        font-size:14.5px; font-weight:800; box-shadow:0 4px 12px rgba(0,0,0,.25);
+      }
+      .wa-btn-gold:active{transform:scale(.96)}
+      .wa-card-in{background:var(--surface-2); color:var(--ink); border-color:var(--line)}
+      .wa-card-in .wa-avatar{background:var(--gold-soft); color:var(--gold-ink); border-color:var(--gold)}
+      .wa-card-in .wa-card-sub{color:var(--ink-soft); opacity:1}
+      .wa-btn-out{
+        flex:0 0 auto; border-radius:999px; padding:9px 14px;
+        background:transparent; border:1.5px solid var(--danger); color:var(--danger);
+        font-size:14px; font-weight:700;
+      }
+      .wa-btn-out:active{transform:scale(.96)}
+      @media (max-width:400px){ .wa-card{flex-wrap:wrap} .wa-btn-gold{width:100%} }
+      .wa-scrim{position:fixed; inset:0; background:rgba(4,20,14,.55); z-index:135; opacity:0; pointer-events:none; transition:opacity .3s ease}
+      .wa-scrim.open{opacity:1; pointer-events:auto}
+      .wa-modal{
+        position:fixed; left:50%; top:50%; transform:translate(-50%,-48%) scale(.97);
+        width:min(430px,94vw); max-height:92vh; overflow-y:auto; z-index:140;
+        background:var(--surface); border-radius:22px; box-shadow:var(--shadow-lg);
+        border-top:5px solid var(--gold); padding:22px 22px 24px;
+        opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease;
+      }
+      .wa-modal.open{opacity:1; pointer-events:auto; transform:translate(-50%,-50%) scale(1)}
+      .wa-modal[hidden]{display:none}
+      .wa-modal form[hidden]{display:none}
+      .wa-modal-head{display:flex; align-items:center; gap:11px; margin-bottom:6px}
+      .wa-modal-head .wa-avatar{width:42px; height:42px; background:var(--gold-soft); color:var(--gold-ink)}
+      .wa-modal-head h2{margin:0; font-size:20px; flex:1; color:var(--emerald-deep)}
+      @media (prefers-color-scheme: dark){ .wa-modal-head h2{color:var(--gold)} }
+      .wa-modal-sub{font-size:14px; color:var(--ink-soft); line-height:1.55; margin:0 0 14px}
+      .wa-tabs{display:flex; gap:6px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:4px; margin-bottom:16px}
+      .wa-tab{flex:1; border:0; background:transparent; padding:9px 6px; border-radius:999px; font-size:15.5px; font-weight:700; color:var(--ink-soft)}
+      .wa-tab.on{background:var(--emerald); color:#fff; box-shadow:0 4px 12px rgba(7,47,33,.22)}
+      .wa-field{display:block; margin-bottom:13px}
+      .wa-field span{display:block; font-size:14px; font-weight:700; margin-bottom:5px}
+      .wa-field input{
+        width:100%; border:1.5px solid var(--line); border-radius:12px; padding:12px 14px;
+        font-size:16px; font-family:inherit; background:var(--surface); color:var(--ink);
+      }
+      .wa-field input:focus{outline:none; border-color:var(--emerald); box-shadow:0 0 0 3px rgba(11,93,67,.15)}
+      .wa-btn-primary{
+        width:100%; border:0; border-radius:999px; padding:13px; margin-top:4px;
+        background:linear-gradient(160deg, var(--emerald), var(--emerald-deep)); color:#fff;
+        font-size:16.5px; font-weight:800; box-shadow:0 8px 20px rgba(7,47,33,.25);
+      }
+      .wa-btn-primary:active{transform:scale(.98)}
+      .wa-btn-primary:disabled{opacity:.6}
+      .wa-link{display:block; margin:13px auto 0; background:none; border:0; color:var(--emerald); font-size:14.5px; font-weight:700; text-decoration:underline; text-underline-offset:3px}
+      @media (prefers-color-scheme: dark){ .wa-link{color:var(--gold)} }
+      .wa-note{border-radius:12px; padding:11px 14px; font-size:14.5px; line-height:1.55; margin:0 0 14px}
+      .wa-note[hidden]{display:none}
+      .wa-note-ok{background:#e6f4ec; border:1px solid var(--emerald); color:var(--emerald-deep)}
+      .wa-note-err{background:#fbeae8; border:1px solid var(--danger); color:var(--danger)}
+      @media (prefers-color-scheme: dark){ .wa-note-ok{background:#0d2c1e; color:#9fd8bd} .wa-note-err{background:#33120e; color:#f0a49c} }
     </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   </head>
   <body>
     <!-- ================= HEADER ================= -->
@@ -2160,7 +2237,7 @@
       </section>
 
       <nav class="page-footer-links sr" aria-label="Site pages">
-        <a href="about.html" data-i18n="pageAbout">আমাদের সম্পর্কে</a><span class="sep" aria-hidden="true">·</span><a href="privacy.html" data-i18n="pagePrivacy">গোপনীয়তা নীতি</a><span class="sep" aria-hidden="true">·</span><a href="contact.html" data-i18n="pageContact">যোগাযোগ</a><span class="sep" aria-hidden="true">·</span><a href="feedback.html" data-i18n="pageFeedback">মতামত ও রিভিউ</a>
+        <a href="about.html" data-i18n="pageAbout">আমাদের সম্পর্কে</a><span class="sep" aria-hidden="true">·</span><a href="privacy.html" data-i18n="pagePrivacy">গোপনীয়তা নীতি</a><span class="sep" aria-hidden="true">·</span><a href="contact.html" data-i18n="pageContact">যোগাযোগ</a><span class="sep" aria-hidden="true">·</span><a href="feedback.html" data-i18n="pageFeedback">মতামত ও রিভিউ</a><span class="sep" aria-hidden="true">·</span><a href="#" id="waqtFooterAccountLink">অ্যাকাউন্ট</a>
       </nav>
     </div>
     </div><!-- /view-home -->
@@ -2445,6 +2522,25 @@
         <button type="button" class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
       </div>
 
+      <div class="drawer-sec waqt-account-sec" id="waqtAccountSec">
+        <div class="wa-card" id="waqtCardOut">
+          <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
+          <div class="wa-card-txt">
+            <div class="wa-card-title">আপনার Waqt অ্যাকাউন্ট</div>
+            <div class="wa-card-sub">অ্যাকাউন্ট থাকলে আপনার কুইজের streak ও অগ্রগতি যেকোনো ফোনেই সেভ থাকবে।</div>
+          </div>
+          <button type="button" class="wa-btn-gold" id="waqtOpenAuthBtn">সাইন ইন / সাইন আপ</button>
+        </div>
+        <div class="wa-card wa-card-in" id="waqtCardIn" hidden>
+          <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
+          <div class="wa-card-txt">
+            <div class="wa-card-title" id="waqtUserName"></div>
+            <div class="wa-card-sub" id="waqtUserEmail"></div>
+          </div>
+          <button type="button" class="wa-btn-out" id="waqtSignOutBtn">সাইন আউট</button>
+        </div>
+      </div>
+
       <div class="drawer-sec">
         <div class="setting-row">
           <label for="methodSel"><span data-i18n="methodLabel">হিসাবের পদ্ধতি</span>
@@ -2538,6 +2634,45 @@
         </div>
       </div>
     </aside>
+
+    <!-- ================= WAQT ACCOUNT / AUTH MODAL ================= -->
+    <div class="wa-scrim" id="waqtAuthScrim"></div>
+    <div class="wa-modal" id="waqtAuthModal" role="dialog" aria-modal="true" aria-label="Waqt অ্যাকাউন্ট" hidden>
+      <div class="wa-modal-head">
+        <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
+        <h2>Waqt অ্যাকাউন্ট</h2>
+        <button type="button" class="drawer-close" id="waqtAuthClose" aria-label="Close">✕</button>
+      </div>
+      <p class="wa-modal-sub">অ্যাকাউন্ট খুললে আপনার কুইজের streak ও অগ্রগতি সব ডিভাইসে নিরাপদে সেভ থাকবে — ফোন বদলালেও হারাবে না।</p>
+      <div class="wa-tabs">
+        <button type="button" class="wa-tab on" id="waqtTabLogin">লগইন</button>
+        <button type="button" class="wa-tab" id="waqtTabSignup">সাইন আপ</button>
+      </div>
+      <p class="wa-note wa-note-ok" id="waqtAuthNote" hidden></p>
+      <p class="wa-note wa-note-err" id="waqtAuthError" hidden></p>
+      <form id="waqtLoginForm" novalidate>
+        <label class="wa-field"><span>Email</span>
+          <input type="email" id="waqtLoginEmail" autocomplete="email" placeholder="আপনার email ঠিকানা" />
+        </label>
+        <label class="wa-field"><span>Password</span>
+          <input type="password" id="waqtLoginPass" autocomplete="current-password" placeholder="আপনার password" />
+        </label>
+        <button type="submit" class="wa-btn-primary" id="waqtLoginBtn">লগইন</button>
+        <button type="button" class="wa-link" id="waqtForgotBtn">পাসওয়ার্ড ভুলে গেছেন?</button>
+      </form>
+      <form id="waqtSignupForm" hidden novalidate>
+        <label class="wa-field"><span>আপনার নাম</span>
+          <input type="text" id="waqtSignupName" autocomplete="name" placeholder="আপনার নাম লিখুন" />
+        </label>
+        <label class="wa-field"><span>Email</span>
+          <input type="email" id="waqtSignupEmail" autocomplete="email" placeholder="আপনার email ঠিকানা" />
+        </label>
+        <label class="wa-field"><span>Password</span>
+          <input type="password" id="waqtSignupPass" autocomplete="new-password" placeholder="কমপক্ষে ৬ অক্ষরের password" />
+        </label>
+        <button type="submit" class="wa-btn-primary" id="waqtSignupBtn">অ্যাকাউন্ট তৈরি করুন</button>
+      </form>
+    </div>
 
     <!-- ================= NEARBY MOSQUES MODAL ================= -->
     <div class="mq-scrim" id="mqScrim"></div>
@@ -6387,6 +6522,231 @@
           setPaused(document.hidden || !heroVisible());
         });
       } catch (e) { /* animations simply keep running */ }
+    })();
+    </script>
+
+    <!-- Waqt accounts (Supabase Auth): drawer account card + auth modal.
+         Fully guarded: if the Supabase library fails to load, the rest of
+         the page is untouched and the buttons simply show a retry note. -->
+    <script>
+    (function () {
+      'use strict';
+      var SB_URL = 'https://tocjvqbqezvccmfwygaw.supabase.co';
+      var SB_KEY = 'sb_publishable_dO0hZvFWIeNX-zeMrTfRzA_Ghl0OVVj';
+      var client = null, clientPromise = null;
+
+      function $(id) { return document.getElementById(id); }
+      function libReady() {
+        return typeof window !== 'undefined' && window.supabase &&
+          typeof window.supabase.createClient === 'function';
+      }
+      function getClient() {
+        if (client) return Promise.resolve(client);
+        if (clientPromise) return clientPromise;
+        clientPromise = new Promise(function (resolve) {
+          var tries = 0;
+          (function poll() {
+            if (libReady()) {
+              try { client = window.supabase.createClient(SB_URL, SB_KEY); }
+              catch (e) { client = null; }
+              resolve(client);
+            } else if (++tries > 60) { resolve(null); }
+            else setTimeout(poll, 150);
+          })();
+        });
+        return clientPromise;
+      }
+
+      /* ---------- tiny public API for the upcoming quiz build ---------- */
+      window.waqtAuth = {
+        getUser: function () {
+          return getClient().then(function (c) {
+            if (!c) return null;
+            return c.auth.getUser().then(function (r) {
+              return (r && r.data) ? r.data.user : null;
+            }).catch(function () { return null; });
+          });
+        },
+        signOut: function () {
+          return getClient().then(function (c) {
+            if (c) return c.auth.signOut();
+          }).catch(function () {});
+        }
+      };
+
+      /* ---------- drawer card ---------- */
+      function renderUser(user) {
+        var out = $('waqtCardOut'), inn = $('waqtCardIn');
+        if (!out || !inn) return;
+        if (user) {
+          var meta = user.user_metadata || {};
+          var name = meta.name || meta.full_name || '';
+          $('waqtUserName').textContent = name || user.email || '';
+          $('waqtUserEmail').textContent = name ? (user.email || '') : '';
+          out.hidden = true; inn.hidden = false;
+          // Prefer the name stored in public.profiles when available.
+          getClient().then(function (c) {
+            if (!c) return;
+            c.from('profiles').select('name').eq('id', user.id).maybeSingle()
+              .then(function (r) {
+                if (r && r.data && r.data.name) {
+                  $('waqtUserName').textContent = r.data.name;
+                }
+              }).catch(function () {});
+          });
+        } else {
+          inn.hidden = true; out.hidden = false;
+        }
+      }
+
+      /* ---------- modal ---------- */
+      function showNote(kind, msg) {
+        var ok = $('waqtAuthNote'), err = $('waqtAuthError');
+        if (kind === 'ok') { ok.textContent = msg; ok.hidden = false; err.hidden = true; }
+        else if (kind === 'err') { err.textContent = msg; err.hidden = false; ok.hidden = true; }
+        else { ok.hidden = true; err.hidden = true; }
+      }
+      function switchView(view) {
+        var login = view !== 'signup';
+        $('waqtLoginForm').hidden = !login;
+        $('waqtSignupForm').hidden = login;
+        $('waqtTabLogin').classList.toggle('on', login);
+        $('waqtTabSignup').classList.toggle('on', !login);
+        showNote(null);
+      }
+      function openAuth(view) {
+        switchView(view || 'login');
+        var m = $('waqtAuthModal'), s = $('waqtAuthScrim');
+        m.hidden = false;
+        requestAnimationFrame(function () { m.classList.add('open'); s.classList.add('open'); });
+      }
+      function closeAuth() {
+        var m = $('waqtAuthModal'), s = $('waqtAuthScrim');
+        m.classList.remove('open'); s.classList.remove('open');
+        setTimeout(function () { m.hidden = true; }, 260);
+      }
+      function friendlyError(e) {
+        var m = (e && e.message) ? String(e.message) : '';
+        if (/invalid login credentials/i.test(m)) return 'Email বা password সঠিক নয় — আবার চেষ্টা করুন।';
+        if (/already registered/i.test(m)) return 'এই email দিয়ে আগেই অ্যাকাউন্ট আছে — লগইন করুন।';
+        if (/at least 6|password should/i.test(m)) return 'Password কমপক্ষে ৬ অক্ষরের হতে হবে।';
+        if (/invalid.*email|email.*invalid|validate email/i.test(m)) return 'সঠিক email ঠিকানা দিন।';
+        if (/rate limit/i.test(m)) return 'অনেকবার চেষ্টা করা হয়েছে — কিছুক্ষণ পর আবার চেষ্টা করুন।';
+        if (/failed to fetch|network/i.test(m)) return 'ইন্টারনেট সংযোগে সমস্যা হয়েছে — আবার চেষ্টা করুন।';
+        return 'কিছু একটা সমস্যা হয়েছে — আবার চেষ্টা করুন।';
+      }
+      function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+      $('waqtOpenAuthBtn').addEventListener('click', function () {
+        try { if (typeof closeDrawer === 'function') closeDrawer(); } catch (e) {}
+        openAuth('signup');
+      });
+      var foot = $('waqtFooterAccountLink');
+      if (foot) foot.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        window.waqtAuth.getUser().then(function (u) {
+          if (u) { try { if (typeof openDrawer === 'function') openDrawer(); } catch (e) {} }
+          else openAuth('login');
+        });
+      });
+      $('waqtAuthClose').addEventListener('click', closeAuth);
+      $('waqtAuthScrim').addEventListener('click', closeAuth);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !$('waqtAuthModal').hidden) closeAuth();
+      });
+      $('waqtTabLogin').addEventListener('click', function () { switchView('login'); });
+      $('waqtTabSignup').addEventListener('click', function () { switchView('signup'); });
+      $('waqtSignOutBtn').addEventListener('click', function () {
+        window.waqtAuth.signOut().then(function () { renderUser(null); });
+      });
+
+      /* ---------- sign up: create -> sign out -> login view, email pre-filled ---------- */
+      $('waqtSignupForm').addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var name = $('waqtSignupName').value.trim();
+        var email = $('waqtSignupEmail').value.trim();
+        var pass = $('waqtSignupPass').value;
+        if (!name) { showNote('err', 'আপনার নাম লিখুন।'); return; }
+        if (!validEmail(email)) { showNote('err', 'সঠিক email ঠিকানা দিন।'); return; }
+        if (!pass || pass.length < 6) { showNote('err', 'Password কমপক্ষে ৬ অক্ষরের হতে হবে।'); return; }
+        var btn = $('waqtSignupBtn');
+        btn.disabled = true; btn.textContent = 'অপেক্ষা করুন…';
+        getClient().then(function (c) {
+          if (!c) { showNote('err', 'সংযোগ হয়নি — একটু পর আবার চেষ্টা করুন।'); return null; }
+          return c.auth.signUp({
+            email: email, password: pass,
+            options: { data: { name: name } }
+          }).then(function (res) {
+            if (res.error) {
+              if (/already registered/i.test(res.error.message || '')) {
+                switchView('login');
+                $('waqtLoginEmail').value = email;
+              }
+              showNote('err', friendlyError(res.error));
+              return null;
+            }
+            // Sunny's flow: account created -> log in manually with the password.
+            return c.auth.signOut().then(function () {
+              renderUser(null);
+              switchView('login');
+              $('waqtLoginEmail').value = email;
+              $('waqtSignupPass').value = '';
+              showNote('ok', 'অ্যাকাউন্ট তৈরি হয়েছে — এখন লগইন করুন');
+            });
+          });
+        }).catch(function (e) { showNote('err', friendlyError(e)); })
+          .then(function () { btn.disabled = false; btn.textContent = 'অ্যাকাউন্ট তৈরি করুন'; });
+      });
+
+      /* ---------- log in ---------- */
+      $('waqtLoginForm').addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var email = $('waqtLoginEmail').value.trim();
+        var pass = $('waqtLoginPass').value;
+        if (!validEmail(email)) { showNote('err', 'সঠিক email ঠিকানা দিন।'); return; }
+        if (!pass) { showNote('err', 'আপনার password দিন।'); return; }
+        var btn = $('waqtLoginBtn');
+        btn.disabled = true; btn.textContent = 'অপেক্ষা করুন…';
+        getClient().then(function (c) {
+          if (!c) { showNote('err', 'সংযোগ হয়নি — একটু পর আবার চেষ্টা করুন।'); return null; }
+          return c.auth.signInWithPassword({ email: email, password: pass })
+            .then(function (res) {
+              if (res.error) { showNote('err', friendlyError(res.error)); return; }
+              renderUser(res.data.user);
+              closeAuth();
+            });
+        }).catch(function (e) { showNote('err', friendlyError(e)); })
+          .then(function () { btn.disabled = false; btn.textContent = 'লগইন'; });
+      });
+
+      /* ---------- forgot password ---------- */
+      $('waqtForgotBtn').addEventListener('click', function () {
+        var email = $('waqtLoginEmail').value.trim();
+        if (!validEmail(email)) {
+          showNote('err', 'আগে উপরে আপনার email লিখুন, তারপর আবার চাপুন।');
+          return;
+        }
+        getClient().then(function (c) {
+          if (!c) { showNote('err', 'সংযোগ হয়নি — একটু পর আবার চেষ্টা করুন।'); return null; }
+          return c.auth.resetPasswordForEmail(email, {
+            redirectTo: 'https://waqtbd.github.io/waqt/'
+          }).then(function (res) {
+            if (res.error) { showNote('err', friendlyError(res.error)); return; }
+            showNote('ok', 'Password বদলানোর link আপনার email-এ পাঠানো হয়েছে — inbox দেখুন।');
+          });
+        }).catch(function (e) { showNote('err', friendlyError(e)); });
+      });
+
+      /* ---------- session: restore + live updates ---------- */
+      getClient().then(function (c) {
+        if (!c) return;
+        c.auth.getSession().then(function (r) {
+          renderUser(r && r.data && r.data.session ? r.data.session.user : null);
+        }).catch(function () {});
+        c.auth.onAuthStateChange(function (_event, session) {
+          renderUser(session ? session.user : null);
+        });
+      });
     })();
     </script>
   </body>
