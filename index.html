@@ -1110,47 +1110,6 @@
       .svc-title{font-size:16.5px; font-weight:700; line-height:1.3}
       .svc-sub{font-size:13.5px; color:var(--ink-soft); line-height:1.45}
       .svc-arr{margin-top:auto; padding-top:4px; font-size:15px; font-weight:700; color:var(--gold-ink)}
-      /* ---------- daily quiz card (services grid) ---------- */
-      .quiz-card.open{grid-column:1/-1}
-      .quiz-head{display:flex; flex-direction:column; gap:5px; width:100%; background:none; border:0; padding:0; margin:0; font:inherit; color:inherit; text-align:left; cursor:pointer}
-      .quiz-arr{transition:transform .25s ease}
-      .quiz-card.open .quiz-arr{transform:rotate(90deg)}
-      .quiz-body{margin-top:12px; border-top:1px dashed var(--line); padding-top:12px; animation:quizIn .3s ease}
-      @keyframes quizIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
-      .quiz-meta{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:9px}
-      .quiz-topic{font-size:12.5px; font-weight:700; color:var(--gold-ink); background:rgba(193,154,61,.14); border:1px solid rgba(193,154,61,.45); padding:3px 10px; border-radius:999px}
-      .quiz-streak{font-size:13.5px; font-weight:700; color:#0b5d43}
-      .quiz-q{font-size:16.5px; font-weight:700; line-height:1.55; margin:0 0 12px}
-      .quiz-opts{display:flex; flex-direction:column; gap:9px}
-      .quiz-opt{display:flex; align-items:center; gap:10px; width:100%; padding:11px 12px; font:inherit; font-size:15px; line-height:1.45; text-align:left; color:var(--ink); background:var(--surface); border:1.5px solid var(--line); border-radius:12px; cursor:pointer; transition:border-color .15s ease, background .15s ease}
-      .quiz-opt:active{transform:scale(.98)}
-      .quiz-opt-letter{flex:none; width:26px; height:26px; border-radius:50%; background:rgba(11,93,67,.10); color:#0b5d43; font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center}
-      .quiz-opt[disabled]{cursor:default}
-      .quiz-opt.correct{border-color:#0b5d43; background:rgba(11,93,67,.10); font-weight:700}
-      .quiz-opt.correct .quiz-opt-letter{background:#0b5d43; color:#fff}
-      .quiz-opt.wrong{border-color:#c0392b; background:rgba(192,57,43,.08)}
-      .quiz-opt.wrong .quiz-opt-letter{background:#c0392b; color:#fff}
-      .quiz-opt.dim{opacity:.65}
-      .quiz-mark{margin-left:auto; font-weight:800; flex:none}
-      .quiz-opt.correct .quiz-mark{color:#0b5d43}
-      .quiz-opt.wrong .quiz-mark{color:#c0392b}
-      .quiz-result{margin-top:13px; background:rgba(11,93,67,.06); border:1px solid var(--line); border-radius:12px; padding:12px 13px}
-      .quiz-verdict{margin:0 0 6px; font-size:15.5px; font-weight:800}
-      .quiz-verdict.ok{color:#0b5d43}
-      .quiz-verdict.no{color:#c0392b}
-      .quiz-explain{margin:0; font-size:14.5px; line-height:1.6; color:var(--ink)}
-      .quiz-source{margin:7px 0 0; font-size:12.5px; line-height:1.55; color:var(--ink-soft)}
-      .quiz-progress{font-size:13px; font-weight:700; color:var(--ink-soft)}
-      .quiz-next{display:block; width:100%; margin-top:13px; padding:12px 18px; font:inherit; font-size:15.5px; font-weight:800; color:#fff; background:#0b5d43; border:0; border-radius:12px; cursor:pointer}
-      .quiz-next:active{transform:scale(.98)}
-      .quiz-sum-title{margin:2px 0 8px; font-size:17.5px; font-weight:800; line-height:1.45; color:var(--ink)}
-      .quiz-sum-line{margin:0 0 6px; font-size:14.5px; line-height:1.6; color:var(--ink)}
-      .quiz-signin{margin:12px 0 0; font-size:14px; color:var(--ink-soft); line-height:1.55}
-      .quiz-signin-btn{background:none; border:0; padding:0; font:inherit; font-weight:800; color:#0b5d43; text-decoration:underline; cursor:pointer}
-      @media (prefers-color-scheme: dark){
-        .quiz-streak, .quiz-verdict.ok, .quiz-opt.correct .quiz-mark{color:#7bd7ae}
-        .quiz-signin-btn{color:#7bd7ae}
-      }
       .menu-status{font-size:14px; color:var(--ink-soft); line-height:1.6; padding:8px 4px 10px; border-bottom:1px dashed var(--line)}
 
       /* ---------- premium share panel ---------- */
@@ -1616,6 +1575,22 @@
       .wa-pw-rules li.ok .wa-rule-mark{background:var(--emerald); border-color:var(--emerald)}
       @media (prefers-color-scheme: dark){ .wa-pw-rules li.ok{color:#9fd8bd} }
       .wa-pw-rules.alert{border-color:var(--danger); box-shadow:0 0 0 3px rgba(179,56,46,.15)}
+
+      /* ---------- no browser tap-highlight / focus rectangle on auth controls ---------- */
+      .wa-btn-gold, .wa-btn-primary, .wa-btn-out, .wa-tab, .wa-link,
+      #waqtOpenAuthBtn, #waqtFooterAccountLink, #waqtAuthClose{
+        -webkit-tap-highlight-color: transparent;
+      }
+      .wa-btn-gold:focus, .wa-btn-gold:focus-visible, .wa-btn-gold:active,
+      .wa-btn-primary:focus, .wa-btn-primary:focus-visible, .wa-btn-primary:active,
+      .wa-btn-out:focus, .wa-btn-out:focus-visible, .wa-btn-out:active,
+      .wa-tab:focus, .wa-tab:focus-visible, .wa-tab:active,
+      .wa-link:focus, .wa-link:focus-visible, .wa-link:active,
+      #waqtOpenAuthBtn:focus, #waqtOpenAuthBtn:focus-visible, #waqtOpenAuthBtn:active,
+      #waqtFooterAccountLink:focus, #waqtFooterAccountLink:focus-visible, #waqtFooterAccountLink:active,
+      #waqtAuthClose:focus, #waqtAuthClose:focus-visible, #waqtAuthClose:active{
+        outline: none;
+      }
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   </head>
@@ -2215,37 +2190,12 @@
             <span class="svc-sub" data-i18n="svcAmalSub">প্রতিদিনের আমলে ফুল ফোটান</span>
             <span class="svc-arr" aria-hidden="true">›</span>
           </a>
-          <div class="svc-card sr quiz-card" id="waqtQuizCard" style="--sr-delay:1.08s">
-            <button type="button" class="quiz-head" id="waqtQuizHead" aria-expanded="false" aria-controls="waqtQuizBody">
-              <svg class="svc-icon" viewBox="0 0 54 54" aria-hidden="true" focusable="false"><rect x="2" y="2" width="50" height="50" rx="15" fill="#0b5d43"/><circle cx="27" cy="27" r="20.5" fill="none" stroke="#c19a3d" stroke-width="2"/><text x="27" y="37" font-size="29" font-weight="800" fill="#ffffff" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">?</text></svg>
-              <span class="svc-title">আজকের কুইজ · ৫টি প্রশ্ন</span>
-              <span class="svc-sub" id="waqtQuizSub">প্রতিদিন ৫টি প্রশ্ন — উত্তর দিন, streak বাড়ান</span>
-              <span class="svc-arr quiz-arr" aria-hidden="true">›</span>
-            </button>
-            <div class="quiz-body" id="waqtQuizBody" hidden>
-              <div id="waqtQuizPlay">
-                <div class="quiz-meta">
-                  <span class="quiz-topic" id="waqtQuizTopic"></span>
-                  <span class="quiz-progress" id="waqtQuizProgress"></span>
-                  <span class="quiz-streak" id="waqtQuizStreak" hidden></span>
-                </div>
-                <p class="quiz-q" id="waqtQuizQ"></p>
-                <div class="quiz-opts" id="waqtQuizOpts"></div>
-                <div class="quiz-result" id="waqtQuizResult" hidden>
-                  <p class="quiz-verdict" id="waqtQuizVerdict"></p>
-                  <p class="quiz-explain" id="waqtQuizExplain"></p>
-                  <p class="quiz-source" id="waqtQuizSource"></p>
-                  <button type="button" class="quiz-next" id="waqtQuizNext">পরের প্রশ্ন ›</button>
-                </div>
-              </div>
-              <div id="waqtQuizSummary" hidden>
-                <p class="quiz-sum-title" id="waqtQuizSumTitle"></p>
-                <p class="quiz-sum-line" id="waqtQuizSumTotal"></p>
-                <p class="quiz-sum-line" id="waqtQuizSumStreak"></p>
-                <p class="quiz-signin" id="waqtQuizSignin" hidden>Streak সবসময় save রাখতে <button type="button" class="quiz-signin-btn" id="waqtQuizSigninBtn">Sign In করো</button></p>
-              </div>
-            </div>
-          </div>
+          <a class="svc-card sr" style="--sr-delay:1.08s" href="quiz.html">
+            <svg class="svc-icon" viewBox="0 0 54 54" aria-hidden="true" focusable="false"><rect x="2" y="2" width="50" height="50" rx="15" fill="#0b5d43"/><circle cx="27" cy="27" r="20.5" fill="none" stroke="#c19a3d" stroke-width="2"/><text x="27" y="37" font-size="29" font-weight="800" fill="#ffffff" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">?</text></svg>
+            <span class="svc-title">আজকের কুইজ</span>
+            <span class="svc-sub">প্রতিদিন ৫টি প্রশ্ন · streak গড়ুন</span>
+            <span class="svc-arr" aria-hidden="true">›</span>
+          </a>
         </div>
       </section>
 
@@ -2606,7 +2556,6 @@
           <div class="wa-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg></div>
           <div class="wa-card-txt">
             <div class="wa-card-title">আপনার Waqt অ্যাকাউন্ট</div>
-            <div class="wa-card-sub">অ্যাকাউন্ট থাকলে আপনার কুইজের streak ও অগ্রগতি যেকোনো ফোনেই সেভ থাকবে।</div>
           </div>
           <button type="button" class="wa-btn-gold" id="waqtOpenAuthBtn">সাইন ইন / সাইন আপ</button>
         </div>
@@ -6867,341 +6816,6 @@
           renderUser(session ? session.user : null);
         });
       });
-    })();
-    </script>
-    <script defer src="quiz-data.js"></script>
-    <!-- Daily quiz card logic: fully guarded; waits for quiz-data.js without any placeholder. -->
-    <script>
-    (function () {
-      'use strict';
-      var card = document.getElementById('waqtQuizCard');
-      if (!card) return;
-      var head = document.getElementById('waqtQuizHead'),
-          body = document.getElementById('waqtQuizBody'),
-          subEl = document.getElementById('waqtQuizSub'),
-          playEl = document.getElementById('waqtQuizPlay'),
-          topicEl = document.getElementById('waqtQuizTopic'),
-          progressEl = document.getElementById('waqtQuizProgress'),
-          streakEl = document.getElementById('waqtQuizStreak'),
-          qEl = document.getElementById('waqtQuizQ'),
-          optsEl = document.getElementById('waqtQuizOpts'),
-          resultEl = document.getElementById('waqtQuizResult'),
-          verdictEl = document.getElementById('waqtQuizVerdict'),
-          explainEl = document.getElementById('waqtQuizExplain'),
-          sourceEl = document.getElementById('waqtQuizSource'),
-          nextBtn = document.getElementById('waqtQuizNext'),
-          sumEl = document.getElementById('waqtQuizSummary'),
-          sumTitle = document.getElementById('waqtQuizSumTitle'),
-          sumTotal = document.getElementById('waqtQuizSumTotal'),
-          sumStreak = document.getElementById('waqtQuizSumStreak'),
-          signinEl = document.getElementById('waqtQuizSignin'),
-          signinBtn = document.getElementById('waqtQuizSigninBtn');
-      if (!head || !body || !optsEl) return;
-
-      var BN = '০১২৩৪৫৬৭৮৯';
-      function bn(n) { return String(n).replace(/[0-9]/g, function (d) { return BN[+d]; }); }
-      var LETTERS = ['ক', 'খ', 'গ', 'ঘ'];
-      var PER_DAY = 5;
-
-      /* ---------- Asia/Dhaka date (never the visitor's raw local date) ---------- */
-      function pad(n) { return (n < 10 ? '0' : '') + n; }
-      function dhakaToday() {
-        var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Dhaka', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
-        var y = 0, m = 0, d = 0, i;
-        for (i = 0; i < parts.length; i++) {
-          if (parts[i].type === 'year') y = +parts[i].value;
-          else if (parts[i].type === 'month') m = +parts[i].value;
-          else if (parts[i].type === 'day') d = +parts[i].value;
-        }
-        var days = Math.floor(Date.UTC(y, m - 1, d) / 86400000);
-        return { str: y + '-' + pad(m) + '-' + pad(d), days: days };
-      }
-      function strFromDays(days) {
-        var dt = new Date(days * 86400000);
-        return dt.getUTCFullYear() + '-' + pad(dt.getUTCMonth() + 1) + '-' + pad(dt.getUTCDate());
-      }
-      var today = dhakaToday();
-      var ANCHOR = Math.floor(Date.UTC(2026, 10, 8) / 86400000); /* 2026-11-08 */
-      var yesterdayStr = strFromDays(today.days - 1);
-
-      /* ---------- state ----------
-         streak: consecutive completed "good days" (>=3 of 5 correct)
-         total:  cumulative correct answers across all days
-         last:   date string of the latest COMPLETED day-set (streak math base)
-         day:    today's record {date, picks:[{picked,correct}], completed, correctCount} */
-      var LS_KEY = 'waqtQuizV2';
-      var state = { streak: 0, total: 0, last: null, day: null };
-      try {
-        var raw = localStorage.getItem(LS_KEY);
-        if (raw) {
-          var p = JSON.parse(raw);
-          if (p && typeof p === 'object') {
-            if (typeof p.streak === 'number') state.streak = p.streak;
-            if (typeof p.total === 'number') state.total = p.total;
-            if (typeof p.last === 'string') state.last = p.last;
-            if (p.day && p.day.date === today.str && Array.isArray(p.day.picks)) state.day = p.day;
-          }
-        }
-      } catch (e) {}
-      if (!state.day) state.day = { date: today.str, picks: [], completed: false, correctCount: 0 };
-      var completedElsewhere = false;
-      var currentUser = null;
-      var daySet = null;
-      var cur = 0;
-
-      function saveLocal() {
-        try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
-      }
-      function effStreak() {
-        if (!state.last) return 0;
-        if (state.last === today.str || state.last === yesterdayStr) return state.streak || 0;
-        return 0;
-      }
-      function recount() {
-        var c = 0, i;
-        for (i = 0; i < state.day.picks.length; i++) if (state.day.picks[i].correct) c++;
-        state.day.correctCount = c;
-      }
-
-      /* ---------- Supabase (own lazy client, same project as the auth build;
-                    session is shared through the same storage key) ---------- */
-      var SB_URL = 'https://tocjvqbqezvccmfwygaw.supabase.co';
-      var SB_KEY = 'sb_publishable_dO0hZvFWIeNX-zeMrTfRzA_Ghl0OVVj';
-      var sbClient = null, sbPromise = null;
-      function getSb() {
-        if (sbClient) return Promise.resolve(sbClient);
-        if (sbPromise) return sbPromise;
-        sbPromise = new Promise(function (resolve) {
-          var tries = 0;
-          (function poll() {
-            if (window.supabase && typeof window.supabase.createClient === 'function') {
-              try { sbClient = window.supabase.createClient(SB_URL, SB_KEY); }
-              catch (e) { sbClient = null; }
-              resolve(sbClient);
-            } else if (++tries > 60) resolve(null);
-            else setTimeout(poll, 150);
-          })();
-        });
-        return sbPromise;
-      }
-      function pushServer() {
-        if (!currentUser) return;
-        getSb().then(function (sb) {
-          if (!sb) return;
-          sb.from('quiz_state').upsert({
-            user_id: currentUser.id,
-            streak: state.streak || 0,
-            total_correct: state.total || 0,
-            last_answered: state.last,
-            updated_at: new Date().toISOString()
-          }, { onConflict: 'user_id' }).then(function () {}, function () {});
-        }).catch(function () {});
-      }
-
-      /* ---------- rendering ---------- */
-      function paintStreak() {
-        var es = effStreak();
-        if (es > 0) {
-          streakEl.textContent = '🔥 ' + bn(es) + ' দিন টানা সঠিক';
-          streakEl.hidden = false;
-        } else streakEl.hidden = true;
-        if (state.day.completed) subEl.textContent = 'আজকের কুইজ শেষ ✓ — আগামীকাল নতুন ৫টি প্রশ্ন';
-        else if (state.day.picks.length > 0) subEl.textContent = 'আজ ' + bn(state.day.picks.length) + '/' + bn(PER_DAY) + 'টি প্রশ্নের উত্তর দেওয়া হয়েছে';
-        else if (es > 0) subEl.textContent = '🔥 ' + bn(es) + ' দিন টানা সঠিক — আজকের ৫টি প্রশ্ন খেলুন';
-        else subEl.textContent = 'প্রতিদিন ৫টি প্রশ্ন — উত্তর দিন, streak বাড়ান';
-      }
-      function buildOptions(item, lockedPick) {
-        optsEl.innerHTML = '';
-        item.options.forEach(function (opt, i) {
-          var b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'quiz-opt';
-          var lt = document.createElement('span');
-          lt.className = 'quiz-opt-letter';
-          lt.textContent = LETTERS[i];
-          var tx = document.createElement('span');
-          tx.textContent = opt;
-          b.appendChild(lt);
-          b.appendChild(tx);
-          if (lockedPick) {
-            b.disabled = true;
-            if (i === item.answer) {
-              b.classList.add('correct');
-              var tick = document.createElement('span');
-              tick.className = 'quiz-mark';
-              tick.textContent = '✓';
-              b.appendChild(tick);
-            } else if (lockedPick.picked === i) {
-              b.classList.add('wrong');
-              var cross = document.createElement('span');
-              cross.className = 'quiz-mark';
-              cross.textContent = '✗';
-              b.appendChild(cross);
-            } else b.classList.add('dim');
-          } else {
-            b.addEventListener('click', function () { onPick(i); });
-          }
-          optsEl.appendChild(b);
-        });
-      }
-      function renderQuestion() {
-        var item = daySet[cur];
-        playEl.hidden = false;
-        sumEl.hidden = true;
-        topicEl.textContent = 'বিষয়: ' + item.topic;
-        progressEl.textContent = 'প্রশ্ন ' + bn(cur + 1) + '/' + bn(PER_DAY);
-        qEl.textContent = item.q;
-        resultEl.hidden = true;
-        buildOptions(item, null);
-        paintStreak();
-      }
-      function renderLocked() {
-        var item = daySet[cur];
-        var pick = state.day.picks[cur];
-        topicEl.textContent = 'বিষয়: ' + item.topic;
-        progressEl.textContent = 'প্রশ্ন ' + bn(cur + 1) + '/' + bn(PER_DAY);
-        qEl.textContent = item.q;
-        buildOptions(item, pick);
-        verdictEl.textContent = pick.correct ? 'মাশাআল্লাহ! সঠিক উত্তর 🎉' : 'এবার হয়নি — সঠিক উত্তরটি সবুজ রঙে দেওয়া আছে';
-        verdictEl.className = 'quiz-verdict ' + (pick.correct ? 'ok' : 'no');
-        explainEl.textContent = item.explain;
-        sourceEl.textContent = 'সূত্র: ' + item.source;
-        nextBtn.textContent = (cur >= PER_DAY - 1) ? 'ফলাফল দেখুন ›' : 'পরের প্রশ্ন ›';
-        resultEl.hidden = false;
-        paintStreak();
-      }
-      function renderSummary() {
-        playEl.hidden = true;
-        sumEl.hidden = false;
-        recount();
-        var cc = state.day.correctCount;
-        if (completedElsewhere) {
-          sumTitle.textContent = 'আজকের কুইজ শেষ ✓';
-          sumTotal.textContent = 'আপনি আজকের ৫টি প্রশ্নের উত্তর ইতিমধ্যে দিয়েছেন।';
-        } else {
-          sumTitle.textContent = 'আজ ৫টার মধ্যে ' + bn(cc) + 'টা সঠিক' + (cc >= 3 ? ' 🎉' : '');
-          sumTotal.textContent = 'মোট সঠিক উত্তর: ' + bn(state.total) + 'টি';
-        }
-        var es = effStreak();
-        if (es > 0) sumStreak.textContent = '🔥 ' + bn(es) + ' দিন টানা সঠিক';
-        else if (!completedElsewhere && cc < 3) sumStreak.textContent = 'আজ streak হয়নি — ৫টার মধ্যে অন্তত ৩টা সঠিক হলেই streak বাড়ে';
-        else sumStreak.textContent = 'আগামীকাল আবার নতুন ৫টি প্রশ্ন আসবে ইনশাআল্লাহ';
-        paintStreak();
-        updateSigninPrompt();
-      }
-      function render() {
-        if (!daySet) return;
-        if (state.day.completed) { renderSummary(); return; }
-        cur = Math.min(state.day.picks.length, PER_DAY - 1);
-        /* resume at the first unanswered question; earlier picks stay locked away */
-        renderQuestion();
-      }
-
-      /* ---------- flow ---------- */
-      function onPick(i) {
-        if (!daySet || state.day.completed) return;
-        if (state.day.picks.length !== cur) return; /* this question already locked */
-        var item = daySet[cur];
-        var correct = (i === item.answer);
-        state.day.picks.push({ picked: i, correct: correct });
-        if (correct) state.total = (state.total || 0) + 1;
-        recount();
-        saveLocal();
-        pushServer();
-        renderLocked();
-      }
-      function completeDay() {
-        recount();
-        if (state.last !== today.str) {
-          if (state.day.correctCount >= 3) {
-            state.streak = (state.last === yesterdayStr) ? (state.streak || 0) + 1 : 1;
-          } else {
-            state.streak = 0;
-          }
-          state.last = today.str;
-        }
-        state.day.completed = true;
-        saveLocal();
-        pushServer();
-        renderSummary();
-      }
-      nextBtn.addEventListener('click', function () {
-        if (cur >= PER_DAY - 1) { completeDay(); return; }
-        cur++;
-        renderQuestion();
-      });
-      head.addEventListener('click', function () {
-        var open = card.classList.toggle('open');
-        head.setAttribute('aria-expanded', open ? 'true' : 'false');
-        body.hidden = !open;
-      });
-      signinBtn.addEventListener('click', function () {
-        var b = document.getElementById('waqtOpenAuthBtn');
-        if (b) b.click(); /* same trigger the drawer account button uses */
-      });
-      function updateSigninPrompt() {
-        if (currentUser) { signinEl.hidden = true; return; }
-        if (window.waqtAuth && window.waqtAuth.getUser) {
-          window.waqtAuth.getUser().then(function (u) {
-            currentUser = u || null;
-            signinEl.hidden = !!u;
-          }).catch(function () { signinEl.hidden = false; });
-        } else signinEl.hidden = false;
-      }
-
-      /* ---------- server merge for signed-in users (server wins when newer) ---------- */
-      function syncServer() {
-        if (!window.waqtAuth || !window.waqtAuth.getUser) return;
-        window.waqtAuth.getUser().then(function (user) {
-          currentUser = user || null;
-          if (!user) return;
-          getSb().then(function (sb) {
-            if (!sb) return;
-            sb.from('quiz_state').select('streak,total_correct,last_answered')
-              .eq('user_id', user.id).maybeSingle()
-              .then(function (r) {
-                var remote = r && r.data;
-                if (!remote) { if (state.last || state.total > 0) pushServer(); return; }
-                var rLast = remote.last_answered || null;
-                var rTotal = remote.total_correct || 0;
-                if (rLast && (!state.last || rLast > state.last)) {
-                  /* server has a newer completed day: adopt its streak base */
-                  state.streak = remote.streak || 0;
-                  state.last = rLast;
-                  if (rTotal > state.total) state.total = rTotal;
-                  if (rLast === today.str && !state.day.completed && state.day.picks.length === 0) {
-                    /* today's set was completed on another device */
-                    completedElsewhere = true;
-                    state.day.completed = true;
-                  }
-                  saveLocal();
-                } else if (state.last && (!rLast || state.last > rLast)) {
-                  if (rTotal > state.total) state.total = rTotal;
-                  saveLocal();
-                  pushServer();
-                } else {
-                  /* same base day: totals only grow */
-                  if (rTotal > state.total) { state.total = rTotal; saveLocal(); }
-                }
-                render();
-              })
-              .catch(function () {});
-          }).catch(function () {});
-        }).catch(function () {});
-      }
-
-      /* ---------- boot: wait for quiz-data.js (deferred) with no placeholder ---------- */
-      var tries = 0;
-      (function waitData() {
-        if (window.WAQT_QUIZ && window.WAQT_QUIZ.length >= 1) {
-          var total = window.WAQT_QUIZ.length;
-          var base = (((today.days - ANCHOR) * PER_DAY) % total + total) % total;
-          daySet = [];
-          for (var k = 0; k < PER_DAY; k++) daySet.push(window.WAQT_QUIZ[(base + k) % total]);
-          render();
-          syncServer();
-        } else if (++tries < 80) setTimeout(waitData, 150);
-      })();
     })();
     </script>
   </body>
