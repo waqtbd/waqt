@@ -1568,6 +1568,13 @@
       .wa-note-ok{background:#e6f4ec; border:1px solid var(--emerald); color:var(--emerald-deep)}
       .wa-note-err{background:#fbeae8; border:1px solid var(--danger); color:var(--danger)}
       @media (prefers-color-scheme: dark){ .wa-note-ok{background:#0d2c1e; color:#9fd8bd} .wa-note-err{background:#33120e; color:#f0a49c} }
+      .wa-pw-rules{list-style:none; margin:-4px 0 13px; padding:10px 13px; background:var(--surface-2); border:1px solid var(--line); border-radius:12px; display:grid; gap:5px; transition:border-color .2s ease, box-shadow .2s ease}
+      .wa-pw-rules li{display:flex; align-items:center; gap:8px; font-size:13.5px; line-height:1.4; color:var(--ink-soft); transition:color .2s ease}
+      .wa-rule-mark{flex:0 0 auto; width:17px; height:17px; border-radius:50%; border:1.5px solid var(--line); display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:#fff; background:transparent; transition:background .2s ease, border-color .2s ease}
+      .wa-pw-rules li.ok{color:var(--emerald-deep); font-weight:600}
+      .wa-pw-rules li.ok .wa-rule-mark{background:var(--emerald); border-color:var(--emerald)}
+      @media (prefers-color-scheme: dark){ .wa-pw-rules li.ok{color:#9fd8bd} }
+      .wa-pw-rules.alert{border-color:var(--danger); box-shadow:0 0 0 3px rgba(179,56,46,.15)}
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   </head>
@@ -2668,8 +2675,15 @@
           <input type="email" id="waqtSignupEmail" autocomplete="email" placeholder="আপনার email ঠিকানা" />
         </label>
         <label class="wa-field"><span>Password</span>
-          <input type="password" id="waqtSignupPass" autocomplete="new-password" placeholder="কমপক্ষে ৬ অক্ষরের password" />
+          <input type="password" id="waqtSignupPass" autocomplete="new-password" placeholder="কমপক্ষে ৮ অক্ষরের password" />
         </label>
+        <ul class="wa-pw-rules" id="waqtPwRules" aria-live="polite">
+          <li id="waqtRuleLen"><span class="wa-rule-mark"></span>কমপক্ষে ৮টি অক্ষর</li>
+          <li id="waqtRuleUpper"><span class="wa-rule-mark"></span>একটি বড় হাতের অক্ষর (A–Z)</li>
+          <li id="waqtRuleLower"><span class="wa-rule-mark"></span>একটি ছোট হাতের অক্ষর (a–z)</li>
+          <li id="waqtRuleDigit"><span class="wa-rule-mark"></span>একটি সংখ্যা (0–9)</li>
+          <li id="waqtRuleSpecial"><span class="wa-rule-mark"></span>একটি বিশেষ চিহ্ন (!@#$%^&* ইত্যাদি)</li>
+        </ul>
         <button type="submit" class="wa-btn-primary" id="waqtSignupBtn">অ্যাকাউন্ট তৈরি করুন</button>
       </form>
     </div>
@@ -6629,13 +6643,38 @@
         var m = (e && e.message) ? String(e.message) : '';
         if (/invalid login credentials/i.test(m)) return 'Email বা password সঠিক নয় — আবার চেষ্টা করুন।';
         if (/already registered/i.test(m)) return 'এই email দিয়ে আগেই অ্যাকাউন্ট আছে — লগইন করুন।';
-        if (/at least 6|password should/i.test(m)) return 'Password কমপক্ষে ৬ অক্ষরের হতে হবে।';
+        if (/at least 6|password should/i.test(m)) return 'Password-এর সব শর্ত পূরণ হয়নি — আবার দেখুন।';
         if (/invalid.*email|email.*invalid|validate email/i.test(m)) return 'সঠিক email ঠিকানা দিন।';
         if (/rate limit/i.test(m)) return 'অনেকবার চেষ্টা করা হয়েছে — কিছুক্ষণ পর আবার চেষ্টা করুন।';
         if (/failed to fetch|network/i.test(m)) return 'ইন্টারনেট সংযোগে সমস্যা হয়েছে — আবার চেষ্টা করুন।';
         return 'কিছু একটা সমস্যা হয়েছে — আবার চেষ্টা করুন।';
       }
       function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+      /* ---------- live password-rules checklist (sign up) ---------- */
+      var PW_RULES = [
+        { id: 'waqtRuleLen', test: function (v) { return v.length >= 8; } },
+        { id: 'waqtRuleUpper', test: function (v) { return /[A-Z]/.test(v); } },
+        { id: 'waqtRuleLower', test: function (v) { return /[a-z]/.test(v); } },
+        { id: 'waqtRuleDigit', test: function (v) { return /[0-9]/.test(v); } },
+        { id: 'waqtRuleSpecial', test: function (v) { return /[^A-Za-z0-9]/.test(v); } }
+      ];
+      function pwAllOk(v) {
+        return PW_RULES.every(function (r) { return r.test(v); });
+      }
+      function paintPwRules() {
+        var box = $('waqtPwRules');
+        if (box) box.classList.remove('alert');
+        var v = $('waqtSignupPass').value;
+        PW_RULES.forEach(function (r) {
+          var li = $(r.id); if (!li) return;
+          var ok = r.test(v);
+          li.classList.toggle('ok', ok);
+          var mark = li.querySelector('.wa-rule-mark');
+          if (mark) mark.textContent = ok ? '✓' : '';
+        });
+      }
+      $('waqtSignupPass').addEventListener('input', paintPwRules);
 
       $('waqtOpenAuthBtn').addEventListener('click', function () {
         try { if (typeof closeDrawer === 'function') closeDrawer(); } catch (e) {}
@@ -6668,7 +6707,16 @@
         var pass = $('waqtSignupPass').value;
         if (!name) { showNote('err', 'আপনার নাম লিখুন।'); return; }
         if (!validEmail(email)) { showNote('err', 'সঠিক email ঠিকানা দিন।'); return; }
-        if (!pass || pass.length < 6) { showNote('err', 'Password কমপক্ষে ৬ অক্ষরের হতে হবে।'); return; }
+        if (!pwAllOk(pass)) {
+          paintPwRules();
+          var pwBox = $('waqtPwRules');
+          if (pwBox) {
+            pwBox.classList.add('alert');
+            setTimeout(function () { pwBox.classList.remove('alert'); }, 2600);
+          }
+          showNote('err', 'Password-এর সব শর্ত পূরণ হয়নি — password-এর নিচের তালিকাটি দেখুন।');
+          return;
+        }
         var btn = $('waqtSignupBtn');
         btn.disabled = true; btn.textContent = 'অপেক্ষা করুন…';
         getClient().then(function (c) {
