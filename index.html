@@ -1791,6 +1791,18 @@
               };
               var dOff = Math.round((offOf(now) - offOf(new Date(Date.UTC(2026, 9, 1, 12)))) * 60);
               if (dOff) { for (var si = 0; si < series.length; si++) for (var sp = 0; sp < 6; sp++) series[si][sp] += dOff; }
+              /* and judge "now" in the city's own frame, so the first
+                 paint already shows the city's date, next prayer and
+                 countdown — not the visitor's */
+              var shMin = Math.round((offOf(now) - (-now.getTimezoneOffset() / 60)) * 60);
+              if (shMin) {
+                var shNow = new Date(now.getTime() + shMin * 60000);
+                var ndi = Math.round((Date.UTC(shNow.getFullYear(), shNow.getMonth(), shNow.getDate()) - Date.UTC(2026, 9, 1)) / 86400000);
+                if (ndi >= 0 && ndi < 396 && series[ndi]) {
+                  if (!series[ndi + 1] && ndi + 1 < 396) series[ndi + 1] = series[ndi];
+                  di = ndi; now = shNow;
+                } else { return; }
+              }
             }
           } catch (e) {}
         }
@@ -3957,7 +3969,7 @@
        today's Fajr (+24h). Display only — never feeds the countdown. */
     function tahajjudDate() {
       const d = state.today; if (!d) return null;
-      const now = new Date();
+      const now = heroNow();
       const maghrib = timeToDate(d.timings.Maghrib, now);
       const fajr = timeToDate(d.timings.Fajr, now);
       if (!maghrib || !fajr) return null;
@@ -4232,6 +4244,22 @@
     }
     function wHM(mins){ var m = ((Math.round(mins) % 1440) + 1440) % 1440; return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
     function wCityTodayParts(tz){ var p = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, year: 'numeric', month: 'numeric', day: 'numeric' }).formatToParts(new Date()).forEach(function(x){ p[x.type] = +x.value; }); return p; }
+    /* The hero's clock: for a world place, a Date shifted so its local
+       fields read as the CITY's wall time. Every hero consumer (cards,
+       next prayer, countdown, progress, sky phase) compares the city's
+       clock strings against this — so a visitor in Dhaka viewing New
+       York sees New York's day, New York's next prayer and a countdown
+       that is correct in New York's frame, not Dhaka's. For district
+       places (same timezone as the visitor) it is just `new Date()`. */
+    function heroNow(){
+      var n = new Date();
+      if (state.place && state.place.world) {
+        var offC = wTzOff(state.place.world.tz, n);
+        var offV = -n.getTimezoneOffset() / 60;
+        if (offC !== offV) return new Date(n.getTime() + (offC - offV) * 3600000);
+      }
+      return n;
+    }
     function worldDayObject(place, y, mo, da){
       var w = place.world; if (!w) return null;
       var t = wCompute(place.lat, place.lon, w.tz, w.method, w.asr, y, mo, da);
@@ -4385,7 +4413,9 @@
         state.today = wo;
         var tmD = new Date(Date.UTC(tp.year, tp.month - 1, tp.day + 1));
         var wto = worldDayObject(state.place, tmD.getUTCFullYear(), tmD.getUTCMonth() + 1, tmD.getUTCDate());
-        state.tomorrowFajr = wto ? timeToDate(wto.timings.Fajr, new Date(now.getTime() + 86400000)) : null;
+        var shN = heroNow();
+        var tmBase = new Date(shN.getFullYear(), shN.getMonth(), shN.getDate() + 1);
+        state.tomorrowFajr = wto ? timeToDate(wto.timings.Fajr, tmBase) : null;
         renderToday();
         return true;
       }
@@ -4402,7 +4432,7 @@
 
     async function loadAll() {
       if (!state.place) return;
-      const now = new Date();
+      const now = (state.place && state.place.world) ? heroNow() : new Date();
       state.viewYear = now.getFullYear(); state.viewMonth = now.getMonth() + 1;
       /* 1) embedded times first — instant, no network needed */
       const shownEmb = showEmbeddedToday(now);
@@ -4475,12 +4505,12 @@
     /* ---------------- rendering: today ---------------- */
     function prayerDates() {
       if (!state.today) return [];
-      const base = new Date();
+      const base = heroNow();
       return PRAYERS.map((p) => ({ name: p, at: timeToDate(state.today.timings[p], base), raw: state.today.timings[p] }));
     }
     function nextPrayerInfo() {
       const list = prayerDates(); if (!list.length) return null;
-      const now = new Date();
+      const now = heroNow();
       for (const item of list) if (item.at && item.at > now) return { ...item, tomorrow: false };
       if (state.tomorrowFajr) return { name: 'Fajr', at: state.tomorrowFajr, raw: null, tomorrow: true };
       return null;
@@ -4504,7 +4534,7 @@
       /* prayer cards */
       const next = nextPrayerInfo();
       const grid = $('prayerGrid'); grid.innerHTML = '';
-      const now = new Date();
+      const now = heroNow();
       /* Display cards: the six timed entries plus two computed nafl cards —
          Tahajjud first and Ishraq right after Sunrise (Sunrise + 15 min).
          The hero countdown and the "next" badge keep using PRAYERS only
@@ -4612,7 +4642,7 @@
 
     /* ---------------- clock + countdown ---------------- */
     function tick() {
-      const now = new Date();
+      const now = heroNow();
       let h = now.getHours(); const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12; if (h === 0) h = 12;
       $('clockNow').textContent = num(h) + ':' + num(pad(now.getMinutes())) + ':' + num(pad(now.getSeconds())) + ' ' + ap;
       const next = nextPrayerInfo();
@@ -5703,7 +5733,7 @@
     let skyBase = null, skyNowMin = 0, skyTimes = null;
     function updateLivingSky() {
       try {
-        const now = new Date();
+        const now = heroNow();
         const nowMin = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
         skyNowMin = nowMin;
         /* phase anchors from the SELECTED district's times on screen;
