@@ -259,16 +259,16 @@
     st.textContent =
       '#wqSndPill{position:fixed;right:18px;bottom:14px;z-index:99990;touch-action:none;-webkit-user-select:none;user-select:none;cursor:grab;opacity:1;transition:opacity .6s ease;font-family:inherit}' +
       '#wqSndPill.idle{opacity:.5}' +
-      '#wqSndPill.idle .tgl{background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}' +
-      '#wqSndPill .wrap{position:relative;width:52px;height:52px}' +
-      '#wqSndPill .tgl{width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 6px 18px rgba(0,0,0,.35);background:#ffffff;color:#0b4331;border:1px solid rgba(11,67,49,.28);transition:background .5s ease,color .5s ease,border-color .5s ease}' +
-      '#wqSndPill.playing .tgl{animation:wqPulse 1.8s ease-in-out infinite}' +
+      '#wqSndPill.idle .wqspTgl{background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}' +
+      '#wqSndPill .wqspWrap{position:relative;width:52px;height:52px}' +
+      '#wqSndPill .wqspTgl{width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 6px 18px rgba(0,0,0,.35);background:#ffffff;color:#0b4331;border:1px solid rgba(11,67,49,.28);transition:background .5s ease,color .5s ease,border-color .5s ease}' +
+      '#wqSndPill.playing .wqspTgl{animation:wqPulse 1.8s ease-in-out infinite}' +
       '@keyframes wqPulse{0%,100%{box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 0 rgba(243,210,122,.45)}50%{box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 9px rgba(243,210,122,0)}}' +
-      '@media (prefers-reduced-motion: reduce){ #wqSndPill.playing .tgl{animation:none} }' +
-      '#wqSndPill .x{position:absolute;top:-14px;right:-14px;width:22px;height:22px;padding:0;background:none;border:0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,.75));opacity:0;pointer-events:none;transition:opacity .4s ease}' +
-      '#wqSndPill:not(.idle) .x{opacity:1;pointer-events:auto}' +
-      '#wqSndPill .tgl svg{width:22px;height:22px;display:block}' +
-      '#wqSndPill .x svg{width:13px;height:13px;display:block}';
+      '@media (prefers-reduced-motion: reduce){ #wqSndPill.playing .wqspTgl{animation:none} }' +
+      '#wqSndPill .wqspX{position:absolute;top:-14px;right:-14px;width:22px;height:22px;padding:0;background:none;border:0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,.75));opacity:0;pointer-events:none;transition:opacity .4s ease}' +
+      '#wqSndPill:not(.idle) .wqspX{opacity:1;pointer-events:auto}' +
+      '#wqSndPill .wqspTgl svg{width:22px;height:22px;display:block}' +
+      '#wqSndPill .wqspX svg{width:13px;height:13px;display:block}';
     document.head.appendChild(st);
     pill = document.createElement('div');
     pill.id = 'wqSndPill';
@@ -276,11 +276,11 @@
     pill.setAttribute('aria-label', 'Sound player');
     if (document.querySelector('.bottomnav')) pill.style.bottom = '74px';
     pill.innerHTML =
-      '<div class="wrap">' +
-      '<button type="button" class="tgl" aria-label="Pause">' + SVG_PAUSE + '</button>' +
-      '<button type="button" class="x" aria-label="Stop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>' +
+      '<div class="wqspWrap">' +
+      '<button type="button" class="wqspTgl" aria-label="Pause">' + SVG_PAUSE + '</button>' +
+      '<button type="button" class="wqspX" aria-label="Stop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>' +
       '</div>';
-    tglEl = pill.querySelector('.tgl');
+    tglEl = pill.querySelector('.wqspTgl');
     tglEl.addEventListener('click', function () {
       if (!state && extEl) {
         if (extEl.paused || extEl.ended) { var p = extEl.play(); if (p && p.catch) p.catch(function () {}); }
@@ -288,7 +288,7 @@
         updatePill();
       } else tToggle();
     });
-    pill.querySelector('.x').addEventListener('click', function () {
+    pill.querySelector('.wqspX').addEventListener('click', function () {
       if (!state && extEl) { try { extEl.pause(); } catch (e) {} extEl = null; hidePill(); return; }
       api.stop();
     });
