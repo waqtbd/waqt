@@ -127,8 +127,9 @@ en: { docTitle:"Prayer Times Worldwide | Waqt (ওয়াক্ত)", home:"Ho
   foot:"prayer times, Quran, duas and Islamic knowledge", noRes:"No city found — check the spelling and try again",
   compass:["North","North-East","East","South-East","South","South-West","West","North-West"] }
 };
+function wqDetectLang(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""); if (tz === "Asia/Dhaka") return "bn"; var nl = (navigator.language || "").toLowerCase(); if (nl.indexOf("bn") === 0) return "bn"; return "en"; } catch (err) { return "bn"; } }
 var LANG = "bn";
-try { LANG = localStorage.getItem("waqtLang") === "en" ? "en" : "bn"; } catch (e) {}
+try { var __wl = localStorage.getItem("waqtLang"); if (__wl === "en" || __wl === "bn") LANG = __wl; else { LANG = wqDetectLang(); localStorage.setItem("waqtLang", LANG); } } catch (e) {}
 function T(k){ return I18N[LANG][k]; }
 function applyLang(){
   document.querySelectorAll("[data-i18n]").forEach(function(el){ var k = el.getAttribute("data-i18n"); if (I18N[LANG][k] != null) el.textContent = I18N[LANG][k]; });

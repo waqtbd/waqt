@@ -421,7 +421,7 @@
       function $(id) { return document.getElementById(id); }
       /* ---------- language: follow the site's saved preference (localStorage 'waqtLang', set on the homepage) ---------- */
       var WQ_LANG = 'bn';
-      try { if (localStorage.getItem('waqtLang') === 'en') WQ_LANG = 'en'; } catch (e) {}
+      try { var __wl = localStorage.getItem('waqtLang'); if (__wl === 'en' || __wl === 'bn') WQ_LANG = __wl; else { WQ_LANG = (function(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ''); if (tz === 'Asia/Dhaka') return 'bn'; var nl = (navigator.language || '').toLowerCase(); if (nl.indexOf('bn') === 0) return 'bn'; return 'en'; } catch (err) { return 'bn'; } })(); try { localStorage.setItem('waqtLang', WQ_LANG); } catch (err) {} } } catch (e) {}
       var WQ_I18N = {
         bn: {
           acctTitle:'Waqt অ্যাকাউন্ট', acctYourTitle:'আপনার Waqt অ্যাকাউন্ট', acctSignInUp:'সাইন ইন / সাইন আপ', acctSignOut:'সাইন আউট', 

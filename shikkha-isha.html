@@ -211,8 +211,9 @@ function applyLang(lang){
   if (b && e) { b.classList.toggle("on", lang !== "en"); e.classList.toggle("on", lang === "en"); }
   try { localStorage.setItem("waqtLang", lang); } catch (err) {}
 }
+function wqDetectLang(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""); if (tz === "Asia/Dhaka") return "bn"; var nl = (navigator.language || "").toLowerCase(); if (nl.indexOf("bn") === 0) return "bn"; return "en"; } catch (err) { return "bn"; } }
 var saved = "bn";
-try { saved = localStorage.getItem("waqtLang") || "bn"; } catch (err) {}
+try { saved = localStorage.getItem("waqtLang") || wqDetectLang(); localStorage.setItem("waqtLang", saved); } catch (err) {}
 applyLang(saved === "en" ? "en" : "bn");
 var b = document.getElementById("langBn"), e = document.getElementById("langEn");
 if (b) b.addEventListener("click", function(){ applyLang("bn"); });

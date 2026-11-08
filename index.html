@@ -3912,7 +3912,7 @@
     /* ---------------- state ---------------- */
     const $ = (id) => document.getElementById(id);
     const state = {
-      lang: (function () { try { return localStorage.getItem('waqtLang') === 'en' ? 'en' : 'bn'; } catch (e) { return 'bn'; } })(),
+      lang: (function () { try { var __wl = localStorage.getItem('waqtLang'); if (__wl === 'en' || __wl === 'bn') return __wl; var __d = (function () { try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ''); if (tz === 'Asia/Dhaka') return 'bn'; var nl = (navigator.language || '').toLowerCase(); if (nl.indexOf('bn') === 0) return 'bn'; return 'en'; } catch (e) { return 'bn'; } })(); try { localStorage.setItem('waqtLang', __d); } catch (e) {} return __d; } catch (e) { return 'bn'; } })(),
       place: null,           // {labelBn, labelEn, lat, lon}
       method: 1,             // Aladhan method id
       school: 1,             // 1 = Hanafi, 0 = Shafi'i
