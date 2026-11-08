@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>মতামত ও রিভিউ | Waqt (ওয়াক্ত)</title>
+<title data-i18n="docTitle">মতামত ও রিভিউ | Waqt (ওয়াক্ত)</title>
 <meta name="description" content="Waqt (ওয়াক্ত) নিয়ে ব্যবহারকারীদের মতামত ও রিভিউ পড়ুন, আর নিজের মতামত পাঠান — নামাজের সময়, কুরআন, দোয়া ও প্রশ্নোত্তরের এই সম্পূর্ণ ফ্রি সাইটটি নিয়ে আপনার অভিজ্ঞতা জানতে চাই।">
 <link rel="canonical" href="https://waqtbd.github.io/waqt/feedback.html">
 <meta property="og:title" content="মতামত ও রিভিউ | Waqt (ওয়াক্ত)">
@@ -28,7 +28,7 @@
 :root{--em:#0b5c4d;--em2:#0f766e;--gold:#c9a227;--gold2:#f3d27a;--ink:#1f2937;--mut:#6b7280;--line:#e5e7eb}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:"Baloo Da 2",system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f6f7f4;color:var(--ink);line-height:1.7}
-.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--em2),var(--em));padding:8px 14px;box-shadow:0 2px 10px rgba(11,92,77,.28)}
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--em2),var(--em));padding:8px 14px;box-shadow:0 2px 10px rgba(11,92,77,.28);display:flex;align-items:center;justify-content:space-between;gap:10px}
 .topbar a{display:flex;align-items:center;gap:10px;text-decoration:none;width:fit-content}
 .topbar img{width:36px;height:36px;border-radius:50%;display:block;box-shadow:0 0 0 2px rgba(243,210,122,.55)}
 .bt b{display:block;color:#fff;font-size:16px;letter-spacing:2.5px;line-height:1.05}
@@ -92,7 +92,10 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
       }
 
       /* print: monthly timetable only */
-    </style>
+    .lang-toggle{display:inline-flex;background:#e9e4d8;border-radius:999px;padding:3px;gap:2px;vertical-align:middle}
+.lang-toggle button{border:0;background:transparent;padding:5px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer;color:#43534a}
+.lang-toggle button.on{background:#0b5d43;color:#fff;font-weight:700}
+</style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
 <script>
@@ -102,35 +105,36 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
   gtag('config', 'G-G3YT4H1B0K');
 </script>
 <style>.waqt-share{max-width:680px;margin:20px auto;padding:16px 16px 15px;text-align:center;background:linear-gradient(180deg,#ffffff,#f2f8f5);border:1px solid #dcebe4;border-top:3px solid #d4af37;border-radius:20px;box-shadow:0 10px 30px rgba(11,92,77,.10)}.waqt-share .ws-title{display:block;font-size:15.5px;font-weight:800;color:#0b5c4d;letter-spacing:.2px}.waqt-share .ws-sub{display:block;font-size:12.5px;color:#64748b;margin:2px 0 12px}.waqt-share .ws-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}.waqt-share .ws-btn{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:9px 16px 9px 13px;border-radius:999px;color:#fff;font-size:13.5px;font-weight:700;text-decoration:none;border:0;cursor:pointer;box-shadow:0 4px 12px rgba(15,23,42,.16),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .15s ease,box-shadow .15s ease}.waqt-share .ws-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(15,23,42,.20),inset 0 1px 0 rgba(255,255,255,.35)}.waqt-share .ws-btn:active{transform:translateY(0)}.waqt-share .ws-btn svg{width:18px;height:18px;flex:0 0 auto}.waqt-share .ws-wa{background:linear-gradient(135deg,#2be07c,#12a150)}.waqt-share .ws-fb{background:linear-gradient(135deg,#3b8bff,#0f5fd0)}.waqt-share .ws-tg{background:linear-gradient(135deg,#4fc3f7,#1d8ec9)}.waqt-share .ws-x{background:linear-gradient(135deg,#3f4756,#05070a)}.waqt-share .ws-copy{background:linear-gradient(135deg,#e7c65a,#b8860b)}</style></head><body>
-<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a></div>
-<header class="banner"><h1>আপনাদের মতামত</h1>
-<p class="sub">Read what users say about Waqt — and share your own experience.</p>
+<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a><span class="lang-toggle" role="group" aria-label="Language"><button type="button" id="langBn">বাংলা</button><button type="button" id="langEn">English</button></span></div>
+<header class="banner"><h1 data-i18n="h1">আপনাদের মতামত</h1>
+<p class="sub" data-i18n="sub">Read what users say about Waqt — and share your own experience.</p>
 <div class="orn">◆</div>
-<div><span class="chip">আপনার মতামত আমাদের জন্য মূল্যবান</span></div></header>
+<div><span class="chip" data-i18n="chip">আপনার মতামত আমাদের জন্য মূল্যবান</span></div></header>
 <main>
 
-<section class="card" id="fbCard"><h2 class="sr" style="--sr-delay:0s">আপনার মতামত জানান</h2>
-<p>সাইটটা কেমন লাগল, কোন সুবিধাটা সবচেয়ে কাজে লাগে, কোথায় উন্নতি চান — লিখে পাঠান। ভুল তথ্য বা ভুল সময় চোখে পড়লে সেটাও এখানেই জানাতে পারেন।</p>
+<section class="card" id="fbCard"><h2 class="sr" style="--sr-delay:0s" data-i18n="fbT">আপনার মতামত জানান</h2>
+<p data-i18n="fbP">সাইটটা কেমন লাগল, কোন সুবিধাটা সবচেয়ে কাজে লাগে, কোথায় উন্নতি চান — লিখে পাঠান। ভুল তথ্য বা ভুল সময় চোখে পড়লে সেটাও এখানেই জানাতে পারেন।</p>
 <div id="fbWrap">
 <form id="fbForm" novalidate>
-<div class="fld"><label for="fbName">আপনার নাম *</label><input id="fbName" type="text" maxlength="60" required placeholder="যেমন: মোঃ আব্দুল্লাহ"></div>
-<div class="fld"><label for="fbMsg">আপনার মতামত *</label><textarea id="fbMsg" maxlength="1000" required placeholder="আপনার অভিজ্ঞতা বা পরামর্শ লিখুন…"></textarea></div>
-<p class="consent">পাঠালে আপনার মতামত আমাদের কাছে পৌঁছাবে। বাছাই করা মতামত নামসহ এই পেজে প্রকাশিত হতে পারে।</p>
-<button type="submit" class="mainbtn" id="fbBtn">মতামত পাঠান</button>
-<div id="fbErr">দুঃখিত, এই মুহূর্তে পাঠানো যাচ্ছে না। একটু পরে আবার চেষ্টা করুন।</div>
+<div class="fld"><label for="fbName" data-i18n="nameLab">আপনার নাম *</label><input id="fbName" type="text" maxlength="60" required placeholder="যেমন: মোঃ আব্দুল্লাহ" data-i18n-ph="namePh"></div>
+<div class="fld"><label for="fbMsg" data-i18n="msgLab">আপনার মতামত *</label><textarea id="fbMsg" maxlength="1000" required placeholder="আপনার অভিজ্ঞতা বা পরামর্শ লিখুন…" data-i18n-ph="msgPh"></textarea></div>
+<p class="consent" data-i18n="consent">পাঠালে আপনার মতামত আমাদের কাছে পৌঁছাবে। বাছাই করা মতামত নামসহ এই পেজে প্রকাশিত হতে পারে।</p>
+<button type="submit" class="mainbtn" id="fbBtn" data-i18n="submit">মতামত পাঠান</button>
+<div id="fbErr" data-i18n="fbErr">দুঃখিত, এই মুহূর্তে পাঠানো যাচ্ছে না। একটু পরে আবার চেষ্টা করুন।</div>
 </form>
 </div>
-<div class="okcard" id="fbOk"><p class="big">জাযাকাল্লাহু খাইরান!</p><p>আপনার মতামত আমাদের কাছে পৌঁছেছে। প্রকাশের উপযুক্ত হলে নামসহ এই পেজেই দেখা যাবে, ইনশাআল্লাহ।</p></div>
+<div class="okcard" id="fbOk"><p class="big" data-i18n="okBig">জাযাকাল্লাহু খাইরান!</p><p data-i18n="okP">আপনার মতামত আমাদের কাছে পৌঁছেছে। প্রকাশের উপযুক্ত হলে নামসহ এই পেজেই দেখা যাবে, ইনশাআল্লাহ।</p></div>
 </section>
 
-<div class="waqt-share sr" style="--sr-delay:.09s"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%AE%E0%A6%A4%E0%A6%BE%E0%A6%AE%E0%A6%A4%20%E0%A6%93%20%E0%A6%B0%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%89%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Ffeedback.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Ffeedback.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Ffeedback.html&text=%E0%A6%AE%E0%A6%A4%E0%A6%BE%E0%A6%AE%E0%A6%A4%20%E0%A6%93%20%E0%A6%B0%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%89%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Ffeedback.html&text=%E0%A6%AE%E0%A6%A4%E0%A6%BE%E0%A6%AE%E0%A6%A4%20%E0%A6%93%20%E0%A6%B0%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%89%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/feedback.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div></main>
-<footer class="sr" style="--sr-delay:.18s"><h3>আরও দেখুন</h3><div class="dir"><a href="index.html">Waqt হোম</a><a href="about.html">আমাদের সম্পর্কে</a><a href="privacy.html">গোপনীয়তা নীতি</a><a href="contact.html">যোগাযোগ</a><a href="feedback.html" class="cur">মতামত ও রিভিউ</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">জেলা ও উপজেলা</a></div><p class="foot">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer>
+<div class="waqt-share sr" style="--sr-delay:.09s"><span class="ws-title" data-i18n="shareT">শেয়ার করুন</span><span class="ws-sub" data-i18n="shareSub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%AE%E0%A6%A4%E0%A6%BE%E0%A6%AE%E0%A6%A4%20%E0%A6%93%20%E0%A6%B0%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%89%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Ffeedback.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Ffeedback.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Ffeedback.html&text=%E0%A6%AE%E0%A6%A4%E0%A6%BE%E0%A6%AE%E0%A6%A4%20%E0%A6%93%20%E0%A6%B0%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%89%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Ffeedback.html&text=%E0%A6%AE%E0%A6%A4%E0%A6%BE%E0%A6%AE%E0%A6%A4%20%E0%A6%93%20%E0%A6%B0%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%89%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent=(typeof I18N!=='undefined'?I18N[(localStorage.getItem('waqtLang')||'bn')].copyOk:'Copied ✓');setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/feedback.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span data-i18n="copyLink">লিংক কপি</span></button></div></div></main>
+<footer class="sr" style="--sr-delay:.18s"><h3 data-i18n="seeAlso">আরও দেখুন</h3><div class="dir"><a href="index.html" data-i18n="fHome">Waqt হোম</a><a href="about.html" data-i18n="fAbout">আমাদের সম্পর্কে</a><a href="privacy.html" data-i18n="fPrivacy">গোপনীয়তা নীতি</a><a href="contact.html" data-i18n="fContact">যোগাযোগ</a><a href="feedback.html" class="cur" data-i18n="fFeedback">মতামত ও রিভিউ</a><a href="proshno-uttor.html" data-i18n="fQA">প্রশ্নোত্তর</a><a href="directory.html" data-i18n="fDir">জেলা ও উপজেলা</a></div><p class="foot" data-i18n="footLine">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer>
 
 <script>
+function wqT(k, fb){ try { if (window.I18N) { var l = localStorage.getItem('waqtLang') || 'bn'; if (I18N[l] && I18N[l][k]) return I18N[l][k]; } } catch (err) {} return fb; }
 document.getElementById('fbForm').addEventListener('submit', function (e) {
   e.preventDefault();
   var btn = document.getElementById('fbBtn'), err = document.getElementById('fbErr');
-  btn.disabled = true; btn.textContent = 'পাঠানো হচ্ছে…'; err.style.display = 'none';
+  btn.disabled = true; btn.textContent = wqT('sending', 'পাঠানো হচ্ছে…'); err.style.display = 'none';
   fetch('https://formsubmit.co/ajax/team.waqtbd@gmail.com', {
     method: 'POST',
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
@@ -150,7 +154,7 @@ document.getElementById('fbForm').addEventListener('submit', function (e) {
     var ok = document.getElementById('fbOk'); ok.style.display = 'block';
     ok.scrollIntoView({behavior: 'smooth', block: 'center'});
   }).catch(function () {
-    btn.disabled = false; btn.textContent = 'মতামত পাঠান';
+    btn.disabled = false; btn.textContent = wqT('submit', 'মতামত পাঠান');
     err.style.display = 'block';
   });
 });
@@ -187,4 +191,32 @@ document.getElementById('fbForm').addEventListener('submit', function (e) {
       }
     })();
     </script>
+<script>
+(function(){
+window.I18N = { bn: {"docTitle": "মতামত ও রিভিউ | Waqt (ওয়াক্ত)", "h1": "আপনাদের মতামত", "sub": "Read what users say about Waqt — and share your own experience.", "chip": "আপনার মতামত আমাদের জন্য মূল্যবান", "fbT": "আপনার মতামত জানান", "fbP": "সাইটটা কেমন লাগল, কোন সুবিধাটা সবচেয়ে কাজে লাগে, কোথায় উন্নতি চান — লিখে পাঠান। ভুল তথ্য বা ভুল সময় চোখে পড়লে সেটাও এখানেই জানাতে পারেন।", "nameLab": "আপনার নাম *", "namePh": "যেমন: মোঃ আব্দুল্লাহ", "msgLab": "আপনার মতামত *", "msgPh": "আপনার অভিজ্ঞতা বা পরামর্শ লিখুন…", "consent": "পাঠালে আপনার মতামত আমাদের কাছে পৌঁছাবে। বাছাই করা মতামত নামসহ এই পেজে প্রকাশিত হতে পারে।", "submit": "মতামত পাঠান", "fbErr": "দুঃখিত, এই মুহূর্তে পাঠানো যাচ্ছে না। একটু পরে আবার চেষ্টা করুন।", "okBig": "জাযাকাল্লাহু খাইরান!", "okP": "আপনার মতামত আমাদের কাছে পৌঁছেছে। প্রকাশের উপযুক্ত হলে নামসহ এই পেজেই দেখা যাবে, ইনশাআল্লাহ।", "sending": "পাঠানো হচ্ছে…", "shareT": "শেয়ার করুন", "shareSub": "ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন", "copyLink": "লিংক কপি", "copyOk": "কপি হয়েছে ✓", "seeAlso": "আরও দেখুন", "fHome": "Waqt হোম", "fAbout": "আমাদের সম্পর্কে", "fPrivacy": "গোপনীয়তা নীতি", "fContact": "যোগাযোগ", "fFeedback": "মতামত ও রিভিউ", "fQA": "প্রশ্নোত্তর", "fDir": "জেলা ও উপজেলা", "footLine": "Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।"}, en: {"chip": "Your feedback is valuable to us", "consent": "When you send it, your feedback will reach us. Selected feedback may be published on this page with your name.", "copyLink": "Copy link", "copyOk": "Copied ✓", "docTitle": "Feedback & reviews | Waqt (ওয়াক্ত)", "fAbout": "About us", "fContact": "Contact", "fDir": "Districts & Upazilas", "fFeedback": "Feedback & reviews", "fHome": "Waqt Home", "fPrivacy": "Privacy policy", "fQA": "Q&A", "fbErr": "Sorry, it cannot be sent right now. Please try again in a little while.", "fbP": "Tell us how you like the site, which feature helps you most, and where you want improvement — write and send it. If you spot wrong information or wrong times, you can let us know here too.", "fbT": "Share your feedback", "footLine": "Waqt (ওয়াক্ত) — prayer times, Quran, duas and Islamic knowledge.", "h1": "Your feedback", "msgLab": "Your feedback *", "msgPh": "Write your experience or suggestion…", "nameLab": "Your name *", "namePh": "e.g. Md Abdullah", "okBig": "Jazakallahu khairan!", "okP": "Your feedback has reached us. If it is suitable for publishing, it will appear on this page with your name, insha'Allah.", "seeAlso": "See also", "sending": "Sending…", "shareSub": "If it helped you, share it with friends", "shareT": "Share", "sub": "Read what users say about Waqt — and share your own experience.", "submit": "Send feedback"} };
+function applyLang(lang){
+  var d = I18N[lang] || I18N.bn;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k = el.getAttribute("data-i18n");
+    if (d[k] != null) el.textContent = d[k];
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){
+    var k = el.getAttribute("data-i18n-ph");
+    if (d[k] != null) el.setAttribute("placeholder", d[k]);
+  });
+  document.documentElement.lang = (lang === "en" ? "en" : "bn");
+  var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+  if (b && e) { b.classList.toggle("on", lang !== "en"); e.classList.toggle("on", lang === "en"); }
+  try { localStorage.setItem("waqtLang", lang); } catch (err) {}
+  if (typeof window.wqRefreshLang === "function") { try { window.wqRefreshLang(); } catch (err) {} }
+}
+function wqDetectLang(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""); if (tz === "Asia/Dhaka") return "bn"; var nl = (navigator.language || "").toLowerCase(); if (nl.indexOf("bn") === 0) return "bn"; return "en"; } catch (err) { return "bn"; } }
+var saved = "bn";
+try { saved = localStorage.getItem("waqtLang") || wqDetectLang(); localStorage.setItem("waqtLang", saved); } catch (err) {}
+applyLang(saved === "en" ? "en" : "bn");
+var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+if (b) b.addEventListener("click", function(){ applyLang("bn"); });
+if (e) e.addEventListener("click", function(){ applyLang("en"); });
+})();
+</script>
 </body></html>

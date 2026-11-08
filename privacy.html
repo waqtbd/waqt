@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>গোপনীয়তা নীতি | Waqt (ওয়াক্ত)</title>
+<title data-i18n="docTitle">গোপনীয়তা নীতি | Waqt (ওয়াক্ত)</title>
 <meta name="description" content="Waqt (ওয়াক্ত)-এর গোপনীয়তা নীতি — আমরা কোনো ব্যক্তিগত তথ্য সংগ্রহ করি না; location শুধু আপনার browser-এই থাকে; Google Analytics cookie ও ভবিষ্যৎ বিজ্ঞাপন সম্পর্কে পরিষ্কার তথ্য।">
 <link rel="canonical" href="https://waqtbd.github.io/waqt/privacy.html">
 <meta property="og:title" content="গোপনীয়তা নীতি | Waqt (ওয়াক্ত)">
@@ -28,7 +28,7 @@
 :root{--em:#0b5c4d;--em2:#0f766e;--gold:#c9a227;--gold2:#f3d27a;--ink:#1f2937;--mut:#6b7280;--line:#e5e7eb}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:"Baloo Da 2",system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f6f7f4;color:var(--ink);line-height:1.7}
-.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--em2),var(--em));padding:8px 14px;box-shadow:0 2px 10px rgba(11,92,77,.28)}
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--em2),var(--em));padding:8px 14px;box-shadow:0 2px 10px rgba(11,92,77,.28);display:flex;align-items:center;justify-content:space-between;gap:10px}
 .topbar a{display:flex;align-items:center;gap:10px;text-decoration:none;width:fit-content}
 .topbar img{width:36px;height:36px;border-radius:50%;display:block;box-shadow:0 0 0 2px rgba(243,210,122,.55)}
 .bt b{display:block;color:#fff;font-size:16px;letter-spacing:2.5px;line-height:1.05}
@@ -70,6 +70,9 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
 .foot{color:var(--mut);font-size:12.5px;margin-top:18px;text-align:center}
 @media (max-width:580px){.banner h1{font-size:26px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.lang-toggle{display:inline-flex;background:#e9e4d8;border-radius:999px;padding:3px;gap:2px;vertical-align:middle}
+.lang-toggle button{border:0;background:transparent;padding:5px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer;color:#43534a}
+.lang-toggle button.on{background:#0b5d43;color:#fff;font-weight:700}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
@@ -95,47 +98,47 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
       }
 </style>
 </head><body>
-<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a></div>
-<header class="banner"><h1>গোপনীয়তা নীতি</h1>
-<p class="sub">How Waqt treats your information, in plain words.</p>
+<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a><span class="lang-toggle" role="group" aria-label="Language"><button type="button" id="langBn">বাংলা</button><button type="button" id="langEn">English</button></span></div>
+<header class="banner"><h1 data-i18n="h1">গোপনীয়তা নীতি</h1>
+<p class="sub" data-i18n="sub">How Waqt treats your information, in plain words.</p>
 <div class="orn">◆</div>
-<div><span class="chip">শেষ হালনাগাদ: ৩০ অক্টোবর ২০২৬</span></div></header>
+<div><span class="chip" data-i18n="upd">শেষ হালনাগাদ: ৩০ অক্টোবর ২০২৬</span></div></header>
 <main>
-<section class="sr card" style="--sr-delay:0s"><h2>সহজ কথায়</h2>
-<p>শুরুতেই বলে রাখি — Waqt আপনার ব্যক্তিগত তথ্য সংগ্রহ করে না। এই পেজে আমরা পরিষ্কার করে জানিয়ে দিচ্ছি, সাইট ব্যবহারের সময় ঠিক কী হয় আর কী হয় না।</p></section>
-<section class="sr card" style="--sr-delay:.09s"><h2>আমরা যা সংগ্রহ করি না</h2>
+<section class="sr card" style="--sr-delay:0s"><h2 data-i18n="s1T">সহজ কথায়</h2>
+<p data-i18n="s1P">শুরুতেই বলে রাখি — Waqt আপনার ব্যক্তিগত তথ্য সংগ্রহ করে না। এই পেজে আমরা পরিষ্কার করে জানিয়ে দিচ্ছি, সাইট ব্যবহারের সময় ঠিক কী হয় আর কী হয় না।</p></section>
+<section class="sr card" style="--sr-delay:.09s"><h2 data-i18n="s2T">আমরা যা সংগ্রহ করি না</h2>
 <ul>
-<li>Waqt-এ <b>কোনো sign-up বা account নেই</b>।</li>
-<li>আমরা আপনার <b>নাম, ফোন নম্বর বা পাসওয়ার্ড</b> চাই না এবং সংগ্রহও করি না।</li>
-<li>আপনার পাঠানো কোনো তথ্য জমা রাখার মতো কোনো server আমাদের নেই।</li>
+<li><span data-i18n="c1A">Waqt-এ </span><b data-i18n="c1B">কোনো sign-up বা account নেই</b><span data-i18n="c1C">।</span></li>
+<li><span data-i18n="c2A">আমরা আপনার </span><b data-i18n="c2B">নাম, ফোন নম্বর বা পাসওয়ার্ড</b><span data-i18n="c2C"> চাই না এবং সংগ্রহও করি না।</span></li>
+<li data-i18n="c3">আপনার পাঠানো কোনো তথ্য জমা রাখার মতো কোনো server আমাদের নেই।</li>
 </ul></section>
-<section class="sr card" style="--sr-delay:.18s"><h2>Location (অবস্থান)</h2>
-<p>আশেপাশের মসজিদ খোঁজা আর কিবলার দিক দেখার সুবিধা দুটির জন্য আপনার অবস্থান দরকার হতে পারে।</p>
+<section class="sr card" style="--sr-delay:.18s"><h2 data-i18n="s3T">Location (অবস্থান)</h2>
+<p data-i18n="s3P">আশেপাশের মসজিদ খোঁজা আর কিবলার দিক দেখার সুবিধা দুটির জন্য আপনার অবস্থান দরকার হতে পারে।</p>
 <ul>
-<li>এই অবস্থান শুধু <b>আপনার নিজের browser-এর ভেতরেই</b> ব্যবহার হয়।</li>
-<li>আপনার অবস্থান Waqt-এর কাছে <b>পাঠানো হয় না এবং কোথাও সংরক্ষণও করা হয় না</b>।</li>
-<li>চাইলে আপনি browser-এর permission বন্ধ করে এই সুবিধা ছাড়াই বাকি সাইট ব্যবহার করতে পারবেন।</li>
+<li><span data-i18n="loc1A">এই অবস্থান শুধু </span><b data-i18n="loc1B">আপনার নিজের browser-এর ভেতরেই</b><span data-i18n="loc1C"> ব্যবহার হয়।</span></li>
+<li><span data-i18n="loc2A">আপনার অবস্থান Waqt-এর কাছে </span><b data-i18n="loc2B">পাঠানো হয় না এবং কোথাও সংরক্ষণও করা হয় না</b><span data-i18n="loc2C">।</span></li>
+<li data-i18n="loc3">চাইলে আপনি browser-এর permission বন্ধ করে এই সুবিধা ছাড়াই বাকি সাইট ব্যবহার করতে পারবেন।</li>
 </ul></section>
-<section class="sr card" style="--sr-delay:.27s"><h2>Cookie ও Google Analytics</h2>
-<p>কতজন visitor আসছেন এবং কোন পেজগুলো বেশি কাজে লাগছে — এটা বোঝার জন্য Waqt <b>Google Analytics</b> ব্যবহার করে, আর এটি cookie ব্যবহার করে থাকে। এই তথ্য সমষ্টিগতভাবে দেখা হয়; এর মাধ্যমে আমরা কোনো নির্দিষ্ট ব্যক্তিকে চেনার চেষ্টা করি না।</p>
-<p>আপনি চাইলে নিজের browser-এর settings থেকে cookie বন্ধ বা মুছে ফেলতে পারেন — সাইটের মূল সুবিধাগুলো তাতে আটকাবে না।</p></section>
-<section class="sr card" style="--sr-delay:.36s"><h2>আপনার browser-এ সংরক্ষিত পছন্দ</h2>
-<p>কিছু ছোট সুবিধার জন্য আপনার পছন্দ <b>আপনার নিজের browser-এর storage-এ (localStorage)</b> রাখা হয়, যেমন—</p>
+<section class="sr card" style="--sr-delay:.27s"><h2 data-i18n="s4T">Cookie ও Google Analytics</h2>
+<p><span data-i18n="ck1A">কতজন visitor আসছেন এবং কোন পেজগুলো বেশি কাজে লাগছে — এটা বোঝার জন্য Waqt </span><b data-i18n="ck1B">Google Analytics</b><span data-i18n="ck1C"> ব্যবহার করে, আর এটি cookie ব্যবহার করে থাকে। এই তথ্য সমষ্টিগতভাবে দেখা হয়; এর মাধ্যমে আমরা কোনো নির্দিষ্ট ব্যক্তিকে চেনার চেষ্টা করি না।</span></p>
+<p data-i18n="ckP2">আপনি চাইলে নিজের browser-এর settings থেকে cookie বন্ধ বা মুছে ফেলতে পারেন — সাইটের মূল সুবিধাগুলো তাতে আটকাবে না।</p></section>
+<section class="sr card" style="--sr-delay:.36s"><h2 data-i18n="s5T">আপনার browser-এ সংরক্ষিত পছন্দ</h2>
+<p><span data-i18n="svA">কিছু ছোট সুবিধার জন্য আপনার পছন্দ </span><b data-i18n="svB">আপনার নিজের browser-এর storage-এ (localStorage)</b><span data-i18n="svC"> রাখা হয়, যেমন—</span></p>
 <ul>
-<li>আপনার বেছে নেওয়া ভাষা (বাংলা বা English)</li>
-<li>কুরআন পড়ার সময় শেষ কোন পৃষ্ঠায় ছিলেন</li>
+<li data-i18n="sv1">আপনার বেছে নেওয়া ভাষা (বাংলা বা English)</li>
+<li data-i18n="sv2">কুরআন পড়ার সময় শেষ কোন পৃষ্ঠায় ছিলেন</li>
 </ul>
-<p>এগুলো শুধু আপনার নিজের ডিভাইসেই থাকে, আমাদের কাছে পাঠানো হয় না। browser-এর data মুছে দিলে এগুলোও মুছে যাবে।</p></section>
-<section class="sr card" style="--sr-delay:.45s"><h2>বিজ্ঞাপন (ভবিষ্যতে)</h2>
-<p>ভবিষ্যতে সাইটে <b>Google AdSense</b>-এর বিজ্ঞাপন দেখানো হতে পারে। তখন Google বিজ্ঞাপনের জন্য advertising cookie ব্যবহার করতে পারে। আপনি চাইলে Google Ads Settings থেকে personalized ads নিজে নিয়ন্ত্রণ করতে পারবেন।</p></section>
-<section class="sr card" style="--sr-delay:.54s"><h2>Hosting</h2>
-<p>Waqt সাইটটি <b>GitHub Pages</b>-এ hosted।</p></section>
-<section class="sr card" style="--sr-delay:.63s"><h2>যোগাযোগ</h2>
-<p>এই গোপনীয়তা নীতি নিয়ে কোনো প্রশ্ন থাকলে আমাদের ইমেইল করুন: <b>team.waqtbd@gmail.com</b></p>
-<p class="upd">শেষ হালনাগাদ: ৩০ অক্টোবর ২০২৬</p></section>
+<p data-i18n="svP2">এগুলো শুধু আপনার নিজের ডিভাইসেই থাকে, আমাদের কাছে পাঠানো হয় না। browser-এর data মুছে দিলে এগুলোও মুছে যাবে।</p></section>
+<section class="sr card" style="--sr-delay:.45s"><h2 data-i18n="s6T">বিজ্ঞাপন (ভবিষ্যতে)</h2>
+<p><span data-i18n="adA">ভবিষ্যতে সাইটে </span><b data-i18n="adB">Google AdSense</b><span data-i18n="adC">-এর বিজ্ঞাপন দেখানো হতে পারে। তখন Google বিজ্ঞাপনের জন্য advertising cookie ব্যবহার করতে পারে। আপনি চাইলে Google Ads Settings থেকে personalized ads নিজে নিয়ন্ত্রণ করতে পারবেন।</span></p></section>
+<section class="sr card" style="--sr-delay:.54s"><h2 data-i18n="s7T">Hosting</h2>
+<p><span data-i18n="hostA">Waqt সাইটটি </span><b data-i18n="hostB">GitHub Pages</b><span data-i18n="hostC">-এ hosted।</span></p></section>
+<section class="sr card" style="--sr-delay:.63s"><h2 data-i18n="s8T">যোগাযোগ</h2>
+<p><span data-i18n="ctA">এই গোপনীয়তা নীতি নিয়ে কোনো প্রশ্ন থাকলে আমাদের ইমেইল করুন: </span><b data-i18n="ctB">team.waqtbd@gmail.com</b></p>
+<p class="upd" data-i18n="upd">শেষ হালনাগাদ: ৩০ অক্টোবর ২০২৬</p></section>
 
-<div class="sr waqt-share" style="--sr-delay:.72s"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%A8%E0%A7%80%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fprivacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fprivacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fprivacy.html&text=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%A8%E0%A7%80%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fprivacy.html&text=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%A8%E0%A7%80%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/privacy.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div></main>
-<footer class="sr" style="--sr-delay:.72s"><h3>আরও দেখুন</h3><div class="dir"><a href="index.html">Waqt হোম</a><a href="about.html">আমাদের সম্পর্কে</a><a href="privacy.html" class="cur">গোপনীয়তা নীতি</a><a href="contact.html">যোগাযোগ</a><a href="feedback.html">মতামত ও রিভিউ</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">জেলা ও উপজেলা</a></div><p class="foot">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer>
+<div class="sr waqt-share" style="--sr-delay:.72s"><span class="ws-title" data-i18n="shareT">শেয়ার করুন</span><span class="ws-sub" data-i18n="shareSub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%A8%E0%A7%80%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fprivacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fprivacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fprivacy.html&text=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%A8%E0%A7%80%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fprivacy.html&text=%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%A8%E0%A7%80%E0%A6%AF%E0%A6%BC%E0%A6%A4%E0%A6%BE%20%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent=(typeof I18N!=='undefined'?I18N[(localStorage.getItem('waqtLang')||'bn')].copyOk:'Copied ✓');setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/privacy.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span data-i18n="copyLink">লিংক কপি</span></button></div></div></main>
+<footer class="sr" style="--sr-delay:.72s"><h3 data-i18n="seeAlso">আরও দেখুন</h3><div class="dir"><a href="index.html" data-i18n="fHome">Waqt হোম</a><a href="about.html" data-i18n="fAbout">আমাদের সম্পর্কে</a><a href="privacy.html" class="cur" data-i18n="fPrivacy">গোপনীয়তা নীতি</a><a href="contact.html" data-i18n="fContact">যোগাযোগ</a><a href="feedback.html" data-i18n="fFeedback">মতামত ও রিভিউ</a><a href="proshno-uttor.html" data-i18n="fQA">প্রশ্নোত্তর</a><a href="directory.html" data-i18n="fDir">জেলা ও উপজেলা</a></div><p class="foot" data-i18n="footLine">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer>
     <!-- Scroll reveal: below-the-fold sections rise in as they enter
          the viewport. Runs in its own script so a failure anywhere else can
          never hide content; the hidden state is gated behind the sr-on
@@ -168,4 +171,32 @@ footer h3{font-size:16px;color:var(--em);margin:10px 0 9px}
       }
     })();
     </script>
+<script>
+(function(){
+window.I18N = { bn: {"docTitle": "গোপনীয়তা নীতি | Waqt (ওয়াক্ত)", "h1": "গোপনীয়তা নীতি", "sub": "How Waqt treats your information, in plain words.", "upd": "শেষ হালনাগাদ: ৩০ অক্টোবর ২০২৬", "s1T": "সহজ কথায়", "s1P": "শুরুতেই বলে রাখি — Waqt আপনার ব্যক্তিগত তথ্য সংগ্রহ করে না। এই পেজে আমরা পরিষ্কার করে জানিয়ে দিচ্ছি, সাইট ব্যবহারের সময় ঠিক কী হয় আর কী হয় না।", "s2T": "আমরা যা সংগ্রহ করি না", "s3T": "Location (অবস্থান)", "s3P": "আশেপাশের মসজিদ খোঁজা আর কিবলার দিক দেখার সুবিধা দুটির জন্য আপনার অবস্থান দরকার হতে পারে।", "s4T": "Cookie ও Google Analytics", "s5T": "আপনার browser-এ সংরক্ষিত পছন্দ", "s6T": "বিজ্ঞাপন (ভবিষ্যতে)", "s7T": "Hosting", "s8T": "যোগাযোগ", "sv2": "কুরআন পড়ার সময় শেষ কোন পৃষ্ঠায় ছিলেন", "sv1": "আপনার বেছে নেওয়া ভাষা (বাংলা বা English)", "loc3": "চাইলে আপনি browser-এর permission বন্ধ করে এই সুবিধা ছাড়াই বাকি সাইট ব্যবহার করতে পারবেন।", "loc2A": "আপনার অবস্থান Waqt-এর কাছে ", "loc2B": "পাঠানো হয় না এবং কোথাও সংরক্ষণও করা হয় না", "loc2C": "।", "loc1A": "এই অবস্থান শুধু ", "loc1B": "আপনার নিজের browser-এর ভেতরেই", "loc1C": " ব্যবহার হয়।", "c3": "আপনার পাঠানো কোনো তথ্য জমা রাখার মতো কোনো server আমাদের নেই।", "c2A": "আমরা আপনার ", "c2B": "নাম, ফোন নম্বর বা পাসওয়ার্ড", "c2C": " চাই না এবং সংগ্রহও করি না।", "c1A": "Waqt-এ ", "c1B": "কোনো sign-up বা account নেই", "c1C": "।", "ck1A": "কতজন visitor আসছেন এবং কোন পেজগুলো বেশি কাজে লাগছে — এটা বোঝার জন্য Waqt ", "ck1B": "Google Analytics", "ck1C": " ব্যবহার করে, আর এটি cookie ব্যবহার করে থাকে। এই তথ্য সমষ্টিগতভাবে দেখা হয়; এর মাধ্যমে আমরা কোনো নির্দিষ্ট ব্যক্তিকে চেনার চেষ্টা করি না।", "ckP2": "আপনি চাইলে নিজের browser-এর settings থেকে cookie বন্ধ বা মুছে ফেলতে পারেন — সাইটের মূল সুবিধাগুলো তাতে আটকাবে না।", "svA": "কিছু ছোট সুবিধার জন্য আপনার পছন্দ ", "svB": "আপনার নিজের browser-এর storage-এ (localStorage)", "svC": " রাখা হয়, যেমন—", "svP2": "এগুলো শুধু আপনার নিজের ডিভাইসেই থাকে, আমাদের কাছে পাঠানো হয় না। browser-এর data মুছে দিলে এগুলোও মুছে যাবে।", "adA": "ভবিষ্যতে সাইটে ", "adB": "Google AdSense", "adC": "-এর বিজ্ঞাপন দেখানো হতে পারে। তখন Google বিজ্ঞাপনের জন্য advertising cookie ব্যবহার করতে পারে। আপনি চাইলে Google Ads Settings থেকে personalized ads নিজে নিয়ন্ত্রণ করতে পারবেন।", "hostA": "Waqt সাইটটি ", "hostB": "GitHub Pages", "hostC": "-এ hosted।", "ctA": "এই গোপনীয়তা নীতি নিয়ে কোনো প্রশ্ন থাকলে আমাদের ইমেইল করুন: ", "ctB": "team.waqtbd@gmail.com", "shareT": "শেয়ার করুন", "shareSub": "ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন", "copyLink": "লিংক কপি", "copyOk": "কপি হয়েছে ✓", "seeAlso": "আরও দেখুন", "fHome": "Waqt হোম", "fAbout": "আমাদের সম্পর্কে", "fPrivacy": "গোপনীয়তা নীতি", "fContact": "যোগাযোগ", "fFeedback": "মতামত ও রিভিউ", "fQA": "প্রশ্নোত্তর", "fDir": "জেলা ও উপজেলা", "footLine": "Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।"}, en: {"adA": "In future, ", "adB": "Google AdSense", "adC": " ads may be shown on the site. Then Google may use advertising cookies for ads. If you want, you can control personalised ads yourself from Google Ads Settings.", "c1A": "On Waqt there is ", "c1B": "no sign-up or account", "c1C": ".", "c2A": "We do not ask for, and do not collect, your ", "c2B": "name, phone number or password", "c2C": ".", "c3": "We have no server that stores any information you send.", "ck1A": "To understand how many visitors come and which pages are most useful, Waqt uses ", "ck1B": "Google Analytics", "ck1C": ", and it uses cookies. This information is seen in aggregate; we do not try to identify any particular person through it.", "ckP2": "If you want, you can turn off or delete cookies from your browser's settings — the main features of the site will not be blocked by that.", "copyLink": "Copy link", "copyOk": "Copied ✓", "ctA": "If you have any question about this privacy policy, email us: ", "ctB": "team.waqtbd@gmail.com", "docTitle": "Privacy policy | Waqt (ওয়াক্ত)", "fAbout": "About us", "fContact": "Contact", "fDir": "Districts & Upazilas", "fFeedback": "Feedback & reviews", "fHome": "Waqt Home", "fPrivacy": "Privacy policy", "fQA": "Q&A", "footLine": "Waqt (ওয়াক্ত) — prayer times, Quran, duas and Islamic knowledge.", "h1": "Privacy policy", "hostA": "The Waqt site is hosted on ", "hostB": "GitHub Pages", "hostC": ".", "loc1A": "This location is used only ", "loc1B": "inside your own browser", "loc1C": ".", "loc2A": "Your location is ", "loc2B": "not sent to Waqt and not stored anywhere", "loc2C": ".", "loc3": "If you want, you can turn off the browser permission and use the rest of the site without this feature.", "s1P": "Let me say it at the start — Waqt does not collect your personal information. On this page we explain clearly what happens and what does not happen when you use the site.", "s1T": "In short", "s2T": "What we do not collect", "s3P": "You may need your location for two features: finding mosques nearby and seeing the direction of the Qibla.", "s3T": "Location", "s4T": "Cookies & Google Analytics", "s5T": "Preferences saved in your browser", "s6T": "Advertising (in future)", "s7T": "Hosting", "s8T": "Contact", "seeAlso": "See also", "shareSub": "If it helped you, share it with friends", "shareT": "Share", "sub": "How Waqt treats your information, in plain words.", "sv1": "The language you chose (Bengali or English)", "sv2": "Which page of the Quran you were last on while reading", "svA": "For a few small features, your preference is kept in ", "svB": "your own browser's storage (localStorage)", "svC": ", such as—", "svP2": "These stay only on your own device; they are not sent to us. If you delete the browser's data, these will be deleted too.", "upd": "Last updated: 30 October 2026"} };
+function applyLang(lang){
+  var d = I18N[lang] || I18N.bn;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k = el.getAttribute("data-i18n");
+    if (d[k] != null) el.textContent = d[k];
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){
+    var k = el.getAttribute("data-i18n-ph");
+    if (d[k] != null) el.setAttribute("placeholder", d[k]);
+  });
+  document.documentElement.lang = (lang === "en" ? "en" : "bn");
+  var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+  if (b && e) { b.classList.toggle("on", lang !== "en"); e.classList.toggle("on", lang === "en"); }
+  try { localStorage.setItem("waqtLang", lang); } catch (err) {}
+  if (typeof window.wqRefreshLang === "function") { try { window.wqRefreshLang(); } catch (err) {} }
+}
+function wqDetectLang(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""); if (tz === "Asia/Dhaka") return "bn"; var nl = (navigator.language || "").toLowerCase(); if (nl.indexOf("bn") === 0) return "bn"; return "en"; } catch (err) { return "bn"; } }
+var saved = "bn";
+try { saved = localStorage.getItem("waqtLang") || wqDetectLang(); localStorage.setItem("waqtLang", saved); } catch (err) {}
+applyLang(saved === "en" ? "en" : "bn");
+var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+if (b) b.addEventListener("click", function(){ applyLang("bn"); });
+if (e) e.addEventListener("click", function(){ applyLang("en"); });
+})();
+</script>
 </body></html>
