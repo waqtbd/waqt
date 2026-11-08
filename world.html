@@ -283,7 +283,7 @@ document.getElementById("q").addEventListener("input", function(){
     hits.forEach(function(c){
       var b = document.createElement("button"); b.className = "hit"; b.type = "button";
       b.innerHTML = "<span>" + c.name + '</span><span class="co">' + c.country + "</span>";
-      b.addEventListener("click", function(){ showCity(c); });
+      b.addEventListener("click", function(){ showCity(c, false, true); });
       resEl.appendChild(b);
     });
   }, 160);
@@ -296,15 +296,20 @@ function buildFeatured(){
     if (!c) return;
     var b = document.createElement("button"); b.className = "chip"; b.type = "button";
     b.textContent = LANG === "bn" && c.bn ? c.bn : c.en;
-    b.addEventListener("click", function(){ showCity({ name: b.textContent, en: c.en, country: c.country, lat: c.lat, lng: c.lng, tz: c.tz, method: c.method, asr: c.asr }); });
+    b.addEventListener("click", function(){ showCity({ name: b.textContent, en: c.en, country: c.country, lat: c.lat, lng: c.lng, tz: c.tz, method: c.method, asr: c.asr }, false, true); });
     wrap.appendChild(b);
   });
 }
 function hijriStr(tz, date){
   try { return new Intl.DateTimeFormat(LANG === "bn" ? "bn-u-ca-islamic" : "en-u-ca-islamic", { timeZone: tz, day: "numeric", month: "long", year: "numeric" }).format(date); } catch (e) { return ""; }
 }
-function showCity(c, keepSel){
+function showCity(c, keepSel, fromUser){
   CURRENT = c;
+  if (fromUser){
+    resEl.innerHTML = "";
+    document.getElementById("feat").style.display = "";
+    var qEl = document.getElementById("q"); if (qEl) qEl.value = c.name || c.en || "";
+  }
   if (!keepSel){
     methodSel.value = c.method || "MWL";
     document.getElementById("asrSel").value = String(c.asr || 1);
@@ -334,6 +339,7 @@ function showCity(c, keepSel){
   document.getElementById("nextText").textContent = T("nextIs") + " " + T(nextKey) + " — " + fmtBn(nextT % 24);
   var diff = nextT - nowH, dh = Math.floor(diff), dm = Math.floor((diff - dh) * 60 + 0.5);
   document.getElementById("nextCd").textContent = "(" + T("left") + " " + dh + ":" + (dm < 10 ? "0" : "") + dm + ")";
+  if (fromUser){ var rc = document.getElementById("result"); if (rc) setTimeout(function(){ rc.scrollIntoView({ behavior: "smooth", block: "start" }); }, 60); }
   var qb = qiblaBearing(c.lat, c.lng);
   document.getElementById("qiblaDeg").textContent = (LANG === "bn" ? String(Math.round(qb)).replace(/[0-9]/g, function(d){ return "০১২৩৪৫৬৭৮৯"[+d]; }) : Math.round(qb)) + "°";
   document.getElementById("qiblaCompass").textContent = T("compass")[Math.round(qb / 45) % 8];
@@ -346,7 +352,7 @@ document.getElementById("gpsBtn").addEventListener("click", function(){
   navigator.geolocation.getCurrentPosition(function(pos){
     var tz = "UTC";
     try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; } catch (e) {}
-    showCity({ name: T("myLoc"), en: "My Location", country: "", lat: pos.coords.latitude, lng: pos.coords.longitude, tz: tz, method: "MWL", asr: 1 });
+    showCity({ name: T("myLoc"), en: "My Location", country: "", lat: pos.coords.latitude, lng: pos.coords.longitude, tz: tz, method: "MWL", asr: 1 }, false, true);
   });
 });
 
