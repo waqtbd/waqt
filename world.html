@@ -188,13 +188,10 @@ function tzOffsetHours(tz, date){
     return (asUTC - date.getTime()) / 3600000;
   } catch (e) { return -date.getTimezoneOffset() / 60; }
 }
-function computeTimes(lat, lng, tz, methodKey, asrFactor){
+function computeForDate(y, mo, da, lat, lng, tz, methodKey, asrFactor, fixedTzH){
   var M = METHODS[methodKey] || METHODS.MWL;
-  /* the date must be TODAY IN THE CITY, not in the visitor's timezone */
-  var dp = {}; new Intl.DateTimeFormat("en-US", { timeZone: tz, year: "numeric", month: "numeric", day: "numeric" }).formatToParts(new Date()).forEach(function(p){ dp[p.type] = +p.value; });
-  var y = dp.year, mo = dp.month, da = dp.day;
   var probe = new Date(Date.UTC(y, mo - 1, da, 12, 0, 0));
-  var tzH = tzOffsetHours(tz, probe);
+  var tzH = (typeof fixedTzH === 'number') ? fixedTzH : tzOffsetHours(tz, probe);
   var jd = julian(y, mo, da) - lng / 360;
   var se = sunDeclEqT(jd), decl = se.decl;
   var midDay = fixhour(12 - se.eqt);
@@ -227,6 +224,50 @@ function computeTimes(lat, lng, tz, methodKey, asrFactor){
   var adj = tzH - lng / 15;
   function fix(x){ return fixhour(x + adj); }
   return { fajr: fix(fajr), sunrise: fix(sunrise), dhuhr: fix(midDay), asr: fix(asr), maghrib: fix(sunset), isha: fix(isha) };
+}
+function computeTimes(lat, lng, tz, methodKey, asrFactor){
+  /* the date must be TODAY IN THE CITY, not in the visitor's timezone */
+  var dp = {}; new Intl.DateTimeFormat("en-US", { timeZone: tz, year: "numeric", month: "numeric", day: "numeric" }).formatToParts(new Date()).forEach(function(p){ dp[p.type] = +p.value; });
+  return computeForDate(dp.year, dp.month, dp.day, lat, lng, tz, methodKey, asrFactor);
+}
+/* synthetic embedded-format row (396 days from 2026-10-01) so the homepage
+   bootstrap can paint this city exactly like a saved district */
+var WB64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+function wRowGen(c){
+  var keys = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"];
+  var off0 = tzOffsetHours(c.tz, new Date(Date.UTC(2026, 9, 1, 12, 0, 0)));
+  var series = [];
+  for (var dOff = 0; dOff < 396; dOff++){
+    var dt = new Date(Date.UTC(2026, 9, 1 + dOff));
+    var t = computeForDate(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate(), c.lat, c.lng, c.tz, c.method || "MWL", c.asr || 1, off0);
+    series.push(keys.map(function(k){ var m = Math.round(t[k] * 60); return ((m % 1440) + 1440) % 1440; }));
+  }
+  function wDelta(a, b){ var dl = b - a; if (dl > 720) dl -= 1440; if (dl < -720) dl += 1440; return dl; }
+  for (var p = 0; p < 6; p++){
+    for (var d = 1; d < 396; d++){
+      var dl = wDelta(series[d - 1][p], series[d][p]);
+      if (dl > 31 || dl < -32){
+        var steps = Math.ceil(Math.abs(dl) / 31);
+        var endD = Math.min(395, d + steps);
+        var from = series[d - 1][p], to = series[endD][p];
+        var span = wDelta(from, to), n = endD - (d - 1);
+        for (var s = 1; s < n; s++){ series[d - 1 + s][p] = ((Math.round(from + span * s / n) % 1440) + 1440) % 1440; }
+        d = endD;
+      }
+    }
+  }
+  var row = "";
+  series.forEach(function(cur, di){
+    if (di === 0){ cur.forEach(function(v){ row += WB64[Math.floor(v / 64)] + WB64[v % 64]; }); }
+    else {
+      cur.forEach(function(v, i){
+        var dl = wDelta(series[di - 1][i], v);
+        dl = Math.max(-32, Math.min(31, dl));
+        row += WB64[dl + 32];
+      });
+    }
+  });
+  return row;
 }
 function qiblaBearing(lat, lng){
   var kaabaLat = 21.4225, kaabaLng = 39.8262;
@@ -343,7 +384,17 @@ function showCity(c, keepSel, fromUser){
   var qb = qiblaBearing(c.lat, c.lng);
   document.getElementById("qiblaDeg").textContent = (LANG === "bn" ? String(Math.round(qb)).replace(/[0-9]/g, function(d){ return "০১২৩৪৫৬৭৮৯"[+d]; }) : Math.round(qb)) + "°";
   document.getElementById("qiblaCompass").textContent = T("compass")[Math.round(qb / 45) % 8];
-  try { localStorage.setItem("waqtWorldCity", JSON.stringify({ en: c.en, name: c.name, country: c.country, lat: c.lat, lng: c.lng, tz: c.tz, method: c.method, asr: c.asr })); } catch (e) {}
+  try {
+    var cBn = c.bn || null;
+    if (!cBn) { CURATED.forEach(function(x){ if (x.en === c.en) cBn = x.bn; }); }
+    cBn = cBn || c.name || c.en;
+    localStorage.setItem("waqtWorldCity", JSON.stringify({ en: c.en, bn: cBn, name: c.name, country: c.country, lat: c.lat, lng: c.lng, tz: c.tz, method: c.method, asr: c.asr }));
+    var prevP = null;
+    try { prevP = JSON.parse(localStorage.getItem("waqtPlace") || "null"); } catch (e2) {}
+    if (!prevP || prevP.k !== "world" || Math.abs((+prevP.lat || 0) - c.lat) > 0.001 || Math.abs((+prevP.lon || 0) - c.lng) > 0.001) {
+      localStorage.setItem("waqtPlace", JSON.stringify({ k: "world", bn: cBn, en: c.en, lat: c.lat, lon: c.lng, row: wRowGen({ lat: c.lat, lng: c.lng, tz: c.tz, method: c.method, asr: c.asr }) }));
+    }
+  } catch (e) {}
 }
 methodSel.addEventListener("change", function(){ if (CURRENT) showCity(CURRENT, true); });
 document.getElementById("asrSel").addEventListener("change", function(){ if (CURRENT) showCity(CURRENT, true); });

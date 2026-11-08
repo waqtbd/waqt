@@ -1777,6 +1777,23 @@
           for (q = 0; q < 6; q++) nd.push(cur[q] + (B64.indexOf(ROW[idx++]) - 32));
           cur = nd; series.push(cur.slice());
         }
+        /* world places: the saved row lives in the offset frame of its
+           first day (2026-10-01); shift the decoded days into today's
+           offset so DST changes stay exact */
+        if (SAVED && SAVED.k === 'world') {
+          try {
+            var wj = JSON.parse(localStorage.getItem('waqtWorldCity') || 'null');
+            if (wj && wj.tz) {
+              var offOf = function (dt) {
+                var dtf = new Intl.DateTimeFormat('en-US', { timeZone: wj.tz, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                var pp = {}; dtf.formatToParts(dt).forEach(function (x) { pp[x.type] = x.value; });
+                return (Date.UTC(+pp.year, +pp.month - 1, +pp.day, (+pp.hour) % 24, +pp.minute, +pp.second) - dt.getTime()) / 3600000;
+              };
+              var dOff = Math.round((offOf(now) - offOf(new Date(Date.UTC(2026, 9, 1, 12)))) * 60);
+              if (dOff) { for (var si = 0; si < series.length; si++) for (var sp = 0; sp < 6; sp++) series[si][sp] += dOff; }
+            }
+          } catch (e) {}
+        }
         var PRAYERS = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
         var NAMES = { Fajr: 'ফজর', Sunrise: 'সূর্যোদয়', Dhuhr: 'যোহর', Asr: 'আসর', Maghrib: 'মাগরিব', Isha: 'এশা' };
         var tv = series[di], T = {};
@@ -4068,6 +4085,8 @@
          next load opens here; re-running the location flow after
          travelling simply overwrites the saved district */
       saveDistrictKey(place.key || place.embedKey);
+      if (place && place.world && place.worldCity) { try { persistWorldPlace(place.worldCity); } catch (e) {} }
+      else if (place && (place.key || place.embedKey)) { try { localStorage.removeItem('waqtWorldCity'); } catch (e) {} }
       if (typeof fetchWeather === 'function') fetchWeather();
       state.monthCache = {};
       renderPlaceLabel(); renderChips(); renderQibla();
@@ -4157,8 +4176,219 @@
     function isDefaultCalc() { return state.method === 1 && state.school === 1; }
     function embedKey() { return state.place ? state.place.embedKey : null; }
 
+
+    /* ---------------- world places (global cities) ----------------
+       A world place is a city outside the embedded district tables.
+       Its times are computed on-device from coordinates with the
+       city's regional method (the same engine as world.html), in the
+       same day-object shape the embedded path produces, so every
+       renderer (hero, cards, month table, sky) works unchanged.
+       Picking one also writes a synthetic embedded-format row into
+       'waqtPlace' so the first-paint bootstrap can paint the city
+       exactly like a saved district — no Dhaka flash, no spinner. */
+    const WMETHODS = { Karachi:{f:18,i:18}, MWL:{f:18,i:17}, ISNA:{f:15,i:15}, Egypt:{f:19.5,i:17.5}, Makkah:{f:18.5,imin:90}, Qatar:{f:18,imin:90}, Kuwait:{f:18,i:17.5}, Dubai:{f:18.2,i:18.2}, Diyanet:{f:18,i:17}, Tehran:{f:17.7,i:14}, Kemenag:{f:20,i:18}, JAKIM:{f:20,i:18} };
+    const WB64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    function wDtr(d){ return d * Math.PI / 180; }
+    function wRtd(r){ return r * 180 / Math.PI; }
+    function wFixA(a){ a = a - 360 * Math.floor(a / 360); return a < 0 ? a + 360 : a; }
+    function wFixH(a){ a = a - 24 * Math.floor(a / 24); return a < 0 ? a + 24 : a; }
+    function wJulian(y, m, d){ if (m <= 2){ y -= 1; m += 12; } var A = Math.floor(y / 100), B = 2 - A + Math.floor(A / 4); return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5; }
+    function wTzOff(tz, date){
+      try {
+        var dtf = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        var p = {}; dtf.formatToParts(date).forEach(function(x){ p[x.type] = x.value; });
+        return (Date.UTC(+p.year, +p.month - 1, +p.day, (+p.hour) % 24, +p.minute, +p.second) - date.getTime()) / 3600000;
+      } catch (e) { return -date.getTimezoneOffset() / 60; }
+    }
+    function wCompute(lat, lon, tz, methodKey, asrF, y, mo, da, fixedTzH){
+      var M = WMETHODS[methodKey] || WMETHODS.MWL;
+      var probe = new Date(Date.UTC(y, mo - 1, da, 12, 0, 0));
+      var tzH = (typeof fixedTzH === 'number') ? fixedTzH : wTzOff(tz, probe);
+      var jd = wJulian(y, mo, da) - lon / 360;
+      var D = jd - 2451545.0;
+      var g = wFixA(357.529 + 0.98560028 * D), q = wFixA(280.459 + 0.98564736 * D);
+      var L = wFixA(q + 1.915 * Math.sin(wDtr(g)) + 0.020 * Math.sin(wDtr(2 * g)));
+      var e = 23.439 - 0.00000036 * D;
+      var RA = wFixH(wRtd(Math.atan2(Math.cos(wDtr(e)) * Math.sin(wDtr(L)), Math.cos(wDtr(L)))) / 15);
+      var decl = wRtd(Math.asin(Math.sin(wDtr(e)) * Math.sin(wDtr(L))));
+      var midDay = wFixH(12 - (q / 15 - RA));
+      function ha(angle){ var c = (-Math.sin(wDtr(angle)) - Math.sin(wDtr(decl)) * Math.sin(wDtr(lat))) / (Math.cos(wDtr(decl)) * Math.cos(wDtr(lat))); if (c < -1 || c > 1) return NaN; return wRtd(Math.acos(c)) / 15; }
+      var srHA = ha(0.833), sunrise = midDay - srHA, sunset = midDay + srHA;
+      var fajr = midDay - ha(M.f);
+      var asrAngle = -wRtd(Math.atan(1 / (asrF + Math.tan(wDtr(Math.abs(lat - decl))))));
+      var cA = (-Math.sin(wDtr(asrAngle)) - Math.sin(wDtr(decl)) * Math.sin(wDtr(lat))) / (Math.cos(wDtr(decl)) * Math.cos(wDtr(lat)));
+      var asr = (cA >= -1 && cA <= 1) ? midDay + wRtd(Math.acos(cA)) / 15 : NaN;
+      var night = 24 - (sunset - sunrise);
+      if (isNaN(fajr)) fajr = sunrise - (M.f / 60) * night;
+      var isha;
+      if (M.imin){
+        var mins = M.imin;
+        if (methodKey === 'Makkah'){ try { var hm = +new Intl.DateTimeFormat('en-u-ca-islamic', { timeZone: tz, month: 'numeric' }).format(probe); if (hm === 9) mins = 120; } catch (err) {} }
+        isha = sunset + mins / 60;
+      } else { isha = midDay + ha(M.i); if (isNaN(isha)) isha = sunset + (M.i / 60) * night; }
+      var adj = tzH - lon / 15;
+      function F(x){ return wFixH(x + adj) * 60; }
+      return { Fajr: F(fajr), Sunrise: F(sunrise), Dhuhr: F(midDay), Asr: F(asr), Maghrib: F(sunset), Isha: F(isha) };
+    }
+    function wHM(mins){ var m = ((Math.round(mins) % 1440) + 1440) % 1440; return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
+    function wCityTodayParts(tz){ var p = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, year: 'numeric', month: 'numeric', day: 'numeric' }).formatToParts(new Date()).forEach(function(x){ p[x.type] = +x.value; }); return p; }
+    function worldDayObject(place, y, mo, da){
+      var w = place.world; if (!w) return null;
+      var t = wCompute(place.lat, place.lon, w.tz, w.method, w.asr, y, mo, da);
+      var timings = {}; ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'].forEach(function(k){ timings[k] = wHM(t[k]); });
+      var hijri = { day: '', month: { number: 1 }, year: '' };
+      try {
+        var hp = {};
+        new Intl.DateTimeFormat('en-u-ca-islamic', { timeZone: w.tz, day: 'numeric', month: 'numeric', year: 'numeric' }).formatToParts(new Date(Date.UTC(y, mo - 1, da, 12))).forEach(function(x){ hp[x.type] = x.value; });
+        hijri = { day: String(+hp.day), month: { number: +hp.month }, year: String(+hp.year) };
+      } catch (e) {}
+      var wd = WD_EN[new Date(Date.UTC(y, mo - 1, da)).getUTCDay()];
+      return { timings: timings, date: { gregorian: { day: String(da), month: { number: mo }, year: y, weekday: { en: wd }, date: pad(da) + '-' + pad(mo) + '-' + y }, hijri: hijri } };
+    }
+    function worldMonthArray(place, year, month){
+      var nd = new Date(year, month, 0).getDate(), arr = [];
+      for (var d = 1; d <= nd; d++){ var o = worldDayObject(place, year, month, d); if (!o) return null; arr.push(o); }
+      return arr;
+    }
+    function worldPlaceFromCity(c){
+      return { labelBn: c.bn || c.en, labelEn: c.en, lat: c.lat, lon: c.lng, key: 'world', embedKey: null,
+        world: { tz: c.tz, method: c.method || 'MWL', asr: c.asr || 1 },
+        worldCity: { en: c.en, bn: c.bn || c.en, country: c.country || '', lat: c.lat, lng: c.lng, tz: c.tz, method: c.method || 'MWL', asr: c.asr || 1 } };
+    }
+    function savedWorldPlace(){
+      try {
+        var c = JSON.parse(localStorage.getItem('waqtWorldCity') || 'null');
+        if (c && isFinite(+c.lat) && isFinite(+c.lng) && c.tz) return worldPlaceFromCity(c);
+      } catch (e) {}
+      return null;
+    }
+    function worldRowGenerate(c){
+      var keys = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+      var off0 = wTzOff(c.tz, new Date(Date.UTC(2026, 9, 1, 12, 0, 0)));
+      /* build the whole integer series first (fixed offset frame) */
+      var series = [];
+      for (var dOff = 0; dOff < 396; dOff++){
+        var dt = new Date(Date.UTC(2026, 9, 1 + dOff));
+        var t = wCompute(c.lat, c.lng, c.tz, c.method || 'MWL', c.asr || 1, dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate(), off0);
+        series.push(keys.map(function(k){ return ((Math.round(t[k]) % 1440) + 1440) % 1440; }));
+      }
+      /* the delta format carries at most -32..+31 minutes per day; where
+         the high-latitude fallback makes a time jump further than that,
+         spread the jump over a few days (the main script recomputes the
+         exact times on the same load — the row only paints frame one) */
+      function wDelta(a, b){ var dl = b - a; if (dl > 720) dl -= 1440; if (dl < -720) dl += 1440; return dl; }
+      for (var p = 0; p < 6; p++){
+        for (var d = 1; d < 396; d++){
+          var dl = wDelta(series[d - 1][p], series[d][p]);
+          if (dl > 31 || dl < -32){
+            var steps = Math.ceil(Math.abs(dl) / 31);
+            var endD = Math.min(395, d + steps);
+            var from = series[d - 1][p], to = series[endD][p];
+            var span = wDelta(from, to), n = endD - (d - 1);
+            for (var s = 1; s < n; s++){
+              series[d - 1 + s][p] = ((Math.round(from + span * s / n) % 1440) + 1440) % 1440;
+            }
+            d = endD;
+          }
+        }
+      }
+      var row = '';
+      series.forEach(function(cur, di){
+        if (di === 0){ cur.forEach(function(v){ row += WB64[Math.floor(v / 64)] + WB64[v % 64]; }); }
+        else {
+          cur.forEach(function(v, i){
+            var dl = wDelta(series[di - 1][i], v);
+            dl = Math.max(-32, Math.min(31, dl));
+            row += WB64[dl + 32];
+          });
+        }
+      });
+      return row;
+    }
+    function persistWorldPlace(c){
+      try {
+        localStorage.setItem('waqtWorldCity', JSON.stringify(c));
+        localStorage.setItem('waqtPlace', JSON.stringify({ k: 'world', bn: c.bn || c.en, en: c.en, lat: c.lat, lon: c.lng, row: worldRowGenerate(c) }));
+      } catch (e) {}
+    }
+    const WCUR = [["Dhaka","ঢাকা","Bangladesh",23.8103,90.4125,"Asia/Dhaka","Karachi",2],["Chattogram","চট্টগ্রাম","Bangladesh",22.3569,91.7832,"Asia/Dhaka","Karachi",2],["Bogura","বগুড়া","Bangladesh",24.8465,89.3773,"Asia/Dhaka","Karachi",2],["Khulna","খুলনা","Bangladesh",22.8456,89.5403,"Asia/Dhaka","Karachi",2],["Rajshahi","রাজশাহী","Bangladesh",24.3745,88.6042,"Asia/Dhaka","Karachi",2],["Sylhet","সিলেট","Bangladesh",24.9045,91.8611,"Asia/Dhaka","Karachi",2],["Kolkata","কলকাতা","India",22.5726,88.3639,"Asia/Kolkata","Karachi",2],["Delhi","দিল্লি","India",28.6139,77.209,"Asia/Kolkata","Karachi",2],["Mumbai","মুম্বাই","India",19.076,72.8777,"Asia/Kolkata","Karachi",2],["Hyderabad","হায়দ্রাবাদ","India",17.385,78.4867,"Asia/Kolkata","Karachi",2],["Lucknow","লখনউ","India",26.8467,80.9462,"Asia/Kolkata","Karachi",2],["Karachi","করাচি","Pakistan",24.8608,67.0011,"Asia/Karachi","Karachi",2],["Lahore","লাহোর","Pakistan",31.5204,74.3587,"Asia/Karachi","Karachi",2],["Islamabad","ইসলামাবাদ","Pakistan",33.6844,73.0479,"Asia/Karachi","Karachi",2],["Peshawar","পেশোয়ার","Pakistan",34.0151,71.5249,"Asia/Karachi","Karachi",2],["Quetta","কোয়েটা","Pakistan",30.1798,66.975,"Asia/Karachi","Karachi",2],["Kabul","কাবুল","Afghanistan",34.5553,69.2075,"Asia/Kabul","Karachi",2],["Male","মালে","Maldives",4.1755,73.5093,"Indian/Maldives","MWL",1],["Makkah","মক্কা","Saudi Arabia",21.3891,39.8579,"Asia/Riyadh","Makkah",1],["Madinah","মদিনা","Saudi Arabia",24.5247,39.5692,"Asia/Riyadh","Makkah",1],["Riyadh","রিয়াদ","Saudi Arabia",24.7136,46.6753,"Asia/Riyadh","Makkah",1],["Jeddah","জেদ্দা","Saudi Arabia",21.4858,39.1925,"Asia/Riyadh","Makkah",1],["Dammam","দাম্মাম","Saudi Arabia",26.4207,50.0888,"Asia/Riyadh","Makkah",1],["Dubai","দুবাই","UAE",25.2048,55.2708,"Asia/Dubai","Dubai",1],["Abu Dhabi","আবুধাবি","UAE",24.4539,54.3773,"Asia/Dubai","Dubai",1],["Sharjah","শারজা","UAE",25.3463,55.4209,"Asia/Dubai","Dubai",1],["Doha","দোহা","Qatar",25.2854,51.531,"Asia/Qatar","Qatar",1],["Kuwait City","কুয়েত সিটি","Kuwait",29.3759,47.9774,"Asia/Kuwait","Kuwait",1],["Muscat","মাস্কাট","Oman",23.588,58.3829,"Asia/Muscat","Dubai",1],["Manama","মানামা","Bahrain",26.2285,50.586,"Asia/Bahrain","Qatar",1],["Baghdad","বাগদাদ","Iraq",33.3152,44.3661,"Asia/Baghdad","MWL",1],["Tehran","তেহরান","Iran",35.6892,51.389,"Asia/Tehran","Tehran",1],["Mashhad","মাশহাদ","Iran",36.2972,59.6067,"Asia/Tehran","Tehran",1],["Istanbul","ইস্তাম্বুল","Turkey",41.0082,28.9784,"Europe/Istanbul","Diyanet",1],["Ankara","আঙ্কারা","Turkey",39.9334,32.8597,"Europe/Istanbul","Diyanet",1],["Izmir","ইজমির","Turkey",38.4192,27.1287,"Europe/Istanbul","Diyanet",1],["Cairo","কায়রো","Egypt",30.0444,31.2357,"Africa/Cairo","Egypt",1],["Alexandria","আলেকজান্দ্রিয়া","Egypt",31.2001,29.9187,"Africa/Cairo","Egypt",1],["Jakarta","জাকার্তা","Indonesia",-6.2088,106.8456,"Asia/Jakarta","Kemenag",1],["Surabaya","সুরাবায়া","Indonesia",-7.2575,112.7521,"Asia/Surabaya","Kemenag",1],["Medan","মেদান","Indonesia",3.5952,98.6722,"Asia/Jakarta","Kemenag",1],["Makassar","মাকাসার","Indonesia",-5.1477,119.4327,"Asia/Makassar","Kemenag",1],["Palembang","পালেমবাং","Indonesia",-2.9761,104.7754,"Asia/Pontianak","Kemenag",1],["Kuala Lumpur","কুয়ালালামপুর","Malaysia",3.139,101.6869,"Asia/Kuala_Lumpur","JAKIM",1],["Johor Bahru","জোহর বাহরু","Malaysia",1.4927,103.7414,"Asia/Kuala_Lumpur","JAKIM",1],["Penang","পেনাং","Malaysia",5.4141,100.3288,"Asia/Kuala_Lumpur","JAKIM",1],["Singapore","সিঙ্গাপুর","Singapore",1.3521,103.8198,"Asia/Singapore","JAKIM",1],["Bandar Seri Begawan","বন্দর সেরি বেগাওয়ান","Brunei",4.9031,114.9398,"Asia/Brunei","JAKIM",1],["Algiers","আলজিয়ার্স","Algeria",36.7538,3.0588,"Africa/Algiers","MWL",1],["Casablanca","কাসাব্লাঙ্কা","Morocco",33.5731,-7.5898,"Africa/Casablanca","MWL",1],["Rabat","রাবাত","Morocco",34.0209,-6.8416,"Africa/Casablanca","MWL",1],["Tunis","তিউনিস","Tunisia",36.8065,10.1815,"Africa/Tunis","MWL",1],["Tripoli","ত্রিপোলি","Libya",32.8966,13.1913,"Africa/Tripoli","MWL",1],["Khartoum","খার্তুম","Sudan",15.5007,32.5599,"Africa/Khartoum","Egypt",1],["Amman","আম্মান","Jordan",31.9454,35.9284,"Asia/Amman","MWL",1],["Jerusalem","জেরুজালেম","Palestine",31.7683,35.2137,"Asia/Jerusalem","MWL",1],["Gaza","গাজা","Palestine",31.5017,34.4668,"Asia/Gaza","Egypt",1],["Beirut","বৈরুত","Lebanon",33.8938,35.5016,"Asia/Beirut","MWL",1],["Damascus","দামেস্ক","Syria",33.5138,36.2765,"Asia/Damascus","MWL",1],["Sanaa","সানা","Yemen",15.3694,44.191,"Asia/Aden","Makkah",1],["Tashkent","তাশখন্দ","Uzbekistan",41.2995,69.2401,"Asia/Tashkent","MWL",2],["Almaty","আলমাতি","Kazakhstan",43.222,76.8512,"Asia/Almaty","MWL",2],["Bishkek","বিশকেক","Kyrgyzstan",42.8746,74.5698,"Asia/Bishkek","MWL",2],["Dushanbe","দুশানবে","Tajikistan",38.5598,68.787,"Asia/Dushanbe","MWL",2],["Ashgabat","আশগাবাত","Turkmenistan",37.9601,58.3261,"Asia/Ashgabat","MWL",2],["Baku","বাকু","Azerbaijan",40.4093,49.8671,"Asia/Baku","Diyanet",1],["Lagos","লাগোস","Nigeria",6.5244,3.3792,"Africa/Lagos","MWL",1],["Kano","কানো","Nigeria",12.0022,8.592,"Africa/Lagos","MWL",1],["Dakar","ডাকার","Senegal",14.7167,-17.4677,"Africa/Dakar","MWL",1],["Bamako","বামাকো","Mali",12.6392,-8.0029,"Africa/Bamako","MWL",1],["Mogadishu","মোগাদিশু","Somalia",2.0469,45.3182,"Africa/Mogadishu","Makkah",1],["Nairobi","নাইরোবি","Kenya",-1.2921,36.8219,"Africa/Nairobi","MWL",1],["London","লন্ডন","United Kingdom",51.5074,-0.1278,"Europe/London","MWL",2],["Birmingham","বার্মিংহাম","United Kingdom",52.48,-1.8904,"Europe/London","MWL",2],["Manchester","ম্যানচেস্টার","United Kingdom",53.4808,-2.2426,"Europe/London","MWL",2],["Paris","প্যারিস","France",48.8566,2.3522,"Europe/Paris","MWL",1],["Berlin","বার্লিন","Germany",52.52,13.405,"Europe/Berlin","Diyanet",1],["Munich","মিউনিখ","Germany",48.1351,11.582,"Europe/Berlin","Diyanet",1],["Amsterdam","আমস্টারডাম","Netherlands",52.3676,4.9041,"Europe/Amsterdam","MWL",1],["Brussels","ব্রাসেলস","Belgium",50.8503,4.3517,"Europe/Brussels","MWL",1],["Madrid","মাদ্রিদ","Spain",40.4168,-3.7038,"Europe/Madrid","MWL",1],["Rome","রোম","Italy",41.9028,12.4964,"Europe/Rome","MWL",1],["Stockholm","স্টকহোম","Sweden",59.3294,18.0686,"Europe/Stockholm","MWL",1],["Oslo","অসলো","Norway",59.9139,10.7522,"Europe/Oslo","MWL",1],["Copenhagen","কোপেনহেগেন","Denmark",55.6761,12.5683,"Europe/Copenhagen","MWL",1],["Vienna","ভিয়েনা","Austria",48.2082,16.3738,"Europe/Vienna","MWL",1],["Toronto","টরন্টো","Canada",43.6532,-79.3832,"America/Toronto","ISNA",2],["Montreal","মন্ট্রিল","Canada",45.5017,-73.5673,"America/Toronto","ISNA",2],["Vancouver","ভ্যাঙ্কুভার","Canada",49.2827,-123.1207,"America/Vancouver","ISNA",2],["New York","নিউ ইয়র্ক","USA",40.7128,-74.006,"America/New_York","ISNA",2],["Chicago","শিকাগো","USA",41.8781,-87.6298,"America/Chicago","ISNA",2],["Houston","হিউস্টন","USA",29.7604,-95.3698,"America/Chicago","ISNA",2],["Los Angeles","লস অ্যাঞ্জেলেস","USA",34.0522,-118.2437,"America/Los_Angeles","ISNA",2],["Dearborn","ডিয়ারবর্ন","USA",42.3223,-83.1763,"America/Detroit","ISNA",1],["Sydney","সিডনি","Australia",-33.8688,151.2093,"Australia/Sydney","MWL",1],["Melbourne","মেলবোর্ন","Australia",-37.8136,144.9631,"Australia/Melbourne","MWL",1],["Auckland","অকল্যান্ড","New Zealand",-36.8485,174.7633,"Pacific/Auckland","MWL",1],["Tokyo","টোকিও","Japan",35.6762,139.6503,"Asia/Tokyo","MWL",1],["Seoul","সিউল","South Korea",37.5665,126.978,"Asia/Seoul","MWL",1],["Beijing","বেইজিং","China",39.9042,116.4074,"Asia/Shanghai","MWL",2],["Urumqi","উরুমকি","China",43.8256,87.6168,"Asia/Urumqi","MWL",2],["Johannesburg","জোহানেসবার্গ","South Africa",-26.2041,28.0473,"Africa/Johannesburg","MWL",1],["Cape Town","কেপ টাউন","South Africa",-33.9249,18.4241,"Africa/Johannesburg","MWL",1]];
+    function wNorm(s){ return (s || '').toLowerCase().replace(/[''.-]/g, ' ').replace(/\s+/g, ' ').trim(); }
+    function worldCityObj(r){ return { en: r[0], bn: r[1], country: r[2], lat: r[3], lng: r[4], tz: r[5], method: r[6], asr: r[7] }; }
+    var WWORLD = null, wWorldLoading = false;
+    function loadWorldData(cb){
+      if (WWORLD){ if (cb) cb(); return; }
+      if (wWorldLoading) return;
+      wWorldLoading = true;
+      fetch('cities-world.json').then(function(r){ return r.json(); }).then(function(j){ WWORLD = j.cities; wWorldLoading = false; if (cb) cb(); }).catch(function(){ wWorldLoading = false; });
+    }
+    function searchWorldCities(q){
+      q = wNorm(q); if (!q) return [];
+      var out = [], i, r;
+      for (i = 0; i < WCUR.length; i++){ r = WCUR[i]; if (wNorm(r[0]).indexOf(q) === 0 || (r[1] && r[1].indexOf(q) >= 0) || wNorm(r[2]).indexOf(q) === 0) out.push(worldCityObj(r)); }
+      if (WWORLD){
+        var hits = [];
+        for (i = 0; i < WWORLD.length; i++){ r = WWORLD[i]; var n = wNorm(r[0]); if (n.indexOf(q) === 0 || n.indexOf(' ' + q) >= 0) hits.push(r); }
+        hits.sort(function(a, b){ return b[7] - a[7]; });
+        for (i = 0; i < Math.min(14, hits.length); i++) out.push(worldCityObj(hits[i]));
+      }
+      var seen = {}, ded = [];
+      for (i = 0; i < out.length; i++){ var c = out[i], k = c.en + '|' + c.country + '|' + c.lat.toFixed(2); if (!seen[k]){ seen[k] = 1; ded.push(c); } }
+      return ded.slice(0, 8);
+    }
+    function appendWorldResults(q){
+      var box = $('searchResults'); if (!box) return;
+      function render(list){
+        if (!list.length) return;
+        var none = box.querySelector('.none'); if (none) none.remove();
+        if (!box.querySelector('.wdiv')){
+          var dv = document.createElement('div');
+          dv.className = 'wdiv';
+          dv.style.cssText = 'padding:8px 12px 4px;font-size:12px;color:#6b7280;font-weight:700';
+          dv.textContent = state.lang === 'bn' ? '🌍 বিশ্বের শহর' : '🌍 World cities';
+          box.appendChild(dv);
+        }
+        list.forEach(function(c){
+          var exists = false;
+          try { exists = !!box.querySelector('[data-wen="' + c.en.replace(/"/g, '') + '"]'); } catch (e) {}
+          if (exists) return;
+          var b = document.createElement('button');
+          b.type = 'button'; b.setAttribute('role', 'option'); b.setAttribute('data-wen', c.en);
+          b.innerHTML = '<span>' + (state.lang === 'bn' && c.bn ? c.bn : c.en) + '</span><span class="en">' + c.country + '</span>';
+          b.addEventListener('click', function(){ setPlace(worldPlaceFromCity(c), { scrollTop: true }); $('searchInput').value = ''; box.classList.remove('open'); });
+          box.appendChild(b);
+        });
+        box.classList.add('open');
+      }
+      render(searchWorldCities(q));
+      if (!WWORLD) loadWorldData(function(){
+        if ($('searchInput').value !== q) return;
+        box.querySelectorAll('[data-wen]').forEach(function(el){ el.remove(); });
+        var dv = box.querySelector('.wdiv'); if (dv) dv.remove();
+        render(searchWorldCities(q));
+      });
+    }
+    function nearestWorldCity(lat, lon){
+      var best = null, bestD = 1e18;
+      for (var i = 0; i < WCUR.length; i++){
+        var r = WCUR[i], dd = (r[3] - lat) * (r[3] - lat) + (r[4] - lon) * (r[4] - lon);
+        if (dd < bestD){ bestD = dd; best = r; }
+      }
+      return best ? { city: worldCityObj(best), distKm: Math.sqrt(bestD) * 111 } : null;
+    }
+
     /* Show today's embedded times (Karachi + Hanafi). Returns true if shown. */
     function showEmbeddedToday(now) {
+      if (state.place && state.place.world) {
+        var tp = wCityTodayParts(state.place.world.tz);
+        var wo = worldDayObject(state.place, tp.year, tp.month, tp.day);
+        if (!wo) return false;
+        state.today = wo;
+        var tmD = new Date(Date.UTC(tp.year, tp.month - 1, tp.day + 1));
+        var wto = worldDayObject(state.place, tmD.getUTCFullYear(), tmD.getUTCMonth() + 1, tmD.getUTCDate());
+        state.tomorrowFajr = wto ? timeToDate(wto.timings.Fajr, new Date(now.getTime() + 86400000)) : null;
+        renderToday();
+        return true;
+      }
       if (!isDefaultCalc() || !embedKey()) return false;
       const o = embeddedDayObject(embedKey(), now);
       if (!o) return false;
@@ -4186,6 +4416,7 @@
             on failure the embedded times simply stay on screen */
       const placeRef = state.place, mRef = state.method, sRef = state.school;
       try {
+        if (placeRef.world) throw new Error('world-local');
         const [today, tomorrow] = await Promise.all([
           fetchTimings(now, placeRef.lat, placeRef.lon),
           fetchTimings(new Date(now.getTime() + 86400000), placeRef.lat, placeRef.lon)
@@ -4216,6 +4447,10 @@
     async function loadMonth(year, month) {
       const key = year + '-' + month;
       renderMonthTitle();
+      if (state.place && state.place.world) {
+        if (!state.monthCache[key]) { const warr = worldMonthArray(state.place, year, month); if (warr) state.monthCache[key] = warr; }
+        if (state.monthCache[key]) { renderMonthTable(state.monthCache[key]); return; }
+      }
       /* monthly timetable comes from the embedded data whenever possible */
       if (!state.monthCache[key] && isDefaultCalc() && embedKey()) {
         const arr = embeddedMonthArray(embedKey(), year, month);
@@ -4701,6 +4936,25 @@
           const dd = (d[3] - lat) * (d[3] - lat) + (d[4] - lon) * (d[4] - lon);
           if (dd < bestD) { bestD = dd; best = d; }
         }
+        if (lat < 20.5 || lat > 26.7 || lon < 87.9 || lon > 92.8 || bestD > 0.6) {
+          /* outside Bangladesh (or far from every district centre): resolve
+             to the nearest world city, else the raw coordinates with the
+             nearest city's regional method — the world engine takes over */
+          const nw = nearestWorldCity(lat, lon);
+          let wplace;
+          if (nw && nw.distKm < 150) {
+            wplace = worldPlaceFromCity(nw.city);
+            wplace.lat = lat; wplace.lon = lon;
+            wplace.worldCity.lat = lat; wplace.worldCity.lng = lon;
+          } else {
+            const dtz = (Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC');
+            wplace = { labelBn: 'আমার অবস্থান', labelEn: 'My location', lat: lat, lon: lon, key: 'world', embedKey: null,
+              world: { tz: dtz, method: nw ? nw.city.method : 'MWL', asr: nw ? nw.city.asr : 1 },
+              worldCity: { en: 'My location', bn: 'আমার অবস্থান', country: '', lat: lat, lng: lon, tz: dtz, method: nw ? nw.city.method : 'MWL', asr: nw ? nw.city.asr : 1 } };
+          }
+          setPlace(wplace, { scrollTop: true });
+          return;
+        }
         /* embedded fallback for a custom location = nearest district's times;
            the chip under "আমার অবস্থান" starts as the labelled nearest
            district (both languages, from the district table) and is refined
@@ -4861,8 +5115,9 @@
         const q = input.value;
         if (!q.trim()) { $('searchResults').classList.remove('open'); return; }
         showResults(searchDistricts(q));
+        appendWorldResults(q);
       });
-      input.addEventListener('focus', () => { if (input.value.trim()) showResults(searchDistricts(input.value)); });
+      input.addEventListener('focus', () => { if (input.value.trim()) { showResults(searchDistricts(input.value)); appendWorldResults(input.value); } });
       document.addEventListener('click', (e) => {
         if (!e.target.closest('.search-box')) $('searchResults').classList.remove('open');
       });
@@ -4870,6 +5125,7 @@
         if (e.key === 'Enter') {
           const hits = searchDistricts(input.value);
           if (hits.length) { setPlace(districtPlace(hits[0]), { scrollTop: true }); input.value = ''; $('searchResults').classList.remove('open'); }
+          else { const wh = searchWorldCities(input.value); if (wh.length) { setPlace(worldPlaceFromCity(wh[0]), { scrollTop: true }); input.value = ''; $('searchResults').classList.remove('open'); } }
         }
       });
 
@@ -6418,7 +6674,9 @@
     /* a district saved on this device wins over the default: the
        site opens where the visitor last chose / was located, and
        only a first-time visitor with nothing saved gets Dhaka */
-    setPlace(districtPlace(savedDistrict() || dhaka));
+    var __wpl = savedWorldPlace();
+    if (__wpl) setPlace(__wpl);
+    else setPlace(districtPlace(savedDistrict() || dhaka));
     /* Restore the view named in the URL hash — this is what keeps a
        refresh on the page the user was actually looking at. */
     const startView = window.location.hash.replace(/^#/, '');
