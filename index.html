@@ -7249,7 +7249,10 @@
      1-3 s later and quieter. Audio never autoplays — the chip is
      the gesture. Files: Mixkit produced sounds (free licence). */
   (function () {
-    var FILES = { light: 'snd-rain-light.mp3', moderate: 'snd-rain-moderate.mp3', heavy: 'snd-rain-heavy.mp3' };
+    var FILES = { light: 'snd-rain-light', moderate: 'snd-rain-moderate', heavy: 'snd-rain-heavy' };
+    /* MP3 loops click at the seam (encoder padding); OGG loops are
+       sample-exact — prefer OGG wherever the browser can play it. */
+    var EXT = (function () { try { var a = new Audio(); return (a.canPlayType && a.canPlayType('audio/ogg; codecs="vorbis"')) ? '.ogg' : '.mp3'; } catch (e) { return '.mp3'; } })();
     var VOL = { light: 0.5, moderate: 0.78, heavy: 1.0 };
     var btn = document.getElementById('sndBtn'), lbl = document.getElementById('sndLbl');
     if (!btn) return;
@@ -7275,7 +7278,7 @@
     }
     function playTier(t) {
       ensure();
-      if (curTier !== t) { curTier = t; rain.src = FILES[t]; }
+      if (curTier !== t) { curTier = t; rain.src = FILES[t] + EXT; }
       var p = rain.play();
       if (p && p.catch) p.catch(function () {});
       fade(VOL[t]);

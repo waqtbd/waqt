@@ -198,9 +198,13 @@ if (e) e.addEventListener("click", function(){ applyLang("en"); });
   var audios = new Map();
   var currentLoop = null;
   function T(k) { return window.waqtT ? window.waqtT(k) : k; }
+  var OGG_OK = (function () { try { var a = new Audio(); return !!(a.canPlayType && a.canPlayType('audio/ogg; codecs="vorbis"')); } catch (e) { return false; } })();
   function audioOf(row) {
     if (!audios.has(row)) {
-      var a = new Audio(row.getAttribute('data-src'));
+      var src = row.getAttribute('data-src');
+      /* loop rows: OGG loops seamlessly (MP3 pads the seam); one-shots stay MP3 */
+      if (row.getAttribute('data-kind') === 'loop' && OGG_OK) src = src.replace(/\.mp3$/, '.ogg');
+      var a = new Audio(src);
       a.preload = 'auto';
       a.loop = row.getAttribute('data-kind') === 'loop';
       a.volume = parseFloat(row.getAttribute('data-vol') || '1');
