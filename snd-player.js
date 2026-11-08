@@ -157,8 +157,8 @@
     elAudio.preload = 'auto';
     elAudio.src = state.src;
     elAudio.volume = state.vol != null ? state.vol : 1;
-    elAudio.addEventListener('play', function () { playingNow = true; changed(); });
-    elAudio.addEventListener('pause', function () { playingNow = false; save(); changed(); });
+    elAudio.addEventListener('play', function () { playingNow = true; if (state) state.playing = true; changed(); });
+    elAudio.addEventListener('pause', function () { playingNow = false; if (state) state.playing = false; save(); changed(); });
     elAudio.addEventListener('timeupdate', function () {
       var now = Date.now();
       if (now - lastSave > 1000) { lastSave = now; save(); }
@@ -197,12 +197,14 @@
   }
   function tPause() {
     token++;
+    if (state) state.playing = false;
     if (wa.playing) waPause();
     else if (elAudio) { try { elAudio.pause(); } catch (e) {} }
     playingNow = false;
     save(); changed();
   }
   function tResume() {
+    if (state) { state.playing = true; save(); }
     if (wa.ok && wa.buffer) { if (waResume()) { changed(); return; } }
     if (elAudio) elPlay();
     else if (state) tPlay(state.pos || 0);
@@ -257,15 +259,17 @@
     if (pill || (!state && !extEl)) return;
     var st = document.createElement('style');
     st.textContent =
-      '#wqSndPill{position:fixed;right:12px;bottom:14px;z-index:99990;display:flex;gap:10px;touch-action:none;-webkit-user-select:none;user-select:none;cursor:grab;opacity:1;transition:opacity .6s ease;font-family:inherit}' +
+      '#wqSndPill{position:fixed;right:12px;bottom:14px;z-index:99990;touch-action:none;-webkit-user-select:none;user-select:none;cursor:grab;opacity:1;transition:opacity .6s ease;font-family:inherit}' +
       '#wqSndPill.idle{opacity:.38}' +
-      '#wqSndPill button{width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 6px 18px rgba(0,0,0,.35)}' +
-      '#wqSndPill .tgl{background:linear-gradient(135deg,#f3d27a,#c9a227);color:#3a2c00;border:1px solid rgba(255,255,255,.5)}' +
+      '#wqSndPill .wrap{position:relative;width:52px;height:52px}' +
+      '#wqSndPill .tgl{width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 6px 18px rgba(0,0,0,.35);background:linear-gradient(135deg,#f3d27a,#c9a227);color:#3a2c00;border:1px solid rgba(255,255,255,.5)}' +
       '#wqSndPill.playing .tgl{animation:wqPulse 1.8s ease-in-out infinite}' +
       '@keyframes wqPulse{0%,100%{box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 0 rgba(243,210,122,.45)}50%{box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 0 9px rgba(243,210,122,0)}}' +
       '@media (prefers-reduced-motion: reduce){ #wqSndPill.playing .tgl{animation:none} }' +
-      '#wqSndPill .x{background:rgba(7,38,28,.88);color:#fff;border:1px solid rgba(243,210,122,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}' +
-      '#wqSndPill button svg{width:22px;height:22px;display:block}';
+      '#wqSndPill .x{position:absolute;top:-4px;right:-4px;width:22px;height:22px;padding:0;background:none;border:0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,.75));opacity:0;pointer-events:none;transition:opacity .4s ease}' +
+      '#wqSndPill:not(.idle) .x{opacity:1;pointer-events:auto}' +
+      '#wqSndPill .tgl svg{width:22px;height:22px;display:block}' +
+      '#wqSndPill .x svg{width:13px;height:13px;display:block}';
     document.head.appendChild(st);
     pill = document.createElement('div');
     pill.id = 'wqSndPill';
@@ -273,8 +277,10 @@
     pill.setAttribute('aria-label', 'Sound player');
     if (document.querySelector('.bottomnav')) pill.style.bottom = '74px';
     pill.innerHTML =
+      '<div class="wrap">' +
       '<button type="button" class="tgl" aria-label="Pause">' + SVG_PAUSE + '</button>' +
-      '<button type="button" class="x" aria-label="Stop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>';
+      '<button type="button" class="x" aria-label="Stop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>' +
+      '</div>';
     tglEl = pill.querySelector('.tgl');
     tglEl.addEventListener('click', function () {
       if (!state && extEl) {
@@ -405,14 +411,26 @@
   }
 
   window.addEventListener('pagehide', save);
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    load();
+    if (!state || !state.src) return;
+    started = true;
+    buildPill(); updatePill();
+    if (!state.playing) return;
+    if (wa.ok && wa.buffer) { waStart(state.pos || 0); changed(); }
+    else if (wa.ok || elAudio) tPlay(state.pos || 0);
+    else tPlay(state.pos || 0);
+  });
 
   /* Resume an active session on this page. */
   function boot() {
     load();
-    if (state && state.playing && state.src) {
+    if (state && state.src) {
       started = true;
       buildPill();
-      tPlay(state.pos || 0);
+      if (state.playing) tPlay(state.pos || 0);
+      else updatePill();
       emit();
     }
   }
