@@ -55,7 +55,7 @@
   }
   function waLoad(src) {
     if (wa.buffer && wa.bufSrc === src) return Promise.resolve(wa.buffer);
-    return fetch(src).then(function (r) {
+    return fetch(src, { cache: 'force-cache' }).then(function (r) {
       if (!r.ok) throw new Error('fetch ' + r.status);
       return r.arrayBuffer();
     }).then(function (ab) {
@@ -94,21 +94,24 @@
     wa.cur = nxt;
     wa.seg = { startCtx: nextStart, startOffset: 0 };
   }
-  function waStart(offset) {
-    var ctx = waCtx(), dur = wa.buffer.duration;
-    waStopNodes();
-    offset = ((offset % dur) + dur) % dur;
-    wa.master.gain.setTargetAtTime(state && state.vol != null ? state.vol : 1, ctx.currentTime, 0.05);
-    var t0 = ctx.currentTime + 0.06;
-    wa.seg = { startCtx: t0, startOffset: offset };
-    wa.cur = waSpawn(t0, offset, 0.25);
-    wa.playing = true; playingNow = true;
+  function waArmTimer() {
     clearInterval(wa.timer);
     wa.timer = setInterval(function () {
       waTick();
       var now = Date.now();
       if (now - lastSave > 1000) { lastSave = now; save(); }
     }, 350);
+  }
+  function waStart(offset, fade) {
+    var ctx = waCtx(), dur = wa.buffer.duration;
+    waStopNodes();
+    offset = ((offset % dur) + dur) % dur;
+    wa.master.gain.setTargetAtTime(state && state.vol != null ? state.vol : 1, ctx.currentTime, 0.05);
+    var t0 = ctx.currentTime + 0.06;
+    wa.seg = { startCtx: t0, startOffset: offset };
+    wa.cur = waSpawn(t0, offset, fade != null ? fade : 0.25);
+    wa.playing = true; playingNow = true;
+    waArmTimer();
     if (ctx.state === 'suspended') {
       var rp = ctx.resume();
       if (rp && rp.then) rp.then(function () {
@@ -133,12 +136,7 @@
     if (!wa.cur) { waStart(state ? state.pos || 0 : 0); return true; }
     wa.playing = true; playingNow = true;
     var p = wa.ctx.resume(); if (p && p.catch) p.catch(function () {});
-    clearInterval(wa.timer);
-    wa.timer = setInterval(function () {
-      waTick();
-      var now = Date.now();
-      if (now - lastSave > 1000) { lastSave = now; save(); }
-    }, 350);
+    waArmTimer();
     return true;
   }
   function waPos() {
@@ -260,7 +258,8 @@
     var st = document.createElement('style');
     st.textContent =
       '#wqSndPill{position:fixed;right:26px;bottom:14px;z-index:99990;touch-action:none;-webkit-user-select:none;user-select:none;cursor:grab;opacity:1;transition:opacity .6s ease;font-family:inherit}' +
-      '#wqSndPill.idle .tgl{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}' +
+      '#wqSndPill.idle{opacity:.5}' +
+      '#wqSndPill.idle .tgl{background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}' +
       '#wqSndPill .wrap{position:relative;width:52px;height:52px}' +
       '#wqSndPill .tgl{width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 6px 18px rgba(0,0,0,.35);background:#ffffff;color:#0b4331;border:1px solid rgba(11,67,49,.28);transition:background .5s ease,color .5s ease,border-color .5s ease}' +
       '#wqSndPill.playing .tgl{animation:wqPulse 1.8s ease-in-out infinite}' +
@@ -418,9 +417,17 @@
     started = true;
     buildPill(); updatePill();
     if (!state.playing) return;
-    if (wa.ok && wa.buffer) { waStart(state.pos || 0); changed(); }
-    else if (wa.ok || elAudio) tPlay(state.pos || 0);
-    else tPlay(state.pos || 0);
+    if (wa.ok && wa.ctx && wa.buffer && wa.cur) {
+      var rp = wa.ctx.resume();
+      if (rp && rp.catch) rp.catch(function () {});
+      wa.playing = true; playingNow = true;
+      waArmTimer();
+      updatePill(); emit();
+      var tClock = wa.ctx.currentTime;
+      setTimeout(function () {
+        if (state && state.playing && wa.ctx && (wa.ctx.state !== 'running' || wa.ctx.currentTime <= tClock + 0.05)) { waStart(waPos() || state.pos || 0, 0.05); changed(); }
+      }, 300);
+    } else tPlay(state.pos || 0);
   });
 
   /* Resume an active session on this page. */
