@@ -41,8 +41,8 @@ header{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px
 header .back{display:flex;align-items:center;gap:6px;color:#eafaf3;font-size:15px;font-weight:600;
   padding:9px 12px;border:1px solid rgba(231,207,122,.45);border-radius:999px;min-height:44px;text-decoration:none}
 header .ttl{flex:1;text-align:center;color:#fff}
-header .ttl b{display:block;font-size:19px;line-height:1.15}
-header .ttl span{font-size:12px;color:var(--gold-soft)}
+header .ttl{min-width:0} header .ttl b{display:block;font-size:19px;line-height:1.15;white-space:nowrap}
+header .ttl span{display:block;font-size:12px;color:var(--gold-soft);white-space:nowrap} html[lang="en"] header .ttl b{font-size:16px} html[lang="en"] header .ttl span{font-size:10.5px} html[lang="en"] header .back{font-size:13.5px;padding:9px 10px} html[lang="en"] header .idxbtn{font-size:13px;padding:10px 11px}
 header .idxbtn{color:#073f34;background:linear-gradient(180deg,var(--gold-soft),var(--gold));
   font-weight:700;font-size:14px;padding:10px 14px;border-radius:999px;min-height:44px}
 main{max-width:760px;margin:0 auto;padding:12px 10px 8px}
