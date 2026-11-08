@@ -217,13 +217,15 @@ function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(
 function matches(n, q){
   if(!q) return true;
   var s = q.toLowerCase();
-  return n.bn.indexOf(q) >= 0 || n.ar.indexOf(q) >= 0 || n.meaning.indexOf(q) >= 0 || n.en.toLowerCase().indexOf(s) >= 0;
+  return n.bn.indexOf(q) >= 0 || n.ar.indexOf(q) >= 0 || n.meaning.indexOf(q) >= 0 || n.en.toLowerCase().indexOf(s) >= 0 || (n.meaningEn || '').toLowerCase().indexOf(s) >= 0;
 }
+function meanOf(n){ return wqLang === 'en' ? (n.meaningEn || n.meaning) : n.meaning; }
 function cardHTML(n, delay){
-  var h = '<article class="ncard" style="animation-delay:' + delay + 'ms"><div class="nrow"><span class="medal">' + esc(n.bn.charAt(0)) + '</span>';
+  var en = (wqLang === 'en');
+  var h = '<article class="ncard" style="animation-delay:' + delay + 'ms"><div class="nrow"><span class="medal">' + esc(en ? (n.en.charAt(0) || n.bn.charAt(0)) : n.bn.charAt(0)) + '</span>';
   if(n.ar) h += '<span class="nar" dir="rtl" lang="ar">' + esc(n.ar) + '</span>';
-  h += '</div><div class="nbn">' + esc(n.bn) + '</div><div class="nen">' + esc(n.en) + '</div>' +
-    '<div class="corn"><i></i><span>◆</span><i></i></div><p class="nmean">' + esc(n.meaning) + '</p></article>';
+  h += '</div><div class="nbn">' + esc(en ? n.en : n.bn) + '</div><div class="nen">' + esc(en ? n.bn : n.en) + '</div>' +
+    '<div class="corn"><i></i><span>◆</span><i></i></div><p class="nmean">' + esc(meanOf(n)) + '</p></article>';
   return h;
 }
 function updateMeta(){
@@ -352,7 +354,7 @@ function setupPicker(i){
       }
       res.forEach(function(n){
         var b = document.createElement('button'); b.type = 'button';
-        b.innerHTML = '<span><b>' + esc(n.bn) + '</b> · ' + esc(n.en) + '</span><span class="dm">' + esc(n.meaning) + '</span>';
+        b.innerHTML = '<span><b>' + esc(n.bn) + '</b> · ' + esc(n.en) + '</span><span class="dm">' + esc(meanOf(n)) + '</span>';
         b.addEventListener('click', function(){ pickName(i, n); });
         e.drop.appendChild(b);
       });
@@ -380,7 +382,7 @@ document.getElementById('combineBtn').addEventListener('click', function(){
   var arEl = document.getElementById('comboAr');
   arEl.textContent = ars.join(' '); arEl.style.display = ars.length ? '' : 'none';
   document.getElementById('comboMean').innerHTML = picked.map(function(n){
-    return '<b>' + esc(n.bn) + '</b> — ' + esc(n.meaning);
+    return '<b>' + esc(wqLang === 'en' ? n.en : n.bn) + '</b> — ' + esc(meanOf(n));
   }).join(' <span class="dia">◆</span> ');
   out.style.display = '';
   out.classList.remove('show'); void out.offsetWidth; out.classList.add('show');
@@ -464,6 +466,13 @@ function applyLang(lang){
       }
     }
     if (typeof updateMeta === "function") updateMeta();
+    if (typeof renderMore === "function" && typeof grid !== "undefined" && grid && typeof filtered !== "undefined") {
+      var keep = (typeof shown !== "undefined" && shown > 0) ? shown : Math.min(CHUNK, filtered.length);
+      grid.innerHTML = ""; shown = 0;
+      while (shown < keep && shown < filtered.length) renderMore();
+      if (!filtered.length) renderMore();
+      if (typeof sel !== "undefined" && typeof renderSel === "function") { for (var si = 0; si < 3; si++) renderSel(si); }
+    }
   }
 }
 function wqDetectLang(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""); if (tz === "Asia/Dhaka") return "bn"; var nl = (navigator.language || "").toLowerCase(); if (nl.indexOf("bn") === 0) return "bn"; return "en"; } catch (err) { return "bn"; } }
