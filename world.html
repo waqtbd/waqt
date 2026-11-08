@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="docTitle">বিশ্বজুড়ে নামাজের সময় | Waqt (ওয়াক্ত)</title>
+<meta name="description" content="বিশ্বের যেকোনো শহরের নামাজের সময় ও কিবলার দিক — ৩৪,০০০+ শহর, অঞ্চল অনুযায়ী সঠিক হিসাব পদ্ধতি। Prayer times and Qibla direction for 34,000+ cities worldwide.">
+<style>
+*{-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali","Baloo Da 2",sans-serif;background:#f6f7f4;color:#1f2937}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#0f766e,#0b5c4d);padding:7px 12px;box-shadow:0 2px 8px rgba(11,92,77,.25)}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:50%;display:block}
+.bt b{display:block;color:#fff;font-size:15px;letter-spacing:2.5px;line-height:1.05}
+.bt span{display:block;color:#f3d27a;font-size:11.5px;line-height:1.1}
+.topright{display:flex;align-items:center;gap:8px}
+.homebtn{background:#fff;color:#0b5c4d;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;text-decoration:none;white-space:nowrap}
+.lang-toggle{display:inline-flex;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:2px;gap:2px}
+.lang-toggle button{border:0;background:transparent;padding:4px 10px;border-radius:999px;font:inherit;font-size:12px;cursor:pointer;color:#e8f5f1}
+.lang-toggle button.on{background:#fff;color:#0b5c4d;font-weight:700}
+.banner{background:linear-gradient(135deg,#0f766e,#0b5c4d);color:#fff;text-align:center;padding:18px 12px 20px}
+.banner h1{font-size:25px;margin:0;font-weight:800}
+.dsub{opacity:.92;font-size:13.5px;margin-top:5px}
+main{max-width:760px;margin:0 auto;padding:14px 12px 34px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px 14px;box-shadow:0 2px 10px rgba(11,92,77,.07);margin-bottom:14px}
+#q{width:100%;font-family:inherit;font-size:16px;padding:12px 15px;border:1.5px solid #dcefe9;border-radius:12px;background:#f0faf7;color:#1f2937;outline:none}
+#q:focus{border-color:#0f766e;background:#fff}
+.gpsbtn{margin-top:10px;width:100%;font-family:inherit;font-size:14.5px;font-weight:700;padding:11px;border:1.5px solid #0f766e;background:#fff;color:#0b5c4d;border-radius:12px;cursor:pointer}
+.gpsbtn:active{background:#f0faf7}
+#res{margin-top:10px}
+.hit{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;font-family:inherit;font-size:15px;padding:11px 12px;margin-bottom:7px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;cursor:pointer;color:#1f2937}
+.hit:active{background:#f0faf7}
+.hit .co{font-size:12.5px;color:#6b7280}
+.feat{margin-top:4px}
+.feat .flabel{font-size:13px;color:#6b7280;margin:2px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-family:inherit;font-size:13.5px;font-weight:600;padding:7px 13px;border-radius:999px;border:1px solid #dcefe9;background:#f0faf7;color:#0b5c4d;cursor:pointer}
+.chip:active{background:#dcefe9}
+.cityhead{text-align:center;margin-bottom:6px}
+.cityhead h2{margin:0;font-size:21px;color:#0b5c4d}
+.cityhead .cc{font-size:13.5px;color:#6b7280;margin-top:2px}
+.cityhead .cd{font-size:13.5px;color:#43534a;margin-top:5px}
+.nextline{text-align:center;background:linear-gradient(135deg,#0f766e,#0b5c4d);color:#fff;border-radius:12px;padding:10px 12px;font-size:15px;font-weight:700;margin:12px 0}
+.nextline .cd2{display:block;font-size:12.5px;font-weight:500;opacity:.9;margin-top:2px}
+.trow{display:flex;justify-content:space-between;align-items:center;padding:11px 6px;border-bottom:1px solid #eef1ee;font-size:15.5px}
+.trow:last-child{border-bottom:0}
+.trow .tn{color:#43534a;font-weight:600}
+.trow .tt{font-weight:800;font-size:17px;color:#16211c;font-variant-numeric:tabular-nums}
+.trow.next{ background:#f0faf7;border-radius:10px}
+.trow.next .tn,.trow.next .tt{color:#0b5c4d}
+.qibla{text-align:center;font-size:15px;padding:12px 6px 2px;color:#43534a}
+.qibla b{color:#0b5c4d;font-size:19px}
+.setrow{display:flex;gap:8px;margin-top:14px}
+.setrow label{flex:1;font-size:12.5px;color:#6b7280;display:block}
+.setrow select{width:100%;margin-top:4px;font-family:inherit;font-size:14px;padding:9px 8px;border:1.5px solid #dcefe9;border-radius:10px;background:#fff;color:#1f2937}
+.disc{font-size:11.5px;color:#8a938c;line-height:1.55;margin-top:14px}
+.foot{text-align:center;font-size:12.5px;color:#8a938c;padding:6px 12px 20px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a>
+  <span class="topright">
+    <span class="lang-toggle" role="group" aria-label="Language"><button type="button" id="langBn">বাংলা</button><button type="button" id="langEn">English</button></span>
+    <a class="homebtn" href="index.html" data-i18n="home">হোম</a>
+  </span>
+</div>
+<header class="banner">
+  <h1 data-i18n="h1">বিশ্বজুড়ে নামাজের সময়</h1>
+  <p class="dsub" data-i18n="sub">যেকোনো শহর খুঁজুন — ওই শহরের নামাজের সময় ও কিবলার দিক</p>
+</header>
+<main>
+  <div class="card">
+    <input id="q" type="text" autocomplete="off" data-i18n-ph="searchPh" placeholder="শহরের নাম লিখুন — যেমন Makkah, London, ঢাকা…">
+    <button class="gpsbtn" id="gpsBtn" type="button">📍 <span data-i18n="gps">আমার অবস্থান ব্যবহার করুন</span></button>
+    <div id="res"></div>
+    <div class="feat" id="feat">
+      <p class="flabel" data-i18n="featLabel">জনপ্রিয় শহর:</p>
+      <div class="chips" id="featChips"></div>
+    </div>
+  </div>
+
+  <div class="card" id="result" hidden>
+    <div class="cityhead">
+      <h2 id="cityName"></h2>
+      <div class="cc" id="cityCountry"></div>
+      <div class="cd" id="cityDate"></div>
+    </div>
+    <div class="nextline"><span id="nextText"></span><span class="cd2" id="nextCd"></span></div>
+    <div id="trows"></div>
+    <div class="qibla"><span data-i18n="qibla">কিবলার দিক:</span> <b id="qiblaDeg"></b> · <span id="qiblaCompass"></span></div>
+    <div class="setrow">
+      <label><span data-i18n="methodL">হিসাবের পদ্ধতি</span>
+        <select id="methodSel"></select></label>
+      <label><span data-i18n="asrL">আসরের নিয়ম</span>
+        <select id="asrSel">
+          <option value="1" data-i18n="asrS">শাফেয়ী / মালেকী / হাম্বলী</option>
+          <option value="2" data-i18n="asrH">হানাফি</option>
+        </select></label>
+    </div>
+    <p class="disc" data-i18n="disc">নামাজের সময় সূর্যের অবস্থান থেকে জ্যোতির্বিজ্ঞানের হিসাবে নির্ধারণ করা হয়েছে; স্থানীয় পর্যবেক্ষণ ও মসজিদের ঘোষণার সঙ্গে ১–২ মিনিটের পার্থক্য হতে পারে। আপনার এলাকার মসজিদের সময়সূচিকেই চূড়ান্ত ধরুন।</p>
+  </div>
+  <p class="foot">Waqt (ওয়াক্ত) — <span data-i18n="foot">নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য</span></p>
+</main>
+
+<script>
+/* ---------------- i18n ---------------- */
+var I18N = {
+bn: { docTitle:"বিশ্বজুড়ে নামাজের সময় | Waqt (ওয়াক্ত)", home:"হোম", h1:"বিশ্বজুড়ে নামাজের সময়",
+  sub:"যেকোনো শহর খুঁজুন — ওই শহরের নামাজের সময় ও কিবলার দিক",
+  searchPh:"শহরের নাম লিখুন — যেমন Makkah, London, ঢাকা…", gps:"আমার অবস্থান ব্যবহার করুন",
+  featLabel:"জনপ্রিয় শহর:", fajr:"ফজর", sunrise:"সূর্যোদয়", dhuhr:"যোহর", asr:"আসর", maghrib:"মাগরিব", isha:"এশা",
+  nextIs:"পরবর্তী ওয়াক্ত:", left:"বাকি", qibla:"কিবলার দিক:", methodL:"হিসাবের পদ্ধতি", asrL:"আসরের নিয়ম",
+  asrS:"শাফেয়ী / মালেকী / হাম্বলী", asrH:"হানাফি", myLoc:"আমার অবস্থান",
+  disc:"নামাজের সময় সূর্যের অবস্থান থেকে জ্যোতির্বিজ্ঞানের হিসাবে নির্ধারণ করা হয়েছে; স্থানীয় পর্যবেক্ষণ ও মসজিদের ঘোষণার সঙ্গে ১–২ মিনিটের পার্থক্য হতে পারে। আপনার এলাকার মসজিদের সময়সূচিকেই চূড়ান্ত ধরুন।",
+  foot:"নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য", noRes:"কোনো শহর পাওয়া যায়নি — বানান ঠিক করে আবার লিখুন",
+  compass:["উত্তর","উত্তর-পূর্ব","পূর্ব","দক্ষিণ-পূর্ব","দক্ষিণ","দক্ষিণ-পশ্চিম","পশ্চিম","উত্তর-পশ্চিম"] },
+en: { docTitle:"Prayer Times Worldwide | Waqt (ওয়াক্ত)", home:"Home", h1:"Prayer Times Worldwide",
+  sub:"Search any city — get its prayer times and Qibla direction",
+  searchPh:"Type a city name — e.g. Makkah, London, Dhaka…", gps:"Use my location",
+  featLabel:"Popular cities:", fajr:"Fajr", sunrise:"Sunrise", dhuhr:"Dhuhr", asr:"Asr", maghrib:"Maghrib", isha:"Isha",
+  nextIs:"Next prayer:", left:"left", qibla:"Qibla direction:", methodL:"Calculation method", asrL:"Asr rule",
+  asrS:"Shafi'i / Maliki / Hanbali", asrH:"Hanafi", myLoc:"My location",
+  disc:"Prayer times are calculated astronomically from the sun's position; they may differ by 1–2 minutes from local observation and mosque announcements. Please treat your local mosque's schedule as final.",
+  foot:"prayer times, Quran, duas and Islamic knowledge", noRes:"No city found — check the spelling and try again",
+  compass:["North","North-East","East","South-East","South","South-West","West","North-West"] }
+};
+var LANG = "bn";
+try { LANG = localStorage.getItem("waqtLang") === "en" ? "en" : "bn"; } catch (e) {}
+function T(k){ return I18N[LANG][k]; }
+function applyLang(){
+  document.querySelectorAll("[data-i18n]").forEach(function(el){ var k = el.getAttribute("data-i18n"); if (I18N[LANG][k] != null) el.textContent = I18N[LANG][k]; });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){ var k = el.getAttribute("data-i18n-ph"); if (I18N[LANG][k] != null) el.setAttribute("placeholder", I18N[LANG][k]); });
+  document.documentElement.lang = LANG === "en" ? "en" : "bn";
+  document.getElementById("langBn").classList.toggle("on", LANG !== "en");
+  document.getElementById("langEn").classList.toggle("on", LANG === "en");
+  try { localStorage.setItem("waqtLang", LANG); } catch (e) {}
+  if (CURRENT) showCity(CURRENT, true);
+  buildFeatured();
+}
+document.getElementById("langBn").addEventListener("click", function(){ LANG = "bn"; applyLang(); });
+document.getElementById("langEn").addEventListener("click", function(){ LANG = "en"; applyLang(); });
+
+/* ---------------- methods ---------------- */
+var METHODS = {
+  Karachi:{fajr:18, isha:18, label:"Karachi (South Asia)"},
+  MWL:{fajr:18, isha:17, label:"Muslim World League"},
+  ISNA:{fajr:15, isha:15, label:"ISNA (North America)"},
+  Egypt:{fajr:19.5, isha:17.5, label:"Egyptian Authority"},
+  Makkah:{fajr:18.5, ishaMin:90, label:"Umm al-Qura (Makkah)"},
+  Qatar:{fajr:18, ishaMin:90, label:"Qatar"},
+  Kuwait:{fajr:18, isha:17.5, label:"Kuwait"},
+  Dubai:{fajr:18.2, isha:18.2, label:"UAE (Dubai)"},
+  Diyanet:{fajr:18, isha:17, label:"Diyanet (Turkey)"},
+  Tehran:{fajr:17.7, isha:14, label:"Tehran (Geophysics)"},
+  Kemenag:{fajr:20, isha:18, label:"Kemenag (Indonesia)"},
+  JAKIM:{fajr:20, isha:18, label:"JAKIM (Malaysia)"}
+};
+var methodSel = document.getElementById("methodSel");
+Object.keys(METHODS).forEach(function(k){ var o = document.createElement("option"); o.value = k; o.textContent = METHODS[k].label; methodSel.appendChild(o); });
+
+/* ---------------- curated cities (Bangla names, priority) ---------------- */
+var CURATED = [{"id": "dhaka", "en": "Dhaka", "bn": "ঢাকা", "country": "Bangladesh", "lat": 23.8103, "lng": 90.4125, "tz": "Asia/Dhaka", "method": "Karachi", "asr": 2}, {"id": "chattogram", "en": "Chattogram", "bn": "চট্টগ্রাম", "country": "Bangladesh", "lat": 22.3569, "lng": 91.7832, "tz": "Asia/Dhaka", "method": "Karachi", "asr": 2}, {"id": "bogura", "en": "Bogura", "bn": "বগুড়া", "country": "Bangladesh", "lat": 24.8465, "lng": 89.3773, "tz": "Asia/Dhaka", "method": "Karachi", "asr": 2}, {"id": "khulna", "en": "Khulna", "bn": "খুলনা", "country": "Bangladesh", "lat": 22.8456, "lng": 89.5403, "tz": "Asia/Dhaka", "method": "Karachi", "asr": 2}, {"id": "rajshahi", "en": "Rajshahi", "bn": "রাজশাহী", "country": "Bangladesh", "lat": 24.3745, "lng": 88.6042, "tz": "Asia/Dhaka", "method": "Karachi", "asr": 2}, {"id": "sylhet", "en": "Sylhet", "bn": "সিলেট", "country": "Bangladesh", "lat": 24.9045, "lng": 91.8611, "tz": "Asia/Dhaka", "method": "Karachi", "asr": 2}, {"id": "kolkata", "en": "Kolkata", "bn": "কলকাতা", "country": "India", "lat": 22.5726, "lng": 88.3639, "tz": "Asia/Kolkata", "method": "Karachi", "asr": 2}, {"id": "delhi", "en": "Delhi", "bn": "দিল্লি", "country": "India", "lat": 28.6139, "lng": 77.209, "tz": "Asia/Kolkata", "method": "Karachi", "asr": 2}, {"id": "mumbai", "en": "Mumbai", "bn": "মুম্বাই", "country": "India", "lat": 19.076, "lng": 72.8777, "tz": "Asia/Kolkata", "method": "Karachi", "asr": 2}, {"id": "hyderabad", "en": "Hyderabad", "bn": "হায়দ্রাবাদ", "country": "India", "lat": 17.385, "lng": 78.4867, "tz": "Asia/Kolkata", "method": "Karachi", "asr": 2}, {"id": "lucknow", "en": "Lucknow", "bn": "লখনউ", "country": "India", "lat": 26.8467, "lng": 80.9462, "tz": "Asia/Kolkata", "method": "Karachi", "asr": 2}, {"id": "karachi", "en": "Karachi", "bn": "করাচি", "country": "Pakistan", "lat": 24.8608, "lng": 67.0011, "tz": "Asia/Karachi", "method": "Karachi", "asr": 2}, {"id": "lahore", "en": "Lahore", "bn": "লাহোর", "country": "Pakistan", "lat": 31.5204, "lng": 74.3587, "tz": "Asia/Karachi", "method": "Karachi", "asr": 2}, {"id": "islamabad", "en": "Islamabad", "bn": "ইসলামাবাদ", "country": "Pakistan", "lat": 33.6844, "lng": 73.0479, "tz": "Asia/Karachi", "method": "Karachi", "asr": 2}, {"id": "peshawar", "en": "Peshawar", "bn": "পেশোয়ার", "country": "Pakistan", "lat": 34.0151, "lng": 71.5249, "tz": "Asia/Karachi", "method": "Karachi", "asr": 2}, {"id": "quetta", "en": "Quetta", "bn": "কোয়েটা", "country": "Pakistan", "lat": 30.1798, "lng": 66.975, "tz": "Asia/Karachi", "method": "Karachi", "asr": 2}, {"id": "kabul", "en": "Kabul", "bn": "কাবুল", "country": "Afghanistan", "lat": 34.5553, "lng": 69.2075, "tz": "Asia/Kabul", "method": "Karachi", "asr": 2}, {"id": "male", "en": "Male", "bn": "মালে", "country": "Maldives", "lat": 4.1755, "lng": 73.5093, "tz": "Indian/Maldives", "method": "MWL", "asr": 1}, {"id": "makkah", "en": "Makkah", "bn": "মক্কা", "country": "Saudi Arabia", "lat": 21.3891, "lng": 39.8579, "tz": "Asia/Riyadh", "method": "Makkah", "asr": 1}, {"id": "madinah", "en": "Madinah", "bn": "মদিনা", "country": "Saudi Arabia", "lat": 24.5247, "lng": 39.5692, "tz": "Asia/Riyadh", "method": "Makkah", "asr": 1}, {"id": "riyadh", "en": "Riyadh", "bn": "রিয়াদ", "country": "Saudi Arabia", "lat": 24.7136, "lng": 46.6753, "tz": "Asia/Riyadh", "method": "Makkah", "asr": 1}, {"id": "jeddah", "en": "Jeddah", "bn": "জেদ্দা", "country": "Saudi Arabia", "lat": 21.4858, "lng": 39.1925, "tz": "Asia/Riyadh", "method": "Makkah", "asr": 1}, {"id": "dammam", "en": "Dammam", "bn": "দাম্মাম", "country": "Saudi Arabia", "lat": 26.4207, "lng": 50.0888, "tz": "Asia/Riyadh", "method": "Makkah", "asr": 1}, {"id": "dubai", "en": "Dubai", "bn": "দুবাই", "country": "UAE", "lat": 25.2048, "lng": 55.2708, "tz": "Asia/Dubai", "method": "Dubai", "asr": 1}, {"id": "abu-dhabi", "en": "Abu Dhabi", "bn": "আবুধাবি", "country": "UAE", "lat": 24.4539, "lng": 54.3773, "tz": "Asia/Dubai", "method": "Dubai", "asr": 1}, {"id": "sharjah", "en": "Sharjah", "bn": "শারজা", "country": "UAE", "lat": 25.3463, "lng": 55.4209, "tz": "Asia/Dubai", "method": "Dubai", "asr": 1}, {"id": "doha", "en": "Doha", "bn": "দোহা", "country": "Qatar", "lat": 25.2854, "lng": 51.531, "tz": "Asia/Qatar", "method": "Qatar", "asr": 1}, {"id": "kuwait-city", "en": "Kuwait City", "bn": "কুয়েত সিটি", "country": "Kuwait", "lat": 29.3759, "lng": 47.9774, "tz": "Asia/Kuwait", "method": "Kuwait", "asr": 1}, {"id": "muscat", "en": "Muscat", "bn": "মাস্কাট", "country": "Oman", "lat": 23.588, "lng": 58.3829, "tz": "Asia/Muscat", "method": "Dubai", "asr": 1}, {"id": "manama", "en": "Manama", "bn": "মানামা", "country": "Bahrain", "lat": 26.2285, "lng": 50.586, "tz": "Asia/Bahrain", "method": "Qatar", "asr": 1}, {"id": "baghdad", "en": "Baghdad", "bn": "বাগদাদ", "country": "Iraq", "lat": 33.3152, "lng": 44.3661, "tz": "Asia/Baghdad", "method": "MWL", "asr": 1}, {"id": "tehran", "en": "Tehran", "bn": "তেহরান", "country": "Iran", "lat": 35.6892, "lng": 51.389, "tz": "Asia/Tehran", "method": "Tehran", "asr": 1}, {"id": "mashhad", "en": "Mashhad", "bn": "মাশহাদ", "country": "Iran", "lat": 36.2972, "lng": 59.6067, "tz": "Asia/Tehran", "method": "Tehran", "asr": 1}, {"id": "istanbul", "en": "Istanbul", "bn": "ইস্তাম্বুল", "country": "Turkey", "lat": 41.0082, "lng": 28.9784, "tz": "Europe/Istanbul", "method": "Diyanet", "asr": 1}, {"id": "ankara", "en": "Ankara", "bn": "আঙ্কারা", "country": "Turkey", "lat": 39.9334, "lng": 32.8597, "tz": "Europe/Istanbul", "method": "Diyanet", "asr": 1}, {"id": "izmir", "en": "Izmir", "bn": "ইজমির", "country": "Turkey", "lat": 38.4192, "lng": 27.1287, "tz": "Europe/Istanbul", "method": "Diyanet", "asr": 1}, {"id": "cairo", "en": "Cairo", "bn": "কায়রো", "country": "Egypt", "lat": 30.0444, "lng": 31.2357, "tz": "Africa/Cairo", "method": "Egypt", "asr": 1}, {"id": "alexandria", "en": "Alexandria", "bn": "আলেকজান্দ্রিয়া", "country": "Egypt", "lat": 31.2001, "lng": 29.9187, "tz": "Africa/Cairo", "method": "Egypt", "asr": 1}, {"id": "jakarta", "en": "Jakarta", "bn": "জাকার্তা", "country": "Indonesia", "lat": -6.2088, "lng": 106.8456, "tz": "Asia/Jakarta", "method": "Kemenag", "asr": 1}, {"id": "surabaya", "en": "Surabaya", "bn": "সুরাবায়া", "country": "Indonesia", "lat": -7.2575, "lng": 112.7521, "tz": "Asia/Surabaya", "method": "Kemenag", "asr": 1}, {"id": "medan", "en": "Medan", "bn": "মেদান", "country": "Indonesia", "lat": 3.5952, "lng": 98.6722, "tz": "Asia/Jakarta", "method": "Kemenag", "asr": 1}, {"id": "makassar", "en": "Makassar", "bn": "মাকাসার", "country": "Indonesia", "lat": -5.1477, "lng": 119.4327, "tz": "Asia/Makassar", "method": "Kemenag", "asr": 1}, {"id": "palembang", "en": "Palembang", "bn": "পালেমবাং", "country": "Indonesia", "lat": -2.9761, "lng": 104.7754, "tz": "Asia/Pontianak", "method": "Kemenag", "asr": 1}, {"id": "kuala-lumpur", "en": "Kuala Lumpur", "bn": "কুয়ালালামপুর", "country": "Malaysia", "lat": 3.139, "lng": 101.6869, "tz": "Asia/Kuala_Lumpur", "method": "JAKIM", "asr": 1}, {"id": "johor-bahru", "en": "Johor Bahru", "bn": "জোহর বাহরু", "country": "Malaysia", "lat": 1.4927, "lng": 103.7414, "tz": "Asia/Kuala_Lumpur", "method": "JAKIM", "asr": 1}, {"id": "penang", "en": "Penang", "bn": "পেনাং", "country": "Malaysia", "lat": 5.4141, "lng": 100.3288, "tz": "Asia/Kuala_Lumpur", "method": "JAKIM", "asr": 1}, {"id": "singapore", "en": "Singapore", "bn": "সিঙ্গাপুর", "country": "Singapore", "lat": 1.3521, "lng": 103.8198, "tz": "Asia/Singapore", "method": "JAKIM", "asr": 1}, {"id": "bandar-seri-begawan", "en": "Bandar Seri Begawan", "bn": "বন্দর সেরি বেগাওয়ান", "country": "Brunei", "lat": 4.9031, "lng": 114.9398, "tz": "Asia/Brunei", "method": "JAKIM", "asr": 1}, {"id": "algiers", "en": "Algiers", "bn": "আলজিয়ার্স", "country": "Algeria", "lat": 36.7538, "lng": 3.0588, "tz": "Africa/Algiers", "method": "MWL", "asr": 1}, {"id": "casablanca", "en": "Casablanca", "bn": "কাসাব্লাঙ্কা", "country": "Morocco", "lat": 33.5731, "lng": -7.5898, "tz": "Africa/Casablanca", "method": "MWL", "asr": 1}, {"id": "rabat", "en": "Rabat", "bn": "রাবাত", "country": "Morocco", "lat": 34.0209, "lng": -6.8416, "tz": "Africa/Casablanca", "method": "MWL", "asr": 1}, {"id": "tunis", "en": "Tunis", "bn": "তিউনিস", "country": "Tunisia", "lat": 36.8065, "lng": 10.1815, "tz": "Africa/Tunis", "method": "MWL", "asr": 1}, {"id": "tripoli", "en": "Tripoli", "bn": "ত্রিপোলি", "country": "Libya", "lat": 32.8966, "lng": 13.1913, "tz": "Africa/Tripoli", "method": "MWL", "asr": 1}, {"id": "khartoum", "en": "Khartoum", "bn": "খার্তুম", "country": "Sudan", "lat": 15.5007, "lng": 32.5599, "tz": "Africa/Khartoum", "method": "Egypt", "asr": 1}, {"id": "amman", "en": "Amman", "bn": "আম্মান", "country": "Jordan", "lat": 31.9454, "lng": 35.9284, "tz": "Asia/Amman", "method": "MWL", "asr": 1}, {"id": "jerusalem", "en": "Jerusalem", "bn": "জেরুজালেম", "country": "Palestine", "lat": 31.7683, "lng": 35.2137, "tz": "Asia/Jerusalem", "method": "MWL", "asr": 1}, {"id": "gaza", "en": "Gaza", "bn": "গাজা", "country": "Palestine", "lat": 31.5017, "lng": 34.4668, "tz": "Asia/Gaza", "method": "Egypt", "asr": 1}, {"id": "beirut", "en": "Beirut", "bn": "বৈরুত", "country": "Lebanon", "lat": 33.8938, "lng": 35.5016, "tz": "Asia/Beirut", "method": "MWL", "asr": 1}, {"id": "damascus", "en": "Damascus", "bn": "দামেস্ক", "country": "Syria", "lat": 33.5138, "lng": 36.2765, "tz": "Asia/Damascus", "method": "MWL", "asr": 1}, {"id": "sanaa", "en": "Sanaa", "bn": "সানা", "country": "Yemen", "lat": 15.3694, "lng": 44.191, "tz": "Asia/Aden", "method": "Makkah", "asr": 1}, {"id": "tashkent", "en": "Tashkent", "bn": "তাশখন্দ", "country": "Uzbekistan", "lat": 41.2995, "lng": 69.2401, "tz": "Asia/Tashkent", "method": "MWL", "asr": 2}, {"id": "almaty", "en": "Almaty", "bn": "আলমাতি", "country": "Kazakhstan", "lat": 43.222, "lng": 76.8512, "tz": "Asia/Almaty", "method": "MWL", "asr": 2}, {"id": "bishkek", "en": "Bishkek", "bn": "বিশকেক", "country": "Kyrgyzstan", "lat": 42.8746, "lng": 74.5698, "tz": "Asia/Bishkek", "method": "MWL", "asr": 2}, {"id": "dushanbe", "en": "Dushanbe", "bn": "দুশানবে", "country": "Tajikistan", "lat": 38.5598, "lng": 68.787, "tz": "Asia/Dushanbe", "method": "MWL", "asr": 2}, {"id": "ashgabat", "en": "Ashgabat", "bn": "আশগাবাত", "country": "Turkmenistan", "lat": 37.9601, "lng": 58.3261, "tz": "Asia/Ashgabat", "method": "MWL", "asr": 2}, {"id": "baku", "en": "Baku", "bn": "বাকু", "country": "Azerbaijan", "lat": 40.4093, "lng": 49.8671, "tz": "Asia/Baku", "method": "Diyanet", "asr": 1}, {"id": "lagos", "en": "Lagos", "bn": "লাগোস", "country": "Nigeria", "lat": 6.5244, "lng": 3.3792, "tz": "Africa/Lagos", "method": "MWL", "asr": 1}, {"id": "kano", "en": "Kano", "bn": "কানো", "country": "Nigeria", "lat": 12.0022, "lng": 8.592, "tz": "Africa/Lagos", "method": "MWL", "asr": 1}, {"id": "dakar", "en": "Dakar", "bn": "ডাকার", "country": "Senegal", "lat": 14.7167, "lng": -17.4677, "tz": "Africa/Dakar", "method": "MWL", "asr": 1}, {"id": "bamako", "en": "Bamako", "bn": "বামাকো", "country": "Mali", "lat": 12.6392, "lng": -8.0029, "tz": "Africa/Bamako", "method": "MWL", "asr": 1}, {"id": "mogadishu", "en": "Mogadishu", "bn": "মোগাদিশু", "country": "Somalia", "lat": 2.0469, "lng": 45.3182, "tz": "Africa/Mogadishu", "method": "Makkah", "asr": 1}, {"id": "nairobi", "en": "Nairobi", "bn": "নাইরোবি", "country": "Kenya", "lat": -1.2921, "lng": 36.8219, "tz": "Africa/Nairobi", "method": "MWL", "asr": 1}, {"id": "london", "en": "London", "bn": "লন্ডন", "country": "United Kingdom", "lat": 51.5074, "lng": -0.1278, "tz": "Europe/London", "method": "MWL", "asr": 2}, {"id": "birmingham", "en": "Birmingham", "bn": "বার্মিংহাম", "country": "United Kingdom", "lat": 52.48, "lng": -1.8904, "tz": "Europe/London", "method": "MWL", "asr": 2}, {"id": "manchester", "en": "Manchester", "bn": "ম্যানচেস্টার", "country": "United Kingdom", "lat": 53.4808, "lng": -2.2426, "tz": "Europe/London", "method": "MWL", "asr": 2}, {"id": "paris", "en": "Paris", "bn": "প্যারিস", "country": "France", "lat": 48.8566, "lng": 2.3522, "tz": "Europe/Paris", "method": "MWL", "asr": 1}, {"id": "berlin", "en": "Berlin", "bn": "বার্লিন", "country": "Germany", "lat": 52.52, "lng": 13.405, "tz": "Europe/Berlin", "method": "Diyanet", "asr": 1}, {"id": "munich", "en": "Munich", "bn": "মিউনিখ", "country": "Germany", "lat": 48.1351, "lng": 11.582, "tz": "Europe/Berlin", "method": "Diyanet", "asr": 1}, {"id": "amsterdam", "en": "Amsterdam", "bn": "আমস্টারডাম", "country": "Netherlands", "lat": 52.3676, "lng": 4.9041, "tz": "Europe/Amsterdam", "method": "MWL", "asr": 1}, {"id": "brussels", "en": "Brussels", "bn": "ব্রাসেলস", "country": "Belgium", "lat": 50.8503, "lng": 4.3517, "tz": "Europe/Brussels", "method": "MWL", "asr": 1}, {"id": "madrid", "en": "Madrid", "bn": "মাদ্রিদ", "country": "Spain", "lat": 40.4168, "lng": -3.7038, "tz": "Europe/Madrid", "method": "MWL", "asr": 1}, {"id": "rome", "en": "Rome", "bn": "রোম", "country": "Italy", "lat": 41.9028, "lng": 12.4964, "tz": "Europe/Rome", "method": "MWL", "asr": 1}, {"id": "stockholm", "en": "Stockholm", "bn": "স্টকহোম", "country": "Sweden", "lat": 59.3294, "lng": 18.0686, "tz": "Europe/Stockholm", "method": "MWL", "asr": 1}, {"id": "oslo", "en": "Oslo", "bn": "অসলো", "country": "Norway", "lat": 59.9139, "lng": 10.7522, "tz": "Europe/Oslo", "method": "MWL", "asr": 1}, {"id": "copenhagen", "en": "Copenhagen", "bn": "কোপেনহেগেন", "country": "Denmark", "lat": 55.6761, "lng": 12.5683, "tz": "Europe/Copenhagen", "method": "MWL", "asr": 1}, {"id": "vienna", "en": "Vienna", "bn": "ভিয়েনা", "country": "Austria", "lat": 48.2082, "lng": 16.3738, "tz": "Europe/Vienna", "method": "MWL", "asr": 1}, {"id": "toronto", "en": "Toronto", "bn": "টরন্টো", "country": "Canada", "lat": 43.6532, "lng": -79.3832, "tz": "America/Toronto", "method": "ISNA", "asr": 2}, {"id": "montreal", "en": "Montreal", "bn": "মন্ট্রিল", "country": "Canada", "lat": 45.5017, "lng": -73.5673, "tz": "America/Toronto", "method": "ISNA", "asr": 2}, {"id": "vancouver", "en": "Vancouver", "bn": "ভ্যাঙ্কুভার", "country": "Canada", "lat": 49.2827, "lng": -123.1207, "tz": "America/Vancouver", "method": "ISNA", "asr": 2}, {"id": "new-york", "en": "New York", "bn": "নিউ ইয়র্ক", "country": "USA", "lat": 40.7128, "lng": -74.006, "tz": "America/New_York", "method": "ISNA", "asr": 2}, {"id": "chicago", "en": "Chicago", "bn": "শিকাগো", "country": "USA", "lat": 41.8781, "lng": -87.6298, "tz": "America/Chicago", "method": "ISNA", "asr": 2}, {"id": "houston", "en": "Houston", "bn": "হিউস্টন", "country": "USA", "lat": 29.7604, "lng": -95.3698, "tz": "America/Chicago", "method": "ISNA", "asr": 2}, {"id": "los-angeles", "en": "Los Angeles", "bn": "লস অ্যাঞ্জেলেস", "country": "USA", "lat": 34.0522, "lng": -118.2437, "tz": "America/Los_Angeles", "method": "ISNA", "asr": 2}, {"id": "dearborn", "en": "Dearborn", "bn": "ডিয়ারবর্ন", "country": "USA", "lat": 42.3223, "lng": -83.1763, "tz": "America/Detroit", "method": "ISNA", "asr": 1}, {"id": "sydney", "en": "Sydney", "bn": "সিডনি", "country": "Australia", "lat": -33.8688, "lng": 151.2093, "tz": "Australia/Sydney", "method": "MWL", "asr": 1}, {"id": "melbourne", "en": "Melbourne", "bn": "মেলবোর্ন", "country": "Australia", "lat": -37.8136, "lng": 144.9631, "tz": "Australia/Melbourne", "method": "MWL", "asr": 1}, {"id": "auckland", "en": "Auckland", "bn": "অকল্যান্ড", "country": "New Zealand", "lat": -36.8485, "lng": 174.7633, "tz": "Pacific/Auckland", "method": "MWL", "asr": 1}, {"id": "tokyo", "en": "Tokyo", "bn": "টোকিও", "country": "Japan", "lat": 35.6762, "lng": 139.6503, "tz": "Asia/Tokyo", "method": "MWL", "asr": 1}, {"id": "seoul", "en": "Seoul", "bn": "সিউল", "country": "South Korea", "lat": 37.5665, "lng": 126.978, "tz": "Asia/Seoul", "method": "MWL", "asr": 1}, {"id": "beijing", "en": "Beijing", "bn": "বেইজিং", "country": "China", "lat": 39.9042, "lng": 116.4074, "tz": "Asia/Shanghai", "method": "MWL", "asr": 2}, {"id": "urumqi", "en": "Urumqi", "bn": "উরুমকি", "country": "China", "lat": 43.8256, "lng": 87.6168, "tz": "Asia/Urumqi", "method": "MWL", "asr": 2}, {"id": "johannesburg", "en": "Johannesburg", "bn": "জোহানেসবার্গ", "country": "South Africa", "lat": -26.2041, "lng": 28.0473, "tz": "Africa/Johannesburg", "method": "MWL", "asr": 1}, {"id": "cape-town", "en": "Cape Town", "bn": "কেপ টাউন", "country": "South Africa", "lat": -33.9249, "lng": 18.4241, "tz": "Africa/Johannesburg", "method": "MWL", "asr": 1}];
+var WORLD = null; /* lazy-loaded full list */
+
+/* ---------------- prayer math (solar position) ---------------- */
+function dtr(d){ return d * Math.PI / 180; } function rtd(r){ return r * 180 / Math.PI; }
+function fixangle(a){ a = a - 360 * Math.floor(a / 360); return a < 0 ? a + 360 : a; }
+function fixhour(a){ a = a - 24 * Math.floor(a / 24); return a < 0 ? a + 24 : a; }
+function julian(y, m, d){ if (m <= 2){ y -= 1; m += 12; } var A = Math.floor(y / 100), B = 2 - A + Math.floor(A / 4); return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5; }
+function sunDeclEqT(jd){
+  var D = jd - 2451545.0;
+  var g = fixangle(357.529 + 0.98560028 * D);
+  var q = fixangle(280.459 + 0.98564736 * D);
+  var L = fixangle(q + 1.915 * Math.sin(dtr(g)) + 0.020 * Math.sin(dtr(2 * g)));
+  var e = 23.439 - 0.00000036 * D;
+  var RA = fixhour(rtd(Math.atan2(Math.cos(dtr(e)) * Math.sin(dtr(L)), Math.cos(dtr(L)))) / 15);
+  var decl = rtd(Math.asin(Math.sin(dtr(e)) * Math.sin(dtr(L))));
+  return { decl: decl, eqt: q / 15 - RA };
+}
+function tzOffsetHours(tz, date){
+  try {
+    var dtf = new Intl.DateTimeFormat("en-US", { timeZone: tz, hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    var parts = {}; dtf.formatToParts(date).forEach(function(p){ parts[p.type] = p.value; });
+    var asUTC = Date.UTC(+parts.year, +parts.month - 1, +parts.day, +parts.hour % 24, +parts.minute, +parts.second);
+    return (asUTC - date.getTime()) / 3600000;
+  } catch (e) { return -date.getTimezoneOffset() / 60; }
+}
+function computeTimes(lat, lng, tz, methodKey, asrFactor){
+  var M = METHODS[methodKey] || METHODS.MWL;
+  /* the date must be TODAY IN THE CITY, not in the visitor's timezone */
+  var dp = {}; new Intl.DateTimeFormat("en-US", { timeZone: tz, year: "numeric", month: "numeric", day: "numeric" }).formatToParts(new Date()).forEach(function(p){ dp[p.type] = +p.value; });
+  var y = dp.year, mo = dp.month, da = dp.day;
+  var probe = new Date(Date.UTC(y, mo - 1, da, 12, 0, 0));
+  var tzH = tzOffsetHours(tz, probe);
+  var jd = julian(y, mo, da) - lng / 360;
+  var se = sunDeclEqT(jd), decl = se.decl;
+  var midDay = fixhour(12 - se.eqt);
+  function ha(angle){ /* hour angle in hours for a depression angle (deg) */
+    var c = (-Math.sin(dtr(angle)) - Math.sin(dtr(decl)) * Math.sin(dtr(lat))) / (Math.cos(dtr(decl)) * Math.cos(dtr(lat)));
+    if (c < -1 || c > 1) return NaN;
+    return rtd(Math.acos(c)) / 15;
+  }
+  var sunriseHA = ha(0.833);
+  var sunrise = midDay - sunriseHA, sunset = midDay + sunriseHA;
+  var fajr = midDay - ha(M.fajr);
+  var ishaA = midDay + ha(M.isha || 17);
+  /* asr: shadow factor */
+  var asrAngle = -rtd(Math.atan(1 / (asrFactor + Math.tan(dtr(Math.abs(lat - decl))))));
+  var cA = (-Math.sin(dtr(asrAngle)) - Math.sin(dtr(decl)) * Math.sin(dtr(lat))) / (Math.cos(dtr(decl)) * Math.cos(dtr(lat)));
+  var asr = (cA >= -1 && cA <= 1) ? midDay + rtd(Math.acos(cA)) / 15 : NaN;
+  /* high-latitude fallback: angle-based portion of the night */
+  var night = 24 - (sunset - sunrise);
+  if (isNaN(fajr)) fajr = sunrise - (M.fajr / 60) * night;
+  var isha;
+  if (M.ishaMin){
+    var mins = M.ishaMin;
+    if (methodKey === "Makkah"){
+      try { var hm = +new Intl.DateTimeFormat("en-u-ca-islamic", { timeZone: tz, month: "numeric" }).format(probe); if (hm === 9) mins = 120; } catch (e) {}
+    }
+    isha = sunset + mins / 60;
+  } else {
+    isha = ishaA; if (isNaN(isha)) isha = sunset + ((M.isha || 17) / 60) * night;
+  }
+  var adj = tzH - lng / 15;
+  function fix(x){ return fixhour(x + adj); }
+  return { fajr: fix(fajr), sunrise: fix(sunrise), dhuhr: fix(midDay), asr: fix(asr), maghrib: fix(sunset), isha: fix(isha) };
+}
+function qiblaBearing(lat, lng){
+  var kaabaLat = 21.4225, kaabaLng = 39.8262;
+  var dLng = dtr(kaabaLng - lng);
+  var y = Math.sin(dLng);
+  var x = Math.cos(dtr(lat)) * Math.tan(dtr(kaabaLat)) - Math.sin(dtr(lat)) * Math.cos(dLng);
+  return fixangle(rtd(Math.atan2(y, x)));
+}
+function fmtTime(h){
+  var hh = Math.floor(h), mm = Math.floor((h - hh) * 60 + 0.5);
+  if (mm === 60){ mm = 0; hh = (hh + 1) % 24; }
+  var ap = hh < 12 ? "AM" : "PM"; var h12 = hh % 12; if (h12 === 0) h12 = 12;
+  return h12 + ":" + (mm < 10 ? "0" : "") + mm + " " + ap;
+}
+function fmtBn(h){ /* Bangla digits + শে/বিকেল hints are complex; use standard digits converted */
+  var s = fmtTime(h);
+  if (LANG !== "bn") return s;
+  var bn = "০১২৩৪৫৬৭৮৯";
+  return s.replace(/[0-9]/g, function(d){ return bn[+d]; }).replace("AM", "AM").replace("PM", "PM");
+}
+
+/* ---------------- search & display ---------------- */
+var CURRENT = null;
+var resEl = document.getElementById("res");
+function norm(s){ return (s || "").toLowerCase().replace(/[''.-]/g, " ").replace(/\s+/g, " ").trim(); }
+function searchCities(q){
+  q = norm(q); if (!q) return [];
+  var out = [];
+  CURATED.forEach(function(c){
+    if (norm(c.en).indexOf(q) === 0 || norm(c.bn).indexOf(q) >= 0 || norm(c.country).indexOf(q) === 0) out.push({ name: LANG === "bn" && c.bn ? c.bn : c.en, en: c.en, country: c.country, lat: c.lat, lng: c.lng, tz: c.tz, method: c.method, asr: c.asr, pop: 999999999 });
+  });
+  if (WORLD){
+    var hits = [];
+    WORLD.forEach(function(r){
+      if (norm(r[0]).indexOf(q) === 0 || norm(r[0]).indexOf(" " + q) >= 0) hits.push(r);
+    });
+    hits.sort(function(a, b){ return b[7] - a[7]; });
+    hits.slice(0, 14).forEach(function(r){ out.push({ name: r[0], en: r[0], country: r[1], lat: r[2], lng: r[3], tz: r[4], method: r[5], asr: r[6], pop: r[7] }); });
+  }
+  var seen = {}, ded = [];
+  out.forEach(function(c){ var k = c.en + "|" + c.country + "|" + c.lat.toFixed(2); if (!seen[k]){ seen[k] = 1; ded.push(c); } });
+  return ded.slice(0, 12);
+}
+var qTimer = null;
+document.getElementById("q").addEventListener("input", function(){
+  var v = this.value;
+  clearTimeout(qTimer);
+  qTimer = setTimeout(function(){
+    if (!v.trim()){ resEl.innerHTML = ""; document.getElementById("feat").style.display = ""; return; }
+    document.getElementById("feat").style.display = "none";
+    var hits = searchCities(v);
+    if (!hits.length){ resEl.innerHTML = '<p style="font-size:13.5px;color:#6b7280;padding:4px 2px">' + T("noRes") + "</p>"; return; }
+    resEl.innerHTML = "";
+    hits.forEach(function(c){
+      var b = document.createElement("button"); b.className = "hit"; b.type = "button";
+      b.innerHTML = "<span>" + c.name + '</span><span class="co">' + c.country + "</span>";
+      b.addEventListener("click", function(){ showCity(c); });
+      resEl.appendChild(b);
+    });
+  }, 160);
+});
+function buildFeatured(){
+  var names = ["Makkah", "Madinah", "Dhaka", "Dubai", "Istanbul", "Kuala Lumpur", "London", "New York", "Karachi", "Cairo"];
+  var wrap = document.getElementById("featChips"); wrap.innerHTML = "";
+  names.forEach(function(n){
+    var c = null; CURATED.forEach(function(x){ if (x.en === n) c = x; });
+    if (!c) return;
+    var b = document.createElement("button"); b.className = "chip"; b.type = "button";
+    b.textContent = LANG === "bn" && c.bn ? c.bn : c.en;
+    b.addEventListener("click", function(){ showCity({ name: b.textContent, en: c.en, country: c.country, lat: c.lat, lng: c.lng, tz: c.tz, method: c.method, asr: c.asr }); });
+    wrap.appendChild(b);
+  });
+}
+function hijriStr(tz, date){
+  try { return new Intl.DateTimeFormat(LANG === "bn" ? "bn-u-ca-islamic" : "en-u-ca-islamic", { timeZone: tz, day: "numeric", month: "long", year: "numeric" }).format(date); } catch (e) { return ""; }
+}
+function showCity(c, keepSel){
+  CURRENT = c;
+  if (!keepSel){
+    methodSel.value = c.method || "MWL";
+    document.getElementById("asrSel").value = String(c.asr || 1);
+  }
+  var nowUTC = new Date();
+  var times = computeTimes(c.lat, c.lng, c.tz, methodSel.value, +document.getElementById("asrSel").value);
+  document.getElementById("result").hidden = false;
+  document.getElementById("cityName").textContent = c.name || c.en;
+  document.getElementById("cityCountry").textContent = c.country || "";
+  var dateStr = "";
+  try { dateStr = new Intl.DateTimeFormat(LANG === "bn" ? "bn" : "en", { timeZone: c.tz, weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(nowUTC); } catch (e) {}
+  var hj = hijriStr(c.tz, nowUTC);
+  document.getElementById("cityDate").textContent = dateStr + (hj ? " · " + hj : "");
+  /* next waqt */
+  var tzH = tzOffsetHours(c.tz, nowUTC);
+  var localNow = new Date(nowUTC.getTime() + (tzH * 3600000));
+  var nowH = localNow.getUTCHours() + localNow.getUTCMinutes() / 60 + localNow.getUTCSeconds() / 3600;
+  var order = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"];
+  var nextKey = null, nextT = null;
+  for (var i = 0; i < order.length; i++){ if (times[order[i]] > nowH + 0.0005){ nextKey = order[i]; nextT = times[order[i]]; break; } }
+  if (!nextKey){ nextKey = "fajr"; nextT = times.fajr + 24; }
+  var rows = "";
+  order.forEach(function(k){
+    rows += '<div class="trow' + (k === nextKey ? " next" : "") + '"><span class="tn">' + T(k) + '</span><span class="tt">' + fmtBn(times[k]) + "</span></div>";
+  });
+  document.getElementById("trows").innerHTML = rows;
+  document.getElementById("nextText").textContent = T("nextIs") + " " + T(nextKey) + " — " + fmtBn(nextT % 24);
+  var diff = nextT - nowH, dh = Math.floor(diff), dm = Math.floor((diff - dh) * 60 + 0.5);
+  document.getElementById("nextCd").textContent = "(" + T("left") + " " + dh + ":" + (dm < 10 ? "0" : "") + dm + ")";
+  var qb = qiblaBearing(c.lat, c.lng);
+  document.getElementById("qiblaDeg").textContent = (LANG === "bn" ? String(Math.round(qb)).replace(/[0-9]/g, function(d){ return "০১২৩৪৫৬৭৮৯"[+d]; }) : Math.round(qb)) + "°";
+  document.getElementById("qiblaCompass").textContent = T("compass")[Math.round(qb / 45) % 8];
+  try { localStorage.setItem("waqtWorldCity", JSON.stringify({ en: c.en, name: c.name, country: c.country, lat: c.lat, lng: c.lng, tz: c.tz, method: c.method, asr: c.asr })); } catch (e) {}
+}
+methodSel.addEventListener("change", function(){ if (CURRENT) showCity(CURRENT, true); });
+document.getElementById("asrSel").addEventListener("change", function(){ if (CURRENT) showCity(CURRENT, true); });
+document.getElementById("gpsBtn").addEventListener("click", function(){
+  if (!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(function(pos){
+    var tz = "UTC";
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; } catch (e) {}
+    showCity({ name: T("myLoc"), en: "My Location", country: "", lat: pos.coords.latitude, lng: pos.coords.longitude, tz: tz, method: "MWL", asr: 1 });
+  });
+});
+
+/* init */
+applyLang();
+(function(){
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem("waqtWorldCity") || "null"); } catch (e) {}
+  if (saved && saved.lat) showCity({ name: LANG === "bn" ? (function(){ var bn = null; CURATED.forEach(function(x){ if (x.en === saved.en) bn = x.bn; }); return bn || saved.en; })() : saved.en, en: saved.en, country: saved.country, lat: saved.lat, lng: saved.lng, tz: saved.tz, method: saved.method, asr: saved.asr });
+  fetch("cities-world.json").then(function(r){ return r.json(); }).then(function(j){ WORLD = j.cities; }).catch(function(){});
+})();
+</script>
+</body>
+</html>
