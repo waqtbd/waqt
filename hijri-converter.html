@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>হিজরি তারিখ কনভার্টার | Waqt (ওয়াক্ত)</title>
+<title data-i18n="docTitle">হিজরি তারিখ কনভার্টার | Waqt (ওয়াক্ত)</title>
 <meta name="description" content="ইংরেজি তারিখ থেকে হিজরি এবং হিজরি থেকে ইংরেজি তারিখে রূপান্তর করুন — আজকের হিজরি তারিখসহ। গাণিতিক পঞ্জিকা অনুযায়ী আনুমানিক ফলাফল।">
 <link rel="canonical" href="https://waqtbd.github.io/waqt/hijri-converter.html">
 <meta property="og:type" content="website">
@@ -91,6 +91,9 @@ input,select{font-family:inherit}
       }
 
       /* print: monthly timetable only */
+.lang-toggle{display:inline-flex;background:#e9e4d8;border-radius:999px;padding:3px;gap:2px;vertical-align:middle}
+.lang-toggle button{border:0;background:transparent;padding:5px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer;color:#43534a}
+.lang-toggle button.on{background:#0b5d43;color:#fff;font-weight:700}
     </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
@@ -102,42 +105,50 @@ input,select{font-family:inherit}
 </script>
 <style>.waqt-share{max-width:680px;margin:20px auto;padding:16px 16px 15px;text-align:center;background:linear-gradient(180deg,#ffffff,#f2f8f5);border:1px solid #dcebe4;border-top:3px solid #d4af37;border-radius:20px;box-shadow:0 10px 30px rgba(11,92,77,.10)}.waqt-share .ws-title{display:block;font-size:15.5px;font-weight:800;color:#0b5c4d;letter-spacing:.2px}.waqt-share .ws-sub{display:block;font-size:12.5px;color:#64748b;margin:2px 0 12px}.waqt-share .ws-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}.waqt-share .ws-btn{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:9px 16px 9px 13px;border-radius:999px;color:#fff;font-size:13.5px;font-weight:700;text-decoration:none;border:0;cursor:pointer;box-shadow:0 4px 12px rgba(15,23,42,.16),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .15s ease,box-shadow .15s ease}.waqt-share .ws-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(15,23,42,.20),inset 0 1px 0 rgba(255,255,255,.35)}.waqt-share .ws-btn:active{transform:translateY(0)}.waqt-share .ws-btn svg{width:18px;height:18px;flex:0 0 auto}.waqt-share .ws-wa{background:linear-gradient(135deg,#2be07c,#12a150)}.waqt-share .ws-fb{background:linear-gradient(135deg,#3b8bff,#0f5fd0)}.waqt-share .ws-tg{background:linear-gradient(135deg,#4fc3f7,#1d8ec9)}.waqt-share .ws-x{background:linear-gradient(135deg,#3f4756,#05070a)}.waqt-share .ws-copy{background:linear-gradient(135deg,#e7c65a,#b8860b)}</style></head>
 <body>
-<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a></div>
-<header class="banner"><h1>হিজরি তারিখ কনভার্টার</h1><div class="gold"></div><p>ইংরেজি (গ্রেগরিয়ান) তারিখ থেকে হিজরি এবং হিজরি থেকে ইংরেজি — দুই দিকেই রূপান্তর</p></header>
+<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a><span class="lang-toggle" role="group" aria-label="Language"><button type="button" id="langBn">বাংলা</button><button type="button" id="langEn">English</button></span></div>
+<header class="banner"><h1 data-i18n="h1">হিজরি তারিখ কনভার্টার</h1><div class="gold"></div><p data-i18n="bannerSub">ইংরেজি (গ্রেগরিয়ান) তারিখ থেকে হিজরি এবং হিজরি থেকে ইংরেজি — দুই দিকেই রূপান্তর</p></header>
 <main>
-<div class="today fade"><div class="tl">আজকের হিজরি তারিখ</div><div class="th" id="todayH">…</div><div class="tg" id="todayG">…</div></div>
+<div class="today fade"><div class="tl" data-i18n="todayL">আজকের হিজরি তারিখ</div><div class="th" id="todayH">…</div><div class="tg" id="todayG">…</div></div>
 <section class="card fade">
-<h2>ইংরেজি থেকে হিজরি</h2>
-<div class="field"><label for="gdate">ইংরেজি তারিখ বেছে নিন</label><input type="date" id="gdate" min="0001-01-01" max="9999-12-31"></div>
-<button class="btn" id="btnG" type="button">হিজরি তারিখ দেখুন</button>
-<div class="resbox" id="resG"><div class="rl">হিজরি তারিখ</div><div class="rv" id="resGv"></div><div class="rs" id="resGs"></div></div>
+<h2 data-i18n="g2hT">ইংরেজি থেকে হিজরি</h2>
+<div class="field"><label for="gdate" data-i18n="gdateL">ইংরেজি তারিখ বেছে নিন</label><input type="date" id="gdate" min="0001-01-01" max="9999-12-31"></div>
+<button class="btn" id="btnG" type="button" data-i18n="btnG">হিজরি তারিখ দেখুন</button>
+<div class="resbox" id="resG"><div class="rl" data-i18n="resGL">হিজরি তারিখ</div><div class="rv" id="resGv"></div><div class="rs" id="resGs"></div></div>
 </section>
-<div class="divider">অথবা</div>
+<div class="divider" data-i18n="orDiv">অথবা</div>
 <section class="card fade">
-<h2>হিজরি থেকে ইংরেজি</h2>
+<h2 data-i18n="h2gT">হিজরি থেকে ইংরেজি</h2>
 <div class="row3">
-<div class="field"><label for="hd">দিন</label><select id="hd"></select></div>
-<div class="field"><label for="hm">মাস</label><select id="hm"></select></div>
-<div class="field"><label for="hy">বছর (হিজরি)</label><input type="number" id="hy" inputmode="numeric" min="1" max="9999"></div>
+<div class="field"><label for="hd" data-i18n="hdL">দিন</label><select id="hd"></select></div>
+<div class="field"><label for="hm" data-i18n="hmL">মাস</label><select id="hm"></select></div>
+<div class="field"><label for="hy" data-i18n="hyL">বছর (হিজরি)</label><input type="number" id="hy" inputmode="numeric" min="1" max="9999"></div>
 </div>
-<button class="btn" id="btnH" type="button" onclick="convH()">ইংরেজি তারিখ দেখুন</button>
-<div class="resbox" id="resH"><div class="rl">ইংরেজি তারিখ</div><div class="rv" id="resHv"></div><div class="rs" id="resHs"></div></div>
+<button class="btn" id="btnH" type="button" onclick="convH()" data-i18n="btnH">ইংরেজি তারিখ দেখুন</button>
+<div class="resbox" id="resH"><div class="rl" data-i18n="resHL">ইংরেজি তারিখ</div><div class="rv" id="resHv"></div><div class="rs" id="resHs"></div></div>
 </section>
 <section class="card sr" style="--sr-delay:0s">
-<h2>মনে রাখুন</h2>
-<p>এই কনভার্টার গাণিতিক (সারণিভিত্তিক) হিজরি পঞ্জিকা অনুসরণ করে, তাই ফলাফল <b>আনুমানিক</b>। প্রকৃত হিজরি তারিখ চাঁদ দেখার উপর নির্ভরশীল — রমজান, ঈদসহ ধর্মীয় দিবসের ক্ষেত্রে স্থানীয় চাঁদ দেখা কমিটি ও ইসলামিক ফাউন্ডেশনের ঘোষণাই চূড়ান্ত। গাণিতিক হিসাবের সাথে বাস্তব তারিখে এক দিনের এদিক-ওদিক হতে পারে।</p>
+<h2 data-i18n="noteT">মনে রাখুন</h2>
+<p><span data-i18n="noteP1">এই কনভার্টার গাণিতিক (সারণিভিত্তিক) হিজরি পঞ্জিকা অনুসরণ করে, তাই ফলাফল </span><b data-i18n="noteB">আনুমানিক</b><span data-i18n="noteP2">। প্রকৃত হিজরি তারিখ চাঁদ দেখার উপর নির্ভরশীল — রমজান, ঈদসহ ধর্মীয় দিবসের ক্ষেত্রে স্থানীয় চাঁদ দেখা কমিটি ও ইসলামিক ফাউন্ডেশনের ঘোষণাই চূড়ান্ত। গাণিতিক হিসাবের সাথে বাস্তব তারিখে এক দিনের এদিক-ওদিক হতে পারে।</span></p>
 </section>
 </main>
-<div class="waqt-share sr" style="--sr-delay:.09s"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/hijri-converter.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html&text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html&text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/hijri-converter.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div><footer class="sr" style="--sr-delay:.18s">
-<h3>আরও দেখুন</h3>
-<div class="dir"><a href="index.html">নামাজের সময়</a><a href="hijri-converter.html">হিজরি কনভার্টার</a><a href="asmaul-husna.html">আল্লাহর ৯৯ নাম</a><a href="zakat-calculator.html">যাকাত ক্যালকুলেটর</a><a href="quran.html">কুরআন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">সব জেলা ও উপজেলা</a></div>
-<p class="fnote">Waqt (ওয়াক্ত) — নামাজের সময়, হিজরি তারিখ, কিবলা ও ইসলামি জ্ঞানের বাংলা ওয়েবসাইট</p>
+<div class="waqt-share sr" style="--sr-delay:.09s"><span class="ws-title" data-i18n="shareT">শেয়ার করুন</span><span class="ws-sub" data-i18n="shareSub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/hijri-converter.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html&text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fhijri-converter.html&text=%E0%A6%B9%E0%A6%BF%E0%A6%9C%E0%A6%B0%E0%A6%BF%20%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%96%20%E0%A6%95%E0%A6%A8%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent=(localStorage.getItem('waqtLang')==='en'?'Copied ✓':'কপি হয়েছে ✓');setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/hijri-converter.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span data-i18n="copyLink">লিংক কপি</span></button></div></div><footer class="sr" style="--sr-delay:.18s">
+<h3 data-i18n="seeAlso">আরও দেখুন</h3>
+<div class="dir"><a href="index.html" data-i18n="fTime">নামাজের সময়</a><a href="hijri-converter.html" data-i18n="fHijri">হিজরি কনভার্টার</a><a href="asmaul-husna.html" data-i18n="fNames">আল্লাহর ৯৯ নাম</a><a href="zakat-calculator.html" data-i18n="fZakat">যাকাত ক্যালকুলেটর</a><a href="quran.html" data-i18n="fQuran">কুরআন</a><a href="proshno-uttor.html" data-i18n="fQA">প্রশ্নোত্তর</a><a href="directory.html" data-i18n="fDir">সব জেলা ও উপজেলা</a></div>
+<p class="fnote" data-i18n="footLine">Waqt (ওয়াক্ত) — নামাজের সময়, হিজরি তারিখ, কিবলা ও ইসলামি জ্ঞানের বাংলা ওয়েবসাইট</p>
 </footer><script>
 var HMON=["মুহাররম","সফর","রবিউল আউয়াল","রবিউস সানি","জুমাদাল উলা","জুমাদাস সানি","রজব","শাবান","রমজান","শাওয়াল","জিলকদ","জিলহজ"];
 var WDAY=["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 var GMON=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 var BN="\u09e6\u09e7\u09e8\u09e9\u09ea\u09eb\u09ec\u09ed\u09ee\u09ef";
 function bn(x){return String(x).replace(/\d/g,function(c){return BN[+c];});}
+var HMON_EN=["Muharram","Safar","Rabi al-Awwal","Rabi al-Thani","Jumada al-Ula","Jumada al-Akhirah","Rajab","Sha'ban","Ramadan","Shawwal","Dhul-Qa'dah","Dhul-Hijjah"];
+var WDAY_EN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+var GMON_EN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+function wqLang(){try{return localStorage.getItem('waqtLang')==='en'?'en':'bn';}catch(err){return 'bn';}}
+var LBN={"hijriWord": "হিজরি", "gregLab": " · ইংরেজি তারিখ: ", "hijriLab": " · হিজরি তারিখ: ", "errYear": "সঠিক হিজরি বছর লিখুন", "errDays1": "এই মাসে ", "errDays2": " দিন", "errPick1": "অনুগ্রহ করে ", "errPick2": " বা তার কম দিন বেছে নিন।"};
+function L(k){var d=window.WAQT_I18N;if(d){var dd=d[wqLang()]||d.bn;if(dd&&dd[k]!=null)return dd[k];}return LBN[k]!=null?LBN[k]:'';}
+function dn(x){return wqLang()==='en'?String(x):bn(x);}
+
 function gJdn(y,m,d){var a=Math.floor((14-m)/12);var yy=y+4800-a;var mm=m+12*a-3;return d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045;}
 function jdnToGreg(jdn){var a=jdn+32044,b=Math.floor((4*a+3)/146097),c=a-Math.floor((146097*b)/4);var dd=Math.floor((4*c+3)/1461),e=c-Math.floor((1461*dd)/4),mm=Math.floor((5*e+2)/153);return [100*b+dd-4800+Math.floor(mm/10),mm+3-12*Math.floor(mm/10),e-Math.floor((153*mm+2)/5)+1];}
 var EPOCH=1948440;
@@ -147,9 +158,9 @@ function hToJdn(hy,hm,hd){return EPOCH+dby(hy)+mstart(hm)+hd-1;}
 function jdnToHijri(jdn){var days=jdn-EPOCH;var hy=Math.floor((30*days+10646)/10631);while(dby(hy+1)<=days)hy++;while(dby(hy)>days)hy--;var doy=days-dby(hy);var hm=1;while(hm<12&&mstart(hm+1)<=doy)hm++;return [hy,hm,doy-mstart(hm)+1];}
 function g2h(y,m,d){return jdnToHijri(gJdn(y,m,d));}
 function h2g(hy,hm,hd){return jdnToGreg(hToJdn(hy,hm,hd));}
-function wdOf(y,m,d){return WDAY[new Date(Date.UTC(y,m-1,d)).getUTCDay()];}
-function fmtH(h){return bn(h[2])+" "+HMON[h[1]-1]+" "+bn(h[0])+" হিজরি";}
-function fmtG(g){return bn(g[2])+" "+GMON[g[1]-1]+" "+bn(g[0]);}
+function wdOf(y,m,d){return (wqLang()==="en"?WDAY_EN:WDAY)[new Date(Date.UTC(y,m-1,d)).getUTCDay()];}
+function fmtH(h){return dn(h[2])+" "+(wqLang()==="en"?HMON_EN:HMON)[h[1]-1]+" "+dn(h[0])+" "+L("hijriWord");}
+function fmtG(g){return dn(g[2])+" "+(wqLang()==="en"?GMON_EN:GMON)[g[1]-1]+" "+dn(g[0]);}
 // today
 var now=new Date(),ty=now.getFullYear(),tm=now.getMonth()+1,td=now.getDate();
 var th=g2h(ty,tm,td);
@@ -168,20 +179,28 @@ function convG(){
   var h=g2h(y,m,d);
   var r=document.getElementById('resG');
   document.getElementById('resGv').textContent=fmtH(h);
-  document.getElementById('resGs').textContent=wdOf(y,m,d)+" · ইংরেজি তারিখ: "+fmtG([y,m,d]);
+  document.getElementById('resGs').textContent=wdOf(y,m,d)+L('gregLab')+fmtG([y,m,d]);
   r.classList.add('show');
 }
 function convH(){
   var hy=parseInt(document.getElementById('hy').value,10),hm=+hmSel.value,hd=+hdSel.value;
   var msg=document.getElementById('resHs');
-  if(!hy||hy<1){document.getElementById('resHv').textContent='সঠিক হিজরি বছর লিখুন';msg.textContent='';document.getElementById('resH').classList.add('show');return;}
+  if(!hy||hy<1){document.getElementById('resHv').textContent=L('errYear');msg.textContent='';document.getElementById('resH').classList.add('show');return;}
   var ml=(hm%2===1)?30:29; if(hm===12&&(hy%30===2||hy%30===5||hy%30===7||hy%30===10||hy%30===13||hy%30===16||hy%30===18||hy%30===21||hy%30===24||hy%30===26||hy%30===29))ml=30;
-  if(hd>ml){document.getElementById('resHv').textContent='এই মাসে '+bn(ml)+' দিন';msg.textContent='অনুগ্রহ করে '+bn(ml)+' বা তার কম দিন বেছে নিন।';document.getElementById('resH').classList.add('show');return;}
+  if(hd>ml){document.getElementById('resHv').textContent=L('errDays1')+dn(ml)+L('errDays2');msg.textContent=L('errPick1')+dn(ml)+L('errPick2');document.getElementById('resH').classList.add('show');return;}
   var g=h2g(hy,hm,hd);
   document.getElementById('resHv').textContent=fmtG(g);
-  msg.textContent=wdOf(g[0],g[1],g[2])+" · হিজরি তারিখ: "+fmtH([hy,hm,hd]);
+  msg.textContent=wdOf(g[0],g[1],g[2])+L('hijriLab')+fmtH([hy,hm,hd]);
   document.getElementById('resH').classList.add('show');
 }
+window.wqRefreshLang=function(){
+  for(var i=0;i<hmSel.options.length;i++){hmSel.options[i].textContent=dn(i+1)+'. '+(wqLang()==='en'?HMON_EN:HMON)[i];}
+  for(var j=0;j<hdSel.options.length;j++){hdSel.options[j].textContent=dn(j+1);}
+  document.getElementById('todayH').textContent=fmtH(th);
+  document.getElementById('todayG').textContent=wdOf(ty,tm,td)+', '+fmtG([ty,tm,td]);
+  if(document.getElementById('resG').classList.contains('show'))convG();
+  if(document.getElementById('resH').classList.contains('show'))convH();
+};
 document.getElementById('btnG').addEventListener('click',convG);
 gi.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();convG();}});
 document.getElementById('hy').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();convH();}});
@@ -219,5 +238,35 @@ document.getElementById('hy').addEventListener('keydown',function(e){if(e.key===
       }
     })();
     </script>
+<script>
+(function(){
+var I18N = { bn: {"docTitle": "হিজরি তারিখ কনভার্টার | Waqt (ওয়াক্ত)", "h1": "হিজরি তারিখ কনভার্টার", "bannerSub": "ইংরেজি (গ্রেগরিয়ান) তারিখ থেকে হিজরি এবং হিজরি থেকে ইংরেজি — দুই দিকেই রূপান্তর", "todayL": "আজকের হিজরি তারিখ", "g2hT": "ইংরেজি থেকে হিজরি", "gdateL": "ইংরেজি তারিখ বেছে নিন", "btnG": "হিজরি তারিখ দেখুন", "resGL": "হিজরি তারিখ", "orDiv": "অথবা", "h2gT": "হিজরি থেকে ইংরেজি", "hdL": "দিন", "hmL": "মাস", "hyL": "বছর (হিজরি)", "btnH": "ইংরেজি তারিখ দেখুন", "resHL": "ইংরেজি তারিখ", "noteT": "মনে রাখুন", "noteP1": "এই কনভার্টার গাণিতিক (সারণিভিত্তিক) হিজরি পঞ্জিকা অনুসরণ করে, তাই ফলাফল ", "noteB": "আনুমানিক", "noteP2": "। প্রকৃত হিজরি তারিখ চাঁদ দেখার উপর নির্ভরশীল — রমজান, ঈদসহ ধর্মীয় দিবসের ক্ষেত্রে স্থানীয় চাঁদ দেখা কমিটি ও ইসলামিক ফাউন্ডেশনের ঘোষণাই চূড়ান্ত। গাণিতিক হিসাবের সাথে বাস্তব তারিখে এক দিনের এদিক-ওদিক হতে পারে।", "shareT": "শেয়ার করুন", "shareSub": "ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন", "copyLink": "লিংক কপি", "seeAlso": "আরও দেখুন", "fTime": "নামাজের সময়", "fHijri": "হিজরি কনভার্টার", "fNames": "আল্লাহর ৯৯ নাম", "fZakat": "যাকাত ক্যালকুলেটর", "fQuran": "কুরআন", "fQA": "প্রশ্নোত্তর", "fDir": "সব জেলা ও উপজেলা", "footLine": "Waqt (ওয়াক্ত) — নামাজের সময়, হিজরি তারিখ, কিবলা ও ইসলামি জ্ঞানের বাংলা ওয়েবসাইট", "hijriWord": "হিজরি", "gregLab": " · ইংরেজি তারিখ: ", "hijriLab": " · হিজরি তারিখ: ", "errYear": "সঠিক হিজরি বছর লিখুন", "errDays1": "এই মাসে ", "errDays2": " দিন", "errPick1": "অনুগ্রহ করে ", "errPick2": " বা তার কম দিন বেছে নিন।"},
+             en: {"docTitle": "Hijri Date Converter | Waqt (ওয়াক্ত)", "h1": "Hijri Date Converter", "bannerSub": "Convert both ways — from Gregorian dates to Hijri, and from Hijri to Gregorian", "todayL": "Today's Hijri date", "g2hT": "Gregorian to Hijri", "gdateL": "Choose a Gregorian date", "btnG": "Show Hijri date", "resGL": "Hijri date", "orDiv": "Or", "h2gT": "Hijri to Gregorian", "hdL": "Day", "hmL": "Month", "hyL": "Year (Hijri)", "btnH": "Show Gregorian date", "resHL": "Gregorian date", "noteT": "Keep in mind", "noteP1": "This converter follows the mathematical (tabular) Hijri calendar, so the result is ", "noteB": "approximate", "noteP2": ". The actual Hijri date depends on moon sighting — for religious days including Ramadan and Eid, the announcement of the local moon sighting committee and the Islamic Foundation is final. The actual date may differ from the calculated date by one day.", "shareT": "Share", "shareSub": "If it helped you, share it with friends", "copyLink": "Copy link", "seeAlso": "See also", "fTime": "Prayer times", "fHijri": "Hijri Converter", "fNames": "Allah's 99 Names", "fZakat": "Zakat Calculator", "fQuran": "Quran", "fQA": "Q&A", "fDir": "All Districts & Upazilas", "footLine": "Waqt (ওয়াক্ত) — a Bengali website for prayer times, Hijri dates, Qibla and Islamic knowledge", "hijriWord": "Hijri", "gregLab": " · Gregorian date: ", "hijriLab": " · Hijri date: ", "errYear": "Enter a correct Hijri year", "errDays1": "This month has ", "errDays2": " days", "errPick1": "Please choose ", "errPick2": " days or fewer."} };
+window.WAQT_I18N = I18N;
+function applyLang(lang){
+  var d = I18N[lang] || I18N.bn;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k = el.getAttribute("data-i18n");
+    if (d[k] != null) el.textContent = d[k];
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){
+    var k = el.getAttribute("data-i18n-ph");
+    if (d[k] != null) el.setAttribute("placeholder", d[k]);
+  });
+  document.documentElement.lang = (lang === "en" ? "en" : "bn");
+  var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+  if (b && e) { b.classList.toggle("on", lang !== "en"); e.classList.toggle("on", lang === "en"); }
+  try { localStorage.setItem("waqtLang", lang); } catch (err) {}
+  if (typeof window.wqRefreshLang === "function") { try { window.wqRefreshLang(); } catch (err) {} }
+}
+function wqDetectLang(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""); if (tz === "Asia/Dhaka") return "bn"; var nl = (navigator.language || "").toLowerCase(); if (nl.indexOf("bn") === 0) return "bn"; return "en"; } catch (err) { return "bn"; } }
+var saved = "bn";
+try { saved = localStorage.getItem("waqtLang") || wqDetectLang(); localStorage.setItem("waqtLang", saved); } catch (err) {}
+applyLang(saved === "en" ? "en" : "bn");
+var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+if (b) b.addEventListener("click", function(){ applyLang("bn"); });
+if (e) e.addEventListener("click", function(){ applyLang("en"); });
+})();
+</script>
 </body>
 </html>

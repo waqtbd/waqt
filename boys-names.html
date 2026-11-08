@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ছেলেদের ইসলামিক নাম অর্থসহ | Waqt (ওয়াক্ত)</title>
+<title data-i18n="docTitle">ছেলেদের ইসলামিক নাম অর্থসহ | Waqt (ওয়াক্ত)</title>
 <meta name="description" content="নবজাতক ছেলের জন্য অর্থসহ সুন্দর ইসলামিক নামের বড় সংগ্রহ — ৭,৬৪৩টি নাম, অক্ষর অনুযায়ী সাজানো। পছন্দের নাম খুঁজুন, অর্থ দেখুন, দুই-তিনটি নাম মিলিয়ে নতুন নামও বানাতে পারবেন।">
 <link rel="canonical" href="https://waqtbd.github.io/waqt/boys-names.html">
 <meta property="og:title" content="ছেলেদের ইসলামিক নাম অর্থসহ | Waqt (ওয়াক্ত)">
@@ -148,6 +148,10 @@ body.girls .medal{box-shadow:0 0 0 2px rgba(240,171,188,.8)}
 .cresult .cmean{font-size:15px;color:#374151;line-height:1.65;margin:4px 0 12px}
 .cresult .cmean b{color:var(--em)}
 .cresult .cmean .dia{color:var(--gold);font-size:10px;padding:0 3px}
+
+.lang-toggle{display:inline-flex;background:#e9e4d8;border-radius:999px;padding:3px;gap:2px;vertical-align:middle}
+.lang-toggle button{border:0;background:transparent;padding:5px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer;color:#43534a}
+.lang-toggle button.on{background:#0b5d43;color:#fff;font-weight:700}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
@@ -173,29 +177,29 @@ body.girls .medal{box-shadow:0 0 0 2px rgba(240,171,188,.8)}
       }
 </style>
 </head><body class="boys">
-<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a></div>
-<header class="banner"><h1>ছেলেদের ইসলামিক নাম</h1>
-<p class="sub">সন্তানের নাম শুধু একটি ডাকনাম নয় — এটি তার প্রথম পরিচয়।<br>অর্থসহ সুন্দর নামগুলো থেকে বেছে নিন আপনার ছেলের জন্য সবচেয়ে মানানসই নামটি।</p>
+<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a><span class="lang-toggle" role="group" aria-label="Language"><button type="button" id="langBn">বাংলা</button><button type="button" id="langEn">English</button></span></div>
+<header class="banner"><h1 data-i18n="h1">ছেলেদের ইসলামিক নাম</h1>
+<p class="sub"><span data-i18n="subP1">সন্তানের নাম শুধু একটি ডাকনাম নয় — এটি তার প্রথম পরিচয়।</span><br><span data-i18n="subP2">অর্থসহ সুন্দর নামগুলো থেকে বেছে নিন আপনার ছেলের জন্য সবচেয়ে মানানসই নামটি।</span></p>
 <div class="orn">◆</div>
 <div class="bignum" id="bigCount">০</div>
-<div class="bignumlab">টি অর্থসহ নাম</div>
-<div class="bignumsub">প্রতিটি নামের আরবি রূপ ও অর্থ দেওয়া আছে</div>
-<div class="heroChips"><a class="chip" href="girls-names.html">মেয়ে শিশুর নাম দেখুন →</a><a class="chip" href="#combiner">দুটো নাম মিলিয়ে দেখুন ↓</a></div></header>
+<div class="bignumlab" data-i18n="bigLab">টি অর্থসহ নাম</div>
+<div class="bignumsub" data-i18n="bigSub">প্রতিটি নামের আরবি রূপ ও অর্থ দেওয়া আছে</div>
+<div class="heroChips"><a class="chip" href="girls-names.html" data-i18n="chipOther">মেয়ে শিশুর নাম দেখুন →</a><a class="chip" href="#combiner" data-i18n="chipCombiner">দুটো নাম মিলিয়ে দেখুন ↓</a></div></header>
 <main>
-<div class="searchwrap"><div class="searchpill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16.6 16.6"/></svg><input id="searchInput" type="search" placeholder="নাম খুঁজুন… যেমন: আব্দুল্লাহ, মুহাম্মদ, রায়ান" autocomplete="off"><button type="button" class="searchclr" id="searchClear" aria-label="মুছুন">✕</button></div>
-<p class="searchhelp">বাংলা, English বা আরবি — যেকোনোভাবে খুঁজুন</p></div>
-<p class="letlab">অক্ষর অনুযায়ী দেখুন</p>
+<div class="searchwrap"><div class="searchpill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16.6 16.6"/></svg><input id="searchInput" type="search" data-i18n-ph="searchPh" placeholder="নাম খুঁজুন… যেমন: আব্দুল্লাহ, মুহাম্মদ, রায়ান" autocomplete="off"><button type="button" class="searchclr" id="searchClear" data-i18n-aria="searchClear" aria-label="মুছুন">✕</button></div>
+<p class="searchhelp" data-i18n="searchHelp">বাংলা, English বা আরবি — যেকোনোভাবে খুঁজুন</p></div>
+<p class="letlab" data-i18n="letLab">অক্ষর অনুযায়ী দেখুন</p>
 <div class="letterbar" id="letterBar"></div>
 <section id="resultsSec"><div class="metarow"><span class="metahead" id="metaHead"></span><span class="metacount" id="metaCount"></span></div>
-<p class="loadnote" id="loadNote">নাম লোড হচ্ছে…</p>
+<p class="loadnote" id="loadNote" data-i18n="loadNote">নাম লোড হচ্ছে…</p>
 <div class="grid" id="cardsGrid"><div class="skel"><span class="skc"></span><span class="skb w1"></span><span class="skb w2"></span><span class="skb w3"></span></div><div class="skel"><span class="skc"></span><span class="skb w1"></span><span class="skb w2"></span><span class="skb w3"></span></div><div class="skel"><span class="skc"></span><span class="skb w1"></span><span class="skb w2"></span><span class="skb w3"></span></div><div class="skel"><span class="skc"></span><span class="skb w1"></span><span class="skb w2"></span><span class="skb w3"></span></div><div class="skel"><span class="skc"></span><span class="skb w1"></span><span class="skb w2"></span><span class="skb w3"></span></div><div class="skel"><span class="skc"></span><span class="skb w1"></span><span class="skb w2"></span><span class="skb w3"></span></div></div>
-<div class="morewrap"><button type="button" class="mainbtn" id="loadMore" style="display:none">আরও নাম দেখুন</button><div class="endline" id="endLine"></div></div></section>
-<section class="sr cpanel" id="combiner" style="--sr-delay:0s"><h2 class="sr chead" style="--sr-delay:.09s">দুই-তিনটি নাম মিলিয়ে নতুন নাম</h2><p class="csub">পছন্দের দুই বা তিনটি নাম একসাথে মিলিয়ে দেখুন — তৈরি হবে একটি পূর্ণ নাম, সঙ্গে থাকবে নামগুলোর মিলিত অর্থ।</p><div class="orn">◆</div><div class="slots"><div class="slot"><span class="slotlab">নাম ১</span><div class="pick"><input id="pickIn0" type="text" placeholder="তালিকা থেকে নাম বেছে নিন" autocomplete="off"><div class="drop" id="pickDrop0" style="display:none"></div><div id="pickSel0"></div></div></div><span class="plus">+</span><div class="slot"><span class="slotlab">নাম ২</span><div class="pick"><input id="pickIn1" type="text" placeholder="তালিকা থেকে নাম বেছে নিন" autocomplete="off"><div class="drop" id="pickDrop1" style="display:none"></div><div id="pickSel1"></div></div></div><span class="plus">+</span><div class="slot"><span class="slotlab">নাম ৩ (ইচ্ছে হলে)</span><div class="pick"><input id="pickIn2" type="text" placeholder="তালিকা থেকে নাম বেছে নিন" autocomplete="off"><div class="drop" id="pickDrop2" style="display:none"></div><div id="pickSel2"></div></div></div></div><p class="chint">টিপ: নামের ঘরে লিখতে শুরু করলেই তালিকা থেকে পছন্দের নামগুলো এসে যাবে।</p><button type="button" class="mainbtn cbtn" id="combineBtn">মিলিয়ে দেখুন</button><div class="cph" id="comboNote">মিলিত নাম দেখতে অন্তত দুটি নাম বেছে নিন।</div><div class="cresult" id="comboOut" style="display:none"><div class="lab">সম্মিলিত নাম</div><div class="cbn" id="comboBn"></div><div class="cen" id="comboEn"></div><div class="car" id="comboAr"></div><div class="corn"><i></i><span>◆</span><i></i></div><div class="lab">সম্মিলিত অর্থ</div><p class="cmean" id="comboMean"></p><button type="button" class="mainbtn" id="comboReset">নতুন করে মেলান</button></div></section>
-<div class="sr waqt-share" style="--sr-delay:.27s"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%9B%E0%A7%87%E0%A6%B2%E0%A7%87%E0%A6%A6%E0%A7%87%E0%A6%B0%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%E0%A6%95%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%B8%E0%A6%B9%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/boys-names.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fboys-names.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fboys-names.html&text=%E0%A6%9B%E0%A7%87%E0%A6%B2%E0%A7%87%E0%A6%A6%E0%A7%87%E0%A6%B0%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%E0%A6%95%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%B8%E0%A6%B9%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fboys-names.html&text=%E0%A6%9B%E0%A7%87%E0%A6%B2%E0%A7%87%E0%A6%A6%E0%A7%87%E0%A6%B0%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%E0%A6%95%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%B8%E0%A6%B9%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/boys-names.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div>
+<div class="morewrap"><button type="button" class="mainbtn" id="loadMore" data-i18n="loadMore" style="display:none">আরও নাম দেখুন</button><div class="endline" id="endLine"></div></div></section>
+<section class="sr cpanel" id="combiner" style="--sr-delay:0s"><h2 class="sr chead" style="--sr-delay:.09s" data-i18n="combT">দুই-তিনটি নাম মিলিয়ে নতুন নাম</h2><p class="csub" data-i18n="combSub">পছন্দের দুই বা তিনটি নাম একসাথে মিলিয়ে দেখুন — তৈরি হবে একটি পূর্ণ নাম, সঙ্গে থাকবে নামগুলোর মিলিত অর্থ।</p><div class="orn">◆</div><div class="slots"><div class="slot"><span class="slotlab" data-i18n="slot1">নাম ১</span><div class="pick"><input id="pickIn0" type="text" data-i18n-ph="pickPh" placeholder="তালিকা থেকে নাম বেছে নিন" autocomplete="off"><div class="drop" id="pickDrop0" style="display:none"></div><div id="pickSel0"></div></div></div><span class="plus">+</span><div class="slot"><span class="slotlab" data-i18n="slot2">নাম ২</span><div class="pick"><input id="pickIn1" type="text" data-i18n-ph="pickPh" placeholder="তালিকা থেকে নাম বেছে নিন" autocomplete="off"><div class="drop" id="pickDrop1" style="display:none"></div><div id="pickSel1"></div></div></div><span class="plus">+</span><div class="slot"><span class="slotlab" data-i18n="slot3">নাম ৩ (ইচ্ছে হলে)</span><div class="pick"><input id="pickIn2" type="text" data-i18n-ph="pickPh" placeholder="তালিকা থেকে নাম বেছে নিন" autocomplete="off"><div class="drop" id="pickDrop2" style="display:none"></div><div id="pickSel2"></div></div></div></div><p class="chint" data-i18n="combTip">টিপ: নামের ঘরে লিখতে শুরু করলেই তালিকা থেকে পছন্দের নামগুলো এসে যাবে।</p><button type="button" class="mainbtn cbtn" id="combineBtn" data-i18n="combBtn">মিলিয়ে দেখুন</button><div class="cph" id="comboNote" data-i18n="comboNote">মিলিত নাম দেখতে অন্তত দুটি নাম বেছে নিন।</div><div class="cresult" id="comboOut" style="display:none"><div class="lab" data-i18n="combNameLab">সম্মিলিত নাম</div><div class="cbn" id="comboBn"></div><div class="cen" id="comboEn"></div><div class="car" id="comboAr"></div><div class="corn"><i></i><span>◆</span><i></i></div><div class="lab" data-i18n="combMeanLab">সম্মিলিত অর্থ</div><p class="cmean" id="comboMean"></p><button type="button" class="mainbtn" id="comboReset" data-i18n="combReset">নতুন করে মেলান</button></div></section>
+<div class="sr waqt-share" style="--sr-delay:.27s"><span class="ws-title" data-i18n="shareT">শেয়ার করুন</span><span class="ws-sub" data-i18n="shareSub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%9B%E0%A7%87%E0%A6%B2%E0%A7%87%E0%A6%A6%E0%A7%87%E0%A6%B0%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%E0%A6%95%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%B8%E0%A6%B9%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/boys-names.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fboys-names.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fboys-names.html&text=%E0%A6%9B%E0%A7%87%E0%A6%B2%E0%A7%87%E0%A6%A6%E0%A7%87%E0%A6%B0%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%E0%A6%95%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%B8%E0%A6%B9%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fboys-names.html&text=%E0%A6%9B%E0%A7%87%E0%A6%B2%E0%A7%87%E0%A6%A6%E0%A7%87%E0%A6%B0%20%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A6%BF%E0%A6%95%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%B8%E0%A6%B9%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent=(localStorage.getItem('waqtLang')==='en'?'Copied ✓':'কপি হয়েছে ✓');setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/boys-names.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span data-i18n="copyLink">লিংক কপি</span></button></div></div>
 </main>
-<footer class="sr" style="--sr-delay:.36s"><h3>আরও দেখুন</h3><div class="dir"><a href="boys-names.html" class="cur">ছেলেদের নাম</a><a href="girls-names.html">মেয়েদের নাম</a><a href="dua.html">দোয়া সংকলন</a><a href="share-card.html">আয়াত ও দোয়া কার্ড</a><a href="proshno-uttor.html">ইসলামিক প্রশ্নোত্তর</a><a href="index.html">Waqt হোম</a></div>
-<p class="sr trust" style="--sr-delay:.18s">এই সংগ্রহের প্রতিটি নাম ও তার অর্থ নির্ভরযোগ্য নাম-সংকলন ও প্রামাণ্য সূত্র থেকে যাচাই করে সংগ্রহ করা হয়েছে। তবু চূড়ান্ত সিদ্ধান্তের আগে অর্থটি নিজে যাচাই করে নেওয়ার অনুরোধ রইল।</p>
-<p class="foot">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer>
+<footer class="sr" style="--sr-delay:.36s"><h3 data-i18n="seeAlso">আরও দেখুন</h3><div class="dir"><a href="boys-names.html" class="cur" data-i18n="fBoys">ছেলেদের নাম</a><a href="girls-names.html" data-i18n="fGirls">মেয়েদের নাম</a><a href="dua.html" data-i18n="fDua">দোয়া সংকলন</a><a href="share-card.html" data-i18n="fCards">আয়াত ও দোয়া কার্ড</a><a href="proshno-uttor.html" data-i18n="fQA">ইসলামিক প্রশ্নোত্তর</a><a href="index.html" data-i18n="fHome">Waqt হোম</a></div>
+<p class="sr trust" style="--sr-delay:.18s" data-i18n="trust">এই সংগ্রহের প্রতিটি নাম ও তার অর্থ নির্ভরযোগ্য নাম-সংকলন ও প্রামাণ্য সূত্র থেকে যাচাই করে সংগ্রহ করা হয়েছে। তবু চূড়ান্ত সিদ্ধান্তের আগে অর্থটি নিজে যাচাই করে নেওয়ার অনুরোধ রইল।</p>
+<p class="foot" data-i18n="footLine">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer>
 <script src="names-boys.js"></script>
 <script>
 var ALL = (window.NAMES || []).slice().sort(function(a, b){ return a.en < b.en ? -1 : (a.en > b.en ? 1 : 0); });
@@ -205,6 +209,10 @@ var grid = document.getElementById('cardsGrid'), loadBtn = document.getElementBy
     endLine = document.getElementById('endLine'), metaHead = document.getElementById('metaHead'),
     metaCount = document.getElementById('metaCount'), loadNote = document.getElementById('loadNote');
 function bnNum(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/[0-9]/g, function(d){ return BND[+d]; }); }
+var wqLang = 'bn';
+var STR = { metaSearch: 'খোঁজের ফলাফল', metaLetter: '‘{L}’ দিয়ে নাম', metaTotal: 'মোট {N}টি নাম', metaShown: 'দেখানো হচ্ছে {A} / {B} টি', noResultQ: 'এই নামটি খুঁজে পাওয়া যায়নি — বানান বদলে আবার চেষ্টা করুন।', noResultL: 'এই অক্ষরে কোনো নাম পাওয়া যায়নি — অন্য একটি অক্ষর বেছে দেখুন।', endAll: '— সব নাম দেখানো হয়েছে —', noPick: 'কোনো নাম পাওয়া যায়নি', all: 'সব', removePick: 'মুছে ফেলুন' };
+function num(n){ var s = String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); return wqLang === 'en' ? s : s.replace(/[0-9]/g, function(d){ return BND[+d]; }); }
+
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function matches(n, q){
   if(!q) return true;
@@ -220,16 +228,16 @@ function cardHTML(n, delay){
 }
 function updateMeta(){
   var head;
-  if(curQuery) head = 'খোঁজের ফলাফল';
-  else if(curLetter !== 'ALL') head = '‘' + curLetter + '’ দিয়ে নাম';
-  else head = 'মোট ' + bnNum(filtered.length) + 'টি নাম';
+  if(curQuery) head = STR.metaSearch;
+  else if(curLetter !== 'ALL') head = STR.metaLetter.replace('{L}', curLetter);
+  else head = STR.metaTotal.replace('{N}', num(filtered.length));
   metaHead.textContent = head;
-  metaCount.textContent = 'দেখানো হচ্ছে ' + bnNum(shown) + ' / ' + bnNum(filtered.length) + ' টি';
+  metaCount.textContent = STR.metaShown.replace('{A}', num(shown)).replace('{B}', num(filtered.length));
 }
 function renderMore(){
   loadNote.style.display = 'none';
   if(!filtered.length){
-    grid.innerHTML = '<div class="note">' + (curQuery ? 'এই নামটি খুঁজে পাওয়া যায়নি — বানান বদলে আবার চেষ্টা করুন।' : 'এই অক্ষরে কোনো নাম পাওয়া যায়নি — অন্য একটি অক্ষর বেছে দেখুন।') + '</div>';
+    grid.innerHTML = '<div class="note">' + (curQuery ? STR.noResultQ : STR.noResultL) + '</div>';
     loadBtn.style.display = 'none'; endLine.textContent = ''; updateMeta(); return;
   }
   var batch = filtered.slice(shown, shown + CHUNK), html = '';
@@ -237,7 +245,7 @@ function renderMore(){
   shown += batch.length;
   grid.insertAdjacentHTML('beforeend', html);
   loadBtn.style.display = shown < filtered.length ? '' : 'none';
-  endLine.textContent = shown >= filtered.length ? '— সব নাম দেখানো হয়েছে —' : '';
+  endLine.textContent = shown >= filtered.length ? STR.endAll : '';
   updateMeta();
 }
 function applyFilters(){
@@ -261,14 +269,14 @@ function markChips(){
   function mk(label, val, cnt){
     b = document.createElement('button'); b.type = 'button'; b.className = 'lchip' + (val === 'ALL' ? ' on' : '');
     b.setAttribute('data-letter', val);
-    b.innerHTML = '<b>' + label + '</b><small>' + bnNum(cnt) + '</small>';
+    b.innerHTML = '<b>' + label + '</b><small>' + num(cnt) + '</small>';
     if(val !== 'ALL' && !cnt) b.disabled = true;
     b.addEventListener('click', function(){
       curLetter = this.getAttribute('data-letter'); markChips(); applyFilters(); scrollToGrid();
     });
     letterBar.appendChild(b);
   }
-  mk('সব', 'ALL', ALL.length);
+  mk(STR.all, 'ALL', ALL.length);
   for(i = 0; i < 26; i++){ L = String.fromCharCode(65 + i); mk(L, L, counts[L] || 0); }
 })();
 /* floating search (debounced; typing resets the letter filter to সব) */
@@ -293,12 +301,12 @@ loadBtn.addEventListener('click', renderMore);
 (function(){
   var el = document.getElementById('bigCount'), total = ALL.length;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce || !window.requestAnimationFrame){ el.textContent = bnNum(total); return; }
+  if(reduce || !window.requestAnimationFrame){ el.textContent = num(total); return; }
   var t0 = null;
   function step(ts){
     if(t0 === null) t0 = ts;
     var p = Math.min(1, (ts - t0) / 800), e = 1 - Math.pow(1 - p, 3);
-    el.textContent = bnNum(Math.round(total * e));
+    el.textContent = num(Math.round(total * e));
     if(p < 1) window.requestAnimationFrame(step);
   }
   window.requestAnimationFrame(step);
@@ -320,7 +328,7 @@ function renderSel(i){
   if(!n){ e.chip.innerHTML = ''; e.inp.style.display = ''; return; }
   e.inp.style.display = 'none'; e.drop.style.display = 'none';
   e.chip.innerHTML = '<span class="selchip">' + esc(n.bn) + ' · ' + esc(n.en) +
-    '<button type="button" aria-label="মুছে ফেলুন">✕</button></span>';
+    '<button type="button" aria-label="' + esc(STR.removePick) + '">✕</button></span>';
   e.chip.querySelector('button').addEventListener('click', function(){ sel[i] = null; renderSel(i); comboState(); });
 }
 function pickName(i, n){
@@ -340,7 +348,7 @@ function setupPicker(i){
       for(var k = 0; k < ALL.length && res.length < 8; k++) if(matches(ALL[k], q)) res.push(ALL[k]);
       if(!res.length){
         var b0 = document.createElement('button'); b0.type = 'button'; b0.disabled = true;
-        b0.textContent = 'কোনো নাম পাওয়া যায়নি'; e.drop.appendChild(b0); e.drop.style.display = ''; return;
+        b0.textContent = STR.noPick; e.drop.appendChild(b0); e.drop.style.display = ''; return;
       }
       res.forEach(function(n){
         var b = document.createElement('button'); b.type = 'button';
@@ -416,4 +424,55 @@ document.getElementById('comboReset').addEventListener('click', function(){
       }
     })();
     </script>
+
+<script>
+(function(){
+var I18N = { bn: {"docTitle": "ছেলেদের ইসলামিক নাম অর্থসহ | Waqt (ওয়াক্ত)", "h1": "ছেলেদের ইসলামিক নাম", "subP2": "অর্থসহ সুন্দর নামগুলো থেকে বেছে নিন আপনার ছেলের জন্য সবচেয়ে মানানসই নামটি।", "chipOther": "মেয়ে শিশুর নাম দেখুন →", "searchPh": "নাম খুঁজুন… যেমন: আব্দুল্লাহ, মুহাম্মদ, রায়ান", "subP1": "সন্তানের নাম শুধু একটি ডাকনাম নয় — এটি তার প্রথম পরিচয়।", "bigLab": "টি অর্থসহ নাম", "bigSub": "প্রতিটি নামের আরবি রূপ ও অর্থ দেওয়া আছে", "chipCombiner": "দুটো নাম মিলিয়ে দেখুন ↓", "searchClear": "মুছুন", "searchHelp": "বাংলা, English বা আরবি — যেকোনোভাবে খুঁজুন", "letLab": "অক্ষর অনুযায়ী দেখুন", "loadNote": "নাম লোড হচ্ছে…", "loadMore": "আরও নাম দেখুন", "combT": "দুই-তিনটি নাম মিলিয়ে নতুন নাম", "combSub": "পছন্দের দুই বা তিনটি নাম একসাথে মিলিয়ে দেখুন — তৈরি হবে একটি পূর্ণ নাম, সঙ্গে থাকবে নামগুলোর মিলিত অর্থ।", "slot1": "নাম ১", "slot2": "নাম ২", "slot3": "নাম ৩ (ইচ্ছে হলে)", "pickPh": "তালিকা থেকে নাম বেছে নিন", "combTip": "টিপ: নামের ঘরে লিখতে শুরু করলেই তালিকা থেকে পছন্দের নামগুলো এসে যাবে।", "combBtn": "মিলিয়ে দেখুন", "comboNote": "মিলিত নাম দেখতে অন্তত দুটি নাম বেছে নিন।", "combNameLab": "সম্মিলিত নাম", "combMeanLab": "সম্মিলিত অর্থ", "combReset": "নতুন করে মেলান", "shareT": "শেয়ার করুন", "shareSub": "ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন", "copyLink": "লিংক কপি", "seeAlso": "আরও দেখুন", "fBoys": "ছেলেদের নাম", "fGirls": "মেয়েদের নাম", "fDua": "দোয়া সংকলন", "fCards": "আয়াত ও দোয়া কার্ড", "fQA": "ইসলামিক প্রশ্নোত্তর", "fHome": "Waqt হোম", "trust": "এই সংগ্রহের প্রতিটি নাম ও তার অর্থ নির্ভরযোগ্য নাম-সংকলন ও প্রামাণ্য সূত্র থেকে যাচাই করে সংগ্রহ করা হয়েছে। তবু চূড়ান্ত সিদ্ধান্তের আগে অর্থটি নিজে যাচাই করে নেওয়ার অনুরোধ রইল।", "footLine": "Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।", "metaSearch": "খোঁজের ফলাফল", "metaLetter": "‘{L}’ দিয়ে নাম", "metaTotal": "মোট {N}টি নাম", "metaShown": "দেখানো হচ্ছে {A} / {B} টি", "noResultQ": "এই নামটি খুঁজে পাওয়া যায়নি — বানান বদলে আবার চেষ্টা করুন।", "noResultL": "এই অক্ষরে কোনো নাম পাওয়া যায়নি — অন্য একটি অক্ষর বেছে দেখুন।", "endAll": "— সব নাম দেখানো হয়েছে —", "noPick": "কোনো নাম পাওয়া যায়নি", "all": "সব", "removePick": "মুছে ফেলুন"},
+             en: {"docTitle": "Islamic Names for Boys with Meanings | Waqt (ওয়াক্ত)", "h1": "Islamic Names for Boys", "subP2": "Choose the most fitting name for your son from these beautiful names with meanings.", "chipOther": "See girls' names →", "searchPh": "Search names… e.g. Abdullah, Muhammad, Rayan", "subP1": "A child's name is not just a name to call them by — it is their first identity.", "bigLab": "names with meanings", "bigSub": "Every name comes with its Arabic form and meaning", "chipCombiner": "Combine two names ↓", "searchClear": "Clear", "searchHelp": "Search in Bengali, English or Arabic — any way you like", "letLab": "Browse by letter", "loadNote": "Loading names…", "loadMore": "See more names", "combT": "Make a new name from two or three names", "combSub": "Combine two or three names you like — you will get one full name, along with the combined meaning of the names.", "slot1": "Name 1", "slot2": "Name 2", "slot3": "Name 3 (optional)", "pickPh": "Choose a name from the list", "combTip": "Tip: as soon as you start typing in a name box, matching names from the list will appear.", "combBtn": "Combine", "comboNote": "Choose at least two names to see the combined name.", "combNameLab": "Combined name", "combMeanLab": "Combined meaning", "combReset": "Combine again", "shareT": "Share", "shareSub": "If it helped you, share it with friends", "copyLink": "Copy link", "seeAlso": "See also", "fBoys": "Boys' names", "fGirls": "Girls' names", "fDua": "Dua collection", "fCards": "Verse & dua cards", "fQA": "Islamic Q&A", "fHome": "Waqt Home", "trust": "Every name in this collection and its meaning has been checked against reliable name collections and authentic sources. Even so, please check the meaning yourself before making a final decision.", "footLine": "Waqt (ওয়াক্ত) — prayer times, Quran, duas and Islamic knowledge.", "metaSearch": "Search results", "metaLetter": "Names starting with ‘{L}’", "metaTotal": "{N} names in total", "metaShown": "Showing {A} / {B}", "noResultQ": "This name was not found — try again with a different spelling.", "noResultL": "No names were found for this letter — try another letter.", "endAll": "— All names have been shown —", "noPick": "No name found", "all": "All", "removePick": "Remove"} };
+function applyLang(lang){
+  var d = I18N[lang] || I18N.bn;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k = el.getAttribute("data-i18n");
+    if (d[k] != null) el.textContent = d[k];
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){
+    var k = el.getAttribute("data-i18n-ph");
+    if (d[k] != null) el.placeholder = d[k];
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach(function(el){
+    var k = el.getAttribute("data-i18n-aria");
+    if (d[k] != null) el.setAttribute("aria-label", d[k]);
+  });
+  document.documentElement.lang = (lang === "en" ? "en" : "bn");
+  var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+  if (b && e) { b.classList.toggle("on", lang !== "en"); e.classList.toggle("on", lang === "en"); }
+  try { localStorage.setItem("waqtLang", lang); } catch (err) {}
+  if (typeof wqLang !== "undefined") {
+    wqLang = lang;
+    if (typeof STR !== "undefined") { for (var k2 in d) { if (STR.hasOwnProperty(k2)) STR[k2] = d[k2]; } }
+    var bc = document.getElementById("bigCount");
+    if (bc && typeof ALL !== "undefined") bc.textContent = num(ALL.length);
+    var lb = document.getElementById("letterBar");
+    if (lb && typeof ALL !== "undefined") {
+      var counts = {}, ci;
+      for (ci = 0; ci < ALL.length; ci++) counts[ALL[ci].letter] = (counts[ALL[ci].letter] || 0) + 1;
+      var chips = lb.children;
+      for (ci = 0; ci < chips.length; ci++) {
+        var lt = chips[ci].getAttribute("data-letter"), sm = chips[ci].querySelector("small"), bb = chips[ci].querySelector("b");
+        if (sm) sm.textContent = num(lt === "ALL" ? ALL.length : (counts[lt] || 0));
+        if (lt === "ALL" && bb && d.all != null) bb.textContent = d.all;
+      }
+    }
+    if (typeof updateMeta === "function") updateMeta();
+  }
+}
+function wqDetectLang(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""); if (tz === "Asia/Dhaka") return "bn"; var nl = (navigator.language || "").toLowerCase(); if (nl.indexOf("bn") === 0) return "bn"; return "en"; } catch (err) { return "bn"; } }
+var saved = "bn";
+try { saved = localStorage.getItem("waqtLang") || wqDetectLang(); localStorage.setItem("waqtLang", saved); } catch (err) {}
+applyLang(saved === "en" ? "en" : "bn");
+var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+if (b) b.addEventListener("click", function(){ applyLang("bn"); });
+if (e) e.addEventListener("click", function(){ applyLang("en"); });
+})();
+</script>
 </body></html>

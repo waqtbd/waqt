@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>আয়াত ও দোয়া শেয়ার কার্ড | Waqt (ওয়াক্ত)</title>
+<title data-i18n="docTitle">আয়াত ও দোয়া শেয়ার কার্ড | Waqt (ওয়াক্ত)</title>
 <meta name="description" content="পছন্দের কুরআনের আয়াত, দোয়া ও হাদিস দিয়ে সুন্দর ছবির কার্ড বানান — পছন্দের ডিজাইন বেছে এক চাপে ডাউনলোড বা শেয়ার করুন।">
 <link rel="canonical" href="https://waqtbd.github.io/waqt/share-card.html">
 <meta property="og:title" content="আয়াত ও দোয়া শেয়ার কার্ড | Waqt (ওয়াক্ত)">
@@ -30,7 +30,7 @@
 :root{--em:#0b5c4d;--em2:#0f766e;--gold:#c9a227;--gold2:#f3d27a;--ink:#1f2937;--mut:#6b7280;--line:#e5e7eb}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:"Baloo Da 2",system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f6f7f4;color:var(--ink);line-height:1.7}
-.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--em2),var(--em));padding:8px 14px;box-shadow:0 2px 10px rgba(11,92,77,.28)}
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--em2),var(--em));padding:8px 14px;box-shadow:0 2px 10px rgba(11,92,77,.28);display:flex;align-items:center;justify-content:space-between;gap:10px}
 .topbar a{display:flex;align-items:center;gap:10px;text-decoration:none;width:fit-content}
 .topbar img{width:36px;height:36px;border-radius:50%;display:block;box-shadow:0 0 0 2px rgba(243,210,122,.55)}
 .bt b{display:block;color:#fff;font-size:16px;letter-spacing:2.5px;line-height:1.05}
@@ -113,6 +113,7 @@ main .card:nth-child(2){animation-delay:.07s}
       }
 
       /* print: monthly timetable only */
+    .lang-toggle{display:inline-flex;background:#e9e4d8;border-radius:999px;padding:3px;gap:2px;vertical-align:middle} .lang-toggle button{border:0;background:transparent;padding:5px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer;color:#43534a} .lang-toggle button.on{background:#0b5d43;color:#fff;font-weight:700}
     </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3YT4H1B0K"></script>
@@ -123,43 +124,46 @@ main .card:nth-child(2){animation-delay:.07s}
   gtag('config', 'G-G3YT4H1B0K');
 </script>
 <style>.waqt-share{max-width:680px;margin:20px auto;padding:16px 16px 15px;text-align:center;background:linear-gradient(180deg,#ffffff,#f2f8f5);border:1px solid #dcebe4;border-top:3px solid #d4af37;border-radius:20px;box-shadow:0 10px 30px rgba(11,92,77,.10)}.waqt-share .ws-title{display:block;font-size:15.5px;font-weight:800;color:#0b5c4d;letter-spacing:.2px}.waqt-share .ws-sub{display:block;font-size:12.5px;color:#64748b;margin:2px 0 12px}.waqt-share .ws-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}.waqt-share .ws-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 16px 9px 13px;border-radius:999px;color:#fff;font-size:13.5px;font-weight:700;text-decoration:none;border:0;cursor:pointer;box-shadow:0 4px 12px rgba(15,23,42,.16),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .15s ease,box-shadow .15s ease}.waqt-share .ws-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(15,23,42,.20),inset 0 1px 0 rgba(255,255,255,.35)}.waqt-share .ws-btn:active{transform:translateY(0)}.waqt-share .ws-btn svg{width:18px;height:18px;flex:0 0 auto}.waqt-share .ws-wa{background:linear-gradient(135deg,#2be07c,#12a150)}.waqt-share .ws-fb{background:linear-gradient(135deg,#3b8bff,#0f5fd0)}.waqt-share .ws-tg{background:linear-gradient(135deg,#4fc3f7,#1d8ec9)}.waqt-share .ws-x{background:linear-gradient(135deg,#3f4756,#05070a)}.waqt-share .ws-copy{background:linear-gradient(135deg,#e7c65a,#b8860b)}</style></head><body>
-<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a></div>
-<header class="banner"><h1>আয়াত ও দোয়া শেয়ার কার্ড</h1>
-<p class="sub">পছন্দের আয়াত, দোয়া বা হাদিস বেছে নিন, সুন্দর একটি ডিজাইন বাছুন — তৈরি হয়ে যাবে মনের মতো ছবির কার্ড, ডাউনলোড বা শেয়ার করুন এক চাপে।</p>
+<div class="topbar"><a href="index.html"><img src="logo.png" alt="Waqt logo"><span class="bt"><b>WAQT</b><span>ওয়াক্ত</span></span></a><span class="lang-toggle" role="group" aria-label="Language"><button type="button" id="langBn">বাংলা</button><button type="button" id="langEn">English</button></span></div>
+<header class="banner"><h1 data-i18n="h1">আয়াত ও দোয়া শেয়ার কার্ড</h1>
+<p class="sub" data-i18n="sub">পছন্দের আয়াত, দোয়া বা হাদিস বেছে নিন, সুন্দর একটি ডিজাইন বাছুন — তৈরি হয়ে যাবে মনের মতো ছবির কার্ড, ডাউনলোড বা শেয়ার করুন এক চাপে।</p>
 <div class="orn">◆</div>
 </header>
 <main>
 <section class="card pvwrap">
-<h2 class="sr" style="justify-content:center;--sr-delay:0s">আপনার কার্ড</h2>
+<h2 class="sr" style="justify-content:center;--sr-delay:0s" data-i18n="yourCard">আপনার কার্ড</h2>
 <canvas id="cv" width="1080" height="1440" aria-label="শেয়ার কার্ডের প্রিভিউ"></canvas>
-<p class="loadnote" id="loadnote">কার্ড তৈরি হচ্ছে…</p>
-<p class="bghint">কার্ডের উপর দুইবার ট্যাপ করলেই design বদলে যাবে</p>
+<p class="loadnote" id="loadnote" data-i18n="loadNote">কার্ড তৈরি হচ্ছে…</p>
+<p class="bghint" data-i18n="bgHint">কার্ডের উপর দুইবার ট্যাপ করলেই design বদলে যাবে</p>
 <div class="navrow">
 <button type="button" class="navbtn" id="prevBtn" aria-label="আগেরটি">‹</button>
 <span class="navcounter" id="navCounter"></span>
 <button type="button" class="navbtn" id="nextBtn" aria-label="পরেরটি">›</button>
 </div>
 <div class="pvacts">
-<button type="button" class="mainbtn" id="dlBtn">ডাউনলোড করুন</button>
-<button type="button" class="ghostbtn" id="shBtn">শেয়ার করুন</button>
+<button type="button" class="mainbtn" id="dlBtn" data-i18n="dlBtn">ডাউনলোড করুন</button>
+<button type="button" class="ghostbtn" id="shBtn" data-i18n="shBtn">শেয়ার করুন</button>
 </div>
 </section>
 <section class="card">
-<h2 class="sr" style="--sr-delay:.09s">কার্ড সাজান</h2>
-<div class="ctl-lab">বিষয় বেছে নিন</div>
+<h2 class="sr" style="--sr-delay:.09s" data-i18n="customiseT">কার্ড সাজান</h2>
+<div class="ctl-lab" data-i18n="typeLbl">বিষয় বেছে নিন</div>
 <div class="typerow" id="typeChips"></div>
-<div class="ctl-lab">ডিজাইন বেছে নিন</div>
+<div class="ctl-lab" data-i18n="designLbl">ডিজাইন বেছে নিন</div>
 <div class="bggrid" id="bgGrid"></div>
 </section>
-<div class="waqt-share sr" style="--sr-delay:.18s"><span class="ws-title">শেয়ার করুন</span><span class="ws-sub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%86%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%A4%20%E0%A6%93%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E0%A6%B6%E0%A7%87%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/share-card.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fshare-card.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fshare-card.html&text=%E0%A6%86%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%A4%20%E0%A6%93%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E0%A6%B6%E0%A7%87%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fshare-card.html&text=%E0%A6%86%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%A4%20%E0%A6%93%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E0%A6%B6%E0%A7%87%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent='কপি হয়েছে ✓';setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/share-card.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>লিংক কপি</span></button></div></div></main><footer class="sr" style="--sr-delay:.27s"><h3>আরও দেখুন</h3><div class="dir"><a href="share-card.html" class="cur">শেয়ার কার্ড</a><a href="dua.html">সব দোয়া</a><a href="bishesh-din.html">বিশেষ ইসলামি দিন</a><a href="proshno-uttor.html">প্রশ্নোত্তর</a><a href="directory.html">জেলা ও উপজেলা</a><a href="index.html">Waqt হোম</a></div>
-<p class="srcnote">সব আয়াত পবিত্র কুরআন থেকে বাংলা অর্থসহ; দোয়া ও হাদিস নির্ভরযোগ্য সূত্রসহ সংকলিত।</p>
-<p class="foot">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer>
+<div class="waqt-share sr" style="--sr-delay:.18s"><span class="ws-title" data-i18n="shareT">শেয়ার করুন</span><span class="ws-sub" data-i18n="shareSub">ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন</span><div class="ws-row"><a class="ws-btn ws-wa" href="https://wa.me/?text=%E0%A6%86%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%A4%20%E0%A6%93%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E0%A6%B6%E0%A7%87%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20https%3A//waqtbd.github.io/waqt/share-card.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span>WhatsApp</span></a><a class="ws-btn ws-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fshare-card.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><text x="12" y="19" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Arial,Helvetica,sans-serif">f</text></svg><span>Facebook</span></a><a class="ws-btn ws-tg" href="https://t.me/share/url?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fshare-card.html&text=%E0%A6%86%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%A4%20%E0%A6%93%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E0%A6%B6%E0%A7%87%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg><span>Telegram</span></a><a class="ws-btn ws-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2Fshare-card.html&text=%E0%A6%86%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%A4%20%E0%A6%93%20%E0%A6%A6%E0%A7%8B%E0%A6%AF%E0%A6%BC%E0%A6%BE%20%E0%A6%B6%E0%A7%87%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%7C%20Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg><span>X</span></a><button type="button" class="ws-btn ws-copy" onclick="var b=this,s=b.querySelector('span'),t=s.textContent;function ok(){s.textContent=(localStorage.getItem('waqtLang')==='en'?'Copied ✓':'কপি হয়েছে ✓');setTimeout(function(){s.textContent=t},1800)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('https://waqtbd.github.io/waqt/share-card.html').then(ok).catch(function(){})}"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span data-i18n="copyLink">লিংক কপি</span></button></div></div></main><footer class="sr" style="--sr-delay:.27s"><h3 data-i18n="seeAlso">আরও দেখুন</h3><div class="dir"><a href="share-card.html" class="cur" data-i18n="fShareCard">শেয়ার কার্ড</a><a href="dua.html" data-i18n="fDua">সব দোয়া</a><a href="bishesh-din.html" data-i18n="fDays">বিশেষ ইসলামি দিন</a><a href="proshno-uttor.html" data-i18n="fQA">প্রশ্নোত্তর</a><a href="directory.html" data-i18n="fDir">জেলা ও উপজেলা</a><a href="index.html" data-i18n="fHome">Waqt হোম</a></div>
+<p class="srcnote" data-i18n="srcNote">সব আয়াত পবিত্র কুরআন থেকে বাংলা অর্থসহ; দোয়া ও হাদিস নির্ভরযোগ্য সূত্রসহ সংকলিত।</p>
+<p class="foot" data-i18n="footLine">Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।</p></footer>
 <div id="toast" role="status"></div>
 <script src="card-data.js"></script>
 <script src="card-data-bg.js"></script>
 <script>
 (function(){
 "use strict";
+/* language-aware labels: only label text changes, never logic */
+function langIsEn(){ try { return localStorage.getItem("waqtLang") === "en"; } catch(e){ return false; } }
+function L(bn, en){ return langIsEn() ? en : bn; }
 var W=1080, H=1440, CX=540;
 var THEMES={
   light:{ar:'#0B4636', bn:'#17352C', ref:'#92600A', orn:'#A87F14', brand:'#0B4636', brandSub:'#92600A', shadow:false},
@@ -170,7 +174,7 @@ var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
 var loadnote=document.getElementById('loadnote');
 var items=(typeof window.CARD_ITEMS!=='undefined' && window.CARD_ITEMS) ? window.CARD_ITEMS : [];
 var bgs=(typeof window.CARD_BGS!=='undefined' && window.CARD_BGS) ? window.CARD_BGS : [];
-var TYPE_DEFS=[{k:'ayat', t:'আয়াত'},{k:'dua', t:'দোয়া'},{k:'hadith', t:'হাদিস'}];
+var TYPE_DEFS=[{k:'ayat', t:'আয়াত', te:'Ayah'},{k:'dua', t:'দোয়া', te:'Dua'},{k:'hadith', t:'হাদিস', te:'Hadith'}];
 var state={type:'ayat', item:0, bg:0};
 if(items.length){
   state.item=Math.floor(Date.now()/86400000)%items.length;
@@ -181,7 +185,7 @@ if(items.length){
 var logoImg=new Image(); logoImg.src='logo.png';
 var bgImgs={};
 var BN_DIGITS='০১২৩৪৫৬৭৮৯';
-function bnNum(n){ return String(n).replace(/[0-9]/g, function(d){ return BN_DIGITS[+d]; }); }
+function bnNum(n){ if (langIsEn()) return String(n); return String(n).replace(/[0-9]/g, function(d){ return BN_DIGITS[+d]; }); }
 function loadImg(src){return new Promise(function(res){var im=new Image();im.onload=function(){res(im);};im.onerror=function(){res(null);};im.src=src;});}
 function setShadow(on){
   if(on){ctx.shadowColor='rgba(0,0,0,0.45)';ctx.shadowBlur=6;ctx.shadowOffsetX=0;ctx.shadowOffsetY=3;}
@@ -309,9 +313,9 @@ function drawNotice(th, box){
   ctx.save();
   ctx.textAlign='center'; ctx.direction='ltr'; ctx.textBaseline='top';
   ctx.font='600 42px "Baloo Da 2"';
-  var l1=wrapBn('এই লেখাটি এই কার্ডের জন্য বড়', bw);
+  var l1=wrapBn(L('এই লেখাটি এই কার্ডের জন্য বড়', 'This text is too big for this card'), bw);
   ctx.font='400 32px "Baloo Da 2"';
-  var l2=wrapBn('ছোট একটি আয়াত, দোয়া বা হাদিস বেছে নিন — তাহলেই সুন্দর কার্ড তৈরি হবে।', bw);
+  var l2=wrapBn(L('ছোট একটি আয়াত, দোয়া বা হাদিস বেছে নিন — তাহলেই সুন্দর কার্ড তৈরি হবে।', 'Choose a shorter ayah, dua or hadith — then a beautiful card will be made.'), bw);
   var lh1=42*1.45, lh2=32*1.5;
   var nH=18 + 26 + l1.length*lh1 + 12 + l2.length*lh2;
   var top=Math.max(y0, y0 + Math.floor((bh-nH)/2) - LIFT);
@@ -361,7 +365,7 @@ function buildTypes(){
   box.innerHTML='';
   TYPE_DEFS.forEach(function(d){
     var b=document.createElement('button');
-    b.type='button'; b.className='pchip'+(state.type===d.k?' on':''); b.textContent=d.t;
+    b.type='button'; b.className='pchip'+(state.type===d.k?' on':''); b.textContent = langIsEn() ? d.te : d.t;
     b.addEventListener('click', function(){
       state.type=d.k;
       applyFilter();
@@ -428,7 +432,7 @@ document.getElementById('dlBtn').addEventListener('click', function(){
 document.getElementById('shBtn').addEventListener('click', function(){
   function fallback(){
     if(cv.toBlob){ cv.toBlob(function(b){ if(b) saveBlob(b); }, 'image/png'); }
-    toast('ছবিটি ডাউনলোড হয়েছে — এবার যেকোনো অ্যাপে শেয়ার করুন');
+    toast(L('ছবিটি ডাউনলোড হয়েছে — এবার যেকোনো অ্যাপে শেয়ার করুন', 'The image has downloaded — now share it in any app'));
   }
   if(cv.toBlob){
     cv.toBlob(function(b){
@@ -463,7 +467,7 @@ function ready(){
   draw();
 }
 if(!items.length || !bgs.length){
-  loadnote.textContent='কার্ডের তথ্য এখনো প্রস্তুত হয়নি — একটু পরে আবার চেষ্টা করুন।';
+  loadnote.textContent=L('কার্ডের তথ্য এখনো প্রস্তুত হয়নি — একটু পরে আবার চেষ্টা করুন।', 'The card data is not ready yet — please try again in a little while.');
 } else {
   var waits=[
     document.fonts.load('47px Marcellus'),
@@ -480,6 +484,12 @@ if(!items.length || !bgs.length){
   Promise.all(waits).then(ready);
   setTimeout(ready, 4000); /* never leave the preview blank */
 }
+/* refresh JS-rendered labels when the language toggle is used */
+window.wqRefreshLabels = function(){
+  if (!items.length || !bgs.length) loadnote.textContent = L('কার্ডের তথ্য এখনো প্রস্তুত হয়নি — একটু পরে আবার চেষ্টা করুন।', 'The card data is not ready yet — please try again in a little while.');
+  buildTypes(); updateNav();
+  if (started) draw();
+};
 })();
 </script>
 <script>
@@ -521,4 +531,30 @@ if(!items.length || !bgs.length){
     })();
     </script>
 </body>
-</html>
+</html
+<script>
+(function(){
+var I18N = { bn: {"docTitle": "আয়াত ও দোয়া শেয়ার কার্ড | Waqt (ওয়াক্ত)", "h1": "আয়াত ও দোয়া শেয়ার কার্ড", "sub": "পছন্দের আয়াত, দোয়া বা হাদিস বেছে নিন, সুন্দর একটি ডিজাইন বাছুন — তৈরি হয়ে যাবে মনের মতো ছবির কার্ড, ডাউনলোড বা শেয়ার করুন এক চাপে।", "yourCard": "আপনার কার্ড", "loadNote": "কার্ড তৈরি হচ্ছে…", "bgHint": "কার্ডের উপর দুইবার ট্যাপ করলেই design বদলে যাবে", "dlBtn": "ডাউনলোড করুন", "shBtn": "শেয়ার করুন", "customiseT": "কার্ড সাজান", "typeLbl": "বিষয় বেছে নিন", "designLbl": "ডিজাইন বেছে নিন", "shareT": "শেয়ার করুন", "shareSub": "ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন", "copyLink": "লিংক কপি", "seeAlso": "আরও দেখুন", "fShareCard": "শেয়ার কার্ড", "fDua": "সব দোয়া", "fDays": "বিশেষ ইসলামি দিন", "fQA": "প্রশ্নোত্তর", "fDir": "জেলা ও উপজেলা", "fHome": "Waqt হোম", "srcNote": "সব আয়াত পবিত্র কুরআন থেকে বাংলা অর্থসহ; দোয়া ও হাদিস নির্ভরযোগ্য সূত্রসহ সংকলিত।", "footLine": "Waqt (ওয়াক্ত) — নামাজের সময়, কুরআন, দোয়া ও ইসলামিক তথ্য।"},
+             en: {"docTitle": "Ayah & Dua Share Card | Waqt (ওয়াক্ত)", "h1": "Ayah & Dua Share Card", "sub": "Choose a favourite ayah, dua or hadith, pick a beautiful design — your picture card will be ready to download or share in one tap.", "yourCard": "Your card", "loadNote": "Making your card…", "bgHint": "Double-tap the card to change the design", "dlBtn": "Download", "shBtn": "Share", "customiseT": "Customise your card", "typeLbl": "Choose a topic", "designLbl": "Choose a design", "shareT": "Share", "shareSub": "If you liked it, share it with friends", "copyLink": "Copy link", "seeAlso": "See also", "fShareCard": "Share Card", "fDua": "All Duas", "fDays": "Special Islamic Days", "fQA": "Q&A", "fDir": "Districts & Upazilas", "fHome": "Waqt Home", "srcNote": "All ayahs are from the Holy Quran, with Bengali meaning; duas and hadiths are compiled with reliable sources.", "footLine": "Waqt (ওয়াক্ত) — prayer times, Quran, duas and Islamic knowledge."} };
+function applyLang(lang){
+  var d = I18N[lang] || I18N.bn;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k = el.getAttribute("data-i18n");
+    if (d[k] != null) el.textContent = d[k];
+  });
+  document.documentElement.lang = (lang === "en" ? "en" : "bn");
+  var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+  if (b && e) { b.classList.toggle("on", lang !== "en"); e.classList.toggle("on", lang === "en"); }
+  try { localStorage.setItem("waqtLang", lang); } catch (err) {}
+  if (typeof window.wqRefreshLabels === "function") { try { window.wqRefreshLabels(); } catch (err) {} }
+}
+function wqDetectLang(){ try { var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ""); if (tz === "Asia/Dhaka") return "bn"; var nl = (navigator.language || "").toLowerCase(); if (nl.indexOf("bn") === 0) return "bn"; return "en"; } catch (err) { return "bn"; } }
+var saved = "bn";
+try { saved = localStorage.getItem("waqtLang") || wqDetectLang(); localStorage.setItem("waqtLang", saved); } catch (err) {}
+applyLang(saved === "en" ? "en" : "bn");
+var b = document.getElementById("langBn"), e = document.getElementById("langEn");
+if (b) b.addEventListener("click", function(){ applyLang("bn"); });
+if (e) e.addEventListener("click", function(){ applyLang("en"); });
+})();
+</script>
+</body></html>
