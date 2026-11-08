@@ -164,6 +164,8 @@ main .card:nth-child(2){animation-delay:.07s}
 /* language-aware labels: only label text changes, never logic */
 function langIsEn(){ try { return localStorage.getItem("waqtLang") === "en"; } catch(e){ return false; } }
 function L(bn, en){ return langIsEn() ? en : bn; }
+function mainText(item){ return langIsEn() ? (item.en || item.bn) : item.bn; }
+function refText(item){ return langIsEn() ? (item.refEn || item.ref) : item.ref; }
 var W=1080, H=1440, CX=540;
 var THEMES={
   light:{ar:'#0B4636', bn:'#17352C', ref:'#92600A', orn:'#A87F14', brand:'#0B4636', brandSub:'#92600A', shadow:false},
@@ -236,7 +238,7 @@ function layout(item, box){
     arH+=14;
     var bs=Math.max(20, Math.round(47*s/104));
     ctx.font='600 '+bs+'px "Baloo Da 2"'; ctx.direction='ltr';
-    var bnLines=wrapBn(item.bn, bw), blh=bs*1.42;
+    var bnLines=wrapBn(mainText(item), bw), blh=bs*1.42;
     var rs=Math.max(20, Math.round(36*s/104));
     var total=arH + GAP_AR_ORN + ORN_ZONE + GAP_ORN_BN + bnLines.length*blh + 14 + rs*1.35;
     best={s:s, lines:lines, spans:spans, lineGap:lineGap, arH:arH, bs:bs,
@@ -302,7 +304,7 @@ function drawText(item, th, box, L){
   var y=oy + ORN_ZONE/2 + GAP_ORN_BN;
   for(var k=0;k<L.bnLines.length;k++){ ctx.fillText(L.bnLines[k], CX, y); y+=L.blh; }
   ctx.font='500 '+L.rs+'px "Baloo Da 2"'; ctx.fillStyle=th.ref;
-  ctx.fillText(item.ref, CX, y+14);
+  ctx.fillText(refText(item), CX, y+14);
   setShadow(false);
   ctx.restore();
 }
