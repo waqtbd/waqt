@@ -7238,86 +7238,61 @@
       });
     })();
     </script>
+  <script src="snd-player.js"></script>
   <script>
-  /* WaqtSnd — hero rain sound (Sunny, 2026-11-08). A chip beside the
-     weather badge, visible ONLY while it is raining at the selected
-     place (and only in the Realistic hero, like the rain itself).
-     Three produced rain loops follow the live rain intensity from
-     wxKind(); the thunder one-shots are fired BY the lightning
-     scheduler (onFlash), so the sound stays in sync with the flash:
-     a close strike cracks almost at once, a distant one rolls in
-     1-3 s later and quieter. Audio never autoplays — the chip is
-     the gesture. Files: Mixkit produced sounds (free licence). */
+  /* WaqtSnd — hero rain chip (Sunny, 2026-11-08). The chip sits under
+     the Quran book and shows ONLY while it is raining at the selected
+     place (Realistic hero). Playback belongs to the site-wide
+     WaqtPlayer (snd-player.js): the sound keeps going across pages
+     until the user stops it or plays something else. Three produced
+     rain loops follow the live wxKind() intensity; the thunder
+     one-shots are fired BY the lightning scheduler (onFlash), so
+     they stay in sync with the flash. OGG loops are preferred —
+     MP3 pads its seam and clicks on loop. */
   (function () {
     var FILES = { light: 'snd-rain-light', moderate: 'snd-rain-moderate', heavy: 'snd-rain-heavy' };
-    /* MP3 loops click at the seam (encoder padding); OGG loops are
-       sample-exact — prefer OGG wherever the browser can play it. */
-    var EXT = (function () { try { var a = new Audio(); return (a.canPlayType && a.canPlayType('audio/ogg; codecs="vorbis"')) ? '.ogg' : '.mp3'; } catch (e) { return '.mp3'; } })();
     var VOL = { light: 0.5, moderate: 0.78, heavy: 1.0 };
+    var EXT = (function () { try { var a = new Audio(); return (a.canPlayType && a.canPlayType('audio/ogg; codecs="vorbis"')) ? '.ogg' : '.mp3'; } catch (e) { return '.mp3'; } })();
     var btn = document.getElementById('sndBtn'), lbl = document.getElementById('sndLbl');
     if (!btn) return;
-    var on = false, K = null, classic = document.documentElement.classList.contains('hero-classic');
-    var rain = null, thN = null, thF = null, curTier = null, fadeTimer = null;
+    var K = null, classic = document.documentElement.classList.contains('hero-classic');
+    var thN = null, thF = null;
     function lang() { try { return localStorage.getItem('waqtLang') === 'en' ? 'en' : 'bn'; } catch (e) { return 'bn'; } }
     function tierOf(k) { if (!k || !k.rain || k.snow) return null; return k.rain < 0.5 ? 'light' : (k.rain <= 0.8 ? 'moderate' : 'heavy'); }
-    function ensure() {
-      if (rain) return;
-      rain = new Audio(); rain.loop = true; rain.preload = 'auto';
+    function ensureThunder() {
+      if (thN) return;
       thN = new Audio(); thN.preload = 'auto'; thN.src = 'snd-thunder-near.mp3';
       thF = new Audio(); thF.preload = 'auto'; thF.src = 'snd-thunder-far.mp3'; thF.volume = 0.85;
     }
-    function fade(vol, done) {
-      if (!rain) { if (done) done(); return; }
-      if (fadeTimer) clearInterval(fadeTimer);
-      var step = (vol - rain.volume) / 14, n = 0;
-      fadeTimer = setInterval(function () {
-        n++;
-        rain.volume = Math.max(0, Math.min(1, rain.volume + step));
-        if (n >= 14) { clearInterval(fadeTimer); fadeTimer = null; rain.volume = vol; if (done) done(); }
-      }, 30);
+    function heroCfg() {
+      var t = tierOf(K);
+      if (!t) return null;
+      return { key: 'hero-rain', src: FILES[t] + EXT, vol: VOL[t], labelBn: 'বৃষ্টির শব্দ', labelEn: 'Rain sound' };
     }
-    function playTier(t) {
-      ensure();
-      if (curTier !== t) { curTier = t; rain.src = FILES[t] + EXT; }
-      var p = rain.play();
-      if (p && p.catch) p.catch(function () {});
-      fade(VOL[t]);
-    }
-    function stopRain(hard) {
-      if (!rain) return;
-      if (hard) { rain.pause(); return; }
-      fade(0, function () { if (rain) rain.pause(); });
+    function syncChip() {
+      var cur = window.WaqtPlayer ? WaqtPlayer.current() : { key: null, playing: false };
+      var mine = cur.key === 'hero-rain' && cur.playing;
+      btn.classList.toggle('playing', mine);
+      btn.setAttribute('aria-pressed', mine ? 'true' : 'false');
     }
     function evaluate() {
       var t = tierOf(K);
-      var vis = !!t && !classic;
-      btn.classList.toggle('hidden', !vis);
+      btn.classList.toggle('hidden', !(t && !classic));
       if (lbl) lbl.textContent = lang() === 'en' ? 'Rain sound' : 'বৃষ্টির শব্দ';
-      if (!vis) { if (on) { on = false; btn.classList.remove('playing'); btn.setAttribute('aria-pressed', 'false'); stopRain(false); } return; }
-      if (on && t !== curTier) playTier(t);
+      if (t && window.WaqtPlayer) {
+        var cur = WaqtPlayer.current();
+        if (cur.key === 'hero-rain' && cur.src !== FILES[t] + EXT) WaqtPlayer.setSrc(FILES[t] + EXT, VOL[t]);
+      }
+      syncChip();
     }
     btn.addEventListener('click', function () {
-      var t = tierOf(K);
-      if (!t) return;
-      on = !on;
-      btn.classList.toggle('playing', on);
-      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      if (on) { ensure(); setSession(); playTier(t); } else stopRain(false);
+      var cfg = heroCfg();
+      if (!cfg || !window.WaqtPlayer) return;
+      ensureThunder();
+      WaqtPlayer.toggleKey(cfg);
+      syncChip();
     });
-    /* Screen off / tab hidden: the rain keeps playing (it is a media
-       stream, not a timer); the lock-screen controls can pause it. */
-    function setSession() {
-      if (!('mediaSession' in navigator)) return;
-      try {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: lang() === 'en' ? 'Rain sound' : 'বৃষ্টির শব্দ',
-          artist: 'Waqt (ওয়াক্ত)',
-          artwork: [{ src: 'logo.png', sizes: '512x512', type: 'image/png' }]
-        });
-        navigator.mediaSession.setActionHandler('pause', function () { if (on) btn.click(); });
-        navigator.mediaSession.setActionHandler('play', function () { if (!on) btn.click(); });
-      } catch (e) {}
-    }
+    window.addEventListener('waqtsnd', syncChip);
     new MutationObserver(function () {
       classic = document.documentElement.classList.contains('hero-classic');
       evaluate();
@@ -7328,7 +7303,10 @@
     window.WaqtSnd = {
       onWx: function (k) { K = k; evaluate(); },
       onFlash: function () {
-        if (!on || !K || !K.thunder || !thN) return;
+        if (!K || !K.thunder || !window.WaqtPlayer) return;
+        var cur = WaqtPlayer.current();
+        if (cur.key !== 'hero-rain' || !cur.playing) return;
+        ensureThunder();
         if (Math.random() < 0.55) {
           setTimeout(function () { try { thN.currentTime = 0; var p = thN.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {} }, Math.random() * 350);
         } else if (thF.paused) {
