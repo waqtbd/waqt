@@ -247,6 +247,8 @@
       /* the header's other tappables get the same no-square-flash
          treatment, each keeping its own shape for the focus ring */
       .topbar button{-webkit-tap-highlight-color:transparent}
+      /* no tap rectangle anywhere on the page — cards and every pressable inside them (Sunny, 2026-11-08) */
+      *{-webkit-tap-highlight-color:transparent}
       .lang-toggle button:focus-visible{border-radius:999px}
       .menu-btn:focus-visible{border-radius:11px}
       @media (max-width:400px){
