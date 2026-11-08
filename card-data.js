@@ -3,1596 +3,2280 @@ window.CARD_ITEMS = [
   "type": "ayat",
   "ar": "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
   "bn": "নিশ্চয় কষ্টের সাথে স্বস্তি রয়েছে।",
+  "en": "Indeed, with hardship comes ease.",
   "ref": "সূরা আশ-শারহ · আয়াত ৫",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ash-Sharh · Ayah 5",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًۭا",
   "bn": "নিশ্চয় কষ্টের সাথে স্বস্তি রয়েছে।",
+  "en": "Indeed, with hardship comes ease.",
   "ref": "সূরা আশ-শারহ · আয়াত ৬",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ash-Sharh · Ayah 6",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَٱسْتَعِينُوا۟ بِٱلصَّبْرِ وَٱلصَّلَوٰةِ ۚ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى ٱلْخَٰشِعِينَ",
   "bn": "ধৈর্য্যর সাথে সাহায্য প্রার্থনা কর নামাযের মাধ্যমে। অবশ্য তা যথেষ্ট কঠিন। কিন্তু সে সমস্ত বিনয়ী লোকদের পক্ষেই তা সম্ভব।",
+  "en": "Seek help through patience and Salah. Indeed, it is difficult, but only for the humble.",
   "ref": "সূরা আল-বাকারা · আয়াত ৪৫",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Al-Baqarah · Ayah 45",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "فَٱذْكُرُونِىٓ أَذْكُرْكُمْ وَٱشْكُرُوا۟ لِى وَلَا تَكْفُرُونِ",
   "bn": "সুতরাং তোমরা আমাকে স্মরণ কর, আমিও তোমাদের স্মরণ রাখবো এবং আমার কৃতজ্ঞতা প্রকাশ কর; অকৃতজ্ঞ হয়ো না।",
+  "en": "So remember Me, and I will remember you. Be grateful to Me and do not be ungrateful.",
   "ref": "সূরা আল-বাকারা · আয়াত ১৫২",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah Al-Baqarah · Ayah 152",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱسْتَعِينُوا۟ بِٱلصَّبْرِ وَٱلصَّلَوٰةِ ۚ إِنَّ ٱللَّهَ مَعَ ٱلصَّٰبِرِينَ",
   "bn": "হে মুমিন গন! তোমরা ধৈর্য্য ও নামাযের মাধ্যমে সাহায্য প্রার্থনা কর। নিশ্চিতই আল্লাহ ধৈর্য্যশীলদের সাথে রয়েছেন।",
+  "en": "O you who believe! Seek help through patience and Salah. Indeed, Allah is with the patient.",
   "ref": "সূরা আল-বাকারা · আয়াত ১৫৩",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Al-Baqarah · Ayah 153",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "وَإِذَا سَأَلَكَ عِبَادِى عَنِّى فَإِنِّى قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ ٱلدَّاعِ إِذَا دَعَانِ ۖ فَلْيَسْتَجِيبُوا۟ لِى وَلْيُؤْمِنُوا۟ بِى لَعَلَّهُمْ يَرْشُدُونَ",
   "bn": "আর আমার বান্দারা যখন তোমার কাছে জিজ্ঞেস করে আমার ব্যাপারে বস্তুতঃ আমি রয়েছি সন্নিকটে। যারা প্রার্থনা করে, তাদের প্রার্থনা কবুল করে নেই, যখন আমার কাছে প্রার্থনা করে। কাজেই আমার হুকুম মান্য করা এবং আমার প্রতি নিঃসংশয়ে বিশ্বাস করা তাদের একান্ত কর্তব্য। যাতে তারা সৎপথে আসতে পারে।",
+  "en": "And when My servants ask you about Me, indeed I am near. I answer the supplication of the one who calls upon Me when he calls upon Me. So let them obey My command and believe in Me without doubt, so that they may be rightly guided.",
   "ref": "সূরা আল-বাকারা · আয়াত ১৮৬",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Baqarah · Ayah 186",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "وَمِنْهُم مَّن يَقُولُ رَبَّنَآ ءَاتِنَا فِى ٱلدُّنْيَا حَسَنَةًۭ وَفِى ٱلْءَاخِرَةِ حَسَنَةًۭ وَقِنَا عَذَابَ ٱلنَّارِ",
   "bn": "আর তাদের মধ্যে কেউ কেউ বলে-হে পরওয়ারদেগার! আমাদিগকে দুনয়াতেও কল্যাণ দান কর এবং আখেরাতেও কল্যাণ দান কর এবং আমাদিগকে দোযখের আযাব থেকে রক্ষা কর।",
+  "en": "And among them are some who say: Our Lord! Give us good in this world and good in the Hereafter, and save us from the punishment of the Fire.",
   "ref": "সূরা আল-বাকারা · আয়াত ২০১",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Baqarah · Ayah 201",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "وَلَا تَهِنُوا۟ وَلَا تَحْزَنُوا۟ وَأَنتُمُ ٱلْأَعْلَوْنَ إِن كُنتُم مُّؤْمِنِينَ",
   "bn": "আর তোমরা নিরাশ হয়ো না এবং দুঃখ করো না। যদি তোমরা মুমিন হও তবে, তোমরাই জয়ী হবে।",
+  "en": "Do not lose heart and do not grieve. If you are believers, you will be victorious.",
   "ref": "সূরা আলে-ইমরান · আয়াত ১৩৯",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Aal-e-Imran · Ayah 139",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "إِن يَنصُرْكُمُ ٱللَّهُ فَلَا غَالِبَ لَكُمْ ۖ وَإِن يَخْذُلْكُمْ فَمَن ذَا ٱلَّذِى يَنصُرُكُم مِّنۢ بَعْدِهِۦ ۗ وَعَلَى ٱللَّهِ فَلْيَتَوَكَّلِ ٱلْمُؤْمِنُونَ",
   "bn": "যদি আল্লাহ তোমাদের সহায়তা করেন, তাহলে কেউ তোমাদের উপর পরাক্রান্ত হতে পারবে না। আর যদি তিনি তোমাদের সাহায্য না করেন, তবে এমন কে আছে, যে তোমাদের সাহায্য করতে পারে? আর আল্লাহর ওপরই মুসলমানগনের ভরসা করা উচিত।",
+  "en": "If Allah helps you, no one can overcome you. And if He does not help you, who is there who can help you? And upon Allah the believers should place their trust.",
   "ref": "সূরা আলে-ইমরান · আয়াত ১৬০",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Aal-e-Imran · Ayah 160",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "ٱلَّذِينَ قَالَ لَهُمُ ٱلنَّاسُ إِنَّ ٱلنَّاسَ قَدْ جَمَعُوا۟ لَكُمْ فَٱخْشَوْهُمْ فَزَادَهُمْ إِيمَٰنًۭا وَقَالُوا۟ حَسْبُنَا ٱللَّهُ وَنِعْمَ ٱلْوَكِيلُ",
   "bn": "যাদেরকে লোকেরা বলেছে যে, তোমাদের সাথে মোকাবেলা করার জন্য লোকেরা সমাবেশ করেছে বহু সাজ-সরঞ্জাম; তাদের ভয় কর। তখন তাদের বিশ্বাস আরও দৃঢ়তর হয়ে যায় এবং তারা বলে, আমাদের জন্য আল্লাহই যথেষ্ট; কতই না চমৎকার কামিয়াবীদানকারী।",
+  "en": "Those to whom people said, 'People have gathered against you with great preparations; fear them,' their faith only grew stronger, and they said, 'Allah is sufficient for us; what an excellent Guardian He is.'",
   "ref": "সূরা আলে-ইমরান · আয়াত ১৭৩",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Aal-e-Imran · Ayah 173",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "ٱلَّذِينَ ءَامَنُوا۟ وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ ٱللَّهِ ۗ أَلَا بِذِكْرِ ٱللَّهِ تَطْمَئِنُّ ٱلْقُلُوبُ",
   "bn": "যারা বিশ্বাস স্থাপন করে এবং তাদের অন্তর আল্লাহর যিকির দ্বারা শান্তি লাভ করে; জেনে রাখ, আল্লাহর যিকির দ্বারাই অন্তর সমূহ শান্তি পায়।",
+  "en": "Those who believe and whose hearts find peace in the remembrance of Allah; indeed, it is in the remembrance of Allah that hearts find peace.",
   "ref": "সূরা আর-রাদ · আয়াত ২৮",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ar-Ra'd · Ayah 28",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ۖ وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِى لَشَدِيدٌۭ",
   "bn": "যখন তোমাদের পালনকর্তা ঘোষণা করলেন যে, যদি কৃতজ্ঞতা স্বীকার কর, তবে তোমাদেরকে আরও দেব এবং যদি অকৃতজ্ঞ হও তবে নিশ্চয়ই আমার শাস্তি হবে কঠোর।",
+  "en": "When your Lord declared: If you are grateful, I will surely give you more, and if you are ungrateful, indeed My punishment is severe.",
   "ref": "সূরা ইব্রাহিম · আয়াত ৭",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah Ibrahim · Ayah 7",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "مَنْ عَمِلَ صَٰلِحًۭا مِّن ذَكَرٍ أَوْ أُنثَىٰ وَهُوَ مُؤْمِنٌۭ فَلَنُحْيِيَنَّهُۥ حَيَوٰةًۭ طَيِّبَةًۭ ۖ وَلَنَجْزِيَنَّهُمْ أَجْرَهُم بِأَحْسَنِ مَا كَانُوا۟ يَعْمَلُونَ",
   "bn": "যে সৎকর্ম সম্পাদন করে এবং সে ঈমাণদার, পুরুষ হোক কিংবা নারী আমি তাকে পবিত্র জীবন দান করব এবং প্রতিদানে তাদেরকে তাদের উত্তম কাজের কারণে প্রাপ্য পুরষ্কার দেব যা তারা করত।",
+  "en": "Whoever does a righteous deed, whether male or female, and is a believer, We will give him a good life and reward them for the best of what they used to do.",
   "ref": "সূরা আন-নাহল · আয়াত ৯৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah An-Nahl · Ayah 97",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَقُل رَّبِّ ٱغْفِرْ وَٱرْحَمْ وَأَنتَ خَيْرُ ٱلرَّٰحِمِينَ",
   "bn": "বলূনঃ হে আমার পালনকর্তা, ক্ষমা করুন ও রহম করুন। রহমকারীদের মধ্যে আপনি শ্রেষ্ট রহমকারী।",
+  "en": "Say: My Lord, forgive and have mercy, and You are the best of those who show mercy.",
   "ref": "সূরা আল-মুমিনুন · আয়াত ১১৮",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-Mu'minun · Ayah 118",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبْ لَنَا مِنْ أَزْوَٰجِنَا وَذُرِّيَّٰتِنَا قُرَّةَ أَعْيُنٍۢ وَٱجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
   "bn": "এবং যারা বলে, হে আমাদের পালনকর্তা, আমাদের স্ত্রীদের পক্ষ থেকে এবং আমাদের সন্তানের পক্ষ থেকে আমাদের জন্যে চোখের শীতলতা দান কর এবং আমাদেরকে মুত্তাকীদের জন্যে আদর্শস্বরূপ কর।",
+  "en": "And those who say: Our Lord, grant us from our wives and our children the coolness of our eyes, and make us an example for the righteous.",
   "ref": "সূরা আল-ফুরকান · আয়াত ৭৪",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Furqan · Ayah 74",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "وَٱلَّذِينَ جَٰهَدُوا۟ فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا ۚ وَإِنَّ ٱللَّهَ لَمَعَ ٱلْمُحْسِنِينَ",
   "bn": "যারা আমার পথে সাধনায় আত্মনিয়োগ করে, আমি অবশ্যই তাদেরকে আমার পথে পরিচালিত করব। নিশ্চয় আল্লাহ সৎকর্মপরায়ণদের সাথে আছেন।",
+  "en": "Those who strive in Our cause, We will surely guide them to Our paths. Indeed, Allah is with those who do good.",
   "ref": "সূরা আল-আনকাবুত · আয়াত ৬৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Ankabut · Ayah 69",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "۞ قُلْ يَٰعِبَادِىَ ٱلَّذِينَ أَسْرَفُوا۟ عَلَىٰٓ أَنفُسِهِمْ لَا تَقْنَطُوا۟ مِن رَّحْمَةِ ٱللَّهِ ۚ إِنَّ ٱللَّهَ يَغْفِرُ ٱلذُّنُوبَ جَمِيعًا ۚ إِنَّهُۥ هُوَ ٱلْغَفُورُ ٱلرَّحِيمُ",
   "bn": "বলুন, হে আমার বান্দাগণ যারা নিজেদের উপর যুলুম করেছ তোমরা আল্লাহর রহমত থেকে নিরাশ হয়ো না। নিশ্চয় আল্লাহ সমস্ত গোনাহ মাফ করেন। তিনি ক্ষমাশীল, পরম দয়ালু।",
+  "en": "Say: O My servants who have wronged themselves, do not despair of the mercy of Allah. Indeed, Allah forgives all sins. He is the Most Forgiving, the Most Merciful.",
   "ref": "সূরা আয-যুমার · আয়াত ৫৩",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Az-Zumar · Ayah 53",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "وَقَالَ رَبُّكُمُ ٱدْعُونِىٓ أَسْتَجِبْ لَكُمْ ۚ إِنَّ ٱلَّذِينَ يَسْتَكْبِرُونَ عَنْ عِبَادَتِى سَيَدْخُلُونَ جَهَنَّمَ دَاخِرِينَ",
   "bn": "তোমাদের পালনকর্তা বলেন, তোমরা আমাকে ডাক, আমি সাড়া দেব। যারা আমার এবাদতে অহংকার করে তারা সত্বরই জাহান্নামে দাখিল হবে লাঞ্ছিত হয়ে।",
+  "en": "Your Lord says: Call upon Me, I will answer you. Those who are too proud to worship Me will soon enter Hell in humiliation.",
   "ref": "সূরা গাফির (মুমিন) · আয়াত ৬০",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Ghafir · Ayah 60",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
   "bn": "অতএব, তোমরা উভয়ে তোমাদের পালনকর্তার কোন কোন অনুগ্রহকে অস্বীকার করবে?",
+  "en": "So which of the favours of your Lord will you both deny?",
   "ref": "সূরা আর-রাহমান · আয়াত ১৩",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah Ar-Rahman · Ayah 13",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "وَٱذْكُرِ ٱسْمَ رَبِّكَ وَتَبَتَّلْ إِلَيْهِ تَبْتِيلًۭا",
   "bn": "আপনি আপনার পালনকর্তার নাম স্মরণ করুন এবং একাগ্রচিত্তে তাতে মগ্ন হোন।",
+  "en": "Remember the name of your Lord and devote yourself to Him wholeheartedly.",
   "ref": "সূরা আল-মুজ্জাম্মিল · আয়াত ৮",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Muzzammil · Ayah 8",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "dua",
   "ar": "غُفْرَانَكَ",
   "bn": "(হে আল্লাহ!) তোমার ক্ষমা চাই।",
+  "en": "(O Allah!) I seek Your forgiveness.",
   "ref": "সুনানে আবু দাউদ ৩০; জামে তিরমিজি ৭; সুনানে ইবনে মাজাহ ৩০০",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sunan Abu Dawud 30; Jami at-Tirmidhi 7; Sunan Ibn Majah 300",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "بِسْمِ اللَّهِ",
   "bn": "আল্লাহর নামে (শুরু করছি)। (ভুলে গেলে:) আল্লাহর নামে — এর শুরুতে ও শেষে।",
+  "en": "In the name of Allah (I begin). (If forgotten:) In the name of Allah — at its beginning and at its end.",
   "ref": "সুনানে আবু দাউদ ৩৭৬৭; জামে তিরমিজি ১৮৫৮",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sunan Abu Dawud 3767; Jami at-Tirmidhi 1858",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "رَّبِّ زِدْنِى عِلْمًۭا",
   "bn": "হে আমার রব! আমার জ্ঞান বাড়িয়ে দিন।",
+  "en": "My Lord! Increase me in knowledge.",
   "ref": "সূরা ত্বহা (২০): ১১৪",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Taha (20): 114",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ صَيِّبًا نَافِعًا",
   "bn": "হে আল্লাহ! (এই বৃষ্টিকে) উপকারী বৃষ্টি বানিয়ে দাও।",
+  "en": "O Allah! Make (this rain) a beneficial rain.",
   "ref": "সহীহ বুখারী ১০৩২",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sahih al-Bukhari 1032",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
   "bn": "আল্লাহই আমাদের জন্য যথেষ্ট, আর তিনি কতই না উত্তম কর্মবিধায়ক।",
+  "en": "Allah is sufficient for us, and He is the best Guardian.",
   "ref": "সূরা আলে ইমরান (৩): ১৭৩",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Aal-e-Imran (3): 173",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "dua",
   "ar": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
   "bn": "হে আল্লাহ, তোমার নামেই আমি মৃত্যুবরণ করি (ঘুমাই) ও জীবিত হই (জাগি)।",
+  "en": "O Allah, in Your name I die (sleep) and live (wake).",
   "ref": "সহীহ বুখারী ৬৩২৪",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sahih al-Bukhari 6324",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
   "bn": "হে আল্লাহ! আমি তোমার কাছে তোমার অনুগ্রহ প্রার্থনা করছি।",
+  "en": "O Allah! I ask You for Your bounty.",
   "ref": "সহীহ মুসলিম ৭১৩",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sahih Muslim 713",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
   "bn": "হে আল্লাহ! আমার জন্য তোমার রহমতের দরজাগুলো খুলে দাও।",
+  "en": "O Allah! Open for me the doors of Your mercy.",
   "ref": "সহীহ মুসলিম ৭১৩",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sahih Muslim 713",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
   "bn": "হে আমার রব, তাদের প্রতি দয়া করো, যেমন তারা শৈশবে আমাকে লালন-পালন করেছেন।",
+  "en": "My Lord, have mercy on them, just as they raised me when I was small.",
   "ref": "সূরা ইসরা (১৭): ২৪",
-  "topic": "মা-বাবা"
+  "refEn": "Surah Al-Isra (17): 24",
+  "topic": "মা-বাবা",
+  "topicEn": "Parents"
  },
  {
   "type": "dua",
   "ar": "رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
   "bn": "হে আমার রব, তুমি আমার প্রতি যে কল্যাণই পাঠাবে, আমি তার মুখাপেক্ষী।",
+  "en": "My Lord, whatever good You send down to me, I am in need of it.",
   "ref": "সূরা কাসাস (২৮): ২৪",
-  "topic": "রিজিক"
+  "refEn": "Surah Al-Qasas (28): 24",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
   "bn": "হে আল্লাহ! তুমি ক্ষমাশীল, ক্ষমা করা পছন্দ করো — সুতরাং আমাকে ক্ষমা করে দাও।",
+  "en": "O Allah! You are Pardoning, You love to pardon — so pardon me.",
   "ref": "জামে তিরমিজি ৩৫১৩; সুনানে ইবনে মাজাহ ৩৮৫০",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Jami at-Tirmidhi 3513; Sunan Ibn Majah 3850",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
   "bn": "হে আল্লাহ! আমি তোমার কাছে আশ্রয় চাই অপবিত্র ও ক্ষতিকর জিনিস (দুষ্ট জিন ও শয়তান) থেকে।",
+  "en": "O Allah! I seek refuge in You from impure and harmful things (evil jinn and devils).",
   "ref": "সহীহ বুখারী ১৪২; সহীহ মুসলিম ৩৭৫",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sahih al-Bukhari 142; Sahih Muslim 375",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",
   "bn": "তুমি ছাড়া কোনো উপাস্য নেই; তুমি পবিত্র, নিশ্চয়ই আমি জালিমদের অন্তর্ভুক্ত ছিলাম।",
+  "en": "There is no god but You; You are pure. Indeed, I was among the wrongdoers.",
   "ref": "সূরা আম্বিয়া (২১): ৮৭",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Al-Anbiya (21): 87",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "dua",
   "ar": "أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ",
   "bn": "আমি মহান আল্লাহ, মহান আরশের রবের কাছে প্রার্থনা করি, তিনি যেন তোমাকে শিফা দেন।",
+  "en": "I ask Allah, the Great, the Lord of the Great Throne, to grant you healing.",
   "ref": "সুনানে আবু দাউদ ৩১০৬; তিরমিজি ২০৮৩",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Sunan Abu Dawud 3106; Jami at-Tirmidhi 2083",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "hadith",
   "ar": "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
   "bn": "কাজসমূহ কেবল নিয়তের উপর নির্ভরশীল, আর প্রত্যেক ব্যক্তি তাই পাবে যা সে নিয়ত করেছে।",
+  "en": "Actions depend only upon intentions, and every person will get what he intended.",
   "ref": "সহীহ আল-বুখারী ১",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Sahih al-Bukhari 1",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "hadith",
   "ar": "بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَالْحَجِّ، وَصَوْمِ رَمَضَانَ",
   "bn": "ইসলাম পাঁচটি ভিত্তির উপর প্রতিষ্ঠিত: এই সাক্ষ্য দেওয়া যে আল্লাহ ছাড়া কোনো উপাস্য নেই এবং মুহাম্মদ (ﷺ) আল্লাহর রাসূল, নামাজ কায়েম করা, জাকাত দেওয়া, হজ করা এবং রমজানের রোজা রাখা।",
+  "en": "Islam is built upon five pillars: bearing witness that there is no god but Allah and that Muhammad (ﷺ) is the Messenger of Allah, establishing Salah, giving Zakat, performing Hajj, and fasting in Ramadan.",
   "ref": "সহীহ আল-বুখারী ৮",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Sahih al-Bukhari 8",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "hadith",
   "ar": "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ، وَالْمُهَاجِرُ مَنْ هَجَرَ مَا نَهَى اللَّهُ عَنْهُ",
   "bn": "মুসলিম সে-ই, যার জিহ্বা ও হাত থেকে অন্য মুসলিমরা নিরাপদ থাকে; আর মুহাজির সে-ই, যে আল্লাহ যা নিষেধ করেছেন তা ত্যাগ করে।",
+  "en": "A Muslim is one from whose tongue and hand other Muslims are safe; and a Muhajir is one who abandons what Allah has forbidden.",
   "ref": "সহীহ আল-বুখারী ১০",
-  "topic": "ভালো আখলাক"
+  "refEn": "Sahih al-Bukhari 10",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "hadith",
   "ar": "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
   "bn": "তোমাদের কেউ (পূর্ণ) মুমিন হতে পারবে না, যতক্ষণ না সে তার ভাইয়ের জন্য তাই ভালোবাসে যা সে নিজের জন্য ভালোবাসে।",
+  "en": "None of you can be a (complete) believer until he loves for his brother what he loves for himself.",
   "ref": "সহীহ আল-বুখারী ১৩",
-  "topic": "ভালো আখলাক"
+  "refEn": "Sahih al-Bukhari 13",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "hadith",
   "ar": "الطُّهُورُ شَطْرُ الْإِيمَانِ",
   "bn": "পবিত্রতা ঈমানের অর্ধেক।",
+  "en": "Purity is half of faith.",
   "ref": "সহীহ মুসলিম ২২৩",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Sahih Muslim 223",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "hadith",
   "ar": "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
   "bn": "তোমাদের মধ্যে সর্বোত্তম সে-ই, যে কুরআন শেখে এবং শেখায়।",
+  "en": "The best among you is the one who learns the Quran and teaches it.",
   "ref": "সহীহ আল-বুখারী ৫০২৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Sahih al-Bukhari 5027",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "hadith",
   "ar": "الصَّلَوَاتُ الْخَمْسُ، وَالْجُمُعَةُ إِلَى الْجُمُعَةِ، كَفَّارَةٌ لِمَا بَيْنَهُنَّ",
   "bn": "পাঁচ ওয়াক্ত নামাজ এবং এক জুমা থেকে পরের জুমা — এগুলোর মধ্যবর্তী (ছোট) গুনাহের কাফফারা।",
+  "en": "The five daily Salah and one Jumu'ah to the next Jumu'ah expiate the (minor) sins between them.",
   "ref": "সহীহ মুসলিম ২৩৩",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Sahih Muslim 233",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "hadith",
   "ar": "إِنَّ أَوَّلَ مَا يُحَاسَبُ بِهِ الْعَبْدُ يَوْمَ الْقِيَامَةِ مِنْ عَمَلِهِ صَلَاتُهُ",
   "bn": "কিয়ামতের দিন বান্দার আমলের মধ্যে সবার আগে নামাজের হিসাব নেওয়া হবে।",
+  "en": "On the Day of Judgement, the first thing a servant will be asked about from his deeds is his Salah.",
   "ref": "সুনানে আত-তিরমিজি ৪১৩; আবু দাউদ ৮৬৪",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Jami at-Tirmidhi 413; Sunan Abu Dawud 864",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "hadith",
   "ar": "مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلَا وَصَبٍ وَلَا هَمٍّ وَلَا حُزْنٍ وَلَا أَذًى وَلَا غَمٍّ حَتَّى الشَّوْكَةِ يُشَاكُهَا إِلَّا كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ",
   "bn": "মুসলিমের উপর যে কষ্ট, রোগ, দুশ্চিন্তা, দুঃখ, কষ্টদায়ক বিষয় বা পেরেশানি আসে — এমনকি একটি কাঁটা বিঁধলেও — আল্লাহ তার বিনিময়ে তার গুনাহ মাফ করে দেন।",
+  "en": "Whatever hardship, illness, worry, grief, harm or distress befalls a Muslim — even a thorn pricking him — Allah forgives some of his sins in return.",
   "ref": "সহীহ বুখারী ৫৬৪১; সহীহ মুসলিম ২৫৭৩",
-  "topic": "ধৈর্য"
+  "refEn": "Sahih al-Bukhari 5641; Sahih Muslim 2573",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "hadith",
   "ar": "عَجَبًا لِأَمْرِ الْمُؤْمِنِ، إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ، إِنْ أَصَابَتْهُ سَرَّاءُ شَكَرَ فَكَانَ خَيْرًا لَهُ، وَإِنْ أَصَابَتْهُ ضَرَّاءُ صَبَرَ فَكَانَ خَيْرًا لَهُ",
   "bn": "মুমিনের ব্যাপারটি আশ্চর্যজনক! তার সব অবস্থাই কল্যাণকর: সুখ এলে সে শুকরিয়া আদায় করে — তা তার জন্য কল্যাণ; কষ্ট এলে সে ধৈর্য ধরে — তাও তার জন্য কল্যাণ।",
+  "en": "The affair of the believer is amazing! All his states are good for him: when joy comes, he gives thanks — that is good for him; when hardship comes, he is patient — that too is good for him.",
   "ref": "সহীহ মুসলিম ২৯৯৯",
-  "topic": "ধৈর্য"
+  "refEn": "Sahih Muslim 2999",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "hadith",
   "ar": "لَوْ أَنَّكُمْ تَوَكَّلْتُمْ عَلَى اللَّهِ حَقَّ تَوَكُّلِهِ لَرَزَقَكُمْ كَمَا يَرْزُقُ الطَّيْرَ، تَغْدُو خِمَاصًا وَتَرُوحُ بِطَانًا",
   "bn": "তোমরা যদি আল্লাহর উপর যথাযথ ভরসা করতে, তিনি তোমাদের রিজিক দিতেন যেমন পাখিকে দেন — সে সকালে খালি পেটে বের হয়, সন্ধ্যায় ভরা পেটে ফেরে।",
+  "en": "If you relied upon Allah as He truly deserves to be relied upon, He would provide for you as He provides for the birds — they leave in the morning with empty stomachs and return in the evening with full stomachs.",
   "ref": "সুনানে আত-তিরমিজি ২৩৪৪; ইবনে মাজাহ ৪১৬৪",
-  "topic": "রিজিক"
+  "refEn": "Jami at-Tirmidhi 2344; Sunan Ibn Majah 4164",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "hadith",
   "ar": "مَنْ أَحَبَّ أَنْ يُبْسَطَ لَهُ فِي رِزْقِهِ وَيُنْسَأَ لَهُ فِي أَثَرِهِ فَلْيَصِلْ رَحِمَهُ",
   "bn": "যে চায় তার রিজিক বাড়ুক ও আয়ু দীর্ঘ হোক, সে যেন আত্মীয়তার সম্পর্ক বজায় রাখে।",
+  "en": "Whoever wishes for his provision to increase and his life to be prolonged, let him maintain ties of kinship.",
   "ref": "সহীহ বুখারী ২০৬৭; সহীহ মুসলিম ২৫৫৭",
-  "topic": "রিজিক"
+  "refEn": "Sahih al-Bukhari 2067; Sahih Muslim 2557",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "hadith",
   "ar": "جَاءَ رَجُلٌ إِلَى رَسُولِ اللَّهِ ﷺ فَقَالَ: مَنْ أَحَقُّ النَّاسِ بِحُسْنِ صَحَابَتِي؟ قَالَ: أُمُّكَ، قَالَ: ثُمَّ مَنْ؟ قَالَ: ثُمَّ أُمُّكَ، قَالَ: ثُمَّ مَنْ؟ قَالَ: ثُمَّ أُمُّكَ، قَالَ: ثُمَّ مَنْ؟ قَالَ: ثُمَّ أَبُوكَ",
   "bn": "এক ব্যক্তি এসে জিজ্ঞেস করল, আমার ভালো আচরণের সবচেয়ে বেশি হকদার কে? নবী ﷺ বললেন: তোমার মা। আবার জিজ্ঞেস করায় বললেন: তোমার মা, তারপর তোমার মা, তারপর তোমার বাবা।",
+  "en": "A man came and asked: Who is most deserving of my good companionship? The Prophet ﷺ said: Your mother. Asked again, he said: Your mother, then your mother, then your father.",
   "ref": "সহীহ বুখারী ৫৯৭১; সহীহ মুসলিম ২৫৪৮",
-  "topic": "মা-বাবা"
+  "refEn": "Sahih al-Bukhari 5971; Sahih Muslim 2548",
+  "topic": "মা-বাবা",
+  "topicEn": "Parents"
  },
  {
   "type": "hadith",
   "ar": "رِضَا الرَّبِّ فِي رِضَا الْوَالِدِ، وَسَخَطُ الرَّبِّ فِي سَخَطِ الْوَالِدِ",
   "bn": "পিতার সন্তুষ্টিতেই আল্লাহর সন্তুষ্টি, আর পিতার অসন্তুষ্টিতেই আল্লাহর অসন্তুষ্টি।",
+  "en": "The pleasure of the Lord lies in the pleasure of the father, and the displeasure of the Lord lies in the displeasure of the father.",
   "ref": "সুনানে আত-তিরমিজি ১৮৯৯",
-  "topic": "মা-বাবা"
+  "refEn": "Jami at-Tirmidhi 1899",
+  "topic": "মা-বাবা",
+  "topicEn": "Parents"
  },
  {
   "type": "ayat",
   "ar": "قُلِ ٱللَّهُمَّ مَٰلِكَ ٱلْمُلْكِ تُؤْتِى ٱلْمُلْكَ مَن تَشَآءُ وَتَنزِعُ ٱلْمُلْكَ مِمَّن تَشَآءُ وَتُعِزُّ مَن تَشَآءُ وَتُذِلُّ مَن تَشَآءُ ۖ بِيَدِكَ ٱلْخَيْرُ ۖ إِنَّكَ عَلَىٰ كُلِّ شَىْءٍۢ قَدِيرٌۭ",
   "bn": "বলুন ইয়া আল্লাহ! তুমিই সার্বভৌম শক্তির অধিকারী। তুমি যাকে ইচ্ছা রাজ্য দান কর এবং যার কাছ থেকে ইচ্ছা রাজ্য ছিনিয়ে নাও এবং যাকে ইচ্ছা সম্মান দান কর আর যাকে ইচ্ছা অপমানে পতিত কর। তোমারই হাতে রয়েছে যাবতীয় কল্যাণ। নিশ্চয়ই তুমি সর্ব বিষয়ে ক্ষমতাশীল।",
+  "en": "Say: O Allah! You are the Owner of all sovereignty. You give sovereignty to whom You will and take sovereignty away from whom You will. You honour whom You will and disgrace whom You will. All good is in Your hand. Indeed, You have power over all things.",
   "ref": "সূরা আলে-ইমরান · আয়াত ২৬",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Aal-e-Imran · Ayah 26",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَمَكَرُوا۟ وَمَكَرَ ٱللَّهُ ۖ وَٱللَّهُ خَيْرُ ٱلْمَٰكِرِينَ",
   "bn": "এবং কাফেরেরা চক্রান্ত করেছে আর আল্লাহও কৌশল অবলম্বন করেছেন। বস্তুতঃ আল্লাহ হচ্ছেন সর্বোত্তম কুশলী।",
+  "en": "And the disbelievers plotted, and Allah planned. And Allah is the best of planners.",
   "ref": "সূরা আলে-ইমরান · আয়াত ৫৪",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Aal-e-Imran · Ayah 54",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱتَّقُوا۟ ٱللَّهَ حَقَّ تُقَاتِهِۦ وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ",
   "bn": "হে ঈমানদারগণ! আল্লাহকে যেমন ভয় করা উচিৎ ঠিক তেমনিভাবে ভয় করতে থাক। এবং অবশ্যই মুসলমান না হয়ে মৃত্যুবরণ করো না।",
+  "en": "O you who believe! Fear Allah as He should be feared, and do not die except as Muslims.",
   "ref": "সূরা আলে-ইমরান · আয়াত ১০২",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Aal-e-Imran · Ayah 102",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "۞ وَسَارِعُوٓا۟ إِلَىٰ مَغْفِرَةٍۢ مِّن رَّبِّكُمْ وَجَنَّةٍ عَرْضُهَا ٱلسَّمَٰوَٰتُ وَٱلْأَرْضُ أُعِدَّتْ لِلْمُتَّقِينَ",
   "bn": "তোমরা তোমাদের পালনকর্তার ক্ষমা এবং জান্নাতের দিকে ছুটে যাও যার সীমানা হচ্ছে আসমান ও যমীন, যা তৈরী করা হয়েছে পরহেযগারদের জন্য।",
+  "en": "Hasten towards the forgiveness of your Lord and towards Jannah, whose width is the heavens and the earth, prepared for the righteous.",
   "ref": "সূরা আলে-ইমরান · আয়াত ১৩৩",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Aal-e-Imran · Ayah 133",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "وَمَن يَعْمَلْ سُوٓءًا أَوْ يَظْلِمْ نَفْسَهُۥ ثُمَّ يَسْتَغْفِرِ ٱللَّهَ يَجِدِ ٱللَّهَ غَفُورًۭا رَّحِيمًۭا",
   "bn": "যে গোনাহ, করে কিংবা নিজের অনিষ্ট করে, অতঃপর আল্লাহর কাছে ক্ষমা প্রার্থনা করে, সে আল্লাহকে ক্ষমাশীল, করুণাময় পায়।",
+  "en": "Whoever commits a sin or wrongs himself, then seeks forgiveness from Allah, will find Allah Forgiving and Merciful.",
   "ref": "সূরা আন-নিসা · আয়াত ১১০",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah An-Nisa · Ayah 110",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "مَّا يَفْعَلُ ٱللَّهُ بِعَذَابِكُمْ إِن شَكَرْتُمْ وَءَامَنتُمْ ۚ وَكَانَ ٱللَّهُ شَاكِرًا عَلِيمًۭا",
   "bn": "তোমাদের আযাব দিয়ে আল্লাহ কি করবেন যদি তোমরা কৃতজ্ঞতা প্রকাশ কর এবং ঈমানের উপর প্রতিষ্ঠিত থাক! আর আল্লাহ হচ্ছেন সমুচিত মূল্যদানকারী সর্বজ্ঞ।",
+  "en": "What would Allah do with your punishment if you are grateful and firm in faith! And Allah is Appreciative and All-Knowing.",
   "ref": "সূরা আন-নিসা · আয়াত ১৪৭",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah An-Nisa · Ayah 147",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "مَن جَآءَ بِٱلْحَسَنَةِ فَلَهُۥ عَشْرُ أَمْثَالِهَا ۖ وَمَن جَآءَ بِٱلسَّيِّئَةِ فَلَا يُجْزَىٰٓ إِلَّا مِثْلَهَا وَهُمْ لَا يُظْلَمُونَ",
   "bn": "যে একটি সৎকর্ম করবে, সে তার দশগুণ পাবে এবং যে, একটি মন্দ কাজ করবে, সে তার সমান শাস্তিই পাবে। বস্তুতঃ তাদের প্রতি জুলুম করা হবে না।",
+  "en": "Whoever does one good deed will receive ten times its reward, and whoever does one evil deed will be punished only with its like. And they will not be wronged.",
   "ref": "সূরা আল-আনআম · আয়াত ১৬০",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-An'am · Ayah 160",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "قَالَا رَبَّنَا ظَلَمْنَآ أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ ٱلْخَٰسِرِينَ",
   "bn": "তারা উভয়ে বললঃ হে আমাদের পালনকর্তা আমরা নিজেদের প্রতি জুলম করেছি। যদি আপনি আমাদেরকে ক্ষমা না করেন এবং আমাদের প্রতি অনুগ্রহ না করেন, তবে আমরা অবশ্যই অবশ্যই ধ্বংস হয়ে যাব।",
+  "en": "They both said: Our Lord, we have wronged ourselves. If You do not forgive us and have mercy on us, we will surely be among the losers.",
   "ref": "সূরা আল-আরাফ · আয়াত ২৩",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-A'raf · Ayah 23",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "۞ وَٱكْتُبْ لَنَا فِى هَٰذِهِ ٱلدُّنْيَا حَسَنَةًۭ وَفِى ٱلْءَاخِرَةِ إِنَّا هُدْنَآ إِلَيْكَ ۚ قَالَ عَذَابِىٓ أُصِيبُ بِهِۦ مَنْ أَشَآءُ ۖ وَرَحْمَتِى وَسِعَتْ كُلَّ شَىْءٍۢ ۚ فَسَأَكْتُبُهَا لِلَّذِينَ يَتَّقُونَ وَيُؤْتُونَ ٱلزَّكَوٰةَ وَٱلَّذِينَ هُم بِـَٔايَٰتِنَا يُؤْمِنُونَ",
   "bn": "আর পৃথিবীতে এবং আখেরাতে আমাদের জন্য কল্যাণ লিখে দাও। আমরা তোমার দিকে প্রত্যাবর্তন করছি। আল্লাহ তা’আলা বললেন, আমার আযাব তারই উপর পরিব্যাপ্ত। সুতরাং তা তাদের জন্য লিখে দেব যারা ভয় রাখে, যাকাত দান করে এবং যারা আমার আয়তসমুহের উপর বিশ্বাস স্থাপন করে।",
+  "en": "And ordain for us good in this world and in the Hereafter. We have turned to You. Allah said: My punishment reaches whom I will. I will ordain it for those who fear Allah, give Zakat, and believe in My signs.",
   "ref": "সূরা আল-আরাফ · আয়াত ১৫৬",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-A'raf · Ayah 156",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "قُل لَّن يُصِيبَنَآ إِلَّا مَا كَتَبَ ٱللَّهُ لَنَا هُوَ مَوْلَىٰنَا ۚ وَعَلَى ٱللَّهِ فَلْيَتَوَكَّلِ ٱلْمُؤْمِنُونَ",
   "bn": "আপনি বলুন, আমাদের কাছে কিছুই পৌঁছবে না, কিন্তু যা আল্লাহ আমাদের জন্য রেখেছেন; তিনি আমাদের কার্যনির্বাহক। আল্লাহর উপরই মুমিনদের ভরসা করা উচিত।",
+  "en": "Say: Nothing will reach us except what Allah has decreed for us; He is our Protector. And upon Allah the believers should place their trust.",
   "ref": "সূরা আত-তাওবা · আয়াত ৫১",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah At-Tawbah · Ayah 51",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَقُلِ ٱعْمَلُوا۟ فَسَيَرَى ٱللَّهُ عَمَلَكُمْ وَرَسُولُهُۥ وَٱلْمُؤْمِنُونَ ۖ وَسَتُرَدُّونَ إِلَىٰ عَٰلِمِ ٱلْغَيْبِ وَٱلشَّهَٰدَةِ فَيُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ",
   "bn": "আর তুমি বলে দাও, তোমরা আমল করে যাও, তার পরবর্তীতে আল্লাহ দেখবেন তোমাদের কাজ এবং দেখবেন রসূল ও মুসলমানগণ। তাছাড়া তোমরা শীগ্রই প্রত্যাবর্তিত হবে তাঁর সান্নিধ্যে যিনি গোপন ও প্রকাশ্য বিষয়ে অবগত। তারপর তিনি জানিয়ে দেবেন তোমাদেরকে যা করতে।",
+  "en": "And say: Keep doing deeds; Allah will see your work, and so will the Messenger and the believers. And you will soon be returned to the Knower of the unseen and the seen, and He will inform you of what you used to do.",
   "ref": "সূরা আত-তাওবা · আয়াত ১০৫",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah At-Tawbah · Ayah 105",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "فَإِن تَوَلَّوْا۟ فَقُلْ حَسْبِىَ ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَهُوَ رَبُّ ٱلْعَرْشِ ٱلْعَظِيمِ",
   "bn": "এ সত্ত্বেও যদি তারা বিমুখ হয়ে থাকে, তবে বলে দাও, আল্লাহই আমার জন্য যথেষ্ট, তিনি ব্যতীত আর কারো বন্দেগী নেই। আমি তাঁরই ভরসা করি এবং তিনিই মহান আরশের অধিপতি।",
+  "en": "Even if they turn away, say: Allah is sufficient for me; there is no god but Him. I place my trust in Him, and He is the Lord of the Great Throne.",
   "ref": "সূরা আত-তাওবা · আয়াত ১২৯",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah At-Tawbah · Ayah 129",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلنَّاسُ قَدْ جَآءَتْكُم مَّوْعِظَةٌۭ مِّن رَّبِّكُمْ وَشِفَآءٌۭ لِّمَا فِى ٱلصُّدُورِ وَهُدًۭى وَرَحْمَةٌۭ لِّلْمُؤْمِنِينَ",
   "bn": "হে মানবকুল, তোমাদের কাছে উপদেশবানী এসেছে তোমাদের পরওয়ারদেগারের পক্ষ থেকে এবং অন্তরের রোগের নিরাময়, হেদায়েত ও রহমত মুসলমানদের জন্য।",
+  "en": "O mankind, there has come to you advice from your Lord, a healing for the diseases of the heart, guidance and mercy for the believers.",
   "ref": "সূরা ইউনুস · আয়াত ৫৭",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Yunus · Ayah 57",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "أَلَآ إِنَّ أَوْلِيَآءَ ٱللَّهِ لَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ",
   "bn": "মনে রেখো যারা আল্লাহর বন্ধু, তাদের না কোন ভয় ভীতি আছে, না তারা চিন্তান্বিত হবে।",
+  "en": "Remember, the friends of Allah have no fear, nor will they grieve.",
   "ref": "সূরা ইউনুস · আয়াত ৬২",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Yunus · Ayah 62",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "قَالَ هَلْ ءَامَنُكُمْ عَلَيْهِ إِلَّا كَمَآ أَمِنتُكُمْ عَلَىٰٓ أَخِيهِ مِن قَبْلُ ۖ فَٱللَّهُ خَيْرٌ حَٰفِظًۭا ۖ وَهُوَ أَرْحَمُ ٱلرَّٰحِمِينَ",
   "bn": "বললেন, আমি তার সম্পর্কে তোমাদেরকে কি সেরূপ বিশ্বাস করব, যেমন ইতিপূর্বে তার ভাই সম্পর্কে বিশ্বাস করেছিলাম? অতএব আল্লাহ উত্তম হেফাযতকারী এবং তিনিই সর্বাধিক দয়ালু।",
+  "en": "He said: Should I trust you with him as I trusted you with his brother before? Allah is the best Guardian, and He is the Most Merciful.",
   "ref": "সূরা ইউসুফ · আয়াত ৬৪",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Yusuf · Ayah 64",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "يَٰبَنِىَّ ٱذْهَبُوا۟ فَتَحَسَّسُوا۟ مِن يُوسُفَ وَأَخِيهِ وَلَا تَا۟يْـَٔسُوا۟ مِن رَّوْحِ ٱللَّهِ ۖ إِنَّهُۥ لَا يَا۟يْـَٔسُ مِن رَّوْحِ ٱللَّهِ إِلَّا ٱلْقَوْمُ ٱلْكَٰفِرُونَ",
   "bn": "বৎসগণ! যাও, ইউসুফ ও তার ভাইকে তালাশ কর এবং আল্লাহর রহমত থেকে নিরাশ হয়ো না। নিশ্চয় আল্লাহর রহমত থেকে কাফের সম্প্রদায়, ব্যতীত অন্য কেউ নিরাশ হয় না।",
+  "en": "O my sons! Go and search for Yusuf and his brother, and do not despair of Allah's mercy. Indeed, none despairs of Allah's mercy except the disbelieving people.",
   "ref": "সূরা ইউসুফ · আয়াত ৮৭",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Yusuf · Ayah 87",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "قَالُوٓا۟ أَءِنَّكَ لَأَنتَ يُوسُفُ ۖ قَالَ أَنَا۠ يُوسُفُ وَهَٰذَآ أَخِى ۖ قَدْ مَنَّ ٱللَّهُ عَلَيْنَآ ۖ إِنَّهُۥ مَن يَتَّقِ وَيَصْبِرْ فَإِنَّ ٱللَّهَ لَا يُضِيعُ أَجْرَ ٱلْمُحْسِنِينَ",
   "bn": "তারা বলল, তবে কি তুমিই ইউসুফ! বললেনঃ আমিই ইউসুফ এবং এ হল আমার সহোদর ভাই। আল্লাহ আমাদের প্রতি অনুগ্রহ করেছেন। নিশ্চয় যে তাকওয়া অবলম্বন করে এবং সবর করে, আল্লাহ এহেন সৎকর্মশীলদের প্রতিদান বিনষ্ট করেন না।",
+  "en": "They said: Are you indeed Yusuf? He said: I am Yusuf, and this is my brother. Allah has favoured us. Indeed, whoever fears Allah and is patient, Allah does not waste the reward of the righteous.",
   "ref": "সূরা ইউসুফ · আয়াত ৯০",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Yusuf · Ayah 90",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "وَٱعْبُدْ رَبَّكَ حَتَّىٰ يَأْتِيَكَ ٱلْيَقِينُ",
   "bn": "এবং পালনকর্তার এবাদত করুন, যে পর্যন্ত আপনার কাছে নিশ্চিত কথা না আসে।",
+  "en": "And worship your Lord until certainty comes to you.",
   "ref": "সূরা আল-হিজর · আয়াত ৯৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Hijr · Ayah 99",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَإِن تَعُدُّوا۟ نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَآ ۗ إِنَّ ٱللَّهَ لَغَفُورٌۭ رَّحِيمٌۭ",
   "bn": "যদি আল্লাহর নেয়ামত গণনা কর, শেষ করতে পারবে না। নিশ্চয় আল্লাহ ক্ষমাশীল, দয়ালু।",
+  "en": "If you count the blessings of Allah, you will never finish counting them. Indeed, Allah is Forgiving and Merciful.",
   "ref": "সূরা আন-নাহল · আয়াত ১৮",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah An-Nahl · Ayah 18",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "۞ إِنَّ ٱللَّهَ يَأْمُرُ بِٱلْعَدْلِ وَٱلْإِحْسَٰنِ وَإِيتَآئِ ذِى ٱلْقُرْبَىٰ وَيَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ وَٱلْبَغْىِ ۚ يَعِظُكُمْ لَعَلَّكُمْ تَذَكَّرُونَ",
   "bn": "আল্লাহ ন্যায়পরায়ণতা, সদাচরণ এবং আত্নীয়-স্বজনকে দান করার আদেশ দেন এবং তিনি অশ্লীলতা, অসঙ্গত কাজ এবং অবাধ্যতা করতে বারণ করেন। তিনি তোমাদের উপদেশ দেন যাতে তোমরা স্মরণ রাখ।",
+  "en": "Allah commands justice, good conduct and giving to relatives, and forbids immorality, wrongdoing and transgression. He advises you so that you may remember.",
   "ref": "সূরা আন-নাহল · আয়াত ৯০",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah An-Nahl · Ayah 90",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "إِنَّ ٱللَّهَ مَعَ ٱلَّذِينَ ٱتَّقَوا۟ وَّٱلَّذِينَ هُم مُّحْسِنُونَ",
   "bn": "নিশ্চয় আল্লাহ তাদের সঙ্গে আছেন, যারা পরহেযগার এবং যারা সৎকর্ম করে।",
+  "en": "Indeed, Allah is with those who fear Him and those who do good.",
   "ref": "সূরা আন-নাহল · আয়াত ১২৮",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah An-Nahl · Ayah 128",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "۞ وَقَضَىٰ رَبُّكَ أَلَّا تَعْبُدُوٓا۟ إِلَّآ إِيَّاهُ وَبِٱلْوَٰلِدَيْنِ إِحْسَٰنًا ۚ إِمَّا يَبْلُغَنَّ عِندَكَ ٱلْكِبَرَ أَحَدُهُمَآ أَوْ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفٍّۢ وَلَا تَنْهَرْهُمَا وَقُل لَّهُمَا قَوْلًۭا كَرِيمًۭا",
   "bn": "তোমার পালনকর্তা আদেশ করেছেন যে, তাঁকে ছাড়া অন্য কারও এবাদত করো না এবং পিতা-মাতার সাথে সদ্ব-ব্যবহার কর। তাদের মধ্যে কেউ অথবা উভয়েই যদি তোমার জীবদ্দশায় বার্ধক্যে উপনীত হয়; তবে তাদেরকে ‘উহ’ শব্দটিও বলো না এবং তাদেরকে ধমক দিও না এবং বল তাদেরকে শিষ্ঠাচারপূর্ণ কথা।",
+  "en": "Your Lord has decreed that you worship none but Him, and be kind to your parents. If one or both of them reach old age in your lifetime, do not say even 'uff' to them, do not rebuke them, and speak to them with honourable words.",
   "ref": "সূরা আল-ইসরা · আয়াত ২৩",
-  "topic": "মা-বাবা"
+  "refEn": "Surah Al-Isra · Ayah 23",
+  "topic": "মা-বাবা",
+  "topicEn": "Parents"
  },
  {
   "type": "ayat",
   "ar": "وَٱخْفِضْ لَهُمَا جَنَاحَ ٱلذُّلِّ مِنَ ٱلرَّحْمَةِ وَقُل رَّبِّ ٱرْحَمْهُمَا كَمَا رَبَّيَانِى صَغِيرًۭا",
   "bn": "তাদের সামনে ভালবাসার সাথে, নম্রভাবে মাথা নত করে দাও এবং বলঃ হে পালনকর্তা, তাদের উভয়ের প্রতি রহম কর, যেমন তারা আমাকে শৈশবকালে লালন-পালন করেছেন।",
+  "en": "Lower to them the wing of humility out of mercy, and say: My Lord, have mercy on them both, just as they raised me when I was small.",
   "ref": "সূরা আল-ইসরা · আয়াত ২৪",
-  "topic": "মা-বাবা"
+  "refEn": "Surah Al-Isra · Ayah 24",
+  "topic": "মা-বাবা",
+  "topicEn": "Parents"
  },
  {
   "type": "ayat",
   "ar": "وَقُل رَّبِّ أَدْخِلْنِى مُدْخَلَ صِدْقٍۢ وَأَخْرِجْنِى مُخْرَجَ صِدْقٍۢ وَٱجْعَل لِّى مِن لَّدُنكَ سُلْطَٰنًۭا نَّصِيرًۭا",
   "bn": "বলুনঃ হে পালনকর্তা! আমাকে দাখিল করুন সত্যরূপে এবং আমাকে বের করুন সত্যরূপে এবং দান করুন আমাকে নিজের কাছ থেকে রাষ্ট্রীয় সাহায্য।",
+  "en": "Say: My Lord! Admit me with truth and bring me out with truth, and grant me from Yourself a supporting authority.",
   "ref": "সূরা আল-ইসরা · আয়াত ৮০",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Isra · Ayah 80",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "وَنُنَزِّلُ مِنَ ٱلْقُرْءَانِ مَا هُوَ شِفَآءٌۭ وَرَحْمَةٌۭ لِّلْمُؤْمِنِينَ ۙ وَلَا يَزِيدُ ٱلظَّٰلِمِينَ إِلَّا خَسَارًۭا",
   "bn": "আমি কোরআনে এমন বিষয় নাযিল করি যা রোগের সুচিকিৎসা এবং মুমিনের জন্য রহমত। গোনাহগারদের তো এতে শুধু ক্ষতিই বৃদ্ধি পায়।",
+  "en": "We send down in the Quran that which is a healing and a mercy for the believers. It only increases the wrongdoers in loss.",
   "ref": "সূরা আল-ইসরা · আয়াত ৮২",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Al-Isra · Ayah 82",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ سَيَجْعَلُ لَهُمُ ٱلرَّحْمَٰنُ وُدًّۭا",
   "bn": "যারা বিশ্বাস স্থাপন করে এবং সৎকর্ম সম্পাদন করে, তাদেরকে দয়াময় আল্লাহ ভালবাসা দেবেন।",
+  "en": "Those who believe and do righteous deeds, the Most Merciful will grant them love.",
   "ref": "সূরা মারইয়াম · আয়াত ৯৬",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Maryam · Ayah 96",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "فَتَعَٰلَى ٱللَّهُ ٱلْمَلِكُ ٱلْحَقُّ ۗ وَلَا تَعْجَلْ بِٱلْقُرْءَانِ مِن قَبْلِ أَن يُقْضَىٰٓ إِلَيْكَ وَحْيُهُۥ ۖ وَقُل رَّبِّ زِدْنِى عِلْمًۭا",
   "bn": "সত্যিকার অধীশ্বর আল্লাহ মহান। আপনার প্রতি আল্লাহর ওহী সম্পুর্ণ হওয়ার পূর্বে আপনি কোরআন গ্রহণের ব্যপারে তাড়াহুড়া করবেন না এবং বলুনঃ হে আমার পালনকর্তা, আমার জ্ঞান বৃদ্ধি করুন।",
+  "en": "Exalted is Allah, the True King. Do not hasten with the Quran before its revelation to you is complete, and say: My Lord, increase me in knowledge.",
   "ref": "সূরা ত্বা-হা · আয়াত ১১৪",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Taha · Ayah 114",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "۞ وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ",
   "bn": "এবং স্মরণ করুন আইয়্যুবের কথা, যখন তিনি তাঁর পালনকর্তাকে আহবান করে বলেছিলেনঃ আমি দুঃখকষ্টে পতিত হয়েছি এবং আপনি দয়াবানদের চাইতেও সর্বশ্রেষ্ট দয়াবান।",
+  "en": "And remember Ayyub, when he called upon his Lord: I have been afflicted with hardship, and You are the Most Merciful of those who show mercy.",
   "ref": "সূরা আল-আম্বিয়া · আয়াত ৮৩",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Al-Anbiya · Ayah 83",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبًۭا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ فَنَادَىٰ فِى ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبْحَٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّٰلِمِينَ",
   "bn": "এবং মাছওয়ালার কথা স্মরণ করুন তিনি ক্রুদ্ধ হয়ে চলে গিয়েছিলেন, অতঃপর মনে করেছিলেন যে, আমি তাঁকে ধৃত করতে পারব না। অতঃপর তিনি অন্ধকারের মধ্যে আহবান করলেনঃ তুমি ব্যতীত কোন উপাস্য নেই; তুমি নির্দোষ আমি গুনাহগার।",
+  "en": "And remember the man of the fish, when he went away in anger and thought that We would not seize him. Then he called out in the darkness: There is no god but You; You are pure. Indeed, I was among the wrongdoers.",
   "ref": "সূরা আল-আম্বিয়া · আয়াত ৮৭",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Al-Anbiya · Ayah 87",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَمَآ أَرْسَلْنَٰكَ إِلَّا رَحْمَةًۭ لِّلْعَٰلَمِينَ",
   "bn": "আমি আপনাকে বিশ্ববাসীর জন্যে রহমত স্বরূপই প্রেরণ করেছি।",
+  "en": "We sent you only as a mercy to the worlds.",
   "ref": "সূরা আল-আম্বিয়া · আয়াত ১০৭",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-Anbiya · Ayah 107",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ",
   "bn": "যখন আমি রোগাক্রান্ত হই, তখন তিনিই আরোগ্য দান করেন।",
+  "en": "And when I fall ill, it is He who heals me.",
   "ref": "সূরা আশ-শুআরা · আয়াত ৮০",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ash-Shu'ara · Ayah 80",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "أَمَّن يُجِيبُ ٱلْمُضْطَرَّ إِذَا دَعَاهُ وَيَكْشِفُ ٱلسُّوٓءَ وَيَجْعَلُكُمْ خُلَفَآءَ ٱلْأَرْضِ ۗ أَءِلَٰهٌۭ مَّعَ ٱللَّهِ ۚ قَلِيلًۭا مَّا تَذَكَّرُونَ",
   "bn": "বল তো কে নিঃসহায়ের ডাকে সাড়া দেন যখন সে ডাকে এবং কষ্ট দূরীভূত করেন এবং তোমাদেরকে পৃথিবীতে পুর্ববর্তীদের স্থলাভিষিক্ত করেন। সুতরাং আল্লাহর সাথে অন্য কোন উপাস্য আছে কি? তোমরা অতি সামান্যই ধ্যান কর।",
+  "en": "Who answers the distressed one when he calls upon Him, removes hardship, and makes you successors on the earth? Is there another god with Allah? Little do you remember.",
   "ref": "সূরা আন-নামল · আয়াত ৬২",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah An-Naml · Ayah 62",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًۭا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةًۭ وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍۢ لِّقَوْمٍۢ يَتَفَكَّرُونَ",
   "bn": "আর এক নিদর্শন এই যে, তিনি তোমাদের জন্যে তোমাদের মধ্য থেকে তোমাদের সংগিনীদের সৃষ্টি করেছেন, যাতে তোমরা তাদের কাছে শান্তিতে থাক এবং তিনি তোমাদের মধ্যে পারস্পরিক সম্প্রীতি ও দয়া সৃষ্টি করেছেন। নিশ্চয় এতে চিন্তাশীল লোকদের জন্যে নিদর্শনাবলী রয়েছে।",
+  "en": "And among His signs is that He created for you spouses from among yourselves, so that you may find peace in them, and He placed love and mercy between you. Indeed, in that are signs for people who reflect.",
   "ref": "সূরা আর-রুম · আয়াত ২১",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ar-Rum · Ayah 21",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "إِنَّ ٱللَّهَ وَمَلَٰٓئِكَتَهُۥ يُصَلُّونَ عَلَى ٱلنَّبِىِّ ۚ يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ صَلُّوا۟ عَلَيْهِ وَسَلِّمُوا۟ تَسْلِيمًا",
   "bn": "আল্লাহ ও তাঁর ফেরেশতাগণ নবীর প্রতি রহমত প্রেরণ করেন। হে মুমিনগণ! তোমরা নবীর জন্যে রহমতের তরে দোয়া কর এবং তাঁর প্রতি সালাম প্রেরণ কর।",
+  "en": "Allah and His angels send blessings upon the Prophet. O you who believe! Send blessings upon him and greet him with peace.",
   "ref": "সূরা আল-আহযাব · আয়াত ৫৬",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Ahzab · Ayah 56",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "سَلَٰمٌۭ قَوْلًۭا مِّن رَّبٍّۢ رَّحِيمٍۢ",
   "bn": "করুণাময় পালনকর্তার পক্ষ থেকে তাদেরকে বলা হবে সালাম।",
+  "en": "Peace — a word from a Merciful Lord.",
   "ref": "সূরা ইয়াসীন · আয়াত ৫৮",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ya-Sin · Ayah 58",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "أَلَيْسَ ٱللَّهُ بِكَافٍ عَبْدَهُۥ ۖ وَيُخَوِّفُونَكَ بِٱلَّذِينَ مِن دُونِهِۦ ۚ وَمَن يُضْلِلِ ٱللَّهُ فَمَا لَهُۥ مِنْ هَادٍۢ",
   "bn": "আল্লাহ কি তাঁর বান্দার পক্ষে যথেষ্ট নন? অথচ তারা আপনাকে আল্লাহর পরিবর্তে অন্যান্য উপাস্যদের ভয় দেখায়। আল্লাহ যাকে গোমরাহ করেন, তার কোন পথপ্রদর্শক নেই।",
+  "en": "Is Allah not sufficient for His servant? Yet they frighten you with others besides Allah. Whoever Allah misguides has no guide.",
   "ref": "সূরা আয-যুমার · আয়াত ৩৬",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Az-Zumar · Ayah 36",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "فَسَتَذْكُرُونَ مَآ أَقُولُ لَكُمْ ۚ وَأُفَوِّضُ أَمْرِىٓ إِلَى ٱللَّهِ ۚ إِنَّ ٱللَّهَ بَصِيرٌۢ بِٱلْعِبَادِ",
   "bn": "আমি তোমাদেরকে যা বলছি, তোমরা একদিন তা স্মরণ করবে। আমি আমার ব্যাপার আল্লাহর কাছে সমর্পণ করছি। নিশ্চয় বান্দারা আল্লাহর দৃষ্টিতে রয়েছে।",
+  "en": "You will one day remember what I am telling you. I entrust my affair to Allah. Indeed, Allah sees His servants.",
   "ref": "সূরা গাফির · আয়াত ৪৪",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ghafir · Ayah 44",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "إِنَّ ٱلَّذِينَ قَالُوا۟ رَبُّنَا ٱللَّهُ ثُمَّ ٱسْتَقَٰمُوا۟ تَتَنَزَّلُ عَلَيْهِمُ ٱلْمَلَٰٓئِكَةُ أَلَّا تَخَافُوا۟ وَلَا تَحْزَنُوا۟ وَأَبْشِرُوا۟ بِٱلْجَنَّةِ ٱلَّتِى كُنتُمْ تُوعَدُونَ",
   "bn": "নিশ্চয় যারা বলে, আমাদের পালনকর্তা আল্লাহ, অতঃপর তাতেই অবিচল থাকে, তাদের কাছে ফেরেশতা অবতীর্ণ হয় এবং বলে, তোমরা ভয় করো না, চিন্তা করো না এবং তোমাদের প্রতিশ্রুত জান্নাতের সুসংবাদ শোন।",
+  "en": "Indeed, those who say: Our Lord is Allah, and then remain steadfast — angels descend upon them, saying: Do not fear and do not grieve, and receive the good news of the Jannah you were promised.",
   "ref": "সূরা ফুসসিলাত · আয়াত ৩০",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Fussilat · Ayah 30",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَلَا تَسْتَوِى ٱلْحَسَنَةُ وَلَا ٱلسَّيِّئَةُ ۚ ٱدْفَعْ بِٱلَّتِى هِىَ أَحْسَنُ فَإِذَا ٱلَّذِى بَيْنَكَ وَبَيْنَهُۥ عَدَٰوَةٌۭ كَأَنَّهُۥ وَلِىٌّ حَمِيمٌۭ",
   "bn": "সমান নয় ভাল ও মন্দ। জওয়াবে তাই বলুন যা উৎকৃষ্ট। তখন দেখবেন আপনার সাথে যে ব্যক্তির শুত্রুতা রয়েছে, সে যেন অন্তরঙ্গ বন্ধু।",
+  "en": "Good and evil are not equal. Repel with what is best; then the one between whom and you there was enmity will become like a close friend.",
   "ref": "সূরা ফুসসিলাত · আয়াত ৩৪",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Fussilat · Ayah 34",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِن تَنصُرُوا۟ ٱللَّهَ يَنصُرْكُمْ وَيُثَبِّتْ أَقْدَامَكُمْ",
   "bn": "হে বিশ্বাসীগণ! যদি তোমরা আল্লাহকে সাহায্য কর, আল্লাহ তোমাদেরকে সাহায্য করবেন এবং তোমাদের পা দৃঢ়প্রতিষ্ঠ করবেন।",
+  "en": "O you who believe! If you help Allah, Allah will help you and make your feet firm.",
   "ref": "সূরা মুহাম্মদ · আয়াত ৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Muhammad · Ayah 7",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "إِنَّمَا ٱلْمُؤْمِنُونَ إِخْوَةٌۭ فَأَصْلِحُوا۟ بَيْنَ أَخَوَيْكُمْ ۚ وَٱتَّقُوا۟ ٱللَّهَ لَعَلَّكُمْ تُرْحَمُونَ",
   "bn": "মুমিনরা তো পরস্পর ভাই-ভাই। অতএব, তোমরা তোমাদের দুই ভাইয়ের মধ্যে মীমাংসা করবে এবং আল্লাহকে ভয় করবে-যাতে তোমরা অনুগ্রহপ্রাপ্ত হও।",
+  "en": "The believers are but brothers. So make peace between your two brothers, and fear Allah so that you may receive mercy.",
   "ref": "সূরা আল-হুজুরাত · আয়াত ১০",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Hujurat · Ayah 10",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلنَّاسُ إِنَّا خَلَقْنَٰكُم مِّن ذَكَرٍۢ وَأُنثَىٰ وَجَعَلْنَٰكُمْ شُعُوبًۭا وَقَبَآئِلَ لِتَعَارَفُوٓا۟ ۚ إِنَّ أَكْرَمَكُمْ عِندَ ٱللَّهِ أَتْقَىٰكُمْ ۚ إِنَّ ٱللَّهَ عَلِيمٌ خَبِيرٌۭ",
   "bn": "হে মানব, আমি তোমাদেরকে এক পুরুষ ও এক নারী থেকে সৃষ্টি করেছি এবং তোমাদেরকে বিভিন্ন জাতি ও গোত্রে বিভক্ত করেছি, যাতে তোমরা পরস্পরে পরিচিতি হও। নিশ্চয় আল্লাহর কাছে সে-ই সর্বাধিক সম্ভ্রান্ত যে সর্বাধিক পরহেযগার। নিশ্চয় আল্লাহ সর্বজ্ঞ, সবকিছুর খবর রাখেন।",
+  "en": "O mankind, We created you from a single male and female and made you into nations and tribes so that you may know one another. Indeed, the most honourable of you before Allah is the most righteous. Indeed, Allah is All-Knowing, All-Aware.",
   "ref": "সূরা আল-হুজুরাত · আয়াত ১৩",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Hujurat · Ayah 13",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "وَذَكِّرْ فَإِنَّ ٱلذِّكْرَىٰ تَنفَعُ ٱلْمُؤْمِنِينَ",
   "bn": "এবং বোঝাতে থাকুন; কেননা, বোঝানো মুমিনদের উপকারে আসবে।",
+  "en": "And keep reminding; for reminding benefits the believers.",
   "ref": "সূরা আয-যারিয়াত · আয়াত ৫৫",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Adh-Dhariyat · Ayah 55",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "إِنَّ ٱللَّهَ هُوَ ٱلرَّزَّاقُ ذُو ٱلْقُوَّةِ ٱلْمَتِينُ",
   "bn": "আল্লাহ তা’আলাই তো জীবিকাদাতা শক্তির আধার, পরাক্রান্ত।",
+  "en": "Allah alone is the Provider, the Possessor of power, the Mighty.",
   "ref": "সূরা আয-যারিয়াত · আয়াত ৫৮",
-  "topic": "রিজিক"
+  "refEn": "Surah Adh-Dhariyat · Ayah 58",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "ayat",
   "ar": "وَأَن لَّيْسَ لِلْإِنسَٰنِ إِلَّا مَا سَعَىٰ",
   "bn": "এবং মানুষ তাই পায়, যা সে করে,",
+  "en": "And man will get only what he strives for.",
   "ref": "সূরা আন-নাজম · আয়াত ৩৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah An-Najm · Ayah 39",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "لِّكَيْلَا تَأْسَوْا۟ عَلَىٰ مَا فَاتَكُمْ وَلَا تَفْرَحُوا۟ بِمَآ ءَاتَىٰكُمْ ۗ وَٱللَّهُ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍ",
   "bn": "এটা এজন্যে বলা হয়, যাতে তোমরা যা হারাও তজ্জন্যে দুঃখিত না হও এবং তিনি তোমাদেরকে যা দিয়েছেন, তজ্জন্যে উল্লসিত না হও। আল্লাহ কোন উদ্ধত অহংকারীকে পছন্দ করেন না,",
+  "en": "This is so that you do not grieve over what you lose, nor rejoice over what He has given you. Allah does not love any arrogant boaster.",
   "ref": "সূরা আল-হাদীদ · আয়াত ২৩",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Al-Hadid · Ayah 23",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "مَآ أَصَابَ مِن مُّصِيبَةٍ إِلَّا بِإِذْنِ ٱللَّهِ ۗ وَمَن يُؤْمِنۢ بِٱللَّهِ يَهْدِ قَلْبَهُۥ ۚ وَٱللَّهُ بِكُلِّ شَىْءٍ عَلِيمٌۭ",
   "bn": "আল্লাহর নির্দেশ ব্যতিরেকে কোন বিপদ আসে না এবং যে আল্লাহর প্রতি বিশ্বাস করে, তিনি তার অন্তরকে সৎপথ প্রদর্শন করেন। আল্লাহ সর্ববিষয়ে সম্যক পরিজ্ঞাত।",
+  "en": "No calamity comes except by the permission of Allah. And whoever believes in Allah, He guides his heart. And Allah knows all things.",
   "ref": "সূরা আত-তাগাবুন · আয়াত ১১",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah At-Taghabun · Ayah 11",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍۢ",
   "bn": "আপনি অবশ্যই মহান চরিত্রের অধিকারী।",
+  "en": "And indeed, you are of a great moral character.",
   "ref": "সূরা আল-কলম · আয়াত ৪",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Qalam · Ayah 4",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "إِنَّمَا نُطْعِمُكُمْ لِوَجْهِ ٱللَّهِ لَا نُرِيدُ مِنكُمْ جَزَآءًۭ وَلَا شُكُورًا",
   "bn": "তারা বলেঃ কেবল আল্লাহর সন্তুষ্টির জন্যে আমরা তোমাদেরকে আহার্য দান করি এবং তোমাদের কাছে কোন প্রতিদান ও কৃতজ্ঞতা কামনা করি না।",
+  "en": "They say: We feed you only for the sake of Allah. We desire neither reward nor thanks from you.",
   "ref": "সূরা আল-ইনসান · আয়াত ৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Insan · Ayah 9",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَأَمَّا مَنْ خَافَ مَقَامَ رَبِّهِۦ وَنَهَى ٱلنَّفْسَ عَنِ ٱلْهَوَىٰ",
   "bn": "পক্ষান্তরে যে ব্যক্তি তার পালনকর্তার সামনে দন্ডায়মান হওয়াকে ভয় করেছে এবং খেয়াল-খুশী থেকে নিজেকে নিবৃত্ত রেখেছে,",
+  "en": "But as for the one who feared standing before his Lord and restrained himself from desire,",
   "ref": "সূরা আন-নাযিআত · আয়াত ৪০",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah An-Nazi'at · Ayah 40",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلْإِنسَٰنُ إِنَّكَ كَادِحٌ إِلَىٰ رَبِّكَ كَدْحًۭا فَمُلَٰقِيهِ",
   "bn": "হে মানুষ, তোমাকে তোমরা পালনকর্তা পর্যন্ত পৌছতে কষ্ট স্বীকার করতে হবে, অতঃপর তার সাক্ষাৎ ঘটবে।",
+  "en": "O man, you will have to strive hard to reach your Lord, and then you will meet Him.",
   "ref": "সূরা আল-ইনশিকাক · আয়াত ৬",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Inshiqaq · Ayah 6",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَهُوَ ٱلْغَفُورُ ٱلْوَدُودُ",
   "bn": "তিনি ক্ষমাশীল, প্রেমময়;",
+  "en": "He is the Most Forgiving, the Most Loving.",
   "ref": "সূরা আল-বুরুজ · আয়াত ১৪",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-Buruj · Ayah 14",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "قَدْ أَفْلَحَ مَن زَكَّىٰهَا",
   "bn": "যে নিজেকে শুদ্ধ করে, সেই সফলকাম হয়।",
+  "en": "Whoever purifies himself will surely succeed.",
   "ref": "সূরা আশ-শামস · আয়াত ৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Ash-Shams · Ayah 9",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰٓ",
   "bn": "আপনার পালনকর্তা সত্বরই আপনাকে দান করবেন, অতঃপর আপনি সন্তুষ্ট হবেন।",
+  "en": "And your Lord will soon give you, and you will be pleased.",
   "ref": "সূরা আদ-দুহা · আয়াত ৫",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ad-Duha · Ayah 5",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "فَإِذَا فَرَغْتَ فَٱنصَبْ",
   "bn": "অতএব, যখন অবসর পান পরিশ্রম করুন।",
+  "en": "So when you have finished, strive hard.",
   "ref": "সূরা আশ-শারহ · আয়াত ৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Ash-Sharh · Ayah 7",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ٱقْرَأْ بِٱسْمِ رَبِّكَ ٱلَّذِى خَلَقَ",
   "bn": "পাঠ করুন আপনার পালনকর্তার নামে যিনি সৃষ্টি করেছেন",
+  "en": "Read in the name of your Lord who created.",
   "ref": "সূরা আল-আলাক · আয়াত ১",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Alaq · Ayah 1",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "كَلَّا لَا تُطِعْهُ وَٱسْجُدْ وَٱقْتَرِب",
   "bn": "কখনই নয়, আপনি তার আনুগত্য করবেন না। আপনি সেজদা করুন ও আমার নৈকট্য অর্জন করুন।",
+  "en": "Never obey him. Prostrate and draw near.",
   "ref": "সূরা আল-আলাক · আয়াত ১৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Alaq · Ayah 19",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًۭا يَرَهُۥ",
   "bn": "অতঃপর কেউ অণু পরিমাণ সৎকর্ম করলে তা দেখতে পাবে",
+  "en": "So whoever does an atom's weight of good will see it.",
   "ref": "সূরা আয-যালযালা · আয়াত ৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Az-Zalzalah · Ayah 7",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍۢ شَرًّۭا يَرَهُۥ",
   "bn": "এবং কেউ অণু পরিমাণ অসৎকর্ম করলে তাও দেখতে পাবে।",
+  "en": "And whoever does an atom's weight of evil will see it.",
   "ref": "সূরা আয-যালযালা · আয়াত ৮",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Az-Zalzalah · Ayah 8",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "﻿بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ۝ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ ۝ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ۝ مَٰلِكِ يَوْمِ ٱلدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ ۝ صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
   "bn": "শুরু করছি আল্লাহর নামে যিনি পরম করুণাময়, অতি দয়ালু। যাবতীয় প্রশংসা আল্লাহ তাআলার যিনি সকল সৃষ্টি জগতের পালনকর্তা। যিনি নিতান্ত মেহেরবান ও দয়ালু। যিনি বিচার দিনের মালিক। আমরা একমাত্র তোমারই ইবাদত করি এবং শুধুমাত্র তোমারই সাহায্য প্রার্থনা করি। আমাদেরকে সরল পথ দেখাও, সে সমস্ত লোকের পথ, যাদেরকে তুমি নেয়ামত দান করেছ। তাদের পথ নয়, যাদের প্রতি তোমার গজব নাযিল হয়েছে এবং যারা পথভ্রষ্ট হয়েছে।",
+  "en": "In the name of Allah, the Most Merciful, the Most Compassionate. All praise belongs to Allah, the Lord of all the worlds. The Most Merciful, the Most Compassionate. The Master of the Day of Judgement. You alone we worship, and You alone we ask for help. Guide us to the straight path — the path of those You have blessed, not of those who earned Your anger, nor of those who went astray.",
   "ref": "সূরা আল-ফাতিহা · সম্পূর্ণ সূরা",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Fatihah · Whole Surah",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "بِّسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ إِنَّآ أَنزَلْنَٰهُ فِى لَيْلَةِ ٱلْقَدْرِ ۝ وَمَآ أَدْرَىٰكَ مَا لَيْلَةُ ٱلْقَدْرِ ۝ لَيْلَةُ ٱلْقَدْرِ خَيْرٌۭ مِّنْ أَلْفِ شَهْرٍۢ ۝ تَنَزَّلُ ٱلْمَلَٰٓئِكَةُ وَٱلرُّوحُ فِيهَا بِإِذْنِ رَبِّهِم مِّن كُلِّ أَمْرٍۢ ۝ سَلَٰمٌ هِىَ حَتَّىٰ مَطْلَعِ ٱلْفَجْرِ",
   "bn": "আমি একে নাযিল করেছি শবে-কদরে। শবে-কদর সমন্ধে আপনি কি জানেন? শবে-কদর হল এক হাজার মাস অপেক্ষা শ্রেষ্ঠ। এতে প্রত্যেক কাজের জন্যে ফেরেশতাগণ ও রূহ অবতীর্ণ হয় তাদের পালনকর্তার নির্দেশক্রমে। এটা নিরাপত্তা, যা ফজরের উদয় পর্যন্ত অব্যাহত থাকে।",
+  "en": "We sent it down on the Night of Decree. And what will make you know what the Night of Decree is? The Night of Decree is better than a thousand months. The angels and the Spirit descend in it by their Lord's permission for every matter. It is peace until the break of dawn.",
   "ref": "সূরা আল-কদর · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Qadr · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلْعَصْرِ ۝ إِنَّ ٱلْإِنسَٰنَ لَفِى خُسْرٍ ۝ إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ وَتَوَاصَوْا۟ بِٱلْحَقِّ وَتَوَاصَوْا۟ بِٱلصَّبْرِ",
   "bn": "কসম যুগের (সময়ের), নিশ্চয় মানুষ ক্ষতিগ্রস্ত; কিন্তু তারা নয়, যারা বিশ্বাস স্থাপন করে ও সৎকর্ম করে এবং পরস্পরকে তাকীদ করে সত্যের এবং তাকীদ করে সবরের।",
+  "en": "By time, indeed, mankind is in loss, except those who believe, do righteous deeds, and urge one another to truth and urge one another to patience.",
   "ref": "সূরা আল-আসর · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Asr · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ ۝ فَصَلِّ لِرَبِّكَ وَٱنْحَرْ ۝ إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ",
   "bn": "নিশ্চয় আমি আপনাকে কাওসার দান করেছি। অতএব আপনার পালনকর্তার উদ্দেশ্যে নামায পড়ুন এবং কোরবানী করুন। যে আপনার শত্রু, সেই তো লেজকাটা, নির্বংশ।",
+  "en": "Indeed, We have given you Al-Kawthar. So pray to your Lord and sacrifice. Indeed, your enemy is the one cut off.",
   "ref": "সূরা আল-কাউসার · সম্পূর্ণ সূরা",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah Al-Kawthar · Whole Surah",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ قُلْ هُوَ ٱللَّهُ أَحَدٌ ۝ ٱللَّهُ ٱلصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
   "bn": "বলুন, তিনি আল্লাহ, এক, আল্লাহ অমুখাপেক্ষী, তিনি কাউকে জন্ম দেননি এবং কেউ তাকে জন্ম দেয়নি এবং তার সমতুল্য কেউ নেই।",
+  "en": "Say: He is Allah, the One. Allah, the Eternal. He neither begets nor is born, and there is none equal to Him.",
   "ref": "সূরা আল-ইখলাস · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Ikhlas · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
   "bn": "বলুন, আমি আশ্রয় গ্রহণ করছি প্রভাতের পালনকর্তার, তিনি যা সৃষ্টি করেছেন, তার অনিষ্ট থেকে, অন্ধকার রাত্রির অনিষ্ট থেকে, যখন তা সমাগত হয়, গ্রন্থিতে ফুঁৎকার দিয়ে জাদুকারিনীদের অনিষ্ট থেকে এবং হিংসুকের অনিষ্ট থেকে যখন সে হিংসা করে।",
+  "en": "Say: I seek refuge in the Lord of the daybreak, from the evil of what He has created, from the evil of the dark night when it comes, from the evil of those who blow on knots, and from the evil of the envier when he envies.",
   "ref": "সূরা আল-ফালাক · সম্পূর্ণ সূরা",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Falaq · Whole Surah",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ ۝ مَلِكِ ٱلنَّاسِ ۝ إِلَٰهِ ٱلنَّاسِ ۝ مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ ۝ ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ ۝ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
   "bn": "বলুন, আমি আশ্রয় গ্রহণ করিতেছি মানুষের পালনকর্তার, মানুষের অধিপতির, মানুষের মা’বুদের তার অনিষ্ট থেকে, যে কুমন্ত্রণা দেয় ও আত্নগোপন করে, যে কুমন্ত্রণা দেয় মানুষের অন্তরে জ্বিনের মধ্য থেকে অথবা মানুষের মধ্য থেকে।",
+  "en": "Say: I seek refuge in the Lord of mankind, the King of mankind, the God of mankind, from the evil of the whisperer who withdraws, who whispers into the hearts of mankind, from among the jinn and mankind.",
   "ref": "সূরা আন-নাস · সম্পূর্ণ সূরা",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah An-Nas · Whole Surah",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "dua",
   "ar": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
   "bn": "সকল প্রশংসা আল্লাহর, যিনি আমাদের মৃত্যুর (ঘুমের) পর জীবিত করলেন, আর তাঁর দিকেই পুনরুত্থান।",
+  "en": "All praise belongs to Allah, who brought us back to life after our death (sleep), and to Him is the resurrection.",
   "ref": "সহীহ বুখারী ৬৩১২",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sahih al-Bukhari 6312",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
   "bn": "হে আল্লাহ, তোমার (অনুগ্রহে) আমরা সকালে উপনীত হয়েছি, তোমার দ্বারাই সন্ধ্যায় উপনীত হই, তোমার দ্বারাই বাঁচি ও মরি, আর তোমার দিকেই পুনরুত্থান।",
+  "en": "O Allah, by You we enter the morning, and by You we enter the evening; by You we live and die, and to You is the resurrection.",
   "ref": "সুনানে আত-তিরমিজি ৩৩৯১; আবু দাউদ ৫০৬৮",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Jami at-Tirmidhi 3391; Sunan Abu Dawud 5068",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ",
   "bn": "হে আল্লাহ, আমি তোমার কাছে আশ্রয় চাই দুশ্চিন্তা ও দুঃখ থেকে, অক্ষমতা ও অলসতা থেকে, কৃপণতা ও ভীরুতা থেকে, ঋণের বোঝা ও মানুষের দাপট থেকে।",
+  "en": "O Allah, I seek refuge in You from worry and grief, from incapacity and laziness, from miserliness and cowardice, from the burden of debt and from being overpowered by people.",
   "ref": "সহীহ বুখারী ৬৩৬৯",
-  "topic": "মনের শান্তি"
+  "refEn": "Sahih al-Bukhari 6369",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ",
   "bn": "হে আল্লাহ, তোমার হালাল দিয়ে হারাম থেকে আমাকে যথেষ্ট করো, আর তোমার অনুগ্রহে তুমি ছাড়া অন্য সবার থেকে আমাকে মুখাপেক্ষীহীন করো।",
+  "en": "O Allah, make Your lawful provision sufficient for me so that I do not need what is unlawful, and make me independent of everyone besides You by Your bounty.",
   "ref": "সুনানে আত-তিরমিজি ৩৫৬৩",
-  "topic": "রিজিক"
+  "refEn": "Jami at-Tirmidhi 3563",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَاسَ، اشْفِهِ وَأَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا",
   "bn": "হে আল্লাহ, মানুষের রব, কষ্ট দূর করে দাও, শিফা দাও — তুমিই শিফাদাতা; তোমার শিফা ছাড়া কোনো শিফা নেই — এমন শিফা দাও যা কোনো রোগ অবশিষ্ট রাখে না।",
+  "en": "O Allah, Lord of mankind, remove the hardship and grant healing — You are the Healer; there is no healing except Your healing — a healing that leaves no illness behind.",
   "ref": "সহীহ বুখারী ৫৬৭৫; সহীহ মুসলিম ২১৯১",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Sahih al-Bukhari 5675; Sahih Muslim 2191",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
   "bn": "হে আল্লাহ, তুমিই আমার রব, তুমি ছাড়া কোনো উপাস্য নেই। তুমি আমাকে সৃষ্টি করেছ, আমি তোমার বান্দা। আমি সাধ্যমতো তোমার অঙ্গীকারের উপর আছি। আমি আমার কৃতকর্মের অনিষ্ট থেকে তোমার কাছে আশ্রয় চাই। আমার উপর তোমার নিয়ামত স্বীকার করছি এবং আমার গুনাহও স্বীকার করছি — আমাকে ক্ষমা করো, কারণ তুমি ছাড়া কেউ গুনাহ ক্ষমা করে না।",
+  "en": "O Allah, You are my Lord, there is no god but You. You created me, and I am Your servant. I remain upon Your covenant as much as I can. I seek refuge in You from the evil of what I have done. I acknowledge Your blessing upon me, and I acknowledge my sin — so forgive me, for none forgives sins except You.",
   "ref": "সহীহ বুখারী ৬৩০৬",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Sahih al-Bukhari 6306",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "dua",
   "ar": "رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",
   "bn": "হে আমার রব, আমাকে ক্ষমা করো ও আমার তওবা কবুল করো; নিশ্চয়ই তুমি তওবা কবুলকারী, পরম দয়ালু।",
+  "en": "My Lord, forgive me and accept my repentance; indeed, You are the Acceptor of Repentance, the Most Merciful.",
   "ref": "সুনানে আবু দাউদ ১৫১৬",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Sunan Abu Dawud 1516",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "dua",
   "ar": "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ",
   "bn": "হে আমাদের রব, যেদিন হিসাব কায়েম হবে, সেদিন আমাকে, আমার মা-বাবাকে ও মুমিনদের ক্ষমা করো।",
+  "en": "Our Lord, on the Day when the reckoning is established, forgive me, my parents and the believers.",
   "ref": "সূরা ইবরাহীম (১৪): ৪১",
-  "topic": "মা-বাবা"
+  "refEn": "Surah Ibrahim (14): 41",
+  "topic": "মা-বাবা",
+  "topicEn": "Parents"
  },
  {
   "type": "dua",
   "ar": "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ",
   "bn": "সকল প্রশংসা আল্লাহর, যিনি আমাকে এই খাবার খাইয়েছেন এবং আমার কোনো শক্তি-সামর্থ্য ছাড়াই তা আমাকে রিজিক হিসেবে দিয়েছেন।",
+  "en": "All praise belongs to Allah, who fed me this food and provided it to me as provision without any power or strength of my own.",
   "ref": "সুনানে আবু দাউদ ৪০২৩; জামে তিরমিজি ৩৪৫৮; সুনানে ইবনে মাজাহ ৩২৮৫",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sunan Abu Dawud 4023; Jami at-Tirmidhi 3458; Sunan Ibn Majah 3285",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
   "bn": "আল্লাহর নামে (বের হচ্ছি), আল্লাহর উপরই ভরসা করলাম; আল্লাহ ছাড়া কোনো শক্তি ও সামর্থ্য নেই।",
+  "en": "In the name of Allah (I go out), I place my trust in Allah; there is no power or strength except through Allah.",
   "ref": "সুনানে আবু দাউদ ৫০৯৫",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sunan Abu Dawud 5095",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
   "bn": "আল্লাহর নামে — যাঁর নামের সাথে পৃথিবীর বা আকাশের কোনো কিছুই ক্ষতি করতে পারে না; আর তিনি সর্বশ্রোতা, সর্বজ্ঞ।",
+  "en": "In the name of Allah — with whose name nothing on earth or in heaven can cause harm; and He is the All-Hearing, the All-Knowing.",
   "ref": "সুনানে আবু দাউদ ৫০৮৮; জামে তিরমিজি ৩৩৮৮",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sunan Abu Dawud 5088; Jami at-Tirmidhi 3388",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "اللَّهُمَّ لَكَ الْحَمْدُ أَنْتَ كَسَوْتَنِيهِ، أَسْأَلُكَ مِنْ خَيْرِهِ وَخَيْرِ مَا صُنِعَ لَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا صُنِعَ لَهُ",
   "bn": "হে আল্লাহ! সকল প্রশংসা তোমারই; তুমিই আমাকে এই পোশাক পরিয়েছ। আমি তোমার কাছে এর কল্যাণ এবং এটি যার জন্য বানানো হয়েছে তার কল্যাণ চাই; আর এর অনিষ্ট এবং এটি যার জন্য বানানো হয়েছে তার অনিষ্ট থেকে তোমার আশ্রয় চাই।",
+  "en": "O Allah! All praise belongs to You; You have clothed me with this garment. I ask You for its good and the good of what it was made for, and I seek refuge in You from its evil and the evil of what it was made for.",
   "ref": "সুনানে আবু দাউদ ৪০২০; জামে তিরমিজি ১৭৬৭",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Sunan Abu Dawud 4020; Jami at-Tirmidhi 1767",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "dua",
   "ar": "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ ٱلْوَهَّابُ",
   "bn": "হে আমাদের রব! হেদায়াত দেওয়ার পর আমাদের অন্তরকে বাঁকা করে দিও না, আর তোমার পক্ষ থেকে আমাদের রহমত দান করো; নিশ্চয় তুমিই মহাদাতা।",
+  "en": "Our Lord! After guiding us, do not let our hearts deviate, and grant us mercy from Yourself; indeed, You are the Great Giver.",
   "ref": "সূরা আলে ইমরান (৩): ৮",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Aal-e-Imran (3): 8",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "dua",
   "ar": "رَبِّ ٱجْعَلْنِى مُقِيمَ ٱلصَّلَوٰةِ وَمِن ذُرِّيَّتِى ۚ رَبَّنَا وَتَقَبَّلْ دُعَآءِ",
   "bn": "হে আমার রব! আমাকে নামাজ কায়েমকারী বানাও এবং আমার সন্তানদের মধ্য থেকেও (নামাজ কায়েমকারী বানাও)। হে আমাদের রব! আমার দোয়া কবুল করো।",
+  "en": "My Lord! Make me one who establishes Salah, and also from among my children (make them establishers of Salah). Our Lord! Accept my Dua.",
   "ref": "সূরা ইবরাহীম (১৪): ৪০",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Ibrahim (14): 40",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "hadith",
   "ar": "مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ",
   "bn": "সদকা (দান) সম্পদ কমায় না।",
+  "en": "Charity (giving) does not decrease wealth.",
   "ref": "সহীহ মুসলিম ২৫৮৮",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Sahih Muslim 2588",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "hadith",
   "ar": "اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ، فَمَنْ لَمْ يَجِدْ فَبِكَلِمَةٍ طَيِّبَةٍ",
   "bn": "জাহান্নামের আগুন থেকে বাঁচো — একটি খেজুরের অর্ধেক দান করে হলেও; যে তা-ও পায় না, সে যেন ভালো কথা বলে।",
+  "en": "Save yourselves from the Fire of Hell — even by giving half a date in charity; whoever does not have even that, let him speak a good word.",
   "ref": "সহীহ বুখারী ১৪১৭; সহীহ মুসলিম ১০১৬",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Sahih al-Bukhari 1417; Sahih Muslim 1016",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "hadith",
   "ar": "كُلُّ بَنِي آدَمَ خَطَّاءٌ، وَخَيْرُ الْخَطَّائِينَ التَّوَّابُونَ",
   "bn": "আদম সন্তানের সবাই গুনাহ করে, আর গুনাহকারীদের মধ্যে সর্বোত্তম তারা, যারা তওবা করে।",
+  "en": "Every child of Adam commits sins, and the best of sinners are those who repent.",
   "ref": "সুনানে আত-তিরমিজি ২৪৯৯; ইবনে মাজাহ ৪২৫১",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Jami at-Tirmidhi 2499; Sunan Ibn Majah 4251",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "hadith",
   "ar": "إِنَّ اللَّهَ يَبْسُطُ يَدَهُ بِاللَّيْلِ لِيَتُوبَ مُسِيءُ النَّهَارِ، وَيَبْسُطُ يَدَهُ بِالنَّهَارِ لِيَتُوبَ مُسِيءُ اللَّيْلِ",
   "bn": "আল্লাহ রাতে তাঁর হাত প্রসারিত করেন, যাতে দিনে গুনাহকারী তওবা করে; আর দিনে হাত প্রসারিত করেন, যাতে রাতে গুনাহকারী তওবা করে।",
+  "en": "Allah extends His hand at night so that the one who sinned during the day may repent, and He extends His hand during the day so that the one who sinned at night may repent.",
   "ref": "সহীহ মুসলিম ২৭৫৯",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Sahih Muslim 2759",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "hadith",
   "ar": "أَكْمَلُ الْمُؤْمِنِينَ إِيمَانًا أَحْسَنُهُمْ خُلُقًا",
   "bn": "ঈমানের দিক থেকে পূর্ণাঙ্গ মুমিন সে-ই, যার আখলাক (চরিত্র) সবচেয়ে ভালো।",
+  "en": "The most complete believer in faith is the one whose character is best.",
   "ref": "সুনানে আবু দাউদ ৪৬৮২; তিরমিজি ১১৬২",
-  "topic": "ভালো আখলাক"
+  "refEn": "Sunan Abu Dawud 4682; Jami at-Tirmidhi 1162",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "hadith",
   "ar": "إِنَّمَا بُعِثْتُ لِأُتَمِّمَ صَالِحَ الْأَخْلَاقِ",
   "bn": "আমাকে পাঠানো হয়েছে উত্তম চরিত্রকে পূর্ণতা দেওয়ার জন্য।",
+  "en": "I was sent only to perfect good character.",
   "ref": "মুসনাদে আহমাদ ৮৯৫২; আদাবুল মুফরাদ ২৭৩",
-  "topic": "ভালো আখলাক"
+  "refEn": "Musnad Ahmad 8952; Al-Adab al-Mufrad 273",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "أَمْ حَسِبْتُمْ أَن تَدْخُلُوا۟ ٱلْجَنَّةَ وَلَمَّا يَأْتِكُم مَّثَلُ ٱلَّذِينَ خَلَوْا۟ مِن قَبْلِكُم ۖ مَّسَّتْهُمُ ٱلْبَأْسَآءُ وَٱلضَّرَّآءُ وَزُلْزِلُوا۟ حَتَّىٰ يَقُولَ ٱلرَّسُولُ وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ مَتَىٰ نَصْرُ ٱللَّهِ ۗ أَلَآ إِنَّ نَصْرَ ٱللَّهِ قَرِيبٌۭ",
   "bn": "তোমাদের কি এই ধারণা যে, তোমরা জান্নাতে চলে যাবে, অথচ সে লোকদের অবস্থা অতিক্রম করনি যারা তোমাদের পূর্বে অতীত হয়েছে। তাদের উপর এসেছে বিপদ ও কষ্ট। আর এমনি ভাবে শিহরিত হতে হয়েছে যাতে নবী ও তাঁর প্রতি যারা ঈমান এনেছিল তাদেরকে পর্যন্ত একথা বলতে হয়েছে যে, কখন আসবে আল্লাহর সাহায্যে! তোমরা শোনে নাও, আল্লাহর সাহায্যে একান্তই নিকটবর্তী।",
+  "en": "Do you think that you will enter Jannah without facing what those before you faced? Hardship and suffering came upon them, and they were shaken so much that the Prophet and those who believed with him said: When will Allah's help come? Listen: Allah's help is indeed near.",
   "ref": "সূরা আল-বাকারা · আয়াত ২১৪",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Al-Baqarah · Ayah 214",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "ٱللَّهُ وَلِىُّ ٱلَّذِينَ ءَامَنُوا۟ يُخْرِجُهُم مِّنَ ٱلظُّلُمَٰتِ إِلَى ٱلنُّورِ ۖ وَٱلَّذِينَ كَفَرُوٓا۟ أَوْلِيَآؤُهُمُ ٱلطَّٰغُوتُ يُخْرِجُونَهُم مِّنَ ٱلنُّورِ إِلَى ٱلظُّلُمَٰتِ ۗ أُو۟لَٰٓئِكَ أَصْحَٰبُ ٱلنَّارِ ۖ هُمْ فِيهَا خَٰلِدُونَ",
   "bn": "যারা ঈমান এনেছে, আল্লাহ তাদের অভিভাবক। তাদেরকে তিনি বের করে আনেন অন্ধকার থেকে আলোর দিকে। আর যারা কুফরী করে তাদের অভিভাবক হচ্ছে তাগুত। তারা তাদেরকে আলো থেকে বের করে অন্ধকারের দিকে নিয়ে যায়। এরাই হলো দোযখের অধিবাসী, চিরকাল তারা সেখানেই থাকবে।",
+  "en": "Allah is the Protector of those who believe. He brings them out of darkness into light. As for those who disbelieve, their protectors are the false gods, who bring them out of light into darkness. They are the people of the Fire, where they will remain forever.",
   "ref": "সূরা আল-বাকারা · আয়াত ২৫৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Baqarah · Ayah 257",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَمَا كَانَ قَوْلَهُمْ إِلَّآ أَن قَالُوا۟ رَبَّنَا ٱغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِىٓ أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَٰفِرِينَ",
   "bn": "তারা আর কিছুই বলেনি-শুধু বলেছে, হে আমাদের পালনকর্তা! মোচন করে দাও আমাদের পাপ এবং যা কিছু বাড়াবাড়ি হয়ে গেছে আমাদের কাজে। আর আমাদিগকে দৃঢ় রাখ এবং কাফেরদের উপর আমাদিগকে সাহায্য কর।",
+  "en": "They said nothing but: Our Lord! Forgive us our sins and our excesses in our affairs, make our feet firm, and help us against the disbelieving people.",
   "ref": "সূরা আলে-ইমরান · আয়াত ১৪৭",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Aal-e-Imran · Ayah 147",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُونُوا۟ قَوَّٰمِينَ لِلَّهِ شُهَدَآءَ بِٱلْقِسْطِ ۖ وَلَا يَجْرِمَنَّكُمْ شَنَـَٔانُ قَوْمٍ عَلَىٰٓ أَلَّا تَعْدِلُوا۟ ۚ ٱعْدِلُوا۟ هُوَ أَقْرَبُ لِلتَّقْوَىٰ ۖ وَٱتَّقُوا۟ ٱللَّهَ ۚ إِنَّ ٱللَّهَ خَبِيرٌۢ بِمَا تَعْمَلُونَ",
   "bn": "হে মুমিনগণ, তোমরা আল্লাহর উদ্দেশে ন্যায় সাক্ষ্যদানের ব্যাপারে অবিচল থাকবে এবং কোন সম্প্রদায়ের শত্রুতার কারণে কখনও ন্যায়বিচার পরিত্যাগ করো না। সুবিচার কর এটাই খোদাভীতির অধিক নিকটবর্তী। আল্লাহকে ভয় কর। তোমরা যা কর, নিশ্চয় আল্লাহ সে বিষয়ে খুব জ্ঞাত।",
+  "en": "O you who believe, stand firm for Allah as witnesses in justice, and never let hatred of a people make you abandon justice. Be just; that is nearer to piety. And fear Allah. Indeed, Allah is well aware of what you do.",
   "ref": "সূরা আল-মায়িদা · আয়াত ৮",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Ma'idah · Ayah 8",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "قَالَ رَجُلَانِ مِنَ ٱلَّذِينَ يَخَافُونَ أَنْعَمَ ٱللَّهُ عَلَيْهِمَا ٱدْخُلُوا۟ عَلَيْهِمُ ٱلْبَابَ فَإِذَا دَخَلْتُمُوهُ فَإِنَّكُمْ غَٰلِبُونَ ۚ وَعَلَى ٱللَّهِ فَتَوَكَّلُوٓا۟ إِن كُنتُم مُّؤْمِنِينَ",
   "bn": "খোদাভীরুদের মধ্য থেকে দু’ব্যক্তি বলল, যাদের প্রতি আল্লাহ অনুগ্রহ করেছিলেনঃ তোমরা তাদের উপর আক্রমণ করে দরজায় প্রবেশ কর। অতঃপর তোমরা যখন তাতে পবেশ করবে, তখন তোমরাই জয়ী হবে। আর আল্লাহর উপর ভরসা কর যদি তোমরা বিশ্বাসী হও।",
+  "en": "Two God-fearing men, whom Allah had favoured, said: Attack them through the gate. When you enter it, you will be victorious. And place your trust in Allah if you are believers.",
   "ref": "সূরা আল-মায়িদা · আয়াত ২৩",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Al-Ma'idah · Ayah 23",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَإِذَا جَآءَكَ ٱلَّذِينَ يُؤْمِنُونَ بِـَٔايَٰتِنَا فَقُلْ سَلَٰمٌ عَلَيْكُمْ ۖ كَتَبَ رَبُّكُمْ عَلَىٰ نَفْسِهِ ٱلرَّحْمَةَ ۖ أَنَّهُۥ مَنْ عَمِلَ مِنكُمْ سُوٓءًۢا بِجَهَٰلَةٍۢ ثُمَّ تَابَ مِنۢ بَعْدِهِۦ وَأَصْلَحَ فَأَنَّهُۥ غَفُورٌۭ رَّحِيمٌۭ",
   "bn": "আর যখন তারা আপনার কাছে আসবে যারা আমার নিদর্শনসমূহে বিশ্বাস করে, তখন আপনি বলে দিনঃ তোমাদের উপর শান্তি বর্ষিত হোক। তোমাদের পালনকর্তা রহমত করা নিজ দায়িত্বে লিখে নিয়েছেন যে, তোমাদের মধ্যে যে কেউ অজ্ঞতাবশতঃ কোন মন্দ কাজ করে, অনন্তর এরপরে তওবা করে নেয় এবং সৎ হয়ে যায়, তবে তিনি অত্যন্ত ক্ষমাশীল, করুণাময়।",
+  "en": "And when those who believe in Our signs come to you, say: Peace be upon you. Your Lord has made mercy incumbent upon Himself: whoever among you does evil out of ignorance, then repents afterwards and becomes righteous — indeed, He is Most Forgiving, Most Merciful.",
   "ref": "সূরা আল-আনআম · আয়াত ৫৪",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-An'am · Ayah 54",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "قُلْ إِنَّ صَلَاتِى وَنُسُكِى وَمَحْيَاىَ وَمَمَاتِى لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
   "bn": "আপনি বলুনঃ আমার নামায, আমার কোরবাণী এবং আমার জীবন ও মরন বিশ্ব-প্রতিপালক আল্লাহরই জন্যে।",
+  "en": "Say: My Salah, my sacrifice, my life and my death are for Allah, the Lord of all the worlds.",
   "ref": "সূরা আল-আনআম · আয়াত ১৬২",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-An'am · Ayah 162",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَمَا تَنقِمُ مِنَّآ إِلَّآ أَنْ ءَامَنَّا بِـَٔايَٰتِ رَبِّنَا لَمَّا جَآءَتْنَا ۚ رَبَّنَآ أَفْرِغْ عَلَيْنَا صَبْرًۭا وَتَوَفَّنَا مُسْلِمِينَ",
   "bn": "বস্তুতঃ আমাদের সাথে তোমার শত্রুতা তো এ কারণেই যে, আমরা ঈমান এনেছি আমাদের পরওয়ারদেগারের নিদর্শনসমূহের প্রতি যখন তা আমাদের নিকট পৌঁছেছে। হে আমাদের পরওয়ারদেগার আমাদের জন্য ধৈর্য্যের দ্বার খুলে দাও এবং আমাদেরকে মুসলমান হিসাবে মৃত্যু দান কর।",
+  "en": "Your enmity towards us is only because we believed in the signs of our Lord when they reached us. Our Lord, open for us the door of patience and grant us death as Muslims.",
   "ref": "সূরা আল-আরাফ · আয়াত ১২৬",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-A'raf · Ayah 126",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "وَٱذْكُر رَّبَّكَ فِى نَفْسِكَ تَضَرُّعًۭا وَخِيفَةًۭ وَدُونَ ٱلْجَهْرِ مِنَ ٱلْقَوْلِ بِٱلْغُدُوِّ وَٱلْءَاصَالِ وَلَا تَكُن مِّنَ ٱلْغَٰفِلِينَ",
   "bn": "আর স্মরণ করতে থাক স্বীয় পালনকর্তাকে আপন মনে ক্রন্দনরত ও ভীত-সন্ত্রস্ত অবস্থায় এবং এমন স্বরে যা চিৎকার করে বলা অপেক্ষা কম; সকালে ও সন্ধ্যায়। আর বে-খবর থেকো না।",
+  "en": "And remember your Lord within yourself, humbly and in fear, in a voice lower than a shout, in the morning and in the evening. And do not be among the heedless.",
   "ref": "সূরা আল-আরাফ · আয়াত ২০৫",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Surah Al-A'raf · Ayah 205",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "ayat",
   "ar": "وَأَطِيعُوا۟ ٱللَّهَ وَرَسُولَهُۥ وَلَا تَنَٰزَعُوا۟ فَتَفْشَلُوا۟ وَتَذْهَبَ رِيحُكُمْ ۖ وَٱصْبِرُوٓا۟ ۚ إِنَّ ٱللَّهَ مَعَ ٱلصَّٰبِرِينَ",
   "bn": "আর আল্লাহ তা’আলার নির্দেশ মান্য কর এবং তাঁর রসূলের। তাছাড়া তোমরা পরস্পরে বিবাদে লিপ্ত হইও না। যদি তা কর, তবে তোমরা কাপুরুষ হয়ে পড়বে এবং তোমাদের প্রভাব চলে যাবে। আর তোমরা ধৈর্য্যধারণ কর। নিশ্চয়ই আল্লাহ তা'আলা রয়েছেন ধৈর্য্যশীলদের সাথে।",
+  "en": "Obey Allah and His Messenger, and do not dispute among yourselves, lest you become cowardly and your strength depart. And be patient. Indeed, Allah is with the patient.",
   "ref": "সূরা আল-আনফাল · আয়াত ৪৬",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Al-Anfal · Ayah 46",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "إِلَّا تَنصُرُوهُ فَقَدْ نَصَرَهُ ٱللَّهُ إِذْ أَخْرَجَهُ ٱلَّذِينَ كَفَرُوا۟ ثَانِىَ ٱثْنَيْنِ إِذْ هُمَا فِى ٱلْغَارِ إِذْ يَقُولُ لِصَٰحِبِهِۦ لَا تَحْزَنْ إِنَّ ٱللَّهَ مَعَنَا ۖ فَأَنزَلَ ٱللَّهُ سَكِينَتَهُۥ عَلَيْهِ وَأَيَّدَهُۥ بِجُنُودٍۢ لَّمْ تَرَوْهَا وَجَعَلَ كَلِمَةَ ٱلَّذِينَ كَفَرُوا۟ ٱلسُّفْلَىٰ ۗ وَكَلِمَةُ ٱللَّهِ هِىَ ٱلْعُلْيَا ۗ وَٱللَّهُ عَزِيزٌ حَكِيمٌ",
   "bn": "যদি তোমরা তাকে (রসূলকে) সাহায্য না কর, তবে মনে রেখো, আল্লাহ তার সাহায্য করেছিলেন, যখন তাকে কাফেররা বহিষ্কার করেছিল, তিনি ছিলেন দু’জনের একজন, যখন তারা গুহার মধ্যে ছিলেন। তখন তিনি আপন সঙ্গীকে বললেন বিষন্ন হয়ো না, আল্লাহ আমাদের সাথে আছেন। অতঃপর আল্লাহ তার প্রতি স্বীয় সান্তনা নাযিল করলেন এবং তাঁর সাহায্যে এমন বাহিনী পাঠালেন, যা তোমরা দেখনি। বস্তুতঃ আল্লাহ কাফেরদের মাথা নীচু করে দিলেন আর আল্লাহর কথাই সদা সমুন্নত এবং আল্লাহ পরাক্রমশালী, প্রজ্ঞাময়।",
+  "en": "If you do not help him (the Messenger), remember that Allah helped him when the disbelievers drove him out — he was one of two, when they were in the cave. Then he said to his companion: Do not grieve, Allah is with us. Then Allah sent down His tranquillity upon him and supported him with forces you did not see. Allah lowered the word of the disbelievers, and the word of Allah is ever exalted. And Allah is Almighty, All-Wise.",
   "ref": "সূরা আত-তাওবা · আয়াত ৪০",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah At-Tawbah · Ayah 40",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "فَقَالُوا۟ عَلَى ٱللَّهِ تَوَكَّلْنَا رَبَّنَا لَا تَجْعَلْنَا فِتْنَةًۭ لِّلْقَوْمِ ٱلظَّٰلِمِينَ",
   "bn": "তখন তারা বলল, আমরা আল্লাহর উপর ভরসা করেছি। হে আমাদের পালনকর্তা, আমাদের উপর এ জালেম কওমের শক্তি পরীক্ষা করিও না।",
+  "en": "Then they said: We have placed our trust in Allah. Our Lord, do not make us a trial for the wrongdoing people.",
   "ref": "সূরা ইউনুস · আয়াত ৮৫",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Yunus · Ayah 85",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "إِنِّى تَوَكَّلْتُ عَلَى ٱللَّهِ رَبِّى وَرَبِّكُم ۚ مَّا مِن دَآبَّةٍ إِلَّا هُوَ ءَاخِذٌۢ بِنَاصِيَتِهَآ ۚ إِنَّ رَبِّى عَلَىٰ صِرَٰطٍۢ مُّسْتَقِيمٍۢ",
   "bn": "আমি আল্লাহর উপর নিশ্চিত ভরসা করেছি যিনি আমার এবং তোমাদের পরওয়ারদেগার। পৃথিবীর বুকে বিচরণকারী এমন কোন প্রাণী নাই যা তাঁর র্পূণ আয়ত্তাধীন নয়। আমার পালকর্তার সরল পথে সন্দেহ নেই।",
+  "en": "I have placed my trust firmly in Allah, who is my Lord and your Lord. There is no living creature on earth that is not fully under His control. My Lord is on a straight path, without doubt.",
   "ref": "সূরা হুদ · আয়াত ৫৬",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Hud · Ayah 56",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَأَقِمِ ٱلصَّلَوٰةَ طَرَفَىِ ٱلنَّهَارِ وَزُلَفًۭا مِّنَ ٱلَّيْلِ ۚ إِنَّ ٱلْحَسَنَٰتِ يُذْهِبْنَ ٱلسَّيِّـَٔاتِ ۚ ذَٰلِكَ ذِكْرَىٰ لِلذَّٰكِرِينَ",
   "bn": "আর দিনের দুই প্রান্তেই নামায ঠিক রাখবে, এবং রাতের প্রান্তভাগে পূর্ণ কাজ অবশ্যই পাপ দূর করে দেয়, যারা স্মরণ রাখে তাদের জন্য এটি এক মহা স্মারক।",
+  "en": "And establish Salah at the two ends of the day and in the early hours of the night. Indeed, good deeds remove evil deeds. This is a great reminder for those who remember.",
   "ref": "সূরা হুদ · আয়াত ১১৪",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Hud · Ayah 114",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "۞ وَمَآ أُبَرِّئُ نَفْسِىٓ ۚ إِنَّ ٱلنَّفْسَ لَأَمَّارَةٌۢ بِٱلسُّوٓءِ إِلَّا مَا رَحِمَ رَبِّىٓ ۚ إِنَّ رَبِّى غَفُورٌۭ رَّحِيمٌۭ",
   "bn": "আমি নিজেকে নির্দোষ বলি না। নিশ্চয় মানুষের মন মন্দ কর্মপ্রবণ কিন্তু সে নয়-আমার পালনকর্তা যার প্রতি অনুগ্রহ করেন। নিশ্চয় আমার পালনকর্তা ক্ষমাশীল, দয়ালু।",
+  "en": "I do not claim to be innocent. Indeed, the human soul is inclined to evil — except the one upon whom my Lord has mercy. Indeed, my Lord is Forgiving and Merciful.",
   "ref": "সূরা ইউসুফ · আয়াত ৫৩",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Yusuf · Ayah 53",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "۞ رَبِّ قَدْ ءَاتَيْتَنِى مِنَ ٱلْمُلْكِ وَعَلَّمْتَنِى مِن تَأْوِيلِ ٱلْأَحَادِيثِ ۚ فَاطِرَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ أَنتَ وَلِىِّۦ فِى ٱلدُّنْيَا وَٱلْءَاخِرَةِ ۖ تَوَفَّنِى مُسْلِمًۭا وَأَلْحِقْنِى بِٱلصَّٰلِحِينَ",
   "bn": "হে পালনকর্তা আপনি আমাকে রাষ্ট্রক্ষমতাও দান করেছেন এবং আমাকে বিভিন্ন তাৎপর্য সহ ব্যাখ্যা করার বিদ্যা শিখিয়ে দিয়েছেন। হে নভোমন্ডল ও ভূ-মন্ডলের স্রষ্টা, আপনিই আমার কার্যনির্বাহী ইহকাল ও পরকালে। আমাকে ইসলামের উপর মৃত্যুদান করুন এবং আমাকে স্বজনদের সাথে মিলিত করুন।",
+  "en": "My Lord, You have given me sovereignty and taught me the interpretation of events. O Creator of the heavens and the earth, You are my Guardian in this world and in the Hereafter. Grant me death in Islam and join me with the righteous.",
   "ref": "সূরা ইউসুফ · আয়াত ১০১",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Yusuf · Ayah 101",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "رَبَّنَا ٱغْفِرْ لِى وَلِوَٰلِدَىَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ ٱلْحِسَابُ",
   "bn": "হে আমাদের পালনকর্তা, আমাকে, আমার পিতা-মাতাকে এবং সব মুমিনকে ক্ষমা করুন, যেদিন হিসাব কায়েম হবে।",
+  "en": "Our Lord, forgive me, my parents and all the believers on the Day when the reckoning is established.",
   "ref": "সূরা ইবরাহিম · আয়াত ৪১",
-  "topic": "মা-বাবা"
+  "refEn": "Surah Ibrahim · Ayah 41",
+  "topic": "মা-বাবা",
+  "topicEn": "Parents"
  },
  {
   "type": "ayat",
   "ar": "۞ نَبِّئْ عِبَادِىٓ أَنِّىٓ أَنَا ٱلْغَفُورُ ٱلرَّحِيمُ",
   "bn": "আপনি আমার বান্দাদেরকে জানিয়ে দিন যে, আমি অত্যন্ত ক্ষমাশীল দয়ালু।",
+  "en": "Inform My servants that I am indeed the Most Forgiving, the Most Merciful.",
   "ref": "সূরা আল-হিজর · আয়াত ৪৯",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-Hijr · Ayah 49",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "قَالَ وَمَن يَقْنَطُ مِن رَّحْمَةِ رَبِّهِۦٓ إِلَّا ٱلضَّآلُّونَ",
   "bn": "তিনি বললেনঃ পালনকর্তার রহমত থেকে পথভ্রষ্টরা ছাড়া কে নিরাশ হয় ?",
+  "en": "He said: Who despairs of the mercy of his Lord except those who are astray?",
   "ref": "সূরা আল-হিজর · আয়াত ৫৬",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-Hijr · Ayah 56",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "قَالَ لَا تَخَافَآ ۖ إِنَّنِى مَعَكُمَآ أَسْمَعُ وَأَرَىٰ",
   "bn": "আল্লাহ বললেনঃ তোমরা ভয় করো না, আমি তোমাদের সাথে আছি, আমি শুনি ও দেখি।",
+  "en": "Allah said: Do not fear, I am with you both; I hear and I see.",
   "ref": "সূরা ত্বা-হা · আয়াত ৪৬",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Taha · Ayah 46",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "كُلُّ نَفْسٍۢ ذَآئِقَةُ ٱلْمَوْتِ ۗ وَنَبْلُوكُم بِٱلشَّرِّ وَٱلْخَيْرِ فِتْنَةًۭ ۖ وَإِلَيْنَا تُرْجَعُونَ",
   "bn": "প্রত্যেককে মৃত্যুর স্বাদ আস্বাদন করতে হবে। আমি তোমাদেরকে মন্দ ও ভাল দ্বারা পরীক্ষা করে থাকি এবং আমারই কাছে তোমরা প্রত্যাবর্তিত হবে।",
+  "en": "Every soul must taste death. We test you with evil and good as a trial, and to Us you will return.",
   "ref": "সূরা আল-আম্বিয়া · আয়াত ৩৫",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Al-Anbiya · Ayah 35",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "قَٰلَ رَبِّ ٱحْكُم بِٱلْحَقِّ ۗ وَرَبُّنَا ٱلرَّحْمَٰنُ ٱلْمُسْتَعَانُ عَلَىٰ مَا تَصِفُونَ",
   "bn": "পয়গাম্বর বললেনঃ হে আমার পালনকর্তা, আপনি ন্যায়ানুগ ফয়সালা করে দিন। আমাদের পালনকর্তা তো দয়াময়, তোমরা যা বলছ, সে বিষয়ে আমরা তাঁর কাছেই সাহায্য প্রার্থনা করি।",
+  "en": "The Prophet said: My Lord, judge with truth. And our Lord is the Most Merciful, whose help we seek in what you describe.",
   "ref": "সূরা আল-আম্বিয়া · আয়াত ১১২",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Anbiya · Ayah 112",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "وَقُل رَّبِّ أَعُوذُ بِكَ مِنْ هَمَزَٰتِ ٱلشَّيَٰطِينِ",
   "bn": "বলুনঃ হে আমার পালনকর্তা! আমি শয়তানের প্ররোচনা থেকে আপনার আশ্রয় প্রার্থনা করি,",
+  "en": "Say: My Lord! I seek refuge in You from the whisperings of the devils.",
   "ref": "সূরা আল-মুমিনুন · আয়াত ৯৭",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Mu'minun · Ayah 97",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "إِنَّهُۥ كَانَ فَرِيقٌۭ مِّنْ عِبَادِى يَقُولُونَ رَبَّنَآ ءَامَنَّا فَٱغْفِرْ لَنَا وَٱرْحَمْنَا وَأَنتَ خَيْرُ ٱلرَّٰحِمِينَ",
   "bn": "আমার বান্দাদের একদলে বলতঃ হে আমাদের পালনকর্তা! আমরা বিশ্বাস স্থাপন করেছি। অতএব তুমি আমাদেরকে ক্ষমা কর ও আমাদের প্রতি রহম কর। তুমি তো দয়ালুদের মধ্যে শ্রেষ্ঠ দয়ালু।",
+  "en": "A group of My servants used to say: Our Lord! We have believed, so forgive us and have mercy on us. You are the best of those who show mercy.",
   "ref": "সূরা আল-মুমিনুন · আয়াত ১০৯",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Mu'minun · Ayah 109",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "فَتَعَٰلَى ٱللَّهُ ٱلْمَلِكُ ٱلْحَقُّ ۖ لَآ إِلَٰهَ إِلَّا هُوَ رَبُّ ٱلْعَرْشِ ٱلْكَرِيمِ",
   "bn": "অতএব শীর্ষ মহিমায় আল্লাহ, তিনি সত্যিকার মালিক, তিনি ব্যতীত কোন মাবুদ নেই। তিনি সম্মানিত আরশের মালিক।",
+  "en": "Exalted in glory is Allah, the True King; there is no god but Him, the Lord of the Honourable Throne.",
   "ref": "সূরা আল-মুমিনুন · আয়াত ১১৬",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Mu'minun · Ayah 116",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَتَوَكَّلْ عَلَى ٱلْحَىِّ ٱلَّذِى لَا يَمُوتُ وَسَبِّحْ بِحَمْدِهِۦ ۚ وَكَفَىٰ بِهِۦ بِذُنُوبِ عِبَادِهِۦ خَبِيرًا",
   "bn": "আপনি সেই চিরঞ্জীবের উপর ভরসা করুন, যার মৃত্যু নেই এবং তাঁর প্রশংসাসহ পবিত্রতা ঘোষণা করুন। তিনি বান্দার গোনাহ সম্পর্কে যথেষ্ট খবরদার।",
+  "en": "Place your trust in the Ever-Living, who never dies, and glorify Him with praise. He is well aware of the sins of His servants.",
   "ref": "সূরা আল-ফুরকান · আয়াত ৫৮",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Al-Furqan · Ayah 58",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا ٱصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ ۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا",
   "bn": "এবং যারা বলে, হে আমার পালনকর্তা, আমাদের কাছথেকে জাহান্নামের শাস্তি হটিয়ে দাও। নিশ্চয় এর শাস্তি নিশ্চিত বিনাশ;",
+  "en": "And those who say: Our Lord, turn away from us the punishment of Hell. Indeed, its punishment is certain destruction.",
   "ref": "সূরা আল-ফুরকান · আয়াত ৬৫",
-  "topic": "দোয়া ও প্রার্থনা"
+  "refEn": "Surah Al-Furqan · Ayah 65",
+  "topic": "দোয়া ও প্রার্থনা",
+  "topicEn": "Dua & Supplication"
  },
  {
   "type": "ayat",
   "ar": "فَتَبَسَّمَ ضَاحِكًۭا مِّن قَوْلِهَا وَقَالَ رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَٰلِحًۭا تَرْضَىٰهُ وَأَدْخِلْنِى بِرَحْمَتِكَ فِى عِبَادِكَ ٱلصَّٰلِحِينَ",
   "bn": "তার কথা শুনে সুলায়মান মুচকি হাসলেন এবং বললেন, হে আমার পালনকর্তা, তুমি আমাকে সামর্থ?2470;াও যাতে আমি তোমার সেই নিয়ামতের কৃতজ্ঞতা প্রকাশ করতে পারি, যা তুমি আমাকে ও আমার পিতা-মাতাকে দান করেছ এবং যাতে আমি তোমার পছন্দনীয় সৎকর্ম করতে পারি এবং আমাকে নিজ অনুগ্রহে তোমার সৎকর্মপরায়ন বান্দাদের অন্তর্ভুক্ত কর।",
+  "en": "Hearing her words, Sulayman smiled and said: My Lord, grant me the ability to give thanks for the blessing You have given me and my parents, and to do righteous deeds that please You, and admit me by Your mercy among Your righteous servants.",
   "ref": "সূরা আন-নামল · আয়াত ১৯",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah An-Naml · Ayah 19",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "قَالَ رَبِّ إِنِّى ظَلَمْتُ نَفْسِى فَٱغْفِرْ لِى فَغَفَرَ لَهُۥٓ ۚ إِنَّهُۥ هُوَ ٱلْغَفُورُ ٱلرَّحِيمُ",
   "bn": "তিনি বললেন, হে আমার পালনকর্তা, আমি তো নিজের উপর জুলুম করে ফেলেছি। অতএব, আমাকে ক্ষমা করুন। আল্লাহ তাকে ক্ষমা করলেন। নিশ্চয় তিনি ক্ষমাশীল, দয়ালু।",
+  "en": "He said: My Lord, I have wronged myself, so forgive me. And Allah forgave him. Indeed, He is the Most Forgiving, the Most Merciful.",
   "ref": "সূরা আল-কাসাস · আয়াত ১৬",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Al-Qasas · Ayah 16",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "ٱتْلُ مَآ أُوحِىَ إِلَيْكَ مِنَ ٱلْكِتَٰبِ وَأَقِمِ ٱلصَّلَوٰةَ ۖ إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ ۗ وَلَذِكْرُ ٱللَّهِ أَكْبَرُ ۗ وَٱللَّهُ يَعْلَمُ مَا تَصْنَعُونَ",
   "bn": "আপনি আপনার প্রতি প্রত্যাদিষ্ট কিতাব পাঠ করুন এবং নামায কায়েম করুন। নিশ্চয় নামায অশ্লীল ও গর্হিত কার্য থেকে বিরত রাখে। আল্লাহর স্মরণ সর্বশ্রেষ্ঠ। আল্লাহ জানেন তোমরা যা কর।",
+  "en": "Recite what has been revealed to you of the Book and establish Salah. Indeed, Salah keeps one away from immorality and evil deeds. And the remembrance of Allah is greatest. Allah knows what you do.",
   "ref": "সূরা আল-আনকাবুত · আয়াত ৪৫",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Ankabut · Ayah 45",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "فَٱصْبِرْ إِنَّ وَعْدَ ٱللَّهِ حَقٌّۭ ۖ وَلَا يَسْتَخِفَّنَّكَ ٱلَّذِينَ لَا يُوقِنُونَ",
   "bn": "অতএব, আপনি সবর করুন। আল্লাহর ওয়াদা সত্য। যারা বিশ্বাসী নয়, তারা যেন আপনাকে বিচলিত করতে না পারে।",
+  "en": "So be patient. The promise of Allah is true. And let not those who do not believe unsettle you.",
   "ref": "সূরা আর-রুম · আয়াত ৬০",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Ar-Rum · Ayah 60",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ",
   "bn": "পদচারণায় মধ্যবর্তিতা অবলম্বন কর এবং কন্ঠস্বর নীচু কর। নিঃসন্দেহে গাধার স্বরই সর্বাপেক্ষা অপ্রীতিকর।",
+  "en": "Walk with moderation and lower your voice. Indeed, the most unpleasant of voices is the voice of the donkey.",
   "ref": "সূরা লুকমান · আয়াত ১৯",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Luqman · Ayah 19",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "فَلَا تَعْلَمُ نَفْسٌۭ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍۢ جَزَآءًۢ بِمَا كَانُوا۟ يَعْمَلُونَ",
   "bn": "কেউ জানে না তার জন্যে কৃতকর্মের কি কি নয়ন-প্রীতিকর প্রতিদান লুক্কায়িত আছে।",
+  "en": "No soul knows what delightful rewards are hidden for them as a reward for what they used to do.",
   "ref": "সূরা আস-সাজদা · আয়াত ১৭",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah As-Sajdah · Ayah 17",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱذْكُرُوا۟ ٱللَّهَ ذِكْرًۭا كَثِيرًۭا",
   "bn": "মুমিনগণ তোমরা আল্লাহকে অধিক পরিমাণে স্মরণ কর।",
+  "en": "O believers, remember Allah abundantly.",
   "ref": "সূরা আল-আহযাব · আয়াত ৪১",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Ahzab · Ayah 41",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱتَّقُوا۟ ٱللَّهَ وَقُولُوا۟ قَوْلًۭا سَدِيدًۭا",
   "bn": "হে মুমিনগণ! আল্লাহকে ভয় কর এবং সঠিক কথা বল।",
+  "en": "O you who believe! Fear Allah and speak the right words.",
   "ref": "সূরা আল-আহযাব · আয়াত ৭০",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Ahzab · Ayah 70",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "قُلْ إِنَّ رَبِّى يَبْسُطُ ٱلرِّزْقَ لِمَن يَشَآءُ مِنْ عِبَادِهِۦ وَيَقْدِرُ لَهُۥ ۚ وَمَآ أَنفَقْتُم مِّن شَىْءٍۢ فَهُوَ يُخْلِفُهُۥ ۖ وَهُوَ خَيْرُ ٱلرَّٰزِقِينَ",
   "bn": "বলুন, আমার পালনকর্তা তাঁর বান্দাদের মধ্যে যাকে ইচ্ছা রিযিক বাড়িয়ে দেন এবং সীমিত পরিমাণে দেন। তোমরা যা কিছু ব্যয় কর, তিনি তার বিনিময় দেন। তিনি উত্তম রিযিক দাতা।",
+  "en": "Say: My Lord increases provision for whom He wills among His servants and restricts it for whom He wills. Whatever you spend, He will replace it. And He is the best of providers.",
   "ref": "সূরা সাবা · আয়াত ৩৯",
-  "topic": "রিজিক"
+  "refEn": "Surah Saba · Ayah 39",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "ayat",
   "ar": "۞ يَٰٓأَيُّهَا ٱلنَّاسُ أَنتُمُ ٱلْفُقَرَآءُ إِلَى ٱللَّهِ ۖ وَٱللَّهُ هُوَ ٱلْغَنِىُّ ٱلْحَمِيدُ",
   "bn": "হে মানুষ, তোমরা আল্লাহর গলগ্রহ। আর আল্লাহ; তিনি অভাবমুক্ত, প্রশংসিত।",
+  "en": "O mankind, you are in need of Allah. And Allah is Free of need, Worthy of praise.",
   "ref": "সূরা ফাতির · আয়াত ১৫",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Fatir · Ayah 15",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "إِنَّهُمْ كَانُوٓا۟ إِذَا قِيلَ لَهُمْ لَآ إِلَٰهَ إِلَّا ٱللَّهُ يَسْتَكْبِرُونَ",
   "bn": "তাদের যখন বলা হত, আল্লাহ ব্যতীত কোন উপাস্য েনই, তখন তারা ঔদ্ধত্য প্রদর্শন করত।",
+  "en": "When it was said to them: There is no god but Allah, they showed arrogance.",
   "ref": "সূরা আস-সাফফাত · আয়াত ৩৫",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah As-Saffat · Ayah 35",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "سُبْحَٰنَ رَبِّكَ رَبِّ ٱلْعِزَّةِ عَمَّا يَصِفُونَ",
   "bn": "পবিত্র আপনার পরওয়ারদেগারের সত্তা, তিনি সম্মানিত ও পবিত্র যা তারা বর্ণনা করে তা থেকে।",
+  "en": "Glory be to your Lord, the Lord of honour, above what they describe.",
   "ref": "সূরা আস-সাফফাত · আয়াত ১৮০",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah As-Saffat · Ayah 180",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَيُنَجِّى ٱللَّهُ ٱلَّذِينَ ٱتَّقَوْا۟ بِمَفَازَتِهِمْ لَا يَمَسُّهُمُ ٱلسُّوٓءُ وَلَا هُمْ يَحْزَنُونَ",
   "bn": "আর যারা শিরক থেকে বেঁচে থাকত, আল্লাহ তাদেরকে সাফল্যের সাথে মুক্তি দেবেন, তাদেরকে অনিষ্ট স্পর্শ করবে না এবং তারা চিন্তিতও হবে না।",
+  "en": "And Allah will save those who guarded themselves from shirk with success; no harm will touch them, nor will they grieve.",
   "ref": "সূরা আয-যুমার · আয়াত ৬১",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Az-Zumar · Ayah 61",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَسِيقَ ٱلَّذِينَ ٱتَّقَوْا۟ رَبَّهُمْ إِلَى ٱلْجَنَّةِ زُمَرًا ۖ حَتَّىٰٓ إِذَا جَآءُوهَا وَفُتِحَتْ أَبْوَٰبُهَا وَقَالَ لَهُمْ خَزَنَتُهَا سَلَٰمٌ عَلَيْكُمْ طِبْتُمْ فَٱدْخُلُوهَا خَٰلِدِينَ",
   "bn": "যারা তাদের পালনকর্তাকে ভয় করত তাদেরকে দলে দলে জান্নাতের দিকে নিয়ে যাওয়া হবে। যখন তারা উম্মুক্ত দরজা দিয়ে জান্নাতে পৌছাবে এবং জান্নাতের রক্ষীরা তাদেরকে বলবে, তোমাদের প্রতি সালাম, তোমরা সুখে থাক, অতঃপর সদাসর্বদা বসবাসের জন্যে তোমরা জান্নাতে প্রবেশ কর।",
+  "en": "Those who feared their Lord will be led to Jannah in groups. When they reach it through its opened gates, its keepers will say to them: Peace be upon you; you have lived well, so enter it to dwell therein forever.",
   "ref": "সূরা আয-যুমার · আয়াত ৭৩",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Az-Zumar · Ayah 73",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "إِنَّا لَنَنصُرُ رُسُلَنَا وَٱلَّذِينَ ءَامَنُوا۟ فِى ٱلْحَيَوٰةِ ٱلدُّنْيَا وَيَوْمَ يَقُومُ ٱلْأَشْهَٰدُ",
   "bn": "আমি সাহায্য করব রসূলগণকে ও মুমিনগণকে পার্থিব জীবনে ও সাক্ষীদের দন্ডায়মান হওয়ার দিবসে।",
+  "en": "We will help Our Messengers and the believers in the life of this world and on the Day when the witnesses stand.",
   "ref": "সূরা গাফির · আয়াত ৫১",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Ghafir · Ayah 51",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَلَوْ جَعَلْنَٰهُ قُرْءَانًا أَعْجَمِيًّۭا لَّقَالُوا۟ لَوْلَا فُصِّلَتْ ءَايَٰتُهُۥٓ ۖ ءَا۬عْجَمِىٌّۭ وَعَرَبِىٌّۭ ۗ قُلْ هُوَ لِلَّذِينَ ءَامَنُوا۟ هُدًۭى وَشِفَآءٌۭ ۖ وَٱلَّذِينَ لَا يُؤْمِنُونَ فِىٓ ءَاذَانِهِمْ وَقْرٌۭ وَهُوَ عَلَيْهِمْ عَمًى ۚ أُو۟لَٰٓئِكَ يُنَادَوْنَ مِن مَّكَانٍۭ بَعِيدٍۢ",
   "bn": "আমি যদি একে অনারব ভাষায় কোরআন করতাম, তবে অবশ্যই তারা বলত, এর আয়াতসমূহ পরিস্কার ভাষায় বিবৃত হয়নি কেন? কি আশ্চর্য যে, কিতাব অনারব ভাষায় আর রসূল আরবী ভাষী! বলুন, এটা বিশ্বাসীদের জন্য হেদায়েত ও রোগের প্রতিকার। যারা মুমিন নয়, তাদের কানে আছে ছিপি, আর কোরআন তাদের জন্যে অন্ধত্ব। তাদেরকে যেন দূরবর্তী স্থান থেকে আহবান করা হয়।",
+  "en": "If We had made it a Quran in a non-Arabic language, they would surely have said: Why are its verses not explained in clear language? How strange that the Book is in a non-Arabic language while the Messenger speaks Arabic! Say: It is guidance and a healing for the believers. As for those who do not believe, their ears are blocked, and the Quran is blindness for them. They are called as if from a distant place.",
   "ref": "সূরা ফুসসিলাত · আয়াত ৪৪",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Fussilat · Ayah 44",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "لِتَسْتَوُۥا۟ عَلَىٰ ظُهُورِهِۦ ثُمَّ تَذْكُرُوا۟ نِعْمَةَ رَبِّكُمْ إِذَا ٱسْتَوَيْتُمْ عَلَيْهِ وَتَقُولُوا۟ سُبْحَٰنَ ٱلَّذِى سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُۥ مُقْرِنِينَ",
   "bn": "যাতে তোমরা তাদের পিঠের উপর আরোহণ কর। অতঃপর তোমাদের পালনকর্তার নেয়ামত স্মরণ কর এবং বল পবিত্র তিনি, যিনি এদেরকে আমাদের বশীভূত করে দিয়েছেন এবং আমরা এদেরকে বশীভূত করতে সক্ষম ছিলাম না।",
+  "en": "So that you may ride on their backs. Then remember the blessing of your Lord when you are seated on them, and say: Glory be to Him who has subjected these for us, and we could not have subjected them ourselves.",
   "ref": "সূরা আয-যুখরুফ · আয়াত ১৩",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Surah Az-Zukhruf · Ayah 13",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "ayat",
   "ar": "فَلِلَّهِ ٱلْحَمْدُ رَبِّ ٱلسَّمَٰوَٰتِ وَرَبِّ ٱلْأَرْضِ رَبِّ ٱلْعَٰلَمِينَ",
   "bn": "অতএব, বিশ্বজগতের পালনকর্তা, ভূ-মন্ডলের পালনকর্তা ও নভোমন্ডলের পালনকর্তা আল্লাহর-ই প্রশংসা।",
+  "en": "So all praise belongs to Allah, the Lord of the heavens, the Lord of the earth, the Lord of all the worlds.",
   "ref": "সূরা আল-জাসিয়া · আয়াত ৩৬",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah Al-Jathiyah · Ayah 36",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "فَٱعْلَمْ أَنَّهُۥ لَآ إِلَٰهَ إِلَّا ٱللَّهُ وَٱسْتَغْفِرْ لِذَنۢبِكَ وَلِلْمُؤْمِنِينَ وَٱلْمُؤْمِنَٰتِ ۗ وَٱللَّهُ يَعْلَمُ مُتَقَلَّبَكُمْ وَمَثْوَىٰكُمْ",
   "bn": "জেনে রাখুন, আল্লাহ ব্যতীত কোন উপাস্য নেই। ক্ষমাপ্রার্থনা করুন, আপনার ক্রটির জন্যে এবং মুমিন পুরুষ ও নারীদের জন্যে। আল্লাহ, তোমাদের গতিবিধি ও অবস্থান সম্পর্কে জ্ঞাত।",
+  "en": "Know that there is no god but Allah. And seek forgiveness for your fault and for the believing men and women. Allah knows your movements and your resting places.",
   "ref": "সূরা মুহাম্মদ · আয়াত ১৯",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Muhammad · Ayah 19",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا يَسْخَرْ قَوْمٌۭ مِّن قَوْمٍ عَسَىٰٓ أَن يَكُونُوا۟ خَيْرًۭا مِّنْهُمْ وَلَا نِسَآءٌۭ مِّن نِّسَآءٍ عَسَىٰٓ أَن يَكُنَّ خَيْرًۭا مِّنْهُنَّ ۖ وَلَا تَلْمِزُوٓا۟ أَنفُسَكُمْ وَلَا تَنَابَزُوا۟ بِٱلْأَلْقَٰبِ ۖ بِئْسَ ٱلِٱسْمُ ٱلْفُسُوقُ بَعْدَ ٱلْإِيمَٰنِ ۚ وَمَن لَّمْ يَتُبْ فَأُو۟لَٰٓئِكَ هُمُ ٱلظَّٰلِمُونَ",
   "bn": "মুমিনগণ, কেউ যেন অপর কাউকে উপহাস না করে। কেননা, সে উপহাসকারী অপেক্ষা উত্তম হতে পারে এবং কোন নারী অপর নারীকেও যেন উপহাস না করে। কেননা, সে উপহাসকারিণী অপেক্ষা শ্রেষ্ঠ হতে পারে। তোমরা একে অপরের প্রতি দোষারোপ করো না এবং একে অপরকে মন্দ নামে ডেকো না। কেউ বিশ্বাস স্থাপন করলে তাদের মন্দ নামে ডাকা গোনাহ। যারা এহেন কাজ থেকে তওবা না করে তারাই যালেম।",
+  "en": "O believers, let no people mock another people; the mocked may be better than the mockers. And let no women mock other women; the mocked may be better than the mockers. Do not find fault with one another, and do not call one another by offensive names. It is a sin to call someone by a bad name after he has believed. Those who do not repent from such deeds are the wrongdoers.",
   "ref": "সূরা আল-হুজুরাত · আয়াত ১১",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Hujurat · Ayah 11",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱجْتَنِبُوا۟ كَثِيرًۭا مِّنَ ٱلظَّنِّ إِنَّ بَعْضَ ٱلظَّنِّ إِثْمٌۭ ۖ وَلَا تَجَسَّسُوا۟ وَلَا يَغْتَب بَّعْضُكُم بَعْضًا ۚ أَيُحِبُّ أَحَدُكُمْ أَن يَأْكُلَ لَحْمَ أَخِيهِ مَيْتًۭا فَكَرِهْتُمُوهُ ۚ وَٱتَّقُوا۟ ٱللَّهَ ۚ إِنَّ ٱللَّهَ تَوَّابٌۭ رَّحِيمٌۭ",
   "bn": "মুমিনগণ, তোমরা অনেক ধারণা থেকে বেঁচে থাক। নিশ্চয় কতক ধারণা গোনাহ। এবং গোপনীয় বিষয় সন্ধান করো না। তোমাদের কেউ যেন কারও পশ্চাতে নিন্দা না করে। তোমাদের কেউ কি তারা মৃত ভ্রাতার মাংস ভক্ষণ করা পছন্দ করবে? বস্তুতঃ তোমরা তো একে ঘৃণাই কর। আল্লাহকে ভয় কর। নিশ্চয় আল্লাহ তওবা কবুলকারী, পরম দয়ালু।",
+  "en": "O believers, avoid much suspicion. Indeed, some suspicion is a sin. And do not seek out others' secrets. Let none of you backbite another. Would any of you like to eat the flesh of his dead brother? You would hate it. Fear Allah. Indeed, Allah is the Acceptor of Repentance, the Most Merciful.",
   "ref": "সূরা আল-হুজুরাত · আয়াত ১২",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Hujurat · Ayah 12",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "وَلَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ وَنَعْلَمُ مَا تُوَسْوِسُ بِهِۦ نَفْسُهُۥ ۖ وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ ٱلْوَرِيدِ",
   "bn": "আমি মানুষ সৃষ্টি করেছি এবং তার মন নিভৃতে যে কুচিন্তা করে, সে সম্বন্ধেও আমি অবগত আছি। আমি তার গ্রীবাস্থিত ধমনী থেকেও অধিক নিকটবর্তী।",
+  "en": "We created man, and We know the evil thoughts his soul whispers to him. We are nearer to him than his jugular vein.",
   "ref": "সূরা কাফ · আয়াত ১৬",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Qaf · Ayah 16",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "فَٱصْبِرْ عَلَىٰ مَا يَقُولُونَ وَسَبِّحْ بِحَمْدِ رَبِّكَ قَبْلَ طُلُوعِ ٱلشَّمْسِ وَقَبْلَ ٱلْغُرُوبِ",
   "bn": "অতএব, তারা যা কিছু বলে, তজ্জন্যে আপনি ছবর করুন এবং, সূর্যোদয় ও সূর্যাস্তের পূর্বে আপনার পালনকর্তার সপ্রশংস পবিত্রতা ঘোষণা করুন।",
+  "en": "So be patient over what they say, and glorify your Lord with praise before sunrise and before sunset.",
   "ref": "সূরা কাফ · আয়াত ৩৯",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Qaf · Ayah 39",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "فَفِرُّوٓا۟ إِلَى ٱللَّهِ ۖ إِنِّى لَكُم مِّنْهُ نَذِيرٌۭ مُّبِينٌۭ",
   "bn": "অতএব, আল্লাহর দিকে ধাবিত হও। আমি তাঁর তরফ থেকে তোমাদের জন্যে সুস্পষ্ট সতর্ককারী।",
+  "en": "So flee to Allah. I am a clear warner to you from Him.",
   "ref": "সূরা আয-যারিয়াত · আয়াত ৫০",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Adh-Dhariyat · Ayah 50",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَأَنَّ إِلَىٰ رَبِّكَ ٱلْمُنتَهَىٰ",
   "bn": "তোমার পালনকর্তার কাছে সবকিছুর সমাপ্তি,",
+  "en": "And to your Lord is the final end of all things.",
   "ref": "সূরা আন-নাজম · আয়াত ৪২",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah An-Najm · Ayah 42",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَلَقَدْ يَسَّرْنَا ٱلْقُرْءَانَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍۢ",
   "bn": "আমি কোরআনকে সহজ করে দিয়েছি বোঝার জন্যে। অতএব, কোন চিন্তাশীল আছে কি?",
+  "en": "We have made the Quran easy to understand. So is there anyone who will reflect?",
   "ref": "সূরা আল-কামার · আয়াত ১৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Qamar · Ayah 17",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "هَلْ جَزَآءُ ٱلْإِحْسَٰنِ إِلَّا ٱلْإِحْسَٰنُ",
   "bn": "সৎকাজের প্রতিদান উত্তম পুরস্কার ব্যতীত কি হতে পারে?",
+  "en": "Is the reward for good anything but good?",
   "ref": "সূরা আর-রহমান · আয়াত ৬০",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Ar-Rahman · Ayah 60",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "۞ أَلَمْ يَأْنِ لِلَّذِينَ ءَامَنُوٓا۟ أَن تَخْشَعَ قُلُوبُهُمْ لِذِكْرِ ٱللَّهِ وَمَا نَزَلَ مِنَ ٱلْحَقِّ وَلَا يَكُونُوا۟ كَٱلَّذِينَ أُوتُوا۟ ٱلْكِتَٰبَ مِن قَبْلُ فَطَالَ عَلَيْهِمُ ٱلْأَمَدُ فَقَسَتْ قُلُوبُهُمْ ۖ وَكَثِيرٌۭ مِّنْهُمْ فَٰسِقُونَ",
   "bn": "যারা মুমিন, তাদের জন্যে কি আল্লাহর স্মরণে এবং যে সত্য অবর্তীর্ণ হয়েছে, তার কারণে হৃদয় বিগলিত হওয়ার সময় আসেনি? তারা তাদের মত যেন না হয়, যাদেরকে পূর্বে কিতাব দেয়া হয়েছিল। তাদের উপর সুদীর্ঘকাল অতিক্রান্ত হয়েছে, অতঃপর তাদের অন্তঃকরণ কঠিন হয়ে গেছে। তাদের অধিকাংশই পাপাচারী।",
+  "en": "Has the time not come for the believers that their hearts should become humble at the remembrance of Allah and the truth that has been revealed? Let them not be like those who were given the Book before; a long time passed over them, and their hearts became hard. Most of them are disobedient.",
   "ref": "সূরা আল-হাদীদ · আয়াত ১৬",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Hadid · Ayah 16",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِذَا قِيلَ لَكُمْ تَفَسَّحُوا۟ فِى ٱلْمَجَٰلِسِ فَٱفْسَحُوا۟ يَفْسَحِ ٱللَّهُ لَكُمْ ۖ وَإِذَا قِيلَ ٱنشُزُوا۟ فَٱنشُزُوا۟ يَرْفَعِ ٱللَّهُ ٱلَّذِينَ ءَامَنُوا۟ مِنكُمْ وَٱلَّذِينَ أُوتُوا۟ ٱلْعِلْمَ دَرَجَٰتٍۢ ۚ وَٱللَّهُ بِمَا تَعْمَلُونَ خَبِيرٌۭ",
   "bn": "মুমিনগণ, যখন তোমাদেরকে বলা হয়ঃ মজলিসে স্থান প্রশস্ত করে দাও, তখন তোমরা স্থান প্রশস্ত করে দিও। আল্লাহর জন্যে তোমাদের জন্য প্রশস্ত করে দিবেন। যখন বলা হয়ঃ উঠে যাও, তখন উঠে যেয়ো। তোমাদের মধ্যে যারা ঈমানদার এবং যারা জ্ঞানপ্রাপ্ত, আল্লাহ তাদের মর্যাদা উচ্চ করে দিবেন। আল্লাহ খবর রাখেন যা কিছু তোমরা কর।",
+  "en": "O believers, when you are told: Make room in the gatherings, make room; Allah will make room for you. And when you are told: Rise up, rise up. Allah will raise in rank those among you who believe and those who have been given knowledge. And Allah is aware of what you do.",
   "ref": "সূরা আল-মুজাদিলা · আয়াত ১১",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Mujadila · Ayah 11",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱتَّقُوا۟ ٱللَّهَ وَلْتَنظُرْ نَفْسٌۭ مَّا قَدَّمَتْ لِغَدٍۢ ۖ وَٱتَّقُوا۟ ٱللَّهَ ۚ إِنَّ ٱللَّهَ خَبِيرٌۢ بِمَا تَعْمَلُونَ",
   "bn": "মুমিনগণ, তোমরা আল্লাহ তা’আলাকে ভয় কর। প্রত্যেক ব্যক্তির উচিত, আগামী কালের জন্যে সে কি প্রেরণ করে, তা চিন্তা করা। আল্লাহ তা’আলাকে ভয় করতে থাক। তোমরা যা কর, আল্লাহ তা’আলা সে সম্পর্কে খবর রাখেন।",
+  "en": "O believers, fear Allah. Every soul should consider what it has sent ahead for tomorrow. Keep fearing Allah. Indeed, Allah is aware of what you do.",
   "ref": "সূরা আল-হাশর · আয়াত ১৮",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Hashr · Ayah 18",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَأُخْرَىٰ تُحِبُّونَهَا ۖ نَصْرٌۭ مِّنَ ٱللَّهِ وَفَتْحٌۭ قَرِيبٌۭ ۗ وَبَشِّرِ ٱلْمُؤْمِنِينَ",
   "bn": "এবং আরও একটি অনুগ্রহ দিবেন, যা তোমরা পছন্দ কর। আল্লাহর পক্ষ থেকে সাহায্য এবং আসন্ন বিজয়। মুমিনদেরকে এর সুসংবাদ দান করুন।",
+  "en": "And another blessing you love: help from Allah and a near victory. Give good news to the believers.",
   "ref": "সূরা আস-সাফ · আয়াত ১৩",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah As-Saff · Ayah 13",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "فَإِذَا قُضِيَتِ ٱلصَّلَوٰةُ فَٱنتَشِرُوا۟ فِى ٱلْأَرْضِ وَٱبْتَغُوا۟ مِن فَضْلِ ٱللَّهِ وَٱذْكُرُوا۟ ٱللَّهَ كَثِيرًۭا لَّعَلَّكُمْ تُفْلِحُونَ",
   "bn": "অতঃপর নামায সমাপ্ত হলে তোমরা পৃথিবীতে ছড়িয়ে পড় এবং আল্লাহর অনুগ্রহ তালাশ কর ও আল্লাহকে অধিক স্মরণ কর, যাতে তোমরা সফলকাম হও।",
+  "en": "Then when the Salah is finished, disperse through the land, seek Allah's bounty, and remember Allah much so that you may succeed.",
   "ref": "সূরা আল-জুমুআ · আয়াত ১০",
-  "topic": "রিজিক"
+  "refEn": "Surah Al-Jumu'ah · Ayah 10",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "ayat",
   "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تُلْهِكُمْ أَمْوَٰلُكُمْ وَلَآ أَوْلَٰدُكُمْ عَن ذِكْرِ ٱللَّهِ ۚ وَمَن يَفْعَلْ ذَٰلِكَ فَأُو۟لَٰٓئِكَ هُمُ ٱلْخَٰسِرُونَ",
   "bn": "মুমিনগণ! তোমাদের ধন-সম্পদ ও সন্তান-সন্ততি যেন তোমাদেরকে আল্লাহর স্মরণ থেকে গাফেল না করে। যারা এ কারণে গাফেল হয়, তারাই তো ক্ষতিগ্রস্ত।",
+  "en": "O believers! Let neither your wealth nor your children distract you from the remembrance of Allah. Those who are distracted by them are indeed the losers.",
   "ref": "সূরা আল-মুনাফিকুন · আয়াত ৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Munafiqun · Ayah 9",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَلَن يُؤَخِّرَ ٱللَّهُ نَفْسًا إِذَا جَآءَ أَجَلُهَا ۚ وَٱللَّهُ خَبِيرٌۢ بِمَا تَعْمَلُونَ",
   "bn": "প্রত্যেক ব্যক্তির নির্ধারিত সময় যখন উপস্থিত হবে, তখন আল্লাহ কাউকে অবকাশ দেবেন না। তোমরা যা কর, আল্লাহ সে বিষয়ে খবর রাখেন।",
+  "en": "When a person's appointed time comes, Allah will not grant anyone any respite. And Allah is aware of what you do.",
   "ref": "সূরা আল-মুনাফিকুন · আয়াত ১১",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Munafiqun · Ayah 11",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "فَٱتَّقُوا۟ ٱللَّهَ مَا ٱسْتَطَعْتُمْ وَٱسْمَعُوا۟ وَأَطِيعُوا۟ وَأَنفِقُوا۟ خَيْرًۭا لِّأَنفُسِكُمْ ۗ وَمَن يُوقَ شُحَّ نَفْسِهِۦ فَأُو۟لَٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
   "bn": "অতএব তোমরা যথাসাধ্য আল্লাহকে ভয় কর, শুন, আনুগত্য কর এবং ব্যয় কর। এটা তোমাদের জন্যে কল্যাণকর। যারা মনের কার্পন্য থেকে মুক্ত, তারাই সফলকাম।",
+  "en": "So fear Allah as much as you can, listen, obey and spend. That is good for you. Those who are saved from the miserliness of their souls are the successful.",
   "ref": "সূরা আত-তাগাবুন · আয়াত ১৬",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah At-Taghabun · Ayah 16",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "لِيُنفِقْ ذُو سَعَةٍۢ مِّن سَعَتِهِۦ ۖ وَمَن قُدِرَ عَلَيْهِ رِزْقُهُۥ فَلْيُنفِقْ مِمَّآ ءَاتَىٰهُ ٱللَّهُ ۚ لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا مَآ ءَاتَىٰهَا ۚ سَيَجْعَلُ ٱللَّهُ بَعْدَ عُسْرٍۢ يُسْرًۭا",
   "bn": "বিত্তশালী ব্যক্তি তার বিত্ত অনুযায়ী ব্যয় করবে। যে ব্যক্তি সীমিত পরিমাণে রিযিকপ্রাপ্ত, সে আল্লাহ যা দিয়েছেন, তা থেকে ব্যয় করবে। আল্লাহ যাকে যা দিয়েছেন, তদপেক্ষা বেশী ব্যয় করার আদেশ কাউকে করেন না। আল্লাহ কষ্টের পর সুখ দেবেন।",
+  "en": "Let the wealthy spend according to his wealth. Whoever has limited provision, let him spend from what Allah has given him. Allah does not burden anyone beyond what He has given him. Allah will grant ease after hardship.",
   "ref": "সূরা আত-তালাক · আয়াত ৭",
-  "topic": "রিজিক"
+  "refEn": "Surah At-Talaq · Ayah 7",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "ayat",
   "ar": "أَلَا يَعْلَمُ مَنْ خَلَقَ وَهُوَ ٱللَّطِيفُ ٱلْخَبِيرُ",
   "bn": "যিনি সৃষ্টি করেছেন, তিনি কি করে জানবেন না? তিনি সূক্ষ্নজ্ঞানী, সম্যক জ্ঞাত।",
+  "en": "Does He who created not know? He is the Most Subtle, the All-Aware.",
   "ref": "সূরা আল-মুলক · আয়াত ১৪",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Mulk · Ayah 14",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "هُوَ ٱلَّذِى جَعَلَ لَكُمُ ٱلْأَرْضَ ذَلُولًۭا فَٱمْشُوا۟ فِى مَنَاكِبِهَا وَكُلُوا۟ مِن رِّزْقِهِۦ ۖ وَإِلَيْهِ ٱلنُّشُورُ",
   "bn": "তিনি তোমাদের জন্যে পৃথিবীকে সুগম করেছেন, অতএব, তোমরা তার কাঁধে বিচরণ কর এবং তাঁর দেয়া রিযিক আহার কর। তাঁরই কাছে পুনরুজ্জীবন হবে।",
+  "en": "It is He who made the earth easy for you, so travel upon its shoulders and eat from His provision. And to Him is the resurrection.",
   "ref": "সূরা আল-মুলক · আয়াত ১৫",
-  "topic": "রিজিক"
+  "refEn": "Surah Al-Mulk · Ayah 15",
+  "topic": "রিজিক",
+  "topicEn": "Provision"
  },
  {
   "type": "ayat",
   "ar": "قُلْ هُوَ ٱلرَّحْمَٰنُ ءَامَنَّا بِهِۦ وَعَلَيْهِ تَوَكَّلْنَا ۖ فَسَتَعْلَمُونَ مَنْ هُوَ فِى ضَلَٰلٍۢ مُّبِينٍۢ",
   "bn": "বলুন, তিনি পরম করুণাময়, আমরা তাতে বিশ্বাস রাখি এবং তাঁরই উপর ভরসা করি। সত্ত্বরই তোমরা জানতে পারবে, কে প্রকাশ্য পথ-ভ্রষ্টতায় আছে।",
+  "en": "Say: He is the Most Merciful; we believe in Him and place our trust in Him. You will soon know who is in clear misguidance.",
   "ref": "সূরা আল-মুলক · আয়াত ২৯",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Al-Mulk · Ayah 29",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "وَمَا هُوَ إِلَّا ذِكْرٌۭ لِّلْعَٰلَمِينَ",
   "bn": "অথচ এই কোরআন তো বিশ্বজগতের জন্যে উপদেশ বৈ নয়।",
+  "en": "Yet this Quran is nothing but a reminder for all the worlds.",
   "ref": "সূরা আল-কলম · আয়াত ৫২",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Qalam · Ayah 52",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "فَٱصْبِرْ صَبْرًۭا جَمِيلًا",
   "bn": "অতএব, আপনি উত্তম সবর করুন।",
+  "en": "So be patient with beautiful patience.",
   "ref": "সূরা আল-মাআরিজ · আয়াত ৫",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Al-Ma'arij · Ayah 5",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "فَقُلْتُ ٱسْتَغْفِرُوا۟ رَبَّكُمْ إِنَّهُۥ كَانَ غَفَّارًۭا",
   "bn": "অতঃপর বলেছিঃ তোমরা তোমাদের পালনকর্তার ক্ষমা প্রার্থনা কর। তিনি অত্যন্ত ক্ষমাশীল।",
+  "en": "Then I said: Seek forgiveness from your Lord. Indeed, He is Most Forgiving.",
   "ref": "সূরা নূহ · আয়াত ১০",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah Nuh · Ayah 10",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "رَّبِّ ٱغْفِرْ لِى وَلِوَٰلِدَىَّ وَلِمَن دَخَلَ بَيْتِىَ مُؤْمِنًۭا وَلِلْمُؤْمِنِينَ وَٱلْمُؤْمِنَٰتِ وَلَا تَزِدِ ٱلظَّٰلِمِينَ إِلَّا تَبَارًۢا",
   "bn": "হে আমার পালনকর্তা! আপনি আমাকে, আমার পিতা-মাতাকে, যারা মুমিন হয়ে আমার গৃহে প্রবেশ করে-তাদেরকে এবং মুমিন পুরুষ ও মুমিন নারীদেরকে ক্ষমা করুন এবং যালেমদের কেবল ধ্বংসই বৃদ্ধি করুন।",
+  "en": "My Lord! Forgive me, my parents, those who enter my house as believers, and the believing men and believing women, and increase the wrongdoers only in destruction.",
   "ref": "সূরা নূহ · আয়াত ২৮",
-  "topic": "মা-বাবা"
+  "refEn": "Surah Nuh · Ayah 28",
+  "topic": "মা-বাবা",
+  "topicEn": "Parents"
  },
  {
   "type": "ayat",
   "ar": "رَّبُّ ٱلْمَشْرِقِ وَٱلْمَغْرِبِ لَآ إِلَٰهَ إِلَّا هُوَ فَٱتَّخِذْهُ وَكِيلًۭا",
   "bn": "তিনি পূর্ব ও পশ্চিমের অধিকর্তা। তিনি ব্যতীত কোন উপাস্য নেই। অতএব, তাঁকেই গ্রহণ করুন কর্মবিধায়করূপে।",
+  "en": "He is the Lord of the east and the west. There is no god but Him, so take Him as your Guardian.",
   "ref": "সূরা আল-মুজ্জাম্মিল · আয়াত ৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Muzzammil · Ayah 9",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَٱذْكُرِ ٱسْمَ رَبِّكَ بُكْرَةًۭ وَأَصِيلًۭا",
   "bn": "এবং সকাল-সন্ধ্যায় আপন পালনকর্তার নাম স্মরণ করুন।",
+  "en": "And remember the name of your Lord morning and evening.",
   "ref": "সূরা আল-ইনসান · আয়াত ২৫",
-  "topic": "দৈনন্দিন জীবনের দোয়া"
+  "refEn": "Surah Al-Insan · Ayah 25",
+  "topic": "দৈনন্দিন জীবনের দোয়া",
+  "topicEn": "Daily Duas"
  },
  {
   "type": "ayat",
   "ar": "وَمَا تَشَآءُونَ إِلَّآ أَن يَشَآءَ ٱللَّهُ رَبُّ ٱلْعَٰلَمِينَ",
   "bn": "তোমরা আল্লাহ রাব্বুল আলামীনের অভিপ্রায়ের বাইরে অন্য কিছুই ইচ্ছা করতে পার না।",
+  "en": "You cannot will anything except as Allah, the Lord of all the worlds, wills.",
   "ref": "সূরা আত-তাকভীর · আয়াত ২৯",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah At-Takwir · Ayah 29",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ لَهُمْ جَنَّٰتٌۭ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ ۚ ذَٰلِكَ ٱلْفَوْزُ ٱلْكَبِيرُ",
   "bn": "যারা ঈমান আনে ও সৎকর্ম করে তাদের জন্যে আছে জান্নাত, যার তলদেশে প্রবাহিত হয় নির্ঝরিণীসমূহ। এটাই মহাসাফল্য।",
+  "en": "Those who believe and do righteous deeds will have gardens beneath which rivers flow. That is the great success.",
   "ref": "সূরা আল-বুরুজ · আয়াত ১১",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Buruj · Ayah 11",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "قَدْ أَفْلَحَ مَن تَزَكَّىٰ",
   "bn": "নিশ্চয় সাফল্য লাভ করবে সে, যে শুদ্ধ হয়",
+  "en": "Indeed, he will succeed who purifies himself.",
   "ref": "সূরা আল-আলা · আয়াত ১৪",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-A'la · Ayah 14",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "ثُمَّ كَانَ مِنَ ٱلَّذِينَ ءَامَنُوا۟ وَتَوَاصَوْا۟ بِٱلصَّبْرِ وَتَوَاصَوْا۟ بِٱلْمَرْحَمَةِ",
   "bn": "অতঃপর তাদের অন্তর্ভুক্ত হওয়া, যারা ঈমান আনে এবং পরস্পরকে উপদেশ দেয় সবরের ও উপদেশ দেয় দয়ার।",
+  "en": "Then to be among those who believe and urge one another to patience and urge one another to mercy.",
   "ref": "সূরা আল-বালাদ · আয়াত ১৭",
-  "topic": "ধৈর্য"
+  "refEn": "Surah Al-Balad · Ayah 17",
+  "topic": "ধৈর্য",
+  "topicEn": "Patience"
  },
  {
   "type": "ayat",
   "ar": "وَنَفْسٍۢ وَمَا سَوَّىٰهَا",
   "bn": "শপথ প্রাণের এবং যিনি তা সুবিন্যস্ত করেছেন, তাঁর,",
+  "en": "By the soul and He who proportioned it.",
   "ref": "সূরা আশ-শামস · আয়াত ৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Ash-Shams · Ayah 7",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَوَجَدَكَ ضَآلًّۭا فَهَدَىٰ",
   "bn": "তিনি আপনাকে পেয়েছেন পথহারা, অতঃপর পথপ্রদর্শন করেছেন।",
+  "en": "He found you lost, and guided you.",
   "ref": "সূরা আদ-দুহা · আয়াত ৭",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah Ad-Duha · Ayah 7",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ",
   "bn": "আমি কি আপনার বক্ষ উম্মুক্ত করে দেইনি?",
+  "en": "Did We not open your chest for you?",
   "ref": "সূরা আশ-শারহ · আয়াত ১",
-  "topic": "মনের শান্তি"
+  "refEn": "Surah Ash-Sharh · Ayah 1",
+  "topic": "মনের শান্তি",
+  "topicEn": "Peace of Mind"
  },
  {
   "type": "ayat",
   "ar": "لَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ فِىٓ أَحْسَنِ تَقْوِيمٍۢ",
   "bn": "আমি সৃষ্টি করেছি মানুষকে সুন্দরতর অবয়বে।",
+  "en": "We created man in the finest form.",
   "ref": "সূরা আত-তীন · আয়াত ৪",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah At-Tin · Ayah 4",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "أَلَمْ يَعْلَم بِأَنَّ ٱللَّهَ يَرَىٰ",
   "bn": "সে কি জানে না যে, আল্লাহ দেখেন?",
+  "en": "Does he not know that Allah sees?",
   "ref": "সূরা আল-আলাক · আয়াত ১৪",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Alaq · Ayah 14",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "وَمَآ أُمِرُوٓا۟ إِلَّا لِيَعْبُدُوا۟ ٱللَّهَ مُخْلِصِينَ لَهُ ٱلدِّينَ حُنَفَآءَ وَيُقِيمُوا۟ ٱلصَّلَوٰةَ وَيُؤْتُوا۟ ٱلزَّكَوٰةَ ۚ وَذَٰلِكَ دِينُ ٱلْقَيِّمَةِ",
   "bn": "তাদেরকে এছাড়া কোন নির্দেশ করা হয়নি যে, তারা খাঁটি মনে একনিষ্ঠভাবে আল্লাহর এবাদত করবে, নামায কায়েম করবে এবং যাকাত দেবে। এটাই সঠিক ধর্ম।",
+  "en": "They were commanded only to worship Allah sincerely, being upright, to establish Salah and give Zakat. That is the right religion.",
   "ref": "সূরা আল-বাইয়্যিনা · আয়াত ৫",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Bayyinah · Ayah 5",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "إِنَّ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ أُو۟لَٰٓئِكَ هُمْ خَيْرُ ٱلْبَرِيَّةِ",
   "bn": "যারা ঈমান আনে ও সৎকর্ম করে, তারাই সৃষ্টির সেরা।",
+  "en": "Those who believe and do righteous deeds are the best of creation.",
   "ref": "সূরা আল-বাইয়্যিনা · আয়াত ৭",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Bayyinah · Ayah 7",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ ۚ إِنَّهُۥ كَانَ تَوَّابًۢا",
   "bn": "তখন আপনি আপনার পালনকর্তার পবিত্রতা বর্ণনা করুন এবং তাঁর কাছে ক্ষমা প্রার্থনা করুন। নিশ্চয় তিনি ক্ষমাকারী।",
+  "en": "Then glorify your Lord with praise and seek His forgiveness. Indeed, He is the Acceptor of Repentance.",
   "ref": "সূরা আন-নাসর · আয়াত ৩",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah An-Nasr · Ayah 3",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  },
  {
   "type": "ayat",
   "ar": "بِّسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلتِّينِ وَٱلزَّيْتُونِ ۝ وَطُورِ سِينِينَ ۝ وَهَٰذَا ٱلْبَلَدِ ٱلْأَمِينِ ۝ لَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ فِىٓ أَحْسَنِ تَقْوِيمٍۢ ۝ ثُمَّ رَدَدْنَٰهُ أَسْفَلَ سَٰفِلِينَ ۝ إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍۢ ۝ فَمَا يُكَذِّبُكَ بَعْدُ بِٱلدِّينِ ۝ أَلَيْسَ ٱللَّهُ بِأَحْكَمِ ٱلْحَٰكِمِينَ",
   "bn": "শপথ আঞ্জীর (ডুমুর) ও যয়তুনের, এবং সিনাই প্রান্তরস্থ তূর পর্বতের, এবং এই নিরাপদ নগরীর। আমি সৃষ্টি করেছি মানুষকে সুন্দরতর অবয়বে। অতঃপর তাকে ফিরিয়ে দিয়েছি নীচ থেকে নীচে। কিন্তু যারা বিশ্বাস স্থাপন করেছে ও সৎকর্ম করেছে, তাদের জন্যে রয়েছে অশেষ পুরস্কার। অতঃপর কেন তুমি অবিশ্বাস করছ কেয়ামতকে? আল্লাহ কি বিচারকদের মধ্যে শ্রেষ্টতম বিচারক নন?",
+  "en": "By the fig and the olive, and Mount Sinai, and this secure city. We created man in the finest form. Then We returned him to the lowest of the low, except those who believe and do righteous deeds — for them is an unending reward. So why do you deny the Day of Judgement? Is Allah not the best of judges?",
   "ref": "সূরা আত-তীন · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah At-Tin · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ إِذَا زُلْزِلَتِ ٱلْأَرْضُ زِلْزَالَهَا ۝ وَأَخْرَجَتِ ٱلْأَرْضُ أَثْقَالَهَا ۝ وَقَالَ ٱلْإِنسَٰنُ مَا لَهَا ۝ يَوْمَئِذٍۢ تُحَدِّثُ أَخْبَارَهَا ۝ بِأَنَّ رَبَّكَ أَوْحَىٰ لَهَا ۝ يَوْمَئِذٍۢ يَصْدُرُ ٱلنَّاسُ أَشْتَاتًۭا لِّيُرَوْا۟ أَعْمَٰلَهُمْ ۝ فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًۭا يَرَهُۥ ۝ وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍۢ شَرًّۭا يَرَهُۥ",
   "bn": "যখন পৃথিবী তার কম্পনে প্রকম্পিত হবে, যখন সে তার বোঝা বের করে দেবে। এবং মানুষ বলবে, এর কি হল ? সেদিন সে তার বৃত্তান্ত বর্ণনা করবে, কারণ, আপনার পালনকর্তা তাকে আদেশ করবেন। সেদিন মানুষ বিভিন্ন দলে প্রকাশ পাবে, যাতে তাদেরকে তাদের কৃতকর্ম দেখানো হয়। অতঃপর কেউ অণু পরিমাণ সৎকর্ম করলে তা দেখতে পাবে এবং কেউ অণু পরিমাণ অসৎকর্ম করলে তাও দেখতে পাবে।",
+  "en": "When the earth is shaken with its quake, and the earth throws out its burdens, and man says: What is wrong with it? On that Day it will tell its story, because your Lord commanded it. On that Day people will come forth in separate groups to be shown their deeds. So whoever does an atom's weight of good will see it, and whoever does an atom's weight of evil will see it.",
   "ref": "সূরা আয-যালযালা · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Az-Zalzalah · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ٱلْقَارِعَةُ ۝ مَا ٱلْقَارِعَةُ ۝ وَمَآ أَدْرَىٰكَ مَا ٱلْقَارِعَةُ ۝ يَوْمَ يَكُونُ ٱلنَّاسُ كَٱلْفَرَاشِ ٱلْمَبْثُوثِ ۝ وَتَكُونُ ٱلْجِبَالُ كَٱلْعِهْنِ ٱلْمَنفُوشِ ۝ فَأَمَّا مَن ثَقُلَتْ مَوَٰزِينُهُۥ ۝ فَهُوَ فِى عِيشَةٍۢ رَّاضِيَةٍۢ ۝ وَأَمَّا مَنْ خَفَّتْ مَوَٰزِينُهُۥ ۝ فَأُمُّهُۥ هَاوِيَةٌۭ ۝ وَمَآ أَدْرَىٰكَ مَا هِيَهْ ۝ نَارٌ حَامِيَةٌۢ",
   "bn": "করাঘাতকারী, করাঘাতকারী কি? করাঘাতকারী সম্পর্কে আপনি কি জানেন ? যেদিন মানুষ হবে বিক্ষিপ্ত পতংগের মত এবং পর্বতমালা হবে ধুনিত রঙ্গীন পশমের মত। অতএব যার পাল্লা ভারী হবে, সে সুখীজীবন যাপন করবে। আর যার পাল্লা হালকা হবে, তার ঠিকানা হবে হাবিয়া। আপনি জানেন তা কি? প্রজ্জ্বলিত অগ্নি!",
+  "en": "The Striking Calamity! What is the Striking Calamity? And what will make you know what the Striking Calamity is? On the Day when people will be like scattered moths, and the mountains will be like carded wool. Then as for the one whose scales are heavy, he will live a pleasant life. But as for the one whose scales are light, his home will be Hawiyah. And what will make you know what it is? A blazing Fire!",
   "ref": "সূরা আল-কারিয়া · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Qari'ah · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ أَلْهَىٰكُمُ ٱلتَّكَاثُرُ ۝ حَتَّىٰ زُرْتُمُ ٱلْمَقَابِرَ ۝ كَلَّا سَوْفَ تَعْلَمُونَ ۝ ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ ۝ كَلَّا لَوْ تَعْلَمُونَ عِلْمَ ٱلْيَقِينِ ۝ لَتَرَوُنَّ ٱلْجَحِيمَ ۝ ثُمَّ لَتَرَوُنَّهَا عَيْنَ ٱلْيَقِينِ ۝ ثُمَّ لَتُسْـَٔلُنَّ يَوْمَئِذٍ عَنِ ٱلنَّعِيمِ",
   "bn": "প্রাচুর্যের লালসা তোমাদেরকে গাফেল রাখে, এমনকি, তোমরা কবরস্থানে পৌছে যাও। এটা কখনও উচিত নয়। তোমরা সত্ত্বরই জেনে নেবে। অতঃপর এটা কখনও উচিত নয়। তোমরা সত্ত্বরই জেনে নেবে। কখনই নয়; যদি তোমরা নিশ্চিত জানতে। তোমরা অবশ্যই জাহান্নাম দেখবে, অতঃপর তোমরা তা অবশ্যই দেখবে দিব্য প্রত্যয়ে, এরপর অবশ্যই সেদিন তোমরা নেয়ামত সম্পর্কে জিজ্ঞাসিত হবে।",
+  "en": "Rivalry for worldly gain distracts you, until you reach the graves. No, you will soon know. Again, no, you will soon know. No! If only you knew with certainty. You will surely see Hell, then you will surely see it with the eye of certainty. Then on that Day you will surely be asked about the blessings.",
   "ref": "সূরা আত-তাকাসুর · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah At-Takathur · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَيْلٌۭ لِّكُلِّ هُمَزَةٍۢ لُّمَزَةٍ ۝ ٱلَّذِى جَمَعَ مَالًۭا وَعَدَّدَهُۥ ۝ يَحْسَبُ أَنَّ مَالَهُۥٓ أَخْلَدَهُۥ ۝ كَلَّا ۖ لَيُنۢبَذَنَّ فِى ٱلْحُطَمَةِ ۝ وَمَآ أَدْرَىٰكَ مَا ٱلْحُطَمَةُ ۝ نَارُ ٱللَّهِ ٱلْمُوقَدَةُ ۝ ٱلَّتِى تَطَّلِعُ عَلَى ٱلْأَفْـِٔدَةِ ۝ إِنَّهَا عَلَيْهِم مُّؤْصَدَةٌۭ ۝ فِى عَمَدٍۢ مُّمَدَّدَةٍۭ",
   "bn": "প্রত্যেক পশ্চাতে ও সম্মুখে পরনিন্দাকারীর দুর্ভোগ, যে অর্থ সঞ্চিত করে ও গণনা করে সে মনে করে যে, তার অর্থ চিরকাল তার সাথে থাকবে! কখনও না, সে অবশ্যই নিক্ষিপ্ত হবে পিষ্টকারীর মধ্যে। আপনি কি জানেন, পিষ্টকারী কি? এটা আল্লাহর প্রজ্জ্বলিত অগ্নি, যা হৃদয় পর্যন্ত পৌছবে। এতে তাদেরকে বেঁধে দেয়া হবে, লম্বা লম্বা খুঁটিতে।",
+  "en": "Woe to every backbiter and slanderer, who collects wealth and counts it, thinking his wealth will make him live forever! No, he will surely be thrown into the Crusher. And what will make you know what the Crusher is? It is the Fire of Allah, kindled, which reaches the hearts. It will be closed upon them, in extended columns.",
   "ref": "সূরা আল-হুমাজা · সম্পূর্ণ সূরা",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Humazah · Whole Surah",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَٰبِ ٱلْفِيلِ ۝ أَلَمْ يَجْعَلْ كَيْدَهُمْ فِى تَضْلِيلٍۢ ۝ وَأَرْسَلَ عَلَيْهِمْ طَيْرًا أَبَابِيلَ ۝ تَرْمِيهِم بِحِجَارَةٍۢ مِّن سِجِّيلٍۢ ۝ فَجَعَلَهُمْ كَعَصْفٍۢ مَّأْكُولٍۭ",
   "bn": "আপনি কি দেখেননি আপনার পালনকর্তা হস্তীবাহিনীর সাথে কিরূপ ব্যবহার করেছেন? তিনি কি তাদের চক্রান্ত নস্যাৎ করে দেননি? তিনি তাদের উপর প্রেরণ করেছেন ঝাঁকে ঝাঁকে পাখী, যারা তাদের উপর পাথরের কংকর নিক্ষেপ করছিল। অতঃপর তিনি তাদেরকে ভক্ষিত তৃণসদৃশ করে দেন।",
+  "en": "Have you not seen how your Lord dealt with the people of the Elephant? Did He not make their plot go astray? He sent upon them flocks of birds, which pelted them with stones of baked clay. Then He made them like eaten straw.",
   "ref": "সূরা আল-ফীল · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Fil · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ لِإِيلَٰفِ قُرَيْشٍ ۝ إِۦلَٰفِهِمْ رِحْلَةَ ٱلشِّتَآءِ وَٱلصَّيْفِ ۝ فَلْيَعْبُدُوا۟ رَبَّ هَٰذَا ٱلْبَيْتِ ۝ ٱلَّذِىٓ أَطْعَمَهُم مِّن جُوعٍۢ وَءَامَنَهُم مِّنْ خَوْفٍۭ",
   "bn": "কোরাইশের আসক্তির কারণে, আসক্তির কারণে তাদের শীত ও গ্রীষ্মকালীন সফরের। অতএব তারা যেন এবাদত করে এই ঘরের পালনকর্তার যিনি তাদেরকে ক্ষুধায় আহার দিয়েছেন এবং যুদ্ধভীতি থেকে তাদেরকে নিরাপদ করেছেন।",
+  "en": "For the familiarity of the Quraysh — their familiarity with the winter and summer journeys. So let them worship the Lord of this House, who fed them against hunger and made them safe from fear.",
   "ref": "সূরা কুরাইশ · সম্পূর্ণ সূরা",
-  "topic": "কৃতজ্ঞতা"
+  "refEn": "Surah Quraysh · Whole Surah",
+  "topic": "কৃতজ্ঞতা",
+  "topicEn": "Gratitude"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ أَرَءَيْتَ ٱلَّذِى يُكَذِّبُ بِٱلدِّينِ ۝ فَذَٰلِكَ ٱلَّذِى يَدُعُّ ٱلْيَتِيمَ ۝ وَلَا يَحُضُّ عَلَىٰ طَعَامِ ٱلْمِسْكِينِ ۝ فَوَيْلٌۭ لِّلْمُصَلِّينَ ۝ ٱلَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ ۝ ٱلَّذِينَ هُمْ يُرَآءُونَ ۝ وَيَمْنَعُونَ ٱلْمَاعُونَ",
   "bn": "আপনি কি দেখেছেন তাকে, যে বিচারদিবসকে মিথ্যা বলে? সে সেই ব্যক্তি, যে এতীমকে গলা ধাক্কা দেয় এবং মিসকীনকে অন্ন দিতে উৎসাহিত করে না। অতএব দুর্ভোগ সেসব নামাযীর, যারা তাদের নামায সম্বন্ধে বে-খবর; যারা তা লোক-দেখানোর জন্য করে এবং নিত্য ব্যবহার্য্য বস্তু অন্যকে দেয় না।",
+  "en": "Have you seen the one who denies the Day of Judgement? He is the one who pushes away the orphan and does not encourage feeding the poor. So woe to those who pray, who are heedless of their Salah; who pray only to be seen, and withhold small kindnesses.",
   "ref": "সূরা আল-মাউন · সম্পূর্ণ সূরা",
-  "topic": "ভালো আখলাক"
+  "refEn": "Surah Al-Ma'un · Whole Surah",
+  "topic": "ভালো আখলাক",
+  "topicEn": "Good Character"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ قُلْ يَٰٓأَيُّهَا ٱلْكَٰفِرُونَ ۝ لَآ أَعْبُدُ مَا تَعْبُدُونَ ۝ وَلَآ أَنتُمْ عَٰبِدُونَ مَآ أَعْبُدُ ۝ وَلَآ أَنَا۠ عَابِدٌۭ مَّا عَبَدتُّمْ ۝ وَلَآ أَنتُمْ عَٰبِدُونَ مَآ أَعْبُدُ ۝ لَكُمْ دِينُكُمْ وَلِىَ دِينِ",
   "bn": "বলুন, হে কাফেরকূল, আমি এবাদত করিনা, তোমরা যার এবাদত কর। এবং তোমরাও এবাদতকারী নও, যার এবাদত আমি করি এবং আমি এবাদতকারী নই, যার এবাদত তোমরা কর। তোমরা এবাদতকারী নও, যার এবাদত আমি করি। তোমাদের কর্ম ও কর্মফল তোমাদের জন্যে এবং আমার কর্ম ও কর্মফল আমার জন্যে।",
+  "en": "Say: O disbelievers, I do not worship what you worship. Nor are you worshippers of what I worship. Nor will I be a worshipper of what you worship. Nor will you be worshippers of what I worship. For you is your religion, and for me is my religion.",
   "ref": "সূরা আল-কাফিরুন · সম্পূর্ণ সূরা",
-  "topic": "ঈমান ও আমল"
+  "refEn": "Surah Al-Kafirun · Whole Surah",
+  "topic": "ঈমান ও আমল",
+  "topicEn": "Faith & Deeds"
  },
  {
   "type": "ayat",
   "ar": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ إِذَا جَآءَ نَصْرُ ٱللَّهِ وَٱلْفَتْحُ ۝ وَرَأَيْتَ ٱلنَّاسَ يَدْخُلُونَ فِى دِينِ ٱللَّهِ أَفْوَاجًۭا ۝ فَسَبِّحْ بِحَمْدِ رَبِّكَ وَٱسْتَغْفِرْهُ ۚ إِنَّهُۥ كَانَ تَوَّابًۢا",
   "bn": "যখন আসবে আল্লাহর সাহায্য ও বিজয় এবং আপনি মানুষকে দলে দলে আল্লাহর দ্বীনে প্রবেশ করতে দেখবেন, তখন আপনি আপনার পালনকর্তার পবিত্রতা বর্ণনা করুন এবং তাঁর কাছে ক্ষমা প্রার্থনা করুন। নিশ্চয় তিনি ক্ষমাকারী।",
+  "en": "When the help of Allah and victory come, and you see people entering the religion of Allah in crowds, then glorify your Lord with praise and seek His forgiveness. Indeed, He is the Acceptor of Repentance.",
   "ref": "সূরা আন-নাসর · সম্পূর্ণ সূরা",
-  "topic": "ক্ষমা ও রহমত"
+  "refEn": "Surah An-Nasr · Whole Surah",
+  "topic": "ক্ষমা ও রহমত",
+  "topicEn": "Forgiveness & Mercy"
  }
 ];
