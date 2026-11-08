@@ -53,12 +53,23 @@
     }
     return wa.ctx;
   }
-  function waLoad(src) {
-    if (wa.buffer && wa.bufSrc === src) return Promise.resolve(wa.buffer);
+  function waFetchNet(src) {
     return fetch(src, { cache: 'force-cache' }).then(function (r) {
       if (!r.ok) throw new Error('fetch ' + r.status);
       return r.arrayBuffer();
-    }).then(function (ab) {
+    });
+  }
+  function waFetchAB(src) {
+    /* the page's head bootstrap may already have this file in flight (window.__wqSndWarm) - use it */
+    if (window.__wqSndWarm && window.__wqSndWarmSrc === src) {
+      var p = window.__wqSndWarm; window.__wqSndWarm = null; window.__wqSndWarmSrc = null;
+      return p.then(function (ab) { return ab || waFetchNet(src); });
+    }
+    return waFetchNet(src);
+  }
+  function waLoad(src) {
+    if (wa.buffer && wa.bufSrc === src) return Promise.resolve(wa.buffer);
+    return waFetchAB(src).then(function (ab) {
       return new Promise(function (res, rej) { waCtx().decodeAudioData(ab, res, rej); });
     }).then(function (buf) { wa.buffer = buf; wa.bufSrc = src; return buf; });
   }
