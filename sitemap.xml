@@ -1681,4 +1681,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://waqtbd.github.io/waqt/sounds.html</loc>
+  </url>
 </urlset>
