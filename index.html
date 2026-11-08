@@ -1671,6 +1671,7 @@
       <div class="hero-inner">
         <div class="hero-place rise">
           <h1><span class="pin">◈</span> <span id="placeName">ঢাকা</span></h1>
+          <script>try{var _wp=JSON.parse(localStorage.getItem('waqtPlace')||'null');if(_wp&&_wp.bn){var _wl2='bn';try { var _wl2 = localStorage.getItem('waqtLang'); if (_wl2 === 'en' || _wl2 === 'bn') { /* saved wins */ } else { var _tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ''); _wl2 = (_tz === 'Asia/Dhaka' || (navigator.language || '').toLowerCase().indexOf('bn') === 0) ? 'bn' : 'en'; } } catch (e) { var _wl2 = 'bn'; }document.getElementById('placeName').textContent=(_wl2==='en'&&_wp.en)?_wp.en:_wp.bn;}}catch(e){}</script>
           <span class="hero-date-chip wx-chip hidden" id="wxChip"><span class="wx-dot" aria-hidden="true"></span><span class="wx-icon" id="wxIcon" aria-hidden="true"></span><span id="wxText">—</span></span>
           <span class="place-detail hidden" id="placeDetail"></span>
         </div>
@@ -1736,7 +1737,9 @@
         var classic = root.classList.contains('hero-classic');
         var $ = function (id) { return doc.getElementById(id); };
         var BND = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-        var num = function (s) { return String(s).replace(/[0-9]/g, function (d) { return BND[+d]; }); };
+        var BL = 'bn';
+        try { BL = localStorage.getItem('waqtLang'); if (BL === 'en' || BL === 'bn') { /* saved wins */ } else { var _tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ''); BL = (_tz === 'Asia/Dhaka' || (navigator.language || '').toLowerCase().indexOf('bn') === 0) ? 'bn' : 'en'; } } catch (e) { BL = 'bn'; }
+        var num = function (s) { return BL === 'en' ? String(s) : String(s).replace(/[0-9]/g, function (d) { return BND[+d]; }); };
         var pad = function (n) { return String(n).padStart(2, '0'); };
         /* today's embedded times for the opening district — the same
            delta encoding the main script decodes; Dhaka's row is
@@ -1765,7 +1768,7 @@
         var WXK = (SAVED && isFinite(+SAVED.lat) && isFinite(+SAVED.lon))
           ? (+SAVED.lat).toFixed(2) + ',' + (+SAVED.lon).toFixed(2)
           : '23.78,90.36';
-        if (SAVED) $('placeName').textContent = SAVED.bn;
+        if (SAVED) $('placeName').textContent = BL === 'en' ? (SAVED.en || SAVED.bn) : SAVED.bn;
         var now = new Date();
         var di = Math.round((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(2026, 9, 1)) / 86400000);
         if (di < 0 || di >= 396) return; /* outside the embedded year the main script's own flow takes over */
@@ -1808,6 +1811,7 @@
         }
         var PRAYERS = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
         var NAMES = { Fajr: 'ফজর', Sunrise: 'সূর্যোদয়', Dhuhr: 'যোহর', Asr: 'আসর', Maghrib: 'মাগরিব', Isha: 'এশা' };
+        var NAMES_EN = { Fajr: 'Fajr', Sunrise: 'Sunrise', Dhuhr: 'Dhuhr', Asr: 'Asr', Maghrib: 'Maghrib', Isha: 'Isha' };
         var tv = series[di], T = {};
         for (p = 0; p < 6; p++) T[PRAYERS[p]] = tv[p];
         function toDate(mins, base) { var dt = new Date(base); dt.setHours(Math.floor(mins / 60), mins % 60, 0, 0); return dt; }
@@ -1815,12 +1819,14 @@
         var WDEN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var WD = { Saturday: 'শনিবার', Sunday: 'রবিবার', Monday: 'সোমবার', Tuesday: 'মঙ্গলবার', Wednesday: 'বুধবার', Thursday: 'বৃহস্পতিবার', Friday: 'শুক্রবার' };
         var MN = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্ট', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+        var MN_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         var HM = ['মুহাররম', 'সফর', 'রবিউল আউয়াল', 'রবিউস সানি', 'জমাদিউল আউয়াল', 'জমাদিউস সানি', 'রজব', 'শাবান', 'রমজান', 'শাওয়াল', 'জিলকদ', 'জিলহজ'];
-        $('gregDate').textContent = WD[WDEN[now.getDay()]] + ', ' + num(now.getDate()) + ' ' + MN[now.getMonth()] + ' ' + num(now.getFullYear());
+        var HM_EN = ['Muharram', 'Safar', 'Rabi al-awwal', 'Rabi al-thani', 'Jumada al-awwal', 'Jumada al-thani', 'Rajab', 'Shaban', 'Ramadan', 'Shawwal', 'Dhul-Qadah', 'Dhul-Hijjah'];
+        $('gregDate').textContent = (BL === 'en' ? WDEN[now.getDay()] : WD[WDEN[now.getDay()]]) + ', ' + num(now.getDate()) + ' ' + (BL === 'en' ? MN_EN : MN)[now.getMonth()] + ' ' + num(now.getFullYear());
         var hv = B64.indexOf(HIJRI[3 * di]) * 4096 + B64.indexOf(HIJRI[3 * di + 1]) * 64 + B64.indexOf(HIJRI[3 * di + 2]);
         var hjEl = $('hijriDate'); hjEl.innerHTML = '';
         var hb = doc.createElement('b');
-        hb.textContent = num(hv % 30 + 1) + ' ' + HM[Math.floor(hv / 30) % 12] + ' ' + num(1400 + Math.floor(hv / 360)) + ' হিজরি';
+        hb.textContent = num(hv % 30 + 1) + ' ' + (BL === 'en' ? HM_EN : HM)[Math.floor(hv / 30) % 12] + ' ' + num(1400 + Math.floor(hv / 360)) + (BL === 'en' ? ' Hijri' : ' হিজরি');
         hjEl.appendChild(hb);
         /* next prayer, its time, countdown, clock, progress line —
            the same math as the main script's renderToday() + tick() */
@@ -1832,8 +1838,8 @@
           next = { name: 'Fajr', at: toDate(series[di + 1][0], tm), tomorrow: true };
         }
         if (next) {
-          var nm = next.name === 'Dhuhr' && next.at.getDay() === 5 ? 'জুম্মা' : NAMES[next.name];
-          $('nextName').textContent = nm + (next.tomorrow ? ' (আগামীকাল)' : '');
+          var nm = next.name === 'Dhuhr' && next.at.getDay() === 5 ? (BL === 'en' ? 'Jummah' : 'জুম্মা') : (BL === 'en' ? NAMES_EN[next.name] : NAMES[next.name]);
+          $('nextName').textContent = nm + (next.tomorrow ? (BL === 'en' ? ' (tomorrow)' : ' (আগামীকাল)') : '');
           var nh = next.at.getHours(), nap = nh >= 12 ? 'PM' : 'AM'; nh = nh % 12; if (nh === 0) nh = 12;
           $('nextTime').textContent = num(nh) + ':' + num(pad(next.at.getMinutes())) + ' ' + nap;
           var diff = Math.max(0, Math.floor((next.at - now) / 1000));
