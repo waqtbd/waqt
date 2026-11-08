@@ -1,10 +1,1 @@
-<!doctype html><html><head><meta charset="utf-8"><title>langtest</title></head><body>
-<pre id="out">reading...</pre>
-<script>
-var lines=[];
-try{ lines.push("waqtLang=["+(localStorage.getItem("waqtLang"))+"]"); }catch(e){ lines.push("waqtLang ERROR "+e.message); }
-try{ lines.push("tz=["+(Intl.DateTimeFormat().resolvedOptions().timeZone||"")+"]"); }catch(e){}
-lines.push("navLang=["+(navigator.language||"")+"]");
-try{ var ks=[]; for(var i=0;i<localStorage.length;i++){ ks.push(localStorage.key(i)); } lines.push("keys=["+ks.join(",")+"]"); }catch(e){ lines.push("keys ERROR"); }
-document.getElementById("out").textContent=lines.join("\n");
-</script></body></html>
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=./"><title>Waqt</title></head><body></body></html>
