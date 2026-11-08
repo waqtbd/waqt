@@ -232,7 +232,7 @@ if (e) e.addEventListener("click", function(){ applyLang("en"); });
   function refreshLabels() {
     rows.forEach(function (row) {
       var btn = row.querySelector('.snd-play');
-      var playing = row.classList.contains('playing') && row.getAttribute('data-kind') === 'loop';
+      var playing = row.classList.contains('playing');
       btn.setAttribute('aria-label', playing ? T('stopAria') : T('playAria'));
     });
   }
@@ -250,6 +250,7 @@ if (e) e.addEventListener("click", function(){ applyLang("en"); });
         });
         var p = a.play(); if (p && p.catch) p.catch(function () {});
       } else {
+        if (!a.paused) { a.pause(); return; }
         try { a.currentTime = 0; } catch (e) {}
         var p2 = a.play(); if (p2 && p2.catch) p2.catch(function () {});
       }
