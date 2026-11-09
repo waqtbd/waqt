@@ -2043,8 +2043,8 @@
             else if (wk.thunder) name = 'storm';
             else if (wk.rain > 0 || wk.snow || wk.code === 3) name = 'overcast';
             else if (wk.vis != null && wk.vis < 10000) name = 'haze';
-            else if (wk.code >= 2 && wk.cloud >= 0.8) name = 'overcast';
-            else if (wk.code >= 2 && wk.cloud >= 0.25) name = 'partly';
+            else if (wk.code >= 1 && wk.cloud >= 0.8) name = 'overcast';
+            else if (wk.code >= 1 && wk.cloud >= 0.25) name = 'partly';
             /* clear-day variants (Sunny, 2026-11-09: every phase
                needs several photos, weather picks the match) */
             if (name === 'day') {
@@ -2087,12 +2087,12 @@
               if (wk && wk.cloud > 0.10) name = 'night2';
               else if (Math.floor(Date.now() / 864e5) % 2) name = 'night3';
             } else if (name === 'sunset') {
-              if (nowMin >= mg) name = 'sunset3';
-              else if (wk.cloud >= 0.25) name = 'sunset2';
+              if (wk.cloud >= 0.25) name = 'sunset2';
+              else if (nowMin >= mg) name = 'sunset3';
               else if (Math.floor(Date.now() / 864e5) % 2) name = 'sunset4';
             } else if (name === 'dawn') {
-              if (nowMin < sr - 15) name = 'dawn3';
-              else if (wk.cloud >= 0.25) name = 'dawn2';
+              if (wk.cloud >= 0.25) name = 'dawn2';
+              else if (nowMin < sr - 15) name = 'dawn3';
             }
           }
         }
@@ -6150,8 +6150,8 @@
             else if (k.thunder) name = 'storm';
             else if (k.rain > 0 || k.snow || k.code === 3) name = 'overcast';
             else if (k.vis != null && k.vis < 10000) name = 'haze';
-            else if (k.code >= 2 && k.cloud >= 0.8) name = 'overcast';
-            else if (k.code >= 2 && k.cloud >= 0.25) name = 'partly';
+            else if (k.code >= 1 && k.cloud >= 0.8) name = 'overcast';
+            else if (k.code >= 1 && k.cloud >= 0.25) name = 'partly';
             /* clear-day variants — MUST stay identical to the bootstrap pick */
             if (name === 'day') {
               if (n < sr + 120) name = 'day3';
@@ -6191,12 +6191,12 @@
               if (k && k.cloud > 0.10) name = 'night2';
               else if (Math.floor(Date.now() / 864e5) % 2) name = 'night3';
             } else if (name === 'sunset') {
-              if (n >= smg) name = 'sunset3';
-              else if (k.cloud >= 0.25) name = 'sunset2';
+              if (k.cloud >= 0.25) name = 'sunset2';
+              else if (n >= smg) name = 'sunset3';
               else if (Math.floor(Date.now() / 864e5) % 2) name = 'sunset4';
             } else if (name === 'dawn') {
-              if (n < sr - 15) name = 'dawn3';
-              else if (k.cloud >= 0.25) name = 'dawn2';
+              if (k.cloud >= 0.25) name = 'dawn2';
+              else if (n < sr - 15) name = 'dawn3';
             }
           }
         }
