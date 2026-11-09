@@ -2084,7 +2084,17 @@
                weather picks which one (Sunny, 2026-11-09). MUST
                stay identical to updateSkyPhoto(). */
             if (phase === 'night') {
-              if (wk && wk.cloud > 0.10) name = 'night2';
+              /* night2 is a MOONLIT-cloud photo: it needs BOTH a mostly
+                 cloudy sky (cover >= 50%) AND a moon actually in the
+                 sky (lunar age ~3-26 days). A lightly clouded night
+                 takes the clear photos; a cloudy MOONLESS night keeps
+                 the plain night photo under the grey tint - never
+                 moonlit clouds with no moon in the sky (Sunny,
+                 2026-11-09: at new moon with 22% cover the hero showed
+                 glowing storm clouds over Bogura). */
+              var mage = ((Date.now() / 864e5 - 10962.7597) % 29.53059 + 29.53059) % 29.53059;
+              if (wk && wk.cloud >= 0.50 && mage >= 3 && mage <= 26) name = 'night2';
+              else if (wk && wk.cloud >= 0.50) grey = true;
               else if (Math.floor(Date.now() / 864e5) % 2) name = 'night3';
             } else if (name === 'sunset') {
               if (wk.cloud >= 0.25) name = 'sunset2';
@@ -6188,7 +6198,16 @@
             }
             /* VARIANTS — MUST stay identical to the bootstrap pick */
             if (phase === 'night') {
-              if (k && k.cloud > 0.10) name = 'night2';
+              /* night2 is a MOONLIT-cloud photo: it needs BOTH a mostly
+                 cloudy sky (cover >= 50%) AND a moon actually in the
+                 sky (lunar age ~3-26 days). A lightly clouded night
+                 takes the clear photos; a cloudy MOONLESS night keeps
+                 the plain night photo under the grey tint - never
+                 moonlit clouds with no moon in the sky (Sunny,
+                 2026-11-09). MUST stay identical to the bootstrap pick. */
+              var mage = ((Date.now() / 864e5 - 10962.7597) % 29.53059 + 29.53059) % 29.53059;
+              if (k && k.cloud >= 0.50 && mage >= 3 && mage <= 26) name = 'night2';
+              else if (k && k.cloud >= 0.50) grey = true;
               else if (Math.floor(Date.now() / 864e5) % 2) name = 'night3';
             } else if (name === 'sunset') {
               if (k.cloud >= 0.25) name = 'sunset2';
