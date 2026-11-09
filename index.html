@@ -2037,7 +2037,23 @@
             else if (wk.code >= 2 && wk.cloud >= 0.8) name = 'overcast';
             else if (wk.code >= 2 && wk.cloud >= 0.25) name = 'partly';
           }
-          else grey = oc2;
+          else {
+            grey = oc2;
+            /* WEATHER-FIRST AT DAWN/DUSK (Sunny, 2026-11-09): bad
+               weather must never wear the golden photo — rain,
+               thunder, snow, fog or a fully overcast sky replace
+               the dawn/sunset photograph with the grey one that
+               matches the real sky; the red sunset and the golden
+               dawn appear only when the weather can truly make
+               them. After Maghrib a rainy sky is dark, so dusk
+               falls back to the night photo with the grey tint.
+               MUST stay identical to updateSkyPhoto(). */
+            if (oc2 && phase !== 'night') {
+              if (phase === 'dusk' && nowMin >= mg) name = 'night';
+              else if (wk.fog) name = 'haze';
+              else name = 'overcast';
+            }
+          }
         }
         BOOT.photo = name; BOOT.cover = (name === 'partly' || name === 'haze') ? 'day' : name; BOOT.grey = grey;
         rs.setProperty('--wx-vapour', name === 'night' ? (grey ? '0.16' : '0.08') : (name === 'overcast' ? '0.18' : ((name === 'sunset' || name === 'dawn') ? '0.22' : '0.30')));
@@ -6044,11 +6060,16 @@
           name = (h >= 19 || h < 5) ? 'night' : (h < 7 ? 'dawn' : ((h >= 17) ? 'sunset' : 'day'));
           phase = name;
         }
-        /* Weather override, window-aware: the bright overcast photo
-           is allowed ONLY inside the day window. Dawn and dusk keep
-           their golden photo and gain the grey veil; at night the
-           night photo stays with the grey tint — sky-overcast must
-           never show after dark. */
+        /* Weather override, window-aware (REVISED, Sunny 2026-11-09):
+           bad weather outranks the golden photographs at dawn and
+           dusk too — rain, thunder, snow, fog or a fully overcast
+           sky swap the dawn/sunset photo for the grey overcast (or
+           haze) photo, because a red sunset under real rain reads
+           as a lie; the golden photos now appear only when the
+           measured weather can truly produce them. After Maghrib a
+           rainy sky is dark, so late dusk falls back to the night
+           photo with the grey tint — the bright overcast photo
+           itself never shows deep after dark. */
         let grey = false;
         if (wxCurrent) {
           const k = wxKind(wxCurrent);
@@ -6075,7 +6096,23 @@
             else if (k.code >= 2 && k.cloud >= 0.8) name = 'overcast';
             else if (k.code >= 2 && k.cloud >= 0.25) name = 'partly';
           }
-          else grey = oc;
+          else {
+            grey = oc;
+            /* WEATHER-FIRST AT DAWN/DUSK (Sunny, 2026-11-09): bad
+               weather must never wear the golden photo — rain,
+               thunder, snow, fog or a fully overcast sky replace
+               the dawn/sunset photograph with the grey one that
+               matches the real sky; the red sunset and the golden
+               dawn appear only when the weather can truly make
+               them. After Maghrib a rainy sky is dark, so dusk
+               falls back to the night photo with the grey tint.
+               MUST stay identical to the bootstrap pick. */
+            if (oc && phase !== 'night') {
+              if (phase === 'dusk' && n >= smg) name = 'night';
+              else if (k.fog) name = 'haze';
+              else name = 'overcast';
+            }
+          }
         }
         wxSetVeil(phase);
         if (layers[0].parentElement) layers[0].parentElement.classList.toggle('sky-photo-grey', grey);
