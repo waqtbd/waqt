@@ -2032,10 +2032,17 @@
                photo for a moment before the main script swapped in
                the correct haze photo (Sunny, 2026-11-04). */
             if (wk.fog) name = 'haze';
-            else if (wk.rain > 0 || wk.thunder || wk.snow || wk.code === 3) name = 'overcast';
+            else if (wk.thunder) name = 'storm';
+            else if (wk.rain > 0 || wk.snow || wk.code === 3) name = 'overcast';
             else if (wk.vis != null && wk.vis < 10000) name = 'haze';
             else if (wk.code >= 2 && wk.cloud >= 0.8) name = 'overcast';
             else if (wk.code >= 2 && wk.cloud >= 0.25) name = 'partly';
+            /* clear-day variants (Sunny, 2026-11-09: every phase
+               needs several photos, weather picks the match) */
+            if (name === 'day') {
+              if (nowMin < sr + 120) name = 'day3';
+              else if (Math.floor(Date.now() / 864e5) % 2) name = 'day2';
+            }
           }
           else {
             grey = oc2;
@@ -2051,6 +2058,7 @@
             if (oc2 && phase !== 'night') {
               if (phase === 'dusk' && nowMin >= mg) name = 'night';
               else if (wk.fog) name = 'haze';
+              else if (wk.thunder) name = 'storm';
               else name = 'overcast';
             }
             /* a DRY but mostly-clouded dawn/dusk is not a fiery
@@ -2064,20 +2072,34 @@
               grey = true;
               name = (phase === 'dusk' && nowMin >= mg) ? 'night' : 'overcast';
             }
+            /* VARIANTS — several photos per phase, the measured
+               weather picks which one (Sunny, 2026-11-09). MUST
+               stay identical to updateSkyPhoto(). */
+            if (phase === 'night') {
+              if (wk && wk.cloud > 0.10) name = 'night2';
+              else if (Math.floor(Date.now() / 864e5) % 2) name = 'night3';
+            } else if (name === 'sunset') {
+              if (nowMin >= mg) name = 'sunset3';
+              else if (wk.cloud >= 0.25) name = 'sunset2';
+              else if (Math.floor(Date.now() / 864e5) % 2) name = 'sunset4';
+            } else if (name === 'dawn') {
+              if (nowMin < sr - 15) name = 'dawn3';
+              else if (wk.cloud >= 0.25) name = 'dawn2';
+            }
           }
         }
-        BOOT.photo = name; BOOT.cover = (name === 'partly' || name === 'haze') ? 'day' : name; BOOT.grey = grey;
+        BOOT.photo = name; BOOT.cover = (name === 'partly' || name === 'haze') ? 'day' : (name === 'storm' ? 'overcast' : name.replace(/[234]$/, '')); BOOT.grey = grey;
         /* the sunset/dawn PHOTOGRAPHS take light text whatever the
            gradient luminance says (Sunny, 2026-11-09: dark text
            does not sit on the orange sky) */
-        if (name === 'sunset' || name === 'dawn') root.classList.remove('sky-light');
-        rs.setProperty('--wx-vapour', name === 'night' ? (grey ? '0.16' : '0.08') : (name === 'overcast' ? '0.18' : ((name === 'sunset' || name === 'dawn') ? '0.22' : '0.30')));
-        var cfx = name === 'night' ? [0.16, 0.10] : ((grey || name === 'overcast') ? [0.28, 0.18] : ((name === 'sunset' || name === 'dawn') ? [0.45, 0.30] : [0.50, 0.32]));
+        if (name.indexOf('sunset') === 0 || name.indexOf('dawn') === 0 || name === 'storm') root.classList.remove('sky-light');
+        rs.setProperty('--wx-vapour', name.indexOf('night') === 0 ? (grey ? '0.16' : '0.08') : ((name === 'overcast' || name === 'storm') ? '0.18' : ((name.indexOf('sunset') === 0 || name.indexOf('dawn') === 0) ? '0.22' : '0.30')));
+        var cfx = name.indexOf('night') === 0 ? [0.16, 0.10] : ((grey || name === 'overcast' || name === 'storm') ? [0.28, 0.18] : ((name.indexOf('sunset') === 0 || name.indexOf('dawn') === 0) ? [0.45, 0.30] : [0.50, 0.32]));
         if (wk) { var sc = wk.cloud <= 0.10 ? 0 : Math.min(1, (wk.cloud - 0.10) / 0.80); cfx = [cfx[0] * sc, cfx[1] * sc]; }
         rs.setProperty('--live-cloud-a', cfx[0].toFixed(3));
         rs.setProperty('--live-cloud-b', cfx[1].toFixed(3));
         var starOp = 0;
-        if (name === 'night') { starOp = wk ? (wk.cloud <= 0.10 ? 1 : Math.max(0, 1 - (wk.cloud - 0.10) / 0.40)) : 0.7; }
+        if (name === 'night' || name === 'night3') { starOp = wk ? (wk.cloud <= 0.10 ? 1 : Math.max(0, 1 - (wk.cloud - 0.10) / 0.40)) : 0.7; }
         rs.setProperty('--star-photo', starOp.toFixed(3));
       } catch (e) { /* first-paint accelerator only — the main script renders everything itself if anything here fails */ }
     })();
@@ -2143,14 +2165,21 @@
           applied = true;
           return true;
         }
+        var SD_URLS = { day: 'sky-day.jpg', dawn: 'sky-dawn.jpg', sunset: 'sky-sunset.jpg', night: 'sky-night.jpg', overcast: 'sky-overcast.jpg', partly: 'sky-partly.jpg', haze: 'sky-haze.jpg', day2: 'sky-day2.jpg', day3: 'sky-day3.jpg', dawn2: 'sky-dawn2.jpg', dawn3: 'sky-dawn3.jpg', sunset2: 'sky-sunset2.jpg', sunset3: 'sky-sunset3.jpg', sunset4: 'sky-sunset4.jpg', night2: 'sky-night2.jpg', night3: 'sky-night3.jpg', storm: 'sky-storm.jpg' };
         function applySd() {
-          if (window.__SKY_URI && window.__SKY_URI[B.photo]) applyPhoto(window.__SKY_URI[B.photo]);
+          if (window.__SKY_URI && window.__SKY_URI[B.photo]) { applyPhoto(window.__SKY_URI[B.photo]); B.hdPending = ''; return; }
+          var sdUrl = SD_URLS[B.photo];
+          if (sdUrl) {
+            var sim = new Image();
+            sim.onload = function () { applyPhoto(sdUrl); };
+            sim.src = sdUrl;
+          }
           B.hdPending = '';
         }
         /* the same predicate and URL map as the main script's
            SKY_HD_LARGE / SKY_PHOTO_HD_URLS (duplicated here because
            this script runs long before that one is parsed) */
-        var HD_URLS = { day: 'sky-hd-day.jpg', dawn: 'sky-hd-dawn.jpg', sunset: 'sky-hd-sunset.jpg', night: 'sky-hd-night.jpg', overcast: 'sky-hd-overcast.jpg', partly: 'sky-hd-partly.jpg', haze: 'sky-hd-haze.jpg' };
+        var HD_URLS = { day: 'sky-hd-day.jpg', dawn: 'sky-hd-dawn.jpg', sunset: 'sky-hd-sunset.jpg', night: 'sky-hd-night.jpg', overcast: 'sky-hd-overcast.jpg', partly: 'sky-hd-partly.jpg', haze: 'sky-hd-haze.jpg', day2: 'sky-hd-day2.jpg', day3: 'sky-hd-day3.jpg', dawn2: 'sky-hd-dawn2.jpg', dawn3: 'sky-hd-dawn3.jpg', sunset2: 'sky-hd-sunset2.jpg', sunset3: 'sky-hd-sunset3.jpg', sunset4: 'sky-hd-sunset4.jpg', night2: 'sky-hd-night2.jpg', night3: 'sky-hd-night3.jpg', storm: 'sky-hd-storm.jpg' };
         var large = !!(window.matchMedia && (window.matchMedia('(min-width: 1024px)').matches || ((window.devicePixelRatio || 1) >= 2 && window.innerWidth >= 768)));
         var hdUrl = large && HD_URLS[B.photo];
         if (hdUrl && window.__SKY_URI && window.__SKY_URI[B.photo]) {
@@ -5874,7 +5903,7 @@
            gradient luminance says (Sunny, 2026-11-09: dark text
            does not sit on the orange sky) */
         const photoTxt = (typeof skyPhotoName !== 'undefined') ? skyPhotoName : '';
-        document.documentElement.classList.toggle('sky-light', li > 0.5 && photoTxt !== 'sunset' && photoTxt !== 'dawn');
+        document.documentElement.classList.toggle('sky-light', li > 0.5 && photoTxt.indexOf('sunset') !== 0 && photoTxt.indexOf('dawn') !== 0 && photoTxt !== 'storm');
         root.setProperty('--cloud-bright', ((0.42 + 0.58 * dayF) * (1 - rainI * 0.18)).toFixed(3));
         /* sun disc on the sunrise→Maghrib arc, moon on Maghrib→Fajr */
         let sunOp = 0, moonOp = 0;
@@ -5927,12 +5956,12 @@
        comes from CSS: the oversized inner image pans slowly
        sideways forever, and the vapour layer floats on top.
        ================================================================ */
-    const SKY_PHOTO_URLS = { day: 'sky-day.jpg', dawn: 'sky-dawn.jpg', sunset: 'sky-sunset.jpg', night: 'sky-night.jpg', overcast: 'sky-overcast.jpg', partly: 'sky-partly.jpg', haze: 'sky-haze.jpg' };
+    const SKY_PHOTO_URLS = { day: 'sky-day.jpg', dawn: 'sky-dawn.jpg', sunset: 'sky-sunset.jpg', night: 'sky-night.jpg', overcast: 'sky-overcast.jpg', partly: 'sky-partly.jpg', haze: 'sky-haze.jpg', day2: 'sky-day2.jpg', day3: 'sky-day3.jpg', dawn2: 'sky-dawn2.jpg', dawn3: 'sky-dawn3.jpg', sunset2: 'sky-sunset2.jpg', sunset3: 'sky-sunset3.jpg', sunset4: 'sky-sunset4.jpg', night2: 'sky-night2.jpg', night3: 'sky-night3.jpg', storm: 'sky-storm.jpg' };
     /* HD SKIES (large screens only): 1920px versions for desktop /
        retina heroes, where the 1000px photos upscale into mush.
        Small screens never touch these files — they keep exactly the
        current 1000px photos and the inlined first-paint data URIs. */
-    const SKY_PHOTO_HD_URLS = { day: 'sky-hd-day.jpg', dawn: 'sky-hd-dawn.jpg', sunset: 'sky-hd-sunset.jpg', night: 'sky-hd-night.jpg', overcast: 'sky-hd-overcast.jpg', partly: 'sky-hd-partly.jpg', haze: 'sky-hd-haze.jpg' };
+    const SKY_PHOTO_HD_URLS = { day: 'sky-hd-day.jpg', dawn: 'sky-hd-dawn.jpg', sunset: 'sky-hd-sunset.jpg', night: 'sky-hd-night.jpg', overcast: 'sky-hd-overcast.jpg', partly: 'sky-hd-partly.jpg', haze: 'sky-hd-haze.jpg', day2: 'sky-hd-day2.jpg', day3: 'sky-hd-day3.jpg', dawn2: 'sky-hd-dawn2.jpg', dawn3: 'sky-hd-dawn3.jpg', sunset2: 'sky-hd-sunset2.jpg', sunset3: 'sky-hd-sunset3.jpg', sunset4: 'sky-hd-sunset4.jpg', night2: 'sky-hd-night2.jpg', night3: 'sky-hd-night3.jpg', storm: 'sky-hd-storm.jpg' };
     const BOLT_HD_URLS = ['sky-thunder-hd-left.jpg', 'sky-thunder-hd-center.jpg', 'sky-thunder-hd-right.jpg'];
     const SKY_HD_LARGE = !!(window.matchMedia && (window.matchMedia('(min-width: 1024px)').matches || ((window.devicePixelRatio || 1) >= 2 && window.innerWidth >= 768)));
     /* SKY-MATCHED QURAN COVER (Realistic mode only): the hero Quran
@@ -6110,10 +6139,16 @@
                clear day photo no matter what the raw cover says.
                The haze veil still rides on top under 6 km. */
             if (k.fog) name = 'haze';
-            else if (k.rain > 0 || k.thunder || k.snow || k.code === 3) name = 'overcast';
+            else if (k.thunder) name = 'storm';
+            else if (k.rain > 0 || k.snow || k.code === 3) name = 'overcast';
             else if (k.vis != null && k.vis < 10000) name = 'haze';
             else if (k.code >= 2 && k.cloud >= 0.8) name = 'overcast';
             else if (k.code >= 2 && k.cloud >= 0.25) name = 'partly';
+            /* clear-day variants — MUST stay identical to the bootstrap pick */
+            if (name === 'day') {
+              if (n < sr + 120) name = 'day3';
+              else if (Math.floor(Date.now() / 864e5) % 2) name = 'day2';
+            }
           }
           else {
             grey = oc;
@@ -6129,6 +6164,7 @@
             if (oc && phase !== 'night') {
               if (phase === 'dusk' && n >= smg) name = 'night';
               else if (k.fog) name = 'haze';
+              else if (k.thunder) name = 'storm';
               else name = 'overcast';
             }
             /* a DRY but mostly-clouded dawn/dusk is not a fiery
@@ -6142,12 +6178,24 @@
               grey = true;
               name = (phase === 'dusk' && n >= smg) ? 'night' : 'overcast';
             }
+            /* VARIANTS — MUST stay identical to the bootstrap pick */
+            if (phase === 'night') {
+              if (k && k.cloud > 0.10) name = 'night2';
+              else if (Math.floor(Date.now() / 864e5) % 2) name = 'night3';
+            } else if (name === 'sunset') {
+              if (n >= smg) name = 'sunset3';
+              else if (k.cloud >= 0.25) name = 'sunset2';
+              else if (Math.floor(Date.now() / 864e5) % 2) name = 'sunset4';
+            } else if (name === 'dawn') {
+              if (n < sr - 15) name = 'dawn3';
+              else if (k.cloud >= 0.25) name = 'dawn2';
+            }
           }
         }
         wxSetVeil(phase);
         if (layers[0].parentElement) layers[0].parentElement.classList.toggle('sky-photo-grey', grey);
         document.documentElement.style.setProperty('--wx-vapour',
-          name === 'night' ? (grey ? '0.16' : '0.08') : (name === 'overcast' ? '0.18' : ((name === 'sunset' || name === 'dawn') ? '0.22' : '0.30')));
+          name.indexOf('night') === 0 ? (grey ? '0.16' : '0.08') : ((name === 'overcast' || name === 'storm') ? '0.18' : ((name.indexOf('sunset') === 0 || name.indexOf('dawn') === 0) ? '0.22' : '0.30')));
         /* live drifting cloud layers: per-phase opacity caps —
            overcast (and rain, which always routes here or sets the
            night grey tint) stays low because the photo already
@@ -6165,9 +6213,9 @@
            the full phase caps at ~90–100% cover. With no weather
            data at all (fetch failed, nothing cached) the phase
            caps apply unchanged, exactly as before. */
-        let cloudFx = name === 'night' ? [0.16, 0.10]
-          : ((grey || name === 'overcast') ? [0.28, 0.18]
-          : ((name === 'sunset' || name === 'dawn') ? [0.45, 0.30] : [0.50, 0.32]));
+        let cloudFx = name.indexOf('night') === 0 ? [0.16, 0.10]
+          : ((grey || name === 'overcast' || name === 'storm') ? [0.28, 0.18]
+          : ((name.indexOf('sunset') === 0 || name.indexOf('dawn') === 0) ? [0.45, 0.30] : [0.50, 0.32]));
         if (wxCurrent) {
           const cover = wxKind(wxCurrent).cloud;
           const scale = cover <= 0.10 ? 0 : Math.min(1, (cover - 0.10) / 0.80);
@@ -6188,7 +6236,7 @@
            away in the clear-night state. */
         buildStarfield();
         let starOp = 0;
-        if (name === 'night') {
+        if (name === 'night' || name === 'night3') {
           if (wxCurrent) {
             const c = wxKind(wxCurrent).cloud;
             starOp = c <= 0.10 ? 1 : Math.max(0, 1 - (c - 0.10) / 0.40);
@@ -6199,7 +6247,7 @@
            together with the sky-photo swap below; the partly and
            haze picks carry the DAY cover (they have none of their
            own) */
-        updateQuranCover((name === 'partly' || name === 'haze') ? 'day' : name);
+        updateQuranCover((name === 'partly' || name === 'haze') ? 'day' : (name === 'storm' ? 'overcast' : name.replace(/[234]$/, '')));
         if (name === skyPhotoName) { upgradeSkyPhotoHd(name); return; }
         const seq = ++skyPhotoSeq;
         const back = layers[1 - skyPhotoTop], front = layers[skyPhotoTop];
@@ -6213,7 +6261,7 @@
           back.classList.remove('boot'); front.classList.remove('boot');
           back.classList.add('on'); front.classList.remove('on');
           skyPhotoTop = 1 - skyPhotoTop; skyPhotoName = name;
-          if (name === 'sunset' || name === 'dawn') document.documentElement.classList.remove('sky-light');
+          if (name.indexOf('sunset') === 0 || name.indexOf('dawn') === 0 || name === 'storm') document.documentElement.classList.remove('sky-light');
           document.documentElement.classList.add('sky-photo-on');
           /* a genuine swap just put this pick's STANDARD photo on
              screen, so any HD-FIRST claim from the first reveal is
