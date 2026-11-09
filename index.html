@@ -2056,6 +2056,10 @@
           }
         }
         BOOT.photo = name; BOOT.cover = (name === 'partly' || name === 'haze') ? 'day' : name; BOOT.grey = grey;
+        /* the sunset/dawn PHOTOGRAPHS take light text whatever the
+           gradient luminance says (Sunny, 2026-11-09: dark text
+           does not sit on the orange sky) */
+        if (name === 'sunset' || name === 'dawn') root.classList.remove('sky-light');
         rs.setProperty('--wx-vapour', name === 'night' ? (grey ? '0.16' : '0.08') : (name === 'overcast' ? '0.18' : ((name === 'sunset' || name === 'dawn') ? '0.22' : '0.30')));
         var cfx = name === 'night' ? [0.16, 0.10] : ((grey || name === 'overcast') ? [0.28, 0.18] : ((name === 'sunset' || name === 'dawn') ? [0.45, 0.30] : [0.50, 0.32]));
         if (wk) { var sc = wk.cloud <= 0.10 ? 0 : Math.min(1, (wk.cloud - 0.10) / 0.80); cfx = [cfx[0] * sc, cfx[1] * sc]; }
@@ -5855,7 +5859,11 @@
         root.setProperty('--sky3', skyRgb(c));
         root.setProperty('--sky-glow', 'rgba(' + skyBase.g[0] + ',' + skyBase.g[1] + ',' + skyBase.g[2] + ',' + glowA.toFixed(3) + ')');
         root.setProperty('--sky-star', String(star.toFixed(3)));
-        document.documentElement.classList.toggle('sky-light', li > 0.5);
+        /* the sunset/dawn PHOTOGRAPHS take light text whatever the
+           gradient luminance says (Sunny, 2026-11-09: dark text
+           does not sit on the orange sky) */
+        const photoTxt = (typeof skyPhotoName !== 'undefined') ? skyPhotoName : '';
+        document.documentElement.classList.toggle('sky-light', li > 0.5 && photoTxt !== 'sunset' && photoTxt !== 'dawn');
         root.setProperty('--cloud-bright', ((0.42 + 0.58 * dayF) * (1 - rainI * 0.18)).toFixed(3));
         /* sun disc on the sunrise→Maghrib arc, moon on Maghrib→Fajr */
         let sunOp = 0, moonOp = 0;
@@ -6183,6 +6191,7 @@
           back.classList.remove('boot'); front.classList.remove('boot');
           back.classList.add('on'); front.classList.remove('on');
           skyPhotoTop = 1 - skyPhotoTop; skyPhotoName = name;
+          if (name === 'sunset' || name === 'dawn') document.documentElement.classList.remove('sky-light');
           document.documentElement.classList.add('sky-photo-on');
           /* a genuine swap just put this pick's STANDARD photo on
              screen, so any HD-FIRST claim from the first reveal is
