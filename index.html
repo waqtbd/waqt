@@ -710,6 +710,7 @@
       /* the badge is temperature-led now: the °C value is the big,
          bold element, vertically centred with the condition glyph */
       #wxText{font-size:19px; font-weight:800; letter-spacing:.01em; line-height:1; font-variant-numeric:tabular-nums; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0}
+      #wxCloud{font-size:11.5px; font-weight:700; opacity:.88; line-height:1; white-space:nowrap}
       /* ---------- classic hero (Classic): the original emerald look ----------
          Restores the pre-living-sky hero exactly: deep emerald gradient,
          gold glows, star pattern, light text, Quran book — every sky and
@@ -1689,7 +1690,7 @@
         <div class="hero-place rise">
           <h1><span class="pin">◈</span> <span id="placeName">ঢাকা</span></h1>
           <script>try{var _wp=JSON.parse(localStorage.getItem('waqtPlace')||'null');if(_wp&&_wp.bn){var _wl2='bn';try { var _wl2 = localStorage.getItem('waqtLang'); if (_wl2 === 'en' || _wl2 === 'bn') { /* saved wins */ } else { var _tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ''); _wl2 = (_tz === 'Asia/Dhaka' || (navigator.language || '').toLowerCase().indexOf('bn') === 0) ? 'bn' : 'en'; } } catch (e) { var _wl2 = 'bn'; }document.getElementById('placeName').textContent=(_wl2==='en'&&_wp.en)?_wp.en:_wp.bn;}}catch(e){}</script>
-          <span class="hero-date-chip wx-chip hidden" id="wxChip"><span class="wx-dot" aria-hidden="true"></span><span class="wx-icon" id="wxIcon" aria-hidden="true"></span><span id="wxText">—</span></span>
+          <span class="hero-date-chip wx-chip hidden" id="wxChip"><span class="wx-dot" aria-hidden="true"></span><span class="wx-icon" id="wxIcon" aria-hidden="true"></span><span id="wxText">—</span><span id="wxCloud"></span></span>
           <span class="place-detail hidden" id="placeDetail"></span>
         </div>
         <div class="hero-dates rise d1">
@@ -1959,6 +1960,13 @@
           var chip = $('wxChip');
           if (chip) {
             $('wxText').textContent = num(Math.round(+wx.temperature_2m)) + '°C';
+            var wcl = $('wxCloud');
+            if (wcl) {
+              var wcn = wx.cloud_cover != null ? Math.round(+wx.cloud_cover) : null;
+              var wlab = 'মেঘ';
+              try { if (localStorage.getItem('waqtLang') === 'en') wlab = 'Cloud'; } catch (e) {}
+              wcl.textContent = wcn != null ? ' · ' + wlab + ' ' + num(wcn) + '%' : '';
+            }
             var kind = th ? 'thunder' : (snow ? 'snow' : (rain > 0 ? 'rain' : (wk.fog ? 'fog' : (cloud >= 0.55 ? 'cloud' : (cloud >= 0.15 ? (+wx.is_day === 1 ? 'partly' : 'partlyNight') : (+wx.is_day === 1 ? 'sun' : 'moon'))))));
             var FILES = { thunder: 'wx-storm.webp', snow: 'wx-snow.webp', rain: 'wx-rain.webp', fog: 'wx-fog.webp', cloud: 'wx-cloud.webp', partly: 'wx-partly.webp', partlyNight: 'wx-partly-night.webp', sun: 'wx-sun.webp', moon: 'wx-moon.webp' };
             var file = FILES[kind], box = $('wxIcon');
@@ -6689,10 +6697,13 @@
       if (!chip) return;
       if (!wxCurrent) { chip.classList.add('hidden'); return; } /* weather badge shows in Classic too (Sunny, 2026-11-04) */
       const k = wxKind(wxCurrent);
-      /* premium badge: green dot + condition icon + temperature
-         only. The condition word and cloud % no longer show here —
-         cloud cover still drives the sky layers internally. */
+      /* premium badge: green dot + condition icon + temperature,
+         plus the cloud-cover % beside it (Sunny, 2026-11-09 —
+         supersedes the earlier no-cloud-% badge rule; the
+         condition WORD still does not show). */
       $('wxText').textContent = wxCurrent.temperature_2m != null ? num(Math.round(+wxCurrent.temperature_2m)) + '°C' : '';
+      const wclEl = $('wxCloud');
+      if (wclEl) wclEl.textContent = wxCurrent.cloud_cover != null ? ' · ' + L().wxCloud + ' ' + num(Math.round(+wxCurrent.cloud_cover)) + '%' : '';
       const kind = k.thunder ? 'thunder' : (k.snow ? 'snow' : (k.rain > 0 ? 'rain' : (k.fog ? 'fog' : (k.cloud >= 0.55 ? 'cloud' : (k.cloud >= 0.15 ? (+wxCurrent.is_day === 1 ? 'partly' : 'partlyNight') : (+wxCurrent.is_day === 1 ? 'sun' : 'moon'))))));
       const file = WX_ICON_FILES[kind];
       const box = $('wxIcon');
