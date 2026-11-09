@@ -2053,6 +2053,17 @@
               else if (wk.fog) name = 'haze';
               else name = 'overcast';
             }
+            /* a DRY but mostly-clouded dawn/dusk is not a fiery
+               sky either (Sunny, 2026-11-09: some evenings are
+               simply dull, and the same red photo must not greet
+               every dry evening) — 55%+ cloud with a cloudy code
+               kills the sunset colours; twilight has no partly
+               asset, so the grey photo stands in. MUST stay
+               identical to updateSkyPhoto(). */
+            else if (wk.code >= 2 && wk.cloud >= 0.55 && phase !== 'night') {
+              grey = true;
+              name = (phase === 'dusk' && nowMin >= mg) ? 'night' : 'overcast';
+            }
           }
         }
         BOOT.photo = name; BOOT.cover = (name === 'partly' || name === 'haze') ? 'day' : name; BOOT.grey = grey;
@@ -6119,6 +6130,17 @@
               if (phase === 'dusk' && n >= smg) name = 'night';
               else if (k.fog) name = 'haze';
               else name = 'overcast';
+            }
+            /* a DRY but mostly-clouded dawn/dusk is not a fiery
+               sky either (Sunny, 2026-11-09: some evenings are
+               simply dull, and the same red photo must not greet
+               every dry evening) — 55%+ cloud with a cloudy code
+               kills the sunset colours; twilight has no partly
+               asset, so the grey photo stands in. MUST stay
+               identical to the bootstrap pick. */
+            else if (k.code >= 2 && k.cloud >= 0.55 && phase !== 'night') {
+              grey = true;
+              name = (phase === 'dusk' && n >= smg) ? 'night' : 'overcast';
             }
           }
         }
