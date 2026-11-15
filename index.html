@@ -1163,6 +1163,9 @@
       .share-tg{background:linear-gradient(135deg,#4fc3f7 0%,#1d8ec9 100%)}
       .share-x{background:linear-gradient(135deg,#3f4756 0%,#05070a 100%)}
       .share-cp{background:linear-gradient(135deg,#e7c65a 0%,#b8860b 100%); text-shadow:0 1px 2px rgba(60,42,4,.4)}
+      .share-yt{background:linear-gradient(135deg,#ff4e45 0%,#c81e1e 100%)}
+      .follow-row{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:16px 0 2px}
+      .follow-label{font-weight:800; font-size:15px; color:var(--ink-soft)}
       @media (max-width:380px){ .share-btn{padding:10px 13px} }
 
       /* ---------- about / privacy / contact page links ---------- */
@@ -2422,6 +2425,11 @@
       <nav class="page-footer-links sr" aria-label="Site pages">
         <a href="about.html" data-i18n="pageAbout">আমাদের সম্পর্কে</a><span class="sep" aria-hidden="true">·</span><a href="privacy.html" data-i18n="pagePrivacy">গোপনীয়তা নীতি</a><span class="sep" aria-hidden="true">·</span><a href="contact.html" data-i18n="pageContact">যোগাযোগ</a><span class="sep" aria-hidden="true">·</span><a href="feedback.html" data-i18n="pageFeedback">মতামত ও রিভিউ</a><span class="sep" aria-hidden="true">·</span><a href="#" id="waqtFooterAccountLink" data-i18n="acctLink">অ্যাকাউন্ট</a>
       </nav>
+      <div class="follow-row sr">
+        <span class="follow-label" data-i18n="followTitle">আমাদের ফলো করুন</span>
+        <a class="share-btn share-yt" href="https://www.youtube.com/@Waqtbd" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg><span>YouTube</span></a>
+        <a class="share-btn share-fb" href="https://www.facebook.com/profile.php?id=61596190321095" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg><span>Facebook</span></a>
+      </div>
     </div>
     </div><!-- /view-home -->
 
@@ -2815,6 +2823,14 @@
             <a class="share-btn share-x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwaqtbd.github.io%2Fwaqt%2F&text=Waqt%20%28%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%29%20%E2%80%94%20%E0%A6%86%E0%A6%9C%E0%A6%95%E0%A7%87%E0%A6%B0%20%E0%A6%A8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%9C%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg><span>X</span></a>
             <button type="button" class="share-btn share-cp js-copy-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></svg><span class="share-cp-label" data-i18n="shareCopy">লিংক কপি</span></button>
           </div>
+        </div>
+      </div>
+
+      <div class="drawer-sec">
+        <h3><span data-i18n="followTitle">আমাদের ফলো করুন</span></h3>
+        <div class="share-row" style="margin-top:0">
+          <a class="share-btn share-yt" href="https://www.youtube.com/@Waqtbd" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg><span>YouTube</span></a>
+          <a class="share-btn share-fb" href="https://www.facebook.com/profile.php?id=61596190321095" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5z"/></svg><span>Facebook</span></a>
         </div>
       </div>
     </aside>
@@ -3760,7 +3776,7 @@
         quranKicker:'আল-কুরআনুল কারীম', quranTitle:'কুরআন মাজিদ', quranLine1:'কুরআন', quranLine2:'মাজিদ', quranSub:'আরবি · বাংলা অর্থ · তিলাওয়াত', quranReadListen:'পড়ুন ও শুনুন',
         goDirectory:'সব জেলা ও উপজেলা', goQA:'প্রশ্ন ও উত্তর',
         moreServices:'ইসলামিক কর্নার',
-        shareTitle:'শেয়ার করুন', shareSub:'ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন', shareCopy:'লিংক কপি', shareCopied:'কপি হয়েছে ✓',
+        shareTitle:'শেয়ার করুন', followTitle:'আমাদের ফলো করুন', shareSub:'ভালো লাগলে বন্ধুদের সাথে শেয়ার করুন', shareCopy:'লিংক কপি', shareCopied:'কপি হয়েছে ✓',
         pageAbout:'আমাদের সম্পর্কে', pagePrivacy:'গোপনীয়তা নীতি', pageContact:'যোগাযোগ', pageFeedback:'মতামত ও রিভিউ',
         svcNamaz:'নামাজ শিক্ষা', svcNamazSub:'আজান, ওজু ও নামাজের প্রতিটা ধাপ শিখুন',
         svcDua:'দোয়া সংকলন', svcDuaSub:'৩১টি দোয়া, আরবি ও অর্থসহ',
@@ -3861,7 +3877,7 @@
         quranKicker:'Al-Quran Al-Kareem', quranTitle:'The Holy Quran', quranLine1:'The Holy', quranLine2:'Quran', quranSub:'Arabic · Bangla meaning · Recitation', quranReadListen:'Read & Listen',
         goDirectory:'All Districts & Upazilas', goQA:'Questions & Answers',
         moreServices:'Islamic Corner',
-        shareTitle:'Share', shareSub:'Share Waqt with your friends', shareCopy:'Copy link', shareCopied:'Copied ✓',
+        shareTitle:'Share', followTitle:'Follow us', shareSub:'Share Waqt with your friends', shareCopy:'Copy link', shareCopied:'Copied ✓',
         pageAbout:'About', pagePrivacy:'Privacy Policy', pageContact:'Contact', pageFeedback:'Feedback & Reviews',
         svcNamaz:'Namaz Shikkha', svcNamazSub:'Learn Azan, Wudu and every step of prayer, step by step',
         svcDua:'Dua Collection', svcDuaSub:'31 duas with Arabic & meaning',
