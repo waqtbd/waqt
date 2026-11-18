@@ -2100,7 +2100,6 @@
               var mage = ((Date.now() / 864e5 - 10962.7597) % 29.53059 + 29.53059) % 29.53059;
               if (wk && wk.cloud >= 0.50 && mage >= 3 && mage <= 26) name = 'night2';
               else if (wk && wk.cloud >= 0.50) grey = true;
-              else if (Math.floor(Date.now() / 864e5) % 2) name = 'night3';
             } else if (name === 'sunset') {
               if (wk.cloud >= 0.25) name = 'sunset2';
               else if (nowMin >= mg) name = 'sunset3';
@@ -6230,7 +6229,6 @@
               var mage = ((Date.now() / 864e5 - 10962.7597) % 29.53059 + 29.53059) % 29.53059;
               if (k && k.cloud >= 0.50 && mage >= 3 && mage <= 26) name = 'night2';
               else if (k && k.cloud >= 0.50) grey = true;
-              else if (Math.floor(Date.now() / 864e5) % 2) name = 'night3';
             } else if (name === 'sunset') {
               if (k.cloud >= 0.25) name = 'sunset2';
               else if (n >= smg) name = 'sunset3';
