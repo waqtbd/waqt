@@ -341,6 +341,31 @@
         html:not(.sky-light) .hero .countdown small,
         html:not(.sky-light) .hero .hb-cap{text-shadow:0 1px 5px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.5)}
       }
+      /* Readability halo on PHOTO skies, all colour schemes: dawn,
+         sunset and storm phases force light hero text (the JS removes
+         sky-light for them), and on a bright photo the small labels,
+         pills and badge wash out — the dark-scheme repair above only
+         covers dark-scheme devices, so light-scheme phones had no halo
+         at all. Same soft dark halo, extended to every hero text
+         element, gated to displayed photos; invisible on dark night
+         skies, and Classic mode is structurally excluded. The countdown
+         keeps its own wide shadow, which already reads. Pill
+         backgrounds deepen slightly so the text zone stays defined. */
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .hero-place h1,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .hero-place .pin,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .place-detail,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .next-label,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .next-name,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .next-time,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .hero-clock .now,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .hero-clock .time,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .hero-date-chip,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .wx-chip,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .snd-chip,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .countdown small,
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .hb-cap{text-shadow:0 1px 5px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.5)}
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .hero-date-chip{background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.30)}
+      html.sky-photo-on:not(.sky-light):not(.hero-classic) .hero .place-detail{background:rgba(212,175,90,.26)}
       /* ---------- weather layers (over the sky, under the hero text) ----------
          Driven by --wx-* variables from the Open-Meteo fetch; every layer
          defaults to fully transparent, so no weather data = pure time sky.
